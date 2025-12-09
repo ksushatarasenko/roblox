@@ -1,0 +1,18 @@
+Теперь мы можем использовать:
+•	📘 <i class="ri-book-2-line"></i>
+•	🧱 <i class="ri-cube-line"></i>
+•	🧪 <i class="ri-flask-line"></i>
+•	⚙️ <i class="ri-code-box-line"></i>
+•	✨ <i class="ri-sparkling-2-line"></i>
+•	🧠 <i class="ri-brain-line"></i>
+•	🎮 <i class="ri-gamepad-line"></i>
+
+
+<b></b>
+<em></em>
+    <span></span>
+    <b style="color: blue;"></b>
+    <b style=\"color: rgba(9, 167, 4, 1);\">score</b>
+    <b style=\"color: rgb(255, 0, 64);\"></b>
+    <b style=\"color: rgb(255, 179, 0);\"></b>
+    <b style=\"color: rgba(9, 167, 4, 1);\"></b>

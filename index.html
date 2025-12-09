@@ -4,9 +4,27 @@
 <head>
     <meta charset="UTF-8" />
     <title>Курс Roblox Studio для детей</title>
+
+    <!-- Стили сайта -->
     <link rel="stylesheet" href="styles/main.css" />
     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
 
+    <!-- Парсер YAML -->
+    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+
+    <!-- Подсветка кода highlight.js -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/lua.min.js"></script>
+
+    <script>
+        // Активируем подсветку после загрузки страницы
+        document.addEventListener("DOMContentLoaded", () => {
+            hljs.highlightAll();
+        });
+    </script>
 </head>
 
 <body>
@@ -37,6 +55,7 @@
                 <li>Небольшие тесты в конце каждого урока</li>
             </ul>
         </section>
+
         <button onclick="location.href='mini-games/collect-blocks.html'" class="primary-btn">
             Мини-игра: Собери блоки 🎮
         </button>
@@ -45,6 +64,12 @@
     <footer class="site-footer">
         <small>&copy; Курс Roblox Studio</small>
     </footer>
+
+    
+
+
+
+    <script src="scripts/router.js"></script>
 </body>
 
 </html>
