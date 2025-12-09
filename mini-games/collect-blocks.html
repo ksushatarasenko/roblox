@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Мини-игра: Собери блоки</title>
+  <link rel="stylesheet" href="collect-blocks.css" />
+</head>
+<body>
+  <header class="game-header">
+    <h1>Мини-игра: Собери блоки</h1>
+    <nav><a href="../index.html">← Назад</a></nav>
+  </header>
+
+  <main class="game-container">
+    <div class="stats">
+      <div>Очки: <span id="score">0</span></div>
+      <div>Время: <span id="timer">30</span> сек</div>
+    </div>
+
+    <div id="game-area" class="game-area"></div>
+
+    <button id="start-btn" class="start-btn">Начать игру</button>
+
+    <div id="end-screen" class="end-screen hidden">
+      <h2>Игра окончена!</h2>
+      <p>Ты набрал: <span id="final-score">0</span> очков!</p>
+      <button onclick="location.reload()">Играть снова</button>
+    </div>
+  </main>
+
+  <script src="collect-blocks.js"></script>
+</body>
+</html>

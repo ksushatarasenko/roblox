@@ -1,0 +1,82 @@
+/* modules.css */
+/* ====== КОНТЕЙНЕР ====== */
+
+.modules-container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 0 15px;
+}
+
+/* ====== КАРТОЧКА МОДУЛЯ ====== */
+
+.module-card {
+  background: var(--white);
+  padding: 25px;
+  border-radius: var(--radius);
+  margin-bottom: 22px;
+  border-left: 8px solid var(--primary);
+  box-shadow: var(--shadow);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.module-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+.module-card h2 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.5rem;
+  color: var(--primary-dark);
+}
+
+.module-card ul {
+  list-style: none;
+  margin-top: 10px;
+  padding-left: 0;
+}
+
+.module-card li {
+  background: #f0f6ff;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  transition: 0.2s;
+}
+.module-card .lesson-list li {
+  background: #e9f1ff;
+  padding: 12px 16px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  border-left: 6px solid var(--accent);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.module-card .lesson-list li:hover {
+  background: #dce8ff;
+}
+.module-card .lesson-list li a {
+  color: var(--primary-dark);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.module-card li:hover {
+  background: #e4efff;
+  transform: translateX(4px);
+}
+
+.module-card li a {
+  text-decoration: none;
+  color: #2f6bb8;
+  font-weight: bold;
+}
+
+/* ====== КРАТКОЕ ОПИСАНИЕ УРОКА ====== */
+
+.lesson-short {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 4px;
+}
