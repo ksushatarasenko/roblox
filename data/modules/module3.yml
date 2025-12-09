@@ -8,7 +8,7 @@ lessons:
   - id: 14
     title: "📘 Урок 14: Script и LocalScript: кто за что отвечает"
     shortDescription: "Учимся понимать разницу между серверным Script и клиентским LocalScript."
-    # video: "https://www.youtube.com/embed/SSSSSSSSSSS"
+    video: "https://www.youtube.com/embed/jw9MFF-HEvw?si=9J9yGT9xm_iuZwLw"
 
     content:
 

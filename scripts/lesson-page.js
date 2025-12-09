@@ -130,7 +130,14 @@
         h3.textContent = block.title;
         section.appendChild(h3);
       }
-
+      // Пояснение под заголовком
+      if (block.text) {
+        const p = document.createElement('p');
+        p.className = "code-description";
+        p.innerHTML = block.text; // поддерживает HTML
+        section.appendChild(p);
+      }
+      // Сам код
       const pre = document.createElement('pre');
       const code = document.createElement('code');
 

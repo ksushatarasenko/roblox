@@ -264,7 +264,7 @@ lessons:
   - id: 4
     title: "Урок 4. Работа со сценой: копирование, группировка и порядок"
     shortDescription: "Учимся копировать объекты, группировать в модели и наводить порядок в проекте."
-    video: "https://www.youtube.com/embed/AAAAAAAAAAA"
+    video: "https://www.youtube.com/embed/uSr3gDyXBsE?si=LBeUkQxeapM8_u7Z"
 
     content:
       - type: text
@@ -342,7 +342,7 @@ lessons:
   - id: 5
     title: "Мини-проект: Домик и двор"
     shortDescription: "Урок 5. Собираем небольшой мир: домик, дорожка, забор и дерево."
-    # video: "https://www.youtube.com/embed/BBBBBBBBBBB"
+    video: "https://www.youtube.com/embed/5P2LJDcWU1M?si=JgYMuUC5o9zRYFQX"
 
     content:
       - type: text

@@ -10,7 +10,7 @@ lessons:
   - id: 40
     title: "Создание NPC с Humanoid"
     shortDescription: "Учимся создавать персонажа-NPC, который стоит в мире и реагирует на игрока."
-    video: "https://www.youtube.com/embed/NPCCREATE40"
+    video: "https://www.youtube.com/embed/47sErtArdrI?si=ciGfdmdp4Yh5tvXO"
 
     content:
       - type: text
@@ -290,7 +290,7 @@ lessons:
   - id: 44
     title: "Мини-проект: Страж охраняет сокровище"
     shortDescription: "Создаём полноценного NPC-стража: патруль, детекция игрока, диалог и награда."
-    video: "https://www.youtube.com/embed/NPCPROJECT44"
+    
 
     content:
       - type: text
