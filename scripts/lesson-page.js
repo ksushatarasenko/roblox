@@ -2,18 +2,17 @@
 // ГЛАВНАЯ АСИНХРОННАЯ ФУНКЦИЯ
 // ===============================
 (async function () {
-
   const { getQueryParam } = window.appRouter;
-  const lessonId = getQueryParam('lessonId');
+  const lessonId = getQueryParam("lessonId");
 
-  const titleEl = document.getElementById('lesson-title');
-  const metaEl = document.getElementById('lesson-meta');
-  const videoEl = document.getElementById('video-block');
-  const contentEl = document.getElementById('lesson-content');
-  const quizEl = document.getElementById('quiz-block');
+  const titleEl = document.getElementById("lesson-title");
+  const metaEl = document.getElementById("lesson-meta");
+  const videoEl = document.getElementById("video-block");
+  const contentEl = document.getElementById("lesson-content");
+  const quizEl = document.getElementById("quiz-block");
 
   if (!lessonId) {
-    titleEl.textContent = 'Урок не найден';
+    titleEl.textContent = "Урок не найден";
     return;
   }
 
@@ -21,7 +20,7 @@
   const found = window.courseApi.findLessonById(data, lessonId);
 
   if (!found) {
-    titleEl.textContent = 'Урок не найден';
+    titleEl.textContent = "Урок не найден";
     return;
   }
 
@@ -33,71 +32,70 @@
   // Метаданные
   metaEl.innerHTML = `
     <p><strong>Модуль:</strong> ${module.title}</p>
-    ${lesson.shortDescription ? `<p>${lesson.shortDescription}</p>` : ''}
+    ${lesson.shortDescription ? `<p>${lesson.shortDescription}</p>` : ""}
   `;
 
   // Видео
   if (lesson.video) {
-    const iframe = document.createElement('iframe');
+    const iframe = document.createElement("iframe");
     iframe.src = lesson.video;
-    iframe.width = '640';
-    iframe.height = '360';
+    iframe.width = "640";
+    iframe.height = "360";
     iframe.allowFullscreen = true;
-    iframe.title = 'Видео урока';
+    iframe.title = "Видео урока";
     videoEl.appendChild(iframe);
   }
 
   // Контент
-  (lesson.content || []).forEach(block => {
-
-    // TEXT
-    if (block.type === 'text') {
-      const section = document.createElement('section');
-      section.className = 'lesson-block fade-in';
+  (lesson.content || []).forEach((block) => {
+    // text
+    if (block.type === "text") {
+      const section = document.createElement("section");
+      section.className = "lesson-block fade-in";
 
       if (block.title) {
         // Если заголовок — массив
         if (Array.isArray(block.title)) {
-          block.title.forEach(t => {
-            const h3 = document.createElement('h3');
+          block.title.forEach((t) => {
+            const h3 = document.createElement("h3");
             h3.textContent = t;
             section.appendChild(h3);
           });
         }
         // Если заголовок — обычная строка
         else {
-          const h3 = document.createElement('h3');
+          const h3 = document.createElement("h3");
           h3.textContent = block.title;
-          section.appendChild(h3)
+          section.appendChild(h3);
         }
       }
 
       const texts = Array.isArray(block.text) ? block.text : [block.text];
 
-      texts.forEach(t => {
-        const p = document.createElement('p');
+      texts.forEach((t) => {
+        const p = document.createElement("p");
         p.innerHTML = t;
-        p.className = 'pText'
+        p.className = "pText";
         section.appendChild(p);
       });
 
       contentEl.appendChild(section);
     }
 
-    // STEPS
-    if (block.type === 'steps') {
-      const section = document.createElement('section');
-      section.className = 'lesson-block';
+    // steps
+    if (block.type === "steps") {
+      const section = document.createElement("section");
+      section.className = "lesson-block";
 
       if (block.title) {
-        const h3 = document.createElement('h3');
+        const h3 = document.createElement("h3");
         h3.textContent = block.title;
         section.appendChild(h3);
       }
 
-      const ol = document.createElement('ol');
-      (block.items || []).forEach(stepText => {
-        const li = document.createElement('li');
+      const ol = document.createElement("ol");
+      (block.items || []).forEach((stepText) => {
+        const li = document.createElement("li");
         li.textContent = stepText;
         ol.appendChild(li);
       });
@@ -106,7 +104,7 @@
       contentEl.appendChild(section);
     }
 
-    // GALLERY
+    // gallery
     if (block.type === "gallery") {
       const section = document.createElement("section");
       section.className = "lesson-block fade-in";
@@ -120,7 +118,7 @@
       const gallery = document.createElement("div");
       gallery.className = "image-gallery";
 
-      block.images.forEach(src => {
+      block.images.forEach((src) => {
         const img = document.createElement("img");
         img.src = src;
         img.className = "thumb";
@@ -132,60 +130,60 @@
       contentEl.appendChild(section);
     }
 
-    // CODE
-    if (block.type === 'code') {
-      const section = document.createElement('section');
-      section.className = 'lesson-block';
+    // code
+    if (block.type === "code") {
+      const section = document.createElement("section");
+      section.className = "lesson-block";
 
       if (block.title) {
         // Если заголовок — массив
-        if (Array.isArray(block.title)){
-          block.title.forEach (t => {
-            const h3 = document.createElement('h3');
+        if (Array.isArray(block.title)) {
+          block.title.forEach((t) => {
+            const h3 = document.createElement("h3");
             h3.textContent = t;
-            section.appendChild (h3);
+            section.appendChild(h3);
           });
         }
-         // Если заголовок — обычная строка
-        else{
-          const h3 = document.createElement('h3');
+        // Если заголовок — обычная строка
+        else {
+          const h3 = document.createElement("h3");
           h3.textContent = block.title;
-          section.appendChild(h3)
+          section.appendChild(h3);
         }
       }
 
       // Пояснение над кодом
       if (block.text) {
-        const desc = document.createElement('p');
+        const desc = document.createElement("p");
         desc.className = "code-description";
         desc.innerHTML = block.text;
         section.appendChild(desc);
       }
 
       // Код
-      const pre = document.createElement('pre');
-      const code = document.createElement('code');
+      const pre = document.createElement("pre");
+      const code = document.createElement("code");
 
-      code.className = `language-${block.language || 'lua'}`;
-      code.textContent = block.code || '';
+      code.className = `language-${block.language || "lua"}`;
+      code.textContent = block.code || "";
       pre.appendChild(code);
       section.appendChild(pre);
 
       // Пояснение под кодом — ВАЖНО: поддерживает массив!
       if (block.afterText) {
-        const after = document.createElement('div');
+        const after = document.createElement("div");
         after.className = "code-after-text";
 
         // если afterText массив → выводим списком
         if (Array.isArray(block.afterText)) {
-          block.afterText.forEach(line => {
-            const p = document.createElement('p');
+          block.afterText.forEach((line) => {
+            const p = document.createElement("p");
             p.innerHTML = line;
             after.appendChild(p);
           });
         } else {
           // если строка
-          const p = document.createElement('p');
+          const p = document.createElement("p");
           p.innerHTML = block.afterText;
           after.appendChild(p);
         }
@@ -201,36 +199,36 @@
     }
 
     // специальный блок цитаты
-    if (block.type === 'quote') {
-      const blockquote = document.createElement('blockquote');
-      blockquote.className = 'quote-block';
+    if (block.type === "quote") {
+      const blockquote = document.createElement("blockquote");
+      blockquote.className = "quote-block";
       blockquote.innerHTML = block.text;
       contentEl.appendChild(blockquote);
     }
 
     // CODEBLOCK — заголовок + код + текст после кода
-    if (block.type === 'codeBlock') {
-      const section = document.createElement('section');
-      section.className = 'lesson-block';
+    if (block.type === "codeBlock") {
+      const section = document.createElement("section");
+      section.className = "lesson-block";
 
       // Заголовок
       if (block.title) {
-        const h3 = document.createElement('h3');
+        const h3 = document.createElement("h3");
         h3.textContent = block.title;
         section.appendChild(h3);
       }
 
       // Код
-      const pre = document.createElement('pre');
-      const code = document.createElement('code');
-      code.className = `language-${block.language || 'lua'}`;
-      code.textContent = block.code || '';
+      const pre = document.createElement("pre");
+      const code = document.createElement("code");
+      code.className = `language-${block.language || "lua"}`;
+      code.textContent = block.code || "";
       pre.appendChild(code);
       section.appendChild(pre);
 
       // Пояснение под кодом
       if (block.afterText) {
-        const p = document.createElement('p');
+        const p = document.createElement("p");
         p.innerHTML = block.afterText;
         section.appendChild(p);
       }
@@ -242,78 +240,158 @@
       });
     }
 
-
     // NOTE
-    if (block.type === 'note') {
-      const div = document.createElement('div');
-      div.className = 'note-block';
+    if (block.type === "note") {
+      const div = document.createElement("div");
+      div.className = "note-block";
       div.innerHTML = block.text;
       contentEl.appendChild(div);
     }
 
     // WARNING
-    if (block.type === 'warning') {
-      const div = document.createElement('div');
-      div.className = 'warning-block';
+    if (block.type === "warning") {
+      const div = document.createElement("div");
+      div.className = "warning-block";
       div.innerHTML = block.text;
       contentEl.appendChild(div);
     }
-    
-  // HINT BLOCK — скрытая подсказка (спойлер)
-  // ------------------------------------------------------
-  if (block.type === 'hint') {
-    const section = document.createElement('section');
-    section.className = 'lesson-block hint-block';
 
-    // кнопка-заголовок
-    const btn = document.createElement('button');
-    btn.className = 'hint-toggle';
-    btn.textContent = block.title || "Подсказка";
-    section.appendChild(btn);
+    // TIP BLOCK — серый блок с вертикальной полоской
+    if (block.type === "tip") {
+      const section = document.createElement("section");
+      section.className = "tip-block fade-in";
 
-    // скрытый контейнер для кода
-    const hidden = document.createElement('div');
-    hidden.className = 'hint-content hidden';
+      // Заголовок
+      if (block.title) {
+        const h3 = document.createElement("h3");
+        h3.textContent = block.title;
+        section.appendChild(h3);
+      }
 
-    const pre = document.createElement('pre');
-    const code = document.createElement('code');
-    code.className = `language-lua`;
-    code.textContent = block.code || '';
-    pre.appendChild(code);
-    hidden.appendChild(pre);
+      // Текст
+      const p = document.createElement("p");
+      p.innerHTML = block.text;
+      section.appendChild(p);
 
-    section.appendChild(hidden);
-    contentEl.appendChild(section);
+      contentEl.appendChild(section);
+    }
 
-    // событие раскрытия
-    btn.onclick = () => {
-      hidden.classList.toggle('hidden');
-      hljs.highlightElement(code);
-    };
-  }
+    // HINT BLOCK — скрытая подсказка (спойлер)
+    // ------------------------------------------------------
+    if (block.type === "hint") {
+      const section = document.createElement("section");
+      section.className = "lesson-block hint-block";
 
+      // кнопка-заголовок
+      const btn = document.createElement("button");
+      btn.className = "hint-toggle";
+      btn.textContent = block.title || "Подсказка";
+      section.appendChild(btn);
+
+      // скрытый контейнер для кода
+      const hidden = document.createElement("div");
+      hidden.className = "hint-content hidden";
+
+      const pre = document.createElement("pre");
+      const code = document.createElement("code");
+      code.className = `language-lua`;
+      code.textContent = block.code || "";
+      pre.appendChild(code);
+      hidden.appendChild(pre);
+
+      section.appendChild(hidden);
+      contentEl.appendChild(section);
+
+      // событие раскрытия
+      btn.onclick = () => {
+        hidden.classList.toggle("hidden");
+        hljs.highlightElement(code);
+      };
+    }
+
+    // ===============================
+    // TABLE BLOCK — таблицы
+    // ===============================
+    if (block.type === "table") {
+      const section = document.createElement("section");
+      section.className = "lesson-block fade-in";
+
+      // Заголовок таблицы
+      if (block.title) {
+        const h3 = document.createElement("h3");
+        h3.textContent = block.title;
+        section.appendChild(h3);
+      }
+
+      // Создаём таблицу
+      const table = document.createElement("table");
+      table.className = "lesson-table";
+
+      // Заголовок (thead)
+      if (block.headers) {
+        const thead = document.createElement("thead");
+        const tr = document.createElement("tr");
+
+        block.headers.forEach((h) => {
+          const th = document.createElement("th");
+          th.textContent = h;
+          tr.appendChild(th);
+        });
+
+        thead.appendChild(tr);
+        table.appendChild(thead);
+      }
+
+      // Строки
+      if (block.rows) {
+        const tbody = document.createElement("tbody");
+
+        block.rows.forEach((row) => {
+          const tr = document.createElement("tr");
+          row.forEach((cell) => {
+            const td = document.createElement("td");
+            td.innerHTML = cell;
+            tr.appendChild(td);
+          });
+          tbody.appendChild(tr);
+        });
+
+        table.appendChild(tbody);
+      }
+
+      section.appendChild(table);
+
+      // Текст под таблицей
+      if (block.afterText) {
+        const p = document.createElement("p");
+        p.innerHTML = block.afterText;
+        p.className = "table-after-text";
+        section.appendChild(p);
+      }
+
+      contentEl.appendChild(section);
+    }
   });
 
   // QUIZ
   if (lesson.quiz && lesson.quiz.length > 0) {
-
-    const title = document.createElement('h2');
-    title.textContent = 'Проверь себя';
+    const title = document.createElement("h2");
+    title.textContent = "Проверь себя";
     quizEl.appendChild(title);
 
     lesson.quiz.forEach((q, qIndex) => {
-      const block = document.createElement('div');
-      block.className = 'quiz-question fade-in';
+      const block = document.createElement("div");
+      block.className = "quiz-question fade-in";
 
-      const p = document.createElement('p');
+      const p = document.createElement("p");
       p.textContent = q.question;
       block.appendChild(p);
 
       q.answers.forEach((answer, aIndex) => {
-        const label = document.createElement('label');
-        const input = document.createElement('input');
+        const label = document.createElement("label");
+        const input = document.createElement("input");
 
-        input.type = 'radio';
+        input.type = "radio";
         input.name = `q${qIndex}`;
         input.value = aIndex;
 
@@ -325,14 +403,16 @@
       quizEl.appendChild(block);
     });
 
-    const btn = document.createElement('button');
-    btn.textContent = 'Проверить ответы';
+    const btn = document.createElement("button");
+    btn.textContent = "Проверить ответы";
 
     btn.onclick = () => {
       let correctCount = 0;
 
       lesson.quiz.forEach((q, qIndex) => {
-        const chosen = document.querySelector(`input[name="q${qIndex}"]:checked`);
+        const chosen = document.querySelector(
+          `input[name="q${qIndex}"]:checked`
+        );
         if (!chosen) return;
         if (Number(chosen.value) === q.correct) correctCount++;
       });
@@ -343,19 +423,47 @@
     quizEl.appendChild(btn);
   }
 
-  
+  // END
+  (lesson.end || []).forEach((block) => {
+    // TEXT
+    if (block.type === "text") {
+      const section = document.createElement("section");
+      section.className = "lesson-end-block fade-in";
 
-  })();
+      if (block.title) {
+        if (Array.isArray(block.title)) {
+          block.title.forEach((t) => {
+            const h3 = document.createElement("h3");
+            h3.textContent = t;
+            section.appendChild(h3);
+          });
+        } else {
+          const h3 = document.createElement("h3");
+          h3.textContent = block.title;
+          section.appendChild(h3);
+        }
+      }
 
+      const texts = Array.isArray(block.text) ? block.text : [block.text];
 
+      texts.forEach((t) => {
+        const p = document.createElement("p");
+        p.innerHTML = t;
+        p.className = "pText";
+        section.appendChild(p);
+      });
 
-
+      // ❗ ДОБАВЛЯЕМ В КОНЕЦ ОСНОВНОГО КОНТЕНТА, НЕ В QUIZ
+      const endEl = document.getElementById("end-block");
+      endEl.appendChild(section);
+    }
+  });
+})();
 
 // ===============================
 // ФУНКЦИЯ ДЛЯ УВЕЛИЧЕНИЯ ИЗОБРАЖЕНИЙ
 // ===============================
 function openImageFullscreen(src) {
-
   // Создаём затемнённый фон
   const overlay = document.createElement("div");
   overlay.className = "image-overlay";
@@ -371,6 +479,3 @@ function openImageFullscreen(src) {
   // закрытие по клику
   overlay.onclick = () => overlay.remove();
 }
-
-
-

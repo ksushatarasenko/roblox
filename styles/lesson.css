@@ -308,3 +308,91 @@
   display: none;
 }
 /* end podskazka */
+/* ======================== */
+/* для зелёного блока END */
+/* ======================= */
+.lesson-end-block {
+  background: #d8fcd8; /* нежно-зелёный */
+  border-left: 6px solid #4caf50;
+  padding: 20px;
+  margin-top: 30px;
+  border-radius: 10px;
+}
+
+.lesson-end-block h3 {
+  color: #2e7d32;
+}
+
+.lesson-end-block p {
+  color: #1b5e20;
+}
+/* CSS для красивой таблицы */
+.lesson-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  font-size: 1rem;
+}
+
+.lesson-table thead tr {
+  border-bottom: 2px solid #ddd;
+}
+
+.lesson-table th {
+  text-align: left;
+  padding: 10px 5px;
+  font-weight: 600;
+  color: #444;
+}
+
+.lesson-table td {
+  padding: 10px 5px;
+  border-bottom: 1px solid #eee;
+  color: #333;
+}
+
+.lesson-table tr:last-child td {
+  border-bottom: none;
+}
+
+.table-after-text {
+  margin-top: 20px;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+.table-after-text {
+  margin-top: 20px;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  white-space: pre-line;  /* ← фиксирует проблему */
+}
+
+/*  */
+.warzno{
+  color: red;
+  font-style: italic;
+  font-size: 20px;
+}
+
+/* ─────────────── TIP BLOCK ─────────────── */
+
+.tip-block {
+  background: var(--white);
+  padding: 18px 22px;
+  border-radius: var(--radius);
+  border-left: 6px solid #d8d8d8; /* та самая вертикальная полоса */
+  margin-bottom: 22px;
+}
+
+.tip-block h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.tip-block p {
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
