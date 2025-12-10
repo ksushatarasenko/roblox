@@ -248,6 +248,13 @@
   margin: 12px 0;
 }
 
+.code-after-text{
+  margin-top: 1%;
+  font-size: 19px;
+}
+.pText{
+  font-size: 18px;
+}
 /* =========================================================
                         ДОП. ВЫДЕЛЕНИЯ
    ========================================================= */
@@ -256,3 +263,48 @@
   background: yellow;
   padding: 2px 4px;
 }
+
+.quote-block {
+  border-left: 4px solid #d0d0d0;
+  margin: 12px 0;
+  padding: 10px 16px;
+  color: #333;
+  font-style: italic;
+  background: #fafafa;
+  border-radius: 6px;
+}
+
+/* ======================================== */
+/* ПОДСКАЗКА */
+/* ======================================== */
+.hint-block {
+  margin-top: 20px;
+}
+
+.hint-toggle {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background 0.25s ease;
+}
+
+.hint-toggle:hover {
+  background: #dfeaff;
+}
+
+.hint-content {
+  margin-top: 10px;
+  transition:
+    max-height 0.45s ease,
+    opacity 0.35s ease;
+}
+
+.hidden {
+  display: none;
+}
+/* end podskazka */

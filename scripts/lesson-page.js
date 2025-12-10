@@ -56,9 +56,20 @@
       section.className = 'lesson-block fade-in';
 
       if (block.title) {
-        const h3 = document.createElement('h3');
-        h3.textContent = block.title;
-        section.appendChild(h3);
+        // Если заголовок — массив
+        if (Array.isArray(block.title)) {
+          block.title.forEach(t => {
+            const h3 = document.createElement('h3');
+            h3.textContent = t;
+            section.appendChild(h3);
+          });
+        }
+        // Если заголовок — обычная строка
+        else {
+          const h3 = document.createElement('h3');
+          h3.textContent = block.title;
+          section.appendChild(h3)
+        }
       }
 
       const texts = Array.isArray(block.text) ? block.text : [block.text];
@@ -66,6 +77,7 @@
       texts.forEach(t => {
         const p = document.createElement('p');
         p.innerHTML = t;
+        p.className = 'pText'
         section.appendChild(p);
       });
 
@@ -126,32 +138,110 @@
       section.className = 'lesson-block';
 
       if (block.title) {
-        const h3 = document.createElement('h3');
-        h3.textContent = block.title;
-        section.appendChild(h3);
+        // Если заголовок — массив
+        if (Array.isArray(block.title)){
+          block.title.forEach (t => {
+            const h3 = document.createElement('h3');
+            h3.textContent = t;
+            section.appendChild (h3);
+          });
+        }
+         // Если заголовок — обычная строка
+        else{
+          const h3 = document.createElement('h3');
+          h3.textContent = block.title;
+          section.appendChild(h3)
+        }
       }
-      // Пояснение под заголовком
+
+      // Пояснение над кодом
       if (block.text) {
-        const p = document.createElement('p');
-        p.className = "code-description";
-        p.innerHTML = block.text; // поддерживает HTML
-        section.appendChild(p);
+        const desc = document.createElement('p');
+        desc.className = "code-description";
+        desc.innerHTML = block.text;
+        section.appendChild(desc);
       }
-      // Сам код
+
+      // Код
       const pre = document.createElement('pre');
       const code = document.createElement('code');
 
       code.className = `language-${block.language || 'lua'}`;
       code.textContent = block.code || '';
-
       pre.appendChild(code);
       section.appendChild(pre);
+
+      // Пояснение под кодом — ВАЖНО: поддерживает массив!
+      if (block.afterText) {
+        const after = document.createElement('div');
+        after.className = "code-after-text";
+
+        // если afterText массив → выводим списком
+        if (Array.isArray(block.afterText)) {
+          block.afterText.forEach(line => {
+            const p = document.createElement('p');
+            p.innerHTML = line;
+            after.appendChild(p);
+          });
+        } else {
+          // если строка
+          const p = document.createElement('p');
+          p.innerHTML = block.afterText;
+          after.appendChild(p);
+        }
+
+        section.appendChild(after);
+      }
+
       contentEl.appendChild(section);
 
       requestAnimationFrame(() => {
         hljs.highlightElement(code);
       });
     }
+
+    // специальный блок цитаты
+    if (block.type === 'quote') {
+      const blockquote = document.createElement('blockquote');
+      blockquote.className = 'quote-block';
+      blockquote.innerHTML = block.text;
+      contentEl.appendChild(blockquote);
+    }
+
+    // CODEBLOCK — заголовок + код + текст после кода
+    if (block.type === 'codeBlock') {
+      const section = document.createElement('section');
+      section.className = 'lesson-block';
+
+      // Заголовок
+      if (block.title) {
+        const h3 = document.createElement('h3');
+        h3.textContent = block.title;
+        section.appendChild(h3);
+      }
+
+      // Код
+      const pre = document.createElement('pre');
+      const code = document.createElement('code');
+      code.className = `language-${block.language || 'lua'}`;
+      code.textContent = block.code || '';
+      pre.appendChild(code);
+      section.appendChild(pre);
+
+      // Пояснение под кодом
+      if (block.afterText) {
+        const p = document.createElement('p');
+        p.innerHTML = block.afterText;
+        section.appendChild(p);
+      }
+
+      contentEl.appendChild(section);
+
+      requestAnimationFrame(() => {
+        hljs.highlightElement(code);
+      });
+    }
+
 
     // NOTE
     if (block.type === 'note') {
@@ -168,6 +258,39 @@
       div.innerHTML = block.text;
       contentEl.appendChild(div);
     }
+    
+  // HINT BLOCK — скрытая подсказка (спойлер)
+  // ------------------------------------------------------
+  if (block.type === 'hint') {
+    const section = document.createElement('section');
+    section.className = 'lesson-block hint-block';
+
+    // кнопка-заголовок
+    const btn = document.createElement('button');
+    btn.className = 'hint-toggle';
+    btn.textContent = block.title || "Подсказка";
+    section.appendChild(btn);
+
+    // скрытый контейнер для кода
+    const hidden = document.createElement('div');
+    hidden.className = 'hint-content hidden';
+
+    const pre = document.createElement('pre');
+    const code = document.createElement('code');
+    code.className = `language-lua`;
+    code.textContent = block.code || '';
+    pre.appendChild(code);
+    hidden.appendChild(pre);
+
+    section.appendChild(hidden);
+    contentEl.appendChild(section);
+
+    // событие раскрытия
+    btn.onclick = () => {
+      hidden.classList.toggle('hidden');
+      hljs.highlightElement(code);
+    };
+  }
 
   });
 
@@ -220,7 +343,9 @@
     quizEl.appendChild(btn);
   }
 
-})();
+  
+
+  })();
 
 
 
@@ -248,6 +373,4 @@ function openImageFullscreen(src) {
 }
 
 
-// "note" — голубой информативный блок
 
-// "warning" — жёлтый блок-предупреждение

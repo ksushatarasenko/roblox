@@ -6,7 +6,8 @@
 •	✨ <i class="ri-sparkling-2-line"></i>
 •	🧠 <i class="ri-brain-line"></i>
 •	🎮 <i class="ri-gamepad-line"></i>
-🎯
+🎯 👉 ➡️
+➡
 
 
 <b></b>
@@ -17,3 +18,22 @@
     <b style=\"color: rgb(255, 0, 64);\"></b>
     <b style=\"color: rgb(255, 179, 0);\"></b>
     <b style=\"color: rgba(9, 167, 4, 1);\"></b>
+
+<ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+
+- type: codeBlock
+  title: "🛠 Пример: меняем цвет куба"
+  code: |
+    local cube = game.Workspace.Part
+
+    cube.Color = Color3.new(1, 0, 0)   -- красный цвет
+  afterText: "Куб станет красным! ❤️"
+
+// "note" — голубой информативный блок
+
+// "warning" — жёлтый блок-предупреждение
