@@ -70,6 +70,23 @@
         }
       }
 
+      if (block.textH4) {
+        
+        if (Array.isArray(block.textH4)) {
+          block.textH4.forEach((t) => {
+            const h4 = document.createElement("h4");
+            h4.textContent = t;
+            section.appendChild(h4);
+          });
+        }
+        // Если заголовок — обычная строка
+        else {
+          const h4 = document.createElement("h4");
+          h4.textContent = block.textH4;
+          section.appendChild(h4);
+        }
+      }
+
       const texts = Array.isArray(block.text) ? block.text : [block.text];
 
       texts.forEach((t) => {
@@ -268,10 +285,30 @@
         section.appendChild(h3);
       }
 
-      // Текст
-      const p = document.createElement("p");
-      p.innerHTML = block.text;
-      section.appendChild(p);
+      // --- ВАЖНО: преобразуем многострочный текст YAML в <ul><li> ---
+      const text = block.text.trim();
+
+      // Если строки начинаются с "-", делаем список
+      if (text.startsWith("-")) {
+        const ul = document.createElement("ul");
+
+        text.split("\n").forEach((line) => {
+          const cleaned = line.replace(/^-/, "").trim(); // убираем "- "
+          if (cleaned.length > 0) {
+            const li = document.createElement("li");
+            li.innerHTML = cleaned;
+            ul.appendChild(li);
+          }
+        });
+
+        section.appendChild(ul);
+      }
+      // иначе — обычный текст
+      else {
+        const p = document.createElement("p");
+        p.innerHTML = text.replace(/\n/g, "<br>");
+        section.appendChild(p);
+      }
 
       contentEl.appendChild(section);
     }
