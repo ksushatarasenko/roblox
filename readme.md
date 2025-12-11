@@ -49,3 +49,41 @@
           <b>LocalScript</b> — личный помощник игрока.
 
 <p class = "warzno"></p>
+
+ - type: hint
+        title: "Подсказака 👇 - 📌 Скрипт для Checkpoint2"
+        code: |
+          local checkpoint = script.Parent
+          local respawnPoint = workspace.Spawn2  -- точка второго чекпоинта
+
+          checkpoint.Touched:Connect(function(hit)
+              local character = hit.Parent
+              local humanoid = character:FindFirstChild("Humanoid")
+
+              if humanoid then
+                  local player = game.Players:GetPlayerFromCharacter(character)
+
+                  if player then
+                      player.RespawnLocation = respawnPoint
+                      print("Чекпоинт 2 активирован!")
+
+                      -- Эффект: меняем цвет на синий
+                      checkpoint.Color = Color3.fromRGB(0, 100, 255)
+                  end
+              end
+          end)
+
+<!-- END -->
+    end:
+      - type: "text"
+        title: "🎉 Итог: Теперь ты умеешь:"
+        text: |
+          <ul>
+            <li>управлять движением игрока</li>
+            <li>телепортировать</li>
+            <li>менять скорость</li>
+            <li>разворачивать игрока в пространстве</li>
+            <li>использовать Humanoid и HumanoidRootPart</li>
+          </ul>
+          <h4>Это мощнейшая база для будущих проектов!</h4>
+<!-- konec END -->
