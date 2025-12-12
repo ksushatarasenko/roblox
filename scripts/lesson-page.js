@@ -71,7 +71,6 @@
       }
 
       if (block.textH4) {
-        
         if (Array.isArray(block.textH4)) {
           block.textH4.forEach((t) => {
             const h4 = document.createElement("h4");
@@ -325,6 +324,18 @@
       btn.textContent = block.title || "Подсказка";
       section.appendChild(btn);
 
+      // --- Пояснение ПЕРЕД кодом (поддерживает массив) ---
+      if (block.text) {
+        const texts = Array.isArray(block.text) ? block.text : [block.text];
+
+        texts.forEach((t) => {
+          const p = document.createElement("p");
+          p.className = "hint-description";
+          p.innerHTML = t;
+          section.appendChild(p);
+        });
+      }
+
       // скрытый контейнер для кода
       const hidden = document.createElement("div");
       hidden.className = "hint-content hidden";
@@ -337,6 +348,25 @@
       hidden.appendChild(pre);
 
       section.appendChild(hidden);
+
+      // --- Пояснение ПОСЛЕ кода (supports array) ---
+      if (block.afterText) {
+        const after = document.createElement("div");
+        after.className = "code-after-text";
+
+        const list = Array.isArray(block.afterText)
+          ? block.afterText
+          : [block.afterText];
+
+        list.forEach((line) => {
+          const p = document.createElement("p");
+          p.innerHTML = line;
+          after.appendChild(p);
+        });
+
+        section.appendChild(after);
+      }
+
       contentEl.appendChild(section);
 
       // событие раскрытия
@@ -495,6 +525,7 @@
       endEl.appendChild(section);
     }
   });
+  
 })();
 
 // ===============================

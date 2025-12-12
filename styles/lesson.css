@@ -295,6 +295,7 @@
 
 .hint-toggle:hover {
   background: #dfeaff;
+  color: var(--accent);
 }
 
 .hint-content {

@@ -6,7 +6,7 @@
 •	✨ <i class="ri-sparkling-2-line"></i>
 •	🧠 <i class="ri-brain-line"></i>
 •	🎮 <i class="ri-gamepad-line"></i>
-🎯 👉 ➡️. 👁️
+🎯 👉 ➡️. 👁️  📍. ✔️
 ➡
 
 
