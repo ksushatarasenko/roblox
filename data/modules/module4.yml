@@ -435,11 +435,203 @@ lessons:
         text: 
          - "Следи, чтобы порталы не стояли слишком близко, иначе игрок может «застрять»."
 
-      - type: "note"
-        text: "Телепорты можно сочетать с эффектами: свет, частицы, звук."
+      - type: "code"
+        title: "🚪 Часть 3 — Переход между комнатами (например, в другой зал)"    
+        text: |
+          Это похоже на двери в торговом центре:
+          <p>зашёл — и сразу оказался в другом помещении.</p>
+          <h4>📦 Подготовка:</h4>
+            <ul>
+              <li>Сделай комнату <b>Room1</b></li>
+              <li>Сделай комнату <b>Room2</b></li>
+              <li>В Room1 поставь Part → Door1</li>
+              <li>В Room2 поставь Part → Door2</li>
+              <li>Все двери Anchored = true</li>
+            </ul>
+        code: |
+          local door = script.Parent
+          local targetRoomDoor = workspace.Door2  -- куда переносим
 
-      - type: "text"
-        title: "🚪 Часть 3 — Переход между комнатами (например, в другой зал)"      
+          door.Touched:Connect(function(hit)
+              local character = hit.Parent
+              local root = character:FindFirstChild("HumanoidRootPart")
+
+              if root then
+                  root.CFrame = targetRoomDoor.CFrame + Vector3.new(0, 3, 0)
+                  print("Переход в другую комнату!")
+              end
+          end)
+        afterText: "👉 Представь, что игрок резко «входит» в соседнюю комнату."
+      
+
+      - type: "code"
+        title: "🏡 Часть 4 — Телепорт в дом (или в секретную комнату)"    
+        text: |
+          Ох, это любимая механика детей!
+          <p>Игрок может войти в маленькую дверь, землю или куст,</p>
+          <p>и попасть в дом, бункер, секретную базу.</p>
+          <h4>📦 Подготовка:</h4>
+            <ul>
+              <li>Портал: <b>HousePortal</b></li>
+              <li>Точка внутри дома: <b>InsideHouse</b></li>
+            </ul>
+        code: |
+          local portal = script.Parent
+          local housePoint = workspace.InsideHouse
+
+          portal.Touched:Connect(function(hit)
+              local char = hit.Parent
+              local root = char:FindFirstChild("HumanoidRootPart")
+
+              if root then
+                  root.CFrame = housePoint.CFrame + Vector3.new(0, 3, 0)
+                  print("Добро пожаловать в дом!")
+              end
+          end)
+
+
+      - type: "code"
+        title: "🧪 Часть 5 — Телепорт-гейт (требует действие)"    
+        text: |
+          Интересная механика: телепорт срабатывает только если игрок что-то сделал, например:
+          <ul>
+              <li>собрал ключ</li>
+              <li>нажал кнопку</li>
+              <li>активировал рычаг</li>
+            </ul>
+          <h4>📦 Подготовка:</h4>
+            <ul>
+              <li>Part → Gate</li>
+              <li>BoolValue → <b>Activated = false</b></li>
+            </ul>
+        code: |
+          local gate = script.Parent
+          local exit = workspace.SecretRoom
+          local activated = gate:FindFirstChild("Activated")
+
+          gate.Touched:Connect(function(hit)
+              local char = hit.Parent
+              local root = char:FindFirstChild("HumanoidRootPart")
+
+              if root and activated.Value == true then
+                  root.CFrame = exit.CFrame + Vector3.new(0, 3, 0)
+                  print("Гейт активирован → телепорт!")
+              end
+          end)
+        afterText: "👉 Можно сделать квест «найди ключ», чтобы телепорт заработал."
+
+      - type: "code"
+        title: "🎨 Визуальные эффекты (по желанию)"    
+        text: |
+          Используй:
+            <ul>
+              <li><b>ParticleEmitter</b> — искры, дым, магия</li>
+              <li><b>TweenService</b> — плавное свечение портала</li>
+              <li><b>Sound</b> — звук портала</li>
+              <li><b>BillboardGui</b> — надпись «ПОРТАЛ»</li>
+            </ul>
+          Например:
+        code: |
+          portal.Color = Color3.fromRGB(100, 0, 255)
+
+          //Структура объекта Portal в Workspace должна быть такой:
+          Portal (Part)
+            ├── Script
+            ├── Sound
+            ├── ParticleEmitter
+
+      - type: "hint"
+        title: "🧙‍♂️ Подсказка - Полный код внутри Script 👁️"
+        code: |
+          -- Получаем сам портал
+          local portal = script.Parent
+
+          -- Частицы (искры, магия)
+          local particles = portal:FindFirstChild("ParticleEmitter")
+
+          -- Звук телепорта
+          local sound = portal:FindFirstChild("Sound")
+
+          -- Цель, куда будем переносить игрока
+          local target = workspace:WaitForChild("ExitPoint")
+
+          -- TweenService для плавного свечения
+          local TweenService = game:GetService("TweenService")
+
+
+          ----------------------------------------------------------
+          -- 1. СОЗДАЁМ НАДПИСЬ "ПОРТАЛ" ЧЕРЕЗ BillboardGui
+          ----------------------------------------------------------
+
+          local billboard = Instance.new("BillboardGui")
+          billboard.Parent = portal
+          billboard.Adornee = portal
+          billboard.Size = UDim2.new(0, 100, 0, 50)
+          billboard.StudsOffset = Vector3.new(0, 3, 0) -- над порталом
+
+          local label = Instance.new("TextLabel")
+          label.Parent = billboard
+          label.Size = UDim2.new(1, 0, 1, 0)
+          label.BackgroundTransparency = 1
+          label.Text = "ПОРТАЛ"
+          label.TextScaled = true
+          label.TextColor3 = Color3.fromRGB(255, 255, 0)
+          label.Font = Enum.Font.FredokaOne
+
+
+          ----------------------------------------------------------
+          -- 2. ПЛАВНОЕ СВЕЧЕНИЕ ПОРТАЛА (TweenService)
+          ----------------------------------------------------------
+
+          local glowInfo = TweenInfo.new(
+              1.5,                          -- длительность 1.5 сек
+              Enum.EasingStyle.Sine,       -- плавная волна
+              Enum.EasingDirection.InOut,
+              -1,                          -- повторять бесконечно
+              true                         -- реверс (туда-сюда)
+          )
+
+          -- Меняем цвет на магический
+          local glowTween = TweenService:Create(portal, glowInfo, {
+              Color = Color3.fromRGB(120, 0, 255) -- фиолетовое сияние
+          })
+
+          glowTween:Play()
+
+
+          ----------------------------------------------------------
+          -- 3. ОБРАБОТКА ТЕЛЕПОРТА
+          ----------------------------------------------------------
+
+          portal.Touched:Connect(function(hit)
+              local char = hit.Parent
+              local root = char:FindFirstChild("HumanoidRootPart")
+
+              if root then
+                  
+                  -- Включаем частицы
+                  if particles then
+                      particles.Enabled = true
+                  end
+                  
+                  -- Проигрываем звук телепорта
+                  if sound then
+                      sound:Play()
+                  end
+                  
+                  -- Сам телепорт
+                  root.CFrame = target.CFrame + Vector3.new(0, 3, 0)
+                  print("Телепорт — в путь!")
+
+                  -- Через 1 секунду выключаем частицы
+                  task.delay(1, function()
+                      if particles then
+                          particles.Enabled = false
+                      end
+                  end)
+              end
+          end)
+
 
     quiz:
       - question: "Какой объект мы ищем, чтобы телепортировать игрока?"
@@ -456,6 +648,19 @@ lessons:
           - "Добавляет урон"
         correct: 0
 
+    end:
+      - type: "text"
+        title: "🎉 Итог: Теперь ты умеешь: 🧠"
+        text: |
+          <ul>
+            <li>обычные телепорты</li>
+            <li>двусторонние порталы</li>
+            <li>переходы между комнатами</li>
+            <li>телепорты в дом</li>
+            <li>телепорт-гейты с условиями</li>
+            <li>а также знаешь, что должен двигаться HumanoidRootPart</li>
+          </ul>
+          <h4>Это огромный шаг в создании настоящих уровней и приключений! 🎮</h4>
 # ============================================================
 # УРОК 26 — Чекпоинты
 # ============================================================
