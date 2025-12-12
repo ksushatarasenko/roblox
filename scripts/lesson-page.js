@@ -134,11 +134,13 @@
       const gallery = document.createElement("div");
       gallery.className = "image-gallery";
 
-      block.images.forEach((src) => {
+      block.images.forEach((imgObj, index) => {
         const img = document.createElement("img");
-        img.src = src;
+        img.src = imgObj.src;
         img.className = "thumb";
-        img.onclick = () => openImageFullscreen(src);
+
+        img.onclick = () => openImageFullscreen(block.images, index); // передаём ВСЕ картинки!
+
         gallery.appendChild(img);
       });
 
@@ -525,25 +527,78 @@
       endEl.appendChild(section);
     }
   });
-  
 })();
 
 // ===============================
 // ФУНКЦИЯ ДЛЯ УВЕЛИЧЕНИЯ ИЗОБРАЖЕНИЙ
 // ===============================
-function openImageFullscreen(src) {
-  // Создаём затемнённый фон
+// ===============================
+// FULLSCREEN CAROUSEL VIEWER
+// ===============================
+function openImageFullscreen(images, startIndex = 0) {
+  let currentIndex = startIndex;
+
+  // overlay
   const overlay = document.createElement("div");
   overlay.className = "image-overlay";
 
-  // Само изображение в центре
+  // wrapper
+  const wrapper = document.createElement("div");
+  wrapper.className = "image-viewer";
+
+  // image element
   const img = document.createElement("img");
-  img.src = src;
   img.className = "fullscreen-image";
 
-  overlay.appendChild(img);
-  document.body.appendChild(overlay);
+  // caption
+  const caption = document.createElement("div");
+  caption.className = "image-caption";
 
-  // закрытие по клику
-  overlay.onclick = () => overlay.remove();
+  // left/right buttons
+  const btnPrev = document.createElement("button");
+  btnPrev.className = "image-nav prev";
+  btnPrev.innerHTML = "⟵";
+
+  const btnNext = document.createElement("button");
+  btnNext.className = "image-nav next";
+  btnNext.innerHTML = "⟶";
+
+  // load image
+  function updateImage() {
+    img.src = images[currentIndex].src;
+
+    const text = images[currentIndex].caption;
+    caption.textContent = text && text.trim() !== "" ? text : "";
+    caption.style.display = text ? "block" : "none";
+  }
+
+  updateImage();
+
+  // closing
+  overlay.onclick = (e) => {
+    if (e.target === overlay) overlay.remove();
+  };
+
+  // navigation
+  btnPrev.onclick = (e) => {
+    e.stopPropagation();
+    currentIndex =
+      (currentIndex - 1 + images.length) % images.length;
+    updateImage();
+  };
+
+  btnNext.onclick = (e) => {
+    e.stopPropagation();
+    currentIndex = (currentIndex + 1) % images.length;
+    updateImage();
+  };
+
+  // assembling
+  wrapper.appendChild(btnPrev);
+  wrapper.appendChild(img);
+  wrapper.appendChild(btnNext);
+  wrapper.appendChild(caption);
+  overlay.appendChild(wrapper);
+
+  document.body.appendChild(overlay);
 }
