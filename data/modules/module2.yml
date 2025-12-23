@@ -27,6 +27,21 @@ lessons:
           - "<ul> <li>Lua — это язык программирования, похожий на язык, по которому робот понимает команды.</li><li>Он простой, лёгкий и очень дружелюбный для новичков.</li><li>На Lua пишутся почти все игровые механики в Roblox Studio.</li></ul>"
           - "Можно сказать так:"
           - "<b>Модели — это тело, а скрипты на Lua — это мозг игры.</b>"
+          - "Kod to nie magia. Kod to <b>praca z pamięcią.</b> "
+      - type: text
+        title: "📘 Jak możemy o tym myśleć?"
+        text:
+          - "Wyobraź sobie, że świat ma:"
+          - "<ul> <li><b>małe pudełka</b></li><li>do których może coś schować</li></ul>"
+          - "W jednym pudełku: liczba"
+          - "W innym: tekst"
+          - "W jeszcze innym: kolor albo stan"
+          - "Na razie nie musisz znać nazw. Ważne jest tylko jedno: <b>Świat musi mieć gdzie zapisywać informacje.</b>"
+
+      - type: gallery
+        title: ""
+        images:
+          - src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module2/lesson6/%D0%B3%D0%BB%D0%B0%D0%B2%D0%B0%D0%B8%CC%86%202_1.png?raw=true"
 
       - type: text
         title: "⭐ Что такое Script в Roblox Studio?"
@@ -42,17 +57,18 @@ lessons:
       - type: gallery
         title: "Где создаётся Script в Explorer"
         images:
-          - "assets/images/module2/script-example-1_1.png"
-          - "assets/images/module2/script-example-1_2.png"
-          - "assets/images/module2/script-example-1_3.png"
-          - "assets/images/module2/script-example-1_4.png"
+          - src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module2/lesson6/%D0%B3%D0%BB%D0%B0%D0%B2%D0%B0%D0%B8%CC%86%202_1.png?raw=true"
+          - src: "assets/images/module2/script-example-1_1.png"
+          - src: "assets/images/module2/script-example-1_2.png"
+          - src: "assets/images/module2/script-example-1_3.png"
+          - src: "assets/images/module2/script-example-1_4.png"
 
       - type: gallery
         title: "Окно редактора кода Roblox Studio"
         images:
-          - "assets/images/module2/code-window-1_1.png"
-          - "assets/images/module2/code-window-1_2.png"
-          - "assets/images/module2/code-window-1_3.png"
+          - src: "assets/images/module2/code-window-1_1.png"
+          - src: "assets/images/module2/code-window-1_2.png"
+          - src: "assets/images/module2/code-window-1_3.png"
 
       - type: text
         title: "🛠️ Практика"
@@ -146,6 +162,16 @@ lessons:
           - "В окне Toolbox"
         correct: 0
 
+    end:
+      - type: "text"
+        title: "🧠 Kluczowa myśl rozdziału"
+        text: |
+          <ul>
+            <li>Świat, który nie pamięta, nie może myśleć.</li>
+            <li>Pamięć to pierwszy krok do prawdziwego programowania.</li>
+          </ul>
+          <h4>Это мощнейшая база для будущих проектов!</h4>
+
   # ============================================================
   # УРОК 7 — Переменные. Управляем объектами через код
   # ============================================================
@@ -173,6 +199,15 @@ lessons:
         text:
           - "<b>Переменная — это коробочка, в которой хранится информация: число, текст, цвет.</b>"
           - "Ты даёшь коробочке имя → и потом можешь использовать это имя в коде."
+          - "<b>W jednym pudełku może być:</b>"
+          - "<ul><li>liczba (np. 5, 10, 100)</li><li>tekst (np. „Hello”)</li><li>informacja prawda / fałsz</li>"
+      - type: text
+        title: "🧠 Dlaczego to takie ważne?"
+        text:
+          - "Bo świat czyta informacje i robi dokładnie to, co one mówią"
+          - "Bez pudełek świat nie ma pamięci, a bez pamięci nie ma myślenia"
+          - "W programowaniu takie pudełko na informacje ma bardzo ważną nazwę: <b>variable</b>"
+          - "Po polsku: <b>zmienna</b>"
 
       - type: code
         language: lua

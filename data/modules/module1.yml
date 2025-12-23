@@ -649,7 +649,7 @@ lessons:
   - id: 5
     title: "Мини-проект: Домик и двор"
     shortDescription: "Урок 5. Собираем небольшой мир: домик, дорожка, забор и дерево."
-    video: "https://www.youtube.com/embed/5P2LJDcWU1M?si=JgYMuUC5o9zRYFQX"
+    # video: "https://www.youtube.com/embed/5P2LJDcWU1M?si=JgYMuUC5o9zRYFQX"
 
     content:
       - type: text
@@ -738,3 +738,15 @@ lessons:
           - "Чтобы двигать его как один объект"
           - "Чтобы изменить всем частям цвет"
         correct: 1
+    end:
+      - type: "text"
+        title: "🧠 Co już potrafisz?"
+        text: |
+          <ul>
+            <li>świat <b>istnieje</b></li>
+            <li>ma <b>obiekty</b></li>
+            <li>ma <b>przestrzeń</b></li>
+            <li>ma <b>właściwości</b></li>
+            <li>i jest <b>uporządkowany</b></li>
+          </ul>
+          <h4>👉 Świat jest gotowy, żeby zacząć myśleć.</h4>
