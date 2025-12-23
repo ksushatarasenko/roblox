@@ -20,6 +20,10 @@ lessons:
           - "<b>Roblox Studio</b> — программа для создания игр. В ней можно строить миры, добавлять персонажей и писать скрипты."
           - "Начнём?"
           - "Открой Roblox Studio на Mac и выбери шаблон <b>Baseplate</b> — пустая сцена с большой платформой."
+      - type: "text"
+        text: |
+          Roblox Studio to nie tylko to, co widzisz na środku. To także kilka <b>okien i pasków</b>, które pomagają ci pracować ze światem. Nie musisz ich teraz zapamiętywać. Po prostu zobacz, że <b>tam są</b>.
+
 
       - type: text
         title: "Интерфейс Roblox Studio"
@@ -28,25 +32,57 @@ lessons:
           - "<b>Explorer</b> — список всех объектов проекта."
           - "<b>Properties</b> — свойства выбранного объекта."
           - "<b>Панель инструментов</b>: Select, Move, Scale, Rotate, вкладки Home, Model, Test."
+        
+      - type: "gallery"
+        title: ""
+        images:
+          - src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module1/lesson1/img1_1.png?raw=true"
+            caption: "viewport1_1"
+          - src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module1/lesson1/viewport1_2.jpeg?raw=true"
+            caption: "viewport1_2"
+          - src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module1/lesson1/viewport1_3.png?raw=true"
+            caption: "viewport1_3"
+      - type: "text"
+        text: |
+          Na ekranie pojawia się świat. Duży. Spokojny. Prawie pusty. Pod stopami widzisz płaską platformę. Dookoła — niebo i przestrzeń. Nic się nie rusza. Nic na ciebie nie reaguje.
+          <p>Ten świat nie jest zepsuty. Nie zrobiłeś nic źle. On po prostu… <b>jeszcze nic nie potrafi.</b></p>
+          Gdyby ktoś mógł tu teraz coś powiedzieć, Profesor Właściwości uśmiechnąłby się spokojnie i wyjaśnił:
+          <p><em>— To normalne. Świat może istnieć, nawet jeśli jeszcze nic nie robi. I to jest bardzo ważne, żeby zrozumieć to od samego początku.</em></p>
+
+
 
       - type: gallery
-        title: "Viewport (главное окно сцены)"
+        title: "Ten świat już istnieje. Ma swoje miejsce. Ma przestrzeń. Ma kształt."
         images:
-          - "https://raw.githubusercontent.com/ksushatarasenko/roblox-course-assets/refs/heads/main/module1/lesson1/viewport1_1.jpeg"
-          - "https://raw.githubusercontent.com/ksushatarasenko/roblox-course-assets/refs/heads/main/module1/lesson1/viewport1_2.jpeg"
-          - "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module1/lesson1/viewport1_3.png?raw=true"
-
-      - type: gallery
-        title: "Explorer (Проводник проекта)"
-        images:
-          - "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module1/lesson1/exploer1.jpg?raw=true"
+          - src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module1/lesson1/%D0%B3%D0%BB%D0%B0%D0%B2%D0%B01.png?raw=true"
+            caption: ""
+      - type: text
+        text: |
+          Ale <b>nie ma jeszcze zasad.</b>
+          <ul>
+            <li>nie myśli</li>
+            <li>nie pamięta</li>
+            <li>nie reaguje</li>
+          </ul>
+          On po prostu czeka.
+          <p>Każdy cyfrowy świat najpierw się pojawia. Dopiero potem uczy się działać.</p>
 
       - type: note
         text: "На Mac управление камерой: правая кнопка мыши + W A S D, колесо — зум."
 
+      - type: text
+        title: "🔧 Spróbuj sam"
+        text:
+          - "1.	Otwórz Roblox Studio."
+          - "2.	Wybierz pusty świat z platformą (Baseplate)."
+          - "3.	Rozejrzyj się po świecie — jeszcze nic nie zmieniaj."
+          - "4.	Teraz kliknij Play i przejdź się po platformie."
+          - "Zatrzymaj się na chwilę i pomyśl:"
+          - "Co musiałoby się pojawić w tym świecie, żeby zaczął coś robić?"
+         
       - type: steps
-        title: "Создание первого объекта"
-        items:
+        title: ""
+        items:         
           - "Home → Part → Block — создаём куб."
           - "Move — перемещаем объект."
           - "Scale — меняем размер."
@@ -78,9 +114,11 @@ lessons:
           - "Stop — выход."
 
       - type: text
-        title: "Итог"
+        title: "🧠 Kluczowa myśl rozdziału"
         text:
-          - "Ребёнок познакомился с интерфейсом, научился создавать объекты и запускать игру."
+          - "Świat może istnieć bez działania."
+          - "Ale bez <b>zasad</b> nic się w nim nie wydarzy."
+          - "Programowanie zaczyna się od <b>zrozumienia świata</b> — nie od kodu."
 
     quiz:
       - question: "Как называется главное окно, где отображается мир?"
@@ -99,6 +137,17 @@ lessons:
         answers: ["Home → Play", "Test → Play", "Model → Play"]
         correct: 1
 
+    
+    end:
+      - type: "text"
+        title: "📘 Słowa, które dziś poznałeś (EN)"
+        text: |
+          <ul>
+            <li><b>Roblox Studio</b> — program do tworzenia światów</li>
+            <li><b>Baseplate</b> — podstawa świata, platforma</li>
+            <li><b>Workspace</b> — przestrzeń, w której znajduje się cały świat</li>
+          </ul>
+          
   # -----------------------------
   # УРОК 2
   # -----------------------------
@@ -125,11 +174,33 @@ lessons:
       - type: gallery
         title: "Части Part"
         images:
-          - "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module1/lesson2/block.png?raw=true"
-          - "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module1/lesson2/sphere.png?raw=true"
-          - "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module1/lesson2/cylinder.png?raw=true"
-          - "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module1/lesson2/wedge.jpeg?raw=true"
-
+          - src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module1/lesson2/block.png?raw=true"            
+          - src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module1/lesson2/sphere.png?raw=true"
+          - src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module1/lesson2/cylinder.png?raw=true"
+          - src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module1/lesson2/wedge.jpeg?raw=true"
+      - type: text
+        title: ""
+        text:
+          - "Na razie <b>nic więcej nie rób.</b> Po prostu popatrz na świat."
+          - "Świat wciąż jest cichy. Ale teraz… <b>nie jest już pusty.</b>"
+          - "Ma kształt. Ma miejsce. Zajmuje przestrzeń."
+          - "I dokładnie w tym momencie coś się zmienia."
+          - "<em>- O! </em> — odezwał się nagle ktoś bardzo prosty i bardzo kanciasty."
+          - "<em>Chyba… właśnie się pojawiłem?</em>"
+          - "To był Formaczek."
+          - "Nie wiedział jeszcze, kim jest ani po co tu stoi. Ale jedno było ewne — <b?>świat już nigdy nie będzie taki sam.</b?"
+          - "Jeszcze przed chwilą świat był tylko przestrzenią. Teraz ma <b>element.</b>"
+      - type: text
+        text: 
+          - "👉 Kliknij na obiekt, żeby go zaznaczyć. Zobaczysz, że wokół niego pojawią się strzałki. To znaczy, że obiekt jest gotowy do ruchu."
+          - "Teraz spróbuj go przesunąć:"
+          - " <ul> <li>•	złap jedną ze strzałek myszką</li><li>•	i pociągnij obiekt w wybraną stronę (w lewo, w prawo, do przodu, do tyłu)</li></ul>"
+          - "Nie zmieniaj kształtu. Nie dodawaj nowych obiektów. Tylko <b>ruch.</b>"
+      - type: gallery
+        title: "Move"
+        images:
+          - src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module1/lesson2/%D0%B3%D0%BB%D0%B0%D0%B2%D0%B0%D0%B8%CC%862_2.png?raw=true"
+          - src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module1/lesson2/rozdzial3.png?raw=true"
       - type: text
         title: "Move — перемещение"
         text:
@@ -138,11 +209,21 @@ lessons:
           - "Y — зелёная"
           - "Z — синяя"
 
+      - type: text
+        title: ""
+        text:
+          - "Świat się nie buntuje. Nie protestuje. Po prostu pozwala ci przesuwać obiekt."
+          - "<em>— Hej!</em> — powiedział Formaček."
+          - "<em>Jestem tu… a teraz jestem tam.</em>"
+          - "<em>— Jak ty wiesz, gdzie mnie postawić?</em>"
+          - "Świat <b>nie zgaduje</b>, gdzie jest obiekt. On to <b>dokładnie wie.</b>"
+
       - type: gallery
         title: "Move"
         images:
-          - "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module1/lesson2/move1.jpeg?raw=true"
-          - "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module1/lesson2/move2.jpeg?raw=true"
+          
+          - src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module1/lesson2/move1.jpeg?raw=true"
+          - src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module1/lesson2/move2.jpeg?raw=true"
 
       - type: text
         title: "Rotate — вращение"
@@ -154,8 +235,8 @@ lessons:
       - type: gallery
         title: "Rotate"
         images:
-          - "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module1/lesson2/rotate1.jpg?raw=true"
-          - "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module1/lesson2/rotate2.png?raw=true"
+          - src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module1/lesson2/rotate1.jpg?raw=true"
+          - src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module1/lesson2/rotate2.png?raw=true"
 
       - type: text
         title: "Scale — размер"
@@ -165,13 +246,22 @@ lessons:
       - type: gallery
         title: "Scale"
         images:
-          - "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module1/lesson2/scale.jpeg?raw=true"
+          - src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module1/lesson2/scale.jpeg?raw=true"
+      - type: text
+        title: "Scale — размер"
+        text:
+          - "Świat Roblox jest jak wielka przestrzeń, w której wszystko ma swoje miejsce."
+          - "Żeby światem dało się sterować, musi on wiedzieć, gdzie coś jest."
+          - "Dlatego ruch nigdy nie jest chaotyczny. Zawsze odbywa się <b>w konkretnym kierunku.</b>"
+          - "Ruch w świecie odbywa się <b>w uporządkowanych kierunkach</b>, a nie przypadkowo."
+          - "Wystarczy, że rozumiesz jedno: Obiekt zawsze jest <b>gdzieś.</b>"
+          - "Żeby sterować światem, trzeba wiedzieć <b>gdzie</b> coś jest."
 
       - type: gallery
         title: "Пример композиции"
         images:
-          - "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module1/lesson2/companowka1.png?raw=true"
-          - "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module1/lesson2/companowka2.png?raw=true"
+          - src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module1/lesson2/companowka1.png?raw=true"
+          - src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module1/lesson2/companowka2.png?raw=true"
 
       - type: steps
         title: "Практика"
@@ -183,6 +273,12 @@ lessons:
 
       - type: note
         text: "Так развивается 3D-мышление."
+      - type: "text"
+        title: "🧠 Kluczowa myśl rozdziału "
+        text: 
+          - "Świat składa się z obiektów"
+          - "Obiekty mogą mieć różne kształty."
+          - "Ale wszystkie są częścią jednego systemu"
 
     quiz:
       - question: "Какой инструмент отвечает за перемещение?"
@@ -201,6 +297,21 @@ lessons:
         answers: ["1", "2", "4"]
         correct: 2
 
+    end:
+      - type: "text"
+        title: "📘 Słowa, które dziś poznałeś (EN)"
+        text: |
+          <ul>
+            <li><b>Part</b> — podstawowy obiekt świata</li>
+            <li><b>Object</b> — element świata</li>
+            <li><b>Shape</b> — kształt obiektu</li>
+            <li><b>Block / Cube</b> — sześcian</li>
+            <li><b>Cylinder</b> — walec</li>
+            <li><b>Ball / Sphere</b> — kula</li>
+            <li><b>Positio</b>n — położenie obiektu</li>
+            <li><b>Space</b> — przestrzeń świata</li>
+          </ul>
+          <h4>Это мощнейшая база для будущих проектов!</h4>
   # -----------------------------
   # УРОК 3
   # -----------------------------
@@ -336,6 +447,7 @@ lessons:
       - question: "Где наводят порядок в сцене?"
         answers: ["Viewport", "Properties", "Explorer"]
         correct: 2
+
 # ------------------------------
 # урок 5
 # ------------------------------
@@ -350,13 +462,16 @@ lessons:
         text:
           - "Собрать небольшой, но аккуратный мир: домик с крышей, дорожка, забор и дерево. Повторяем всё, что уже умеем."
 
-      - type: gallery
+      - type: "gallery"
         title: "Примеры домиков"
         images:
-          - "https://raw.githubusercontent.com/ksushatarasenko/roblox-course-assets/main/module1/lesson5/house-example-1_1.png"
-          - "https://raw.githubusercontent.com/ksushatarasenko/roblox-course-assets/main/module1/lesson5/house-example-1_2.jpeg"
-          - "https://raw.githubusercontent.com/ksushatarasenko/roblox-course-assets/main/module1/lesson5/house-example-1_3.jpeg"
-
+          - src: "https://raw.githubusercontent.com/ksushatarasenko/roblox-course-assets/main/module1/lesson5/house-example-1_1.png"
+            caption: "house-example-1"
+          - src: "https://raw.githubusercontent.com/ksushatarasenko/roblox-course-assets/main/module1/lesson5/house-example-1_1.png"
+            caption: "Сложный уровень"
+          - src: "https://raw.githubusercontent.com/ksushatarasenko/roblox-course-assets/main/module1/lesson5/house-example-1_2.jpeg"
+          - src: "https://raw.githubusercontent.com/ksushatarasenko/roblox-course-assets/main/module1/lesson5/house-example-1_3.jpeg"
+       
       - type: gallery
         title: "Домик с двором"
         images:

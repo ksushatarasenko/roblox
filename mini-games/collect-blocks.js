@@ -69,3 +69,6 @@ function endGame() {
 
   endScreen.classList.remove("hidden");
 }
+
+
+
