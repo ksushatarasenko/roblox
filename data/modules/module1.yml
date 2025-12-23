@@ -319,13 +319,45 @@ lessons:
   - id: 3
     title: "Урок 3. Свойства объектов: цвет, материал, привязка, коллизии"
     shortDescription: "Понимаем свойства Color, Material, Transparency, Anchored, CanCollide."
-    video: "https://www.youtube.com/embed/ZZZZZZZZZZZ"
+    # video: "https://www.youtube.com/embed/ZZZZZZZZZZZ"
 
     content:
       - type: text
         title: "Цель"
         text:
           - "Понять, как свойства влияют на объект: вид, поведение и взаимодействие."
+      - type: text
+        title: ""
+        text:
+          - "Wybierz jeden obiekt "
+          - "Zajrzyj teraz na bok ekranu, do panelu <b>Properties.</b>"
+          - "Nie klikaj wszystkiego naraz. Na razie skup się tylko na kilku rzeczach."
+          - "Spróbuj zmienić:"
+          - "<ul><li><b>kolor</b> obiektu</li><li><b>rozmiar</b> (zrób go większym lub mniejszym)</li></ul>"
+          - "Popatrz na świat."
+          - "Formaček nadal jest w tym samym miejscu. Ale wygląda… <b>inaczej.</b>"
+      - type: "gallery"
+        title: ""
+        images:
+          - src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module1/lesson3/%D0%B3%D0%BB%D0%B0%D0%B2%D0%B0%204.png?raw=true"
+            caption: ""
+      - type: "text"
+        title: "🧠 Co tu się właściwie dzieje?"   
+        text: 
+          - "Formaček się nie zamienił w inny obiekt. To wciąż <b>ten sam Formaček</b>"
+          - "Zmieniły się tylko informacje o nim."
+          - "Każdy obiekt w świecie ma:"
+          - "<ul><li>swój <b>kształt</b></li><li>swoje <b>miejsce</b></li><li>swoje <b>właściwości</b></li><li>swój <b>kolorz</b></li></ul>"
+      - type: "text"
+        title: "📘 Jak to się nazywa?"   
+        text: 
+          - "Te cechy mają swoją nazwę:"
+          - "<b>•	Property</b> — właściwość obiektu"
+          - "Najczęstsze właściwości:"
+          - "<ul><li><b>Color </b>— kolor</li><li><b>Size</b> — rozmiar</li><li><b>Material</b> — materiał</li></ul>"
+          - "Każdy obiekt ma wiele właściwości."
+          - "Zmieniając je, <b>zmieniasz sposób, w jaki świat go odbiera.</b>"
+
 
       - type: steps
         title: "Шаг 1. Цвет"
@@ -349,16 +381,111 @@ lessons:
           - "0.5 — прозрачный."
           - "1 — невидимый."
 
-      - type: steps
-        title: "Шаг 3. Anchored"
-        items:
-          - "Если выключено — объект падает."
-          - "Если включено — висит."
+      - type: "text"
+        title: "⚓ Anchored — czy obiekt jest przytwierdzony"
+        text: |
+          <p><b>⭐ Bardzo ważna właściwość</b></p>
+          Ta właściwość jest jedną z najważniejszych <b>w całym świecie Roblox.</b>
+          <p>Jeśli <b>Anchored = true</b>, obiekt jest <b>przytwierdzony do świata:</b></p>
+          <ul>
+            <li>nie spada</li>
+            <li>nie przesuwa się sam</li>
+            <li>zostaje dokładnie tam, gdzie go postawiłeś</li>
+          </ul>
+          <p>Jeśli <b>Anchored = false</b>, obiekt:</p>
+          <ul>
+            <li>może spaść</li>
+            <li>może się przewrócić</li>
+            <li>może zareagować na inne obiekty</li>
+          </ul>
+      - type: "note"
+        text: "<b>📌  Przed uruchomieniem świata (Play) zawsze sprawdź, czy ważne obiekty są Anchored</b>"
+      - type: "note"
+        text: "<b>📌  Jeśli coś spada lub się przewraca — najpierw sprawdź Anchored.</b>"
 
-      - type: steps
-        title: "Шаг 4. CanCollide"
-        items:
-          - "Если false — игрок проходит сквозь объект."
+      - type: "text"
+        title: "CanCollide — czy można przez obiekt przejść"
+        text: |
+          <p>Ta właściwość decyduje, czy obiekt jest twardy, czy przenikalny.</p>
+          <p>Gdy CanCollide = true: nie da się przez niego przejść, zatrzymuje inne obiekty</p>
+          <p>Gdy CanCollide = false: można przez niego przejść, inne obiekty go nie zatrzymują</p>
+          <p>Ten sam obiekt może być: <b>ścianą</b>, albo tylko cieniem</p>
+          <p>Wszystko zależy od właściwości. To nie magia. <b>To tylko ustawienia.</b></p>
+
+      - type: "text"
+        title: "📋 Kopiowanie — jak budować szybciej"
+        text: |
+          <p>Czasem chcesz:</p>
+          <ul>
+            <li>zbudować kilka takich samych ścian</li>
+            <li>zrobić ścieżkę</li>
+            <li>ustawić wiele podobnych obiektów</li>
+          </ul>
+          <p>Nie musisz tworzyć wszystkiego od nowa.</p>
+          <p>Możesz <b>kopiować obiekty.</b></p>
+          <p>🧠 Dlaczego kopiowanie jest ważne?</p>
+          <ul>
+            <li>oszczędza czas</li>
+            <li>pomaga zachować równe kształty</li>
+            <li>pozwala budować świat szybko i mądrze</li>
+          </ul>
+          <p><em>— O! Jest nas więcej!</em> — ucieszył się Formaček.</p>
+          <p><em>— I wszyscy jesteśmy tacy sami!</em></p>
+
+
+      - type: "text"
+        title: "🔄 Spróbuj więcej"
+        text: |
+          <p>Teraz zrób kilka prostych zmian:</p>
+          <ul>
+            <li>Zmień kolor Formačka na bardzo jasny, ыkopiuj Formačka kilka razy.</li>
+            <li>Ustaw kopie w linii albo w rzędzie</li>
+            <li>Zrób z nich:
+                <ul>
+                <li>ścieżkę</li>
+                <li>mur</li>
+                <li>albo wzór</li>
+              </ul></li>
+             <li>Zrób go:
+                <ul>
+                <li>bardzo małym</li>
+                <li>bardzo dużym</li>
+              </ul></li>
+          </ul>
+         
+
+      - type: "text"
+        title: "🛟 Nie bój się eksperymentować"
+        text: |
+          <p>Czasem:</p>
+          <ul>
+            <li>coś przesuniesz za daleko</li>
+            <li>coś zniknie</li>
+            <li>albo świat przestanie wyglądać tak, jak chcesz</li>              
+          </ul>
+          <p>To normalne.</p>
+          <p>Na szczęście są <b>magiczne przyciski</b>, które pomagają. </p>          
+
+
+      - type: "text"
+        title: "🔙 Cofnij ostatnią akcję (Undo)"
+        text: |          
+          <p>Na szczęście są <b>magiczne przyciski</b>, które pomagają. </p>
+          <p>Jeśli chcesz cofnąć to, co właśnie zrobiłeś <b>Windows: Ctrl + Z / Mac: Cmd + Z</b></p>
+          <p>Możesz cofać kilka kroków. Świat się nie obrazi 😉</p>
+
+      - type: "text"
+        title: "🧭 Wróć na początek świata (gdy się zgubisz)"
+        text: |          
+          <p>Jeśli nie widzisz obiektów albo zgubiłeś się w przestrzeni: </p>
+          <p>Naciśnij: Windows: F / Mac: F</p>
+          <p>Kamera wróci dokładnie tam, gdzie jest obiekt.</p>
+      
+      - type: "note"
+        text: "<b>📌 Bardzo ważne:</b> Niczego nie da się „zepsuć na zawsze”. Eksperymentowanie jest częścią nauki."
+
+
+
 
     quiz:
       - question: "Что делает Anchored?"
@@ -368,20 +495,35 @@ lessons:
       - question: "Что делает объект невидимым?"
         answers: ["Transparency = 1", "Color = Black", "Material = Neon"]
         correct: 0
+    end:
+      - type: "text"
+        title: "📘 Słowa, które dziś poznałeś (EN)"
+        text: |
+          <ul>
+            <li><b>Property</b> — właściwość obiektu</li>
+            <li><b>Color</b> — kolor</li>
+            <li><b>Size</b> — rozmiar</li>
+            <li><b>Material</b> — materiał</li>
+            <li><b>Anchored</b> — przytwierdzony</li>
+            <li><b>CanCollide</b> — kolizje</li>
+            <li><b>Duplicate</b> — kopiuj / powiel</li>
+          </ul>
+          <p><b>Właściwości</b> to informacje o obiekcie. Zmieniając informacje, zmieniasz świat.</p>
+
 
   # -----------------------------
   # УРОК 4 
   # -----------------------------
   - id: 4
-    title: "Урок 4. Работа со сценой: копирование, группировка и порядок"
-    shortDescription: "Учимся копировать объекты, группировать в модели и наводить порядок в проекте."
+    title: "Урок 4. Работа со сценой:  группировка и порядок"
+    shortDescription: "Учимся  группировать в модели и наводить порядок в проекте."
     video: "https://www.youtube.com/embed/uSr3gDyXBsE?si=LBeUkQxeapM8_u7Z"
 
     content:
       - type: text
         title: "Цель урока"
         text:
-          - "Научиться быстро копировать объекты, объединять их в Model и аккуратно организовывать сцену в окне Explorer."
+          - "Научиться быстро объединять объекты в Model и аккуратно организовывать сцену в окне Explorer."
 
       - type: steps
         title: "Шаг 1. Копирование объектов"
