@@ -289,6 +289,14 @@
   right: -60px;
 }
 
+.image{
+  width: 70%;
+  margin: 0 auto;
+}
+.image img{
+  width: 80%;
+  margin: 0 auto;
+}
 
 /* =========================================================
                         БЛОКИ "note" и "warning"

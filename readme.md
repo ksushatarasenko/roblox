@@ -87,6 +87,18 @@
           - src: "assets/images/obby-3.png"
             caption: ""
 
+
+  - type: "oneImage"
+        title: "Заголовок"
+        textTop: "Текст над картинкой"
+        img:
+            src: "/assets/images/pic.png"
+            width: 360
+            maxWidth: "100%"
+            align: center
+        textBottom: "Текст под картинкой"
+
+
 <!-- END -->
     end:
       - type: "text"

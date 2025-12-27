@@ -670,9 +670,9 @@ lessons:
       - type: gallery
         title: "Домик с двором"
         images:
-          - "https://raw.githubusercontent.com/ksushatarasenko/roblox-course-assets/main/module1/lesson5/house-example-2_1.jpeg"
-          - "https://raw.githubusercontent.com/ksushatarasenko/roblox-course-assets/main/module1/lesson5/house-example-2_2.png"
-          - "https://raw.githubusercontent.com/ksushatarasenko/roblox-course-assets/main/module1/lesson5/house-example-2_3.jpeg"
+          - src: "https://raw.githubusercontent.com/ksushatarasenko/roblox-course-assets/main/module1/lesson5/house-example-2_1.jpeg"
+          - src: "https://raw.githubusercontent.com/ksushatarasenko/roblox-course-assets/main/module1/lesson5/house-example-2_2.png"
+          - src: "https://raw.githubusercontent.com/ksushatarasenko/roblox-course-assets/main/module1/lesson5/house-example-2_3.jpeg"
 
       - type: steps
         title: "Шаг 1. Основание и дорожка"

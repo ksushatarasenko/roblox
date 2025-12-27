@@ -148,6 +148,50 @@
       contentEl.appendChild(section);
     }
 
+    // oneImae
+    if (block.type === "oneImage") {
+      const section = document.createElement("section");
+      section.className = "lesson-block fade-in";
+
+      // Заголовок
+      if (block.title) {
+        const h3 = document.createElement("h3");
+        h3.textContent = block.title;
+        section.appendChild(h3);
+      }
+
+      // HTML-текст НАД картинкой
+      if (block.textTop) {
+        const topText = document.createElement("div");
+        topText.className = "text-top";
+        topText.innerHTML = block.textTop; // 🔥 ВАЖНО
+        section.appendChild(topText);
+      }
+
+      // Картинка
+      const gallery = document.createElement("div");
+      gallery.className = "image";
+
+      const img = document.createElement("img");
+      img.src = block.img.src;
+      img.style.width = block.img.width + "px";
+      img.style.maxWidth = block.img.maxWidth;
+      img.className = "thumb";
+
+      gallery.appendChild(img);
+      section.appendChild(gallery);
+
+      // HTML-текст ПОД картинкой
+      if (block.textBottom) {
+        const bottomText = document.createElement("div");
+        bottomText.className = "text-bottom";
+        bottomText.innerHTML = block.textBottom; // 🔥 ВАЖНО
+        section.appendChild(bottomText);
+      }
+
+      contentEl.appendChild(section);
+    }
+
     // code
     if (block.type === "code") {
       const section = document.createElement("section");
@@ -582,8 +626,7 @@ function openImageFullscreen(images, startIndex = 0) {
   // navigation
   btnPrev.onclick = (e) => {
     e.stopPropagation();
-    currentIndex =
-      (currentIndex - 1 + images.length) % images.length;
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
     updateImage();
   };
 
