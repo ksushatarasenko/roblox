@@ -4,12 +4,12 @@ description: "Учимся писать скрипты, работать с пе
 
 lessons:
   # ============================================================
-  # УРОК 6_1 — Первый скрипт. Команда print()
+  # УРОК 6 — Первый скрипт. Команда print()
   # ============================================================
-  - id: 6_1
-    title: "📘 Урок 6_1: Что такое Script и как работает print()"
-    shortDescription: "Добавляем Script, пишем первую команду print() и запускаем код."
-    video: "https://www.youtube.com/embed/hyK2psZK1KY?si=Z2IFEE-kyW5NTIhY"
+  - id: 6
+    title: "📘 Урок 6: Что такое Script и как работает print()"
+    shortDescription: "🟢 «Я написал код — он что-то вывел» (print)"
+    # video: "https://www.youtube.com/embed/hyK2psZK1KY?si=Z2IFEE-kyW5NTIhY"
     content:
       - type: text
         title: "🎯 Цель урока"
@@ -173,11 +173,11 @@ lessons:
           <h4>Это мощнейшая база для будущих проектов!</h4>
 
   # ============================================================
-  # УРОК 6_2 — Первый скрипт. Команда print()
+  # УРОК 7 — где они вообще хранятся
   # ============================================================
-  - id: 6_2
-    title: "📘 Урок 6_2: Что такое Script и где они вообще хранятся."
-    shortDescription: "🧠 Почему скрипты «где-то» и где они вообще хранятся?"
+  - id: 7
+    title: "📘 Урок 7: Что такое Script и где они вообще хранятся."
+    shortDescription: "🟢 «А где вообще живёт код?»"
     
     content:
       - type: text
@@ -307,11 +307,11 @@ lessons:
           <h4>Это мощнейшая база для будущих проектов!</h4>
 
   # ============================================================
-  # УРОК 6_3 — Первый скрипт. Команда print()
+  # УРОК 8 — «Почему код не всегда в кубике?»
   # ============================================================
-  - id: 6_3
-    title: "📘 Урок 6_3: 🧠 Где должен жить скрипт и как объект с ним «разговаривает»"
-    shortDescription: "🧠 почему не все скрипты живут в объектах?"
+  - id: 8
+    title: "📘 Урок 8: 🧠 Где должен жить скрипт и как объект с ним «разговаривает»"
+    shortDescription: "🟢 «Почему код не всегда в кубике?»"
     
     content:
       - type: text
@@ -399,67 +399,324 @@ lessons:
         text: |
           <h4>🏢 ServerScriptService — главный мозг</h4>
           <p> game ─> ServerScriptService</p>
-
-
-
-          
+          <p><b>📌 Что здесь хранится</b></p>
           <ul>
-            <li>Открой Roblox Studio.</li>
-            <li>Включи: 
-              <ul>
-                <li>View → Explorer</li>
-                <li>View → Properties </li>
-              </ul>
-            </li>
-            <li>В окне Explorer ты увидишь все объекты и скрипты.</li><br>
+            <li>правила игры</li>
+            <li>очки</li>
+            <li>победа / поражение</li>
+            <li>кто выиграл</li>
+            <li>кто проиграл</li>
           </ul>
-          <h4>✅ Способ 2. Поиск (быстрый)</h4>
-          <ul>
-            <li>Нажми Ctrl + F (Cmd + F на Mac).</li>
-            <li>Введи «Script» в строку поиска.</li>
-            <li>Roblox Studio покажет <b>все скрипты</b> в проекте.</li>
-          </ul> 
+          <p><b>👉 Один скрипт управляет всей игрой</b></p>
+
 
     
 
       - type: text
-        title: "🧠 Очень важная мысль"
-        text: |
-          <h4>Скрипты — это мозг игры, это невидимые работники игры</h4>
+        title: "🧠 Аналогия (очень понятная)"
+        text: |          
           <ul>
-            <li>Они живут в специальных службах (Services), они не стоят в мире.</li>
-            <li>Они не видны игрокам, они не рисуются.</li>
-            <li>Они управляют всем, что происходит в игре, они думают и управляют.</li>
+            <li>объекты — это <b>рабочие</b></li>
+            <li>ServerScriptService — это <b>директор</b></li>
           </ul>
-          <p>Когда ты будешь создавать свои игры, помни: <b>скрипты — это мозг твоей игры! А <b>Workspace</b> — это сцена,</b></p>
+          <p>Рабочие делают действия, директор решает что это значит.</p>
           
           
 
 
       - type: text
-        title: "🎓 Как это объяснить одной фразой"
-        text:
-          <p><em>🏙️ Workspace — это город, <br> а скрипты — это диспетчеры и правила, <br>которые сидят в офисах и управляют городом.</em></p
+        title: "🧩 Часть 3. Тогда зачем вообще скрипт в объекте?"
+        text: |
+          Хороший вопрос 👍
+          <h4>🟢 Правильная схема</h4>
+          <ul>
+            <li>объект — замечает событие</li>
+            <li>большой скрипт — принимает решение</li>
+          </ul>
 
-      
+      - type: text
+        title: "🔌 Часть 4. Как объект «общается» со скриптом"
+        text: |
+          Объекты <b>не говорят словами</b>, они <b>посылают сигналы</b>.
+          <h4>В Roblox эти сигналы называются события.</h4>
+
+      - type: codeBlock
+        title: "⚡ Пример 1. Кубик сообщает: «меня тронули»"
+        code: |
+          cube.Touched:Connect(function(hit)
+              print("Меня тронули!")
+          end)
+        afterText: |
+          <h4>🧠 Что происходит</h4>
+          <ul>
+            <li>когда <b>кто-то трогает</b> кубик,</li>
+            <li>кубик <b>посылает сигнал</b> «Меня тронули!»</li>
+            <li>скрипт <b>слушает сигна</b>л и <b>выполняет код</b> внутри функции</li>
+          </ul>
+          <p.>👉 Кубик не думает — он сообщает</p.
+
+      - type: codeBlock
+        title: "⚡ Пример 2. Кнопка сообщает: «на меня нажали»"
+        code: |
+          button.ClickDetector.MouseClick:Connect(function(player)
+              print("Кнопку нажали")
+          end)
+        
+      - type: text
+        title: "🧪 Мини-пример"
+        text: |
+          <h4>❌ Плохо</h4>
+          <p>Каждая дверь сама решает, когда открываться</p><br>
+          <h4>✅ Хорошо</h4>
+          <p>Одна дверь сообщает, что её открыли (<b>«В меня постучали»</b>), а большой скрипт решает (<b>«Можно ли открыть»</b>), что делать дальше</p>
 
     end:
       - type: "text"
-        title: "🧠 Kluczowa myśl rozdziału"
+        title: "🟢 Итог урока"
         text: |
           <ul>
-            <li>Świat, który nie pamięta, nie może myśleć.</li>
-            <li>Pamięć to pierwszy krok do prawdziwego programowania.</li>
+            <li>да, <b>скрипты МОЖНО класть в объекты</b></li>
+            <li>но <b>это не главный способ</b></li>
+            <li>большие правила живут в <b>ServerScriptService</b></li>
+            <li>объекты <b>общаются со скриптами через событи</b>я</li>
+            <li>один мозг лучше, чем 100 маленьких</li>
           </ul>
-          <h4>Это мощнейшая база для будущих проектов!</h4>
+          <h4>Кубик не умный — он просто говорит, а главный скрипт решает, что делать.</h4>
+   
+  # ============================================================
+  # УРОК 9 — Как обратиться к объекту в Roblox
+  # ============================================================
+  - id: 9
+    title: "📘 Урок 9: Как обратиться к объекту в Roblox"
+    shortDescription: "🟢 «Как код находит нужный объект?»"
+
+    content:
+      - type: text
+        title: "Цель урока"
+        text:
+          - "Как сказать игре, с каким объектом работать"
+          - "Как игра находит объекты: game.Workspace.Part"
+          - "Научиться понимать:"
+          - " <ul>
+                <li>что такое <b>game</b></li>
+                <li>что такое <b>Workspace</b></li>               
+                <li>почему пишут <b>game.Workspace.Part</b></li>                
+                <li>как <b>самому находить путь к объекту</b></li>
+              </ul>"
+
+      - type: text
+        title: "🧩 Часть 1. Где живут объекты в Roblox?"
+        text:
+          - "🏠 <b>Вся игра — это</b> game"
+          - "В Roblox <b>всё находится внутри game.</b>"
+          - "Это как <b>большой дом</b>, в котором есть комнаты."
+
+      - type: text
+        title: "🌍 Комната с миром — Workspace"
+        text: |
+          Workspace — это <b>главная комната игры</b>, где:
+          <ul>
+            <li>бегают игроки</li>
+            <li>стоят кубики</li>
+            <li>находятся дома и платформы</li>
+          </ul>
+      - type: text
+        title: "🟦 Кубик — Part"
+        text:
+          - "Part — это обычный <bкубик></bкубик>, который стоит в мире."
+
+      - type: "gallery"
+        title: "👀 Как это выглядит в Roblox Studio"
+        images:
+          - src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module2/lesson7_1/module2_lesson7_struktura.png?raw=true"
+            caption: ""
+          - src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module2/lesson7_1/module2_lesson7_1.png?raw=true"
+            caption: ""
+          - src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module2/lesson7_1/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202025-12-27%20%D0%B2%2006.36.14.png?raw=true"
+            caption: "👉 Это и есть путь к кубику."
+          
+
+      - type: text
+        title: "🧠 Часть 2. Почему пишут game.Workspace.Part"
+        text: |
+          Roblox <b>не угадывает</b>, что ты имеешь в виду.
+          <p>Ему нужен <b>точный адрес</b>.</p>
+          <p>📬 Как адрес дома: <b>Страна → Город → Улица → Дом</b></p>
+          <p>🎮 В Roblox: <b>game → Workspace → Part</b></p>
+          <p>Это значит: «Возьми Part, который находится в Workspace, который находится в game». </p>
+
+      - type: text
+        title: "✋ Почему нельзя просто написать Part?"
+        text: |
+          Потому что:
+          <ul>
+            <li>кубиков может быть <b>много</b></li>
+            <li>Roblox спросит: 🤔 «Какой именно Part?»</li>
+          </ul>
+          А путь говорит точно.
+
+      - type: text
+        title: "🧩 Часть 3. Зачем писать local cube = game.Workspace.Part"
+        text: |
+          <p>Полный путь — длинный.</p>
+          <p>Поэтому мы делаем короткое имя. <em>local cube = game.Workspace.Part</em></p>
+          <p>Это значит: «Я буду называть game.Workspace.Part словом cube»</p>
+          <p>Теперь можно писать просто: <em>cube.Transparency = 1</em></p>
+          <p>👍 Удобно и понятно.</p>
+
+      - type: text
+        title: "📦 Часть 4. Другие примеры путей"
+        text: |
+          <p><b>🟦 Кубик с другим именем</b></p>
+          <p>Если ты переименовал <b>Part</b> в <b>MagicCube:</b> <em>game.Workspace.MagicCube</em></p>
+
+      - type: "oneImage"
+        title: "🧱 Кубик внутри дома (модели)"
+        textTop: |
+          <p><b>🟦 Кубик с другим именем</b></p>
+          <p>В Explorer:</p>
+        img:
+          src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module2/lesson7_1/module2_lesson7_2.png?raw=true"
+          width: 200
+          maxWidth: "100%"
+          align: center
+        textBottom: |          
+          <p>Код: <em>game.Workspace.House.Door</em></p>
+          👉 Дверь <b>внутри дома.</b>
+
+      - type: "oneImage"
+        title: "🎒 Предмет в рюкзаке игрока"        
+        textTop: |
+          <p><b>🟦 Кубик с другим именем</b></p>
+          <p>В Explorer:</p>
+        img:
+          src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module2/lesson7_1/module2_lesson7_3.png?raw=true"
+          width: 330
+          maxWidth: "100%"
+          align: center        
+        textBottom: |          
+          <p>Код: <em>game.Players.Player1.Backpack.Sword</em></p>
+      
+      - type: "oneImage"
+        title: "📜 Скрипт"   
+        img:
+          src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module2/lesson7_1/module2_lesson7_4.png?raw=true"
+          width: 300
+          maxWidth: "100%"
+          align: center        
+        textBottom: |          
+          <p>Код: <em>game.ServerScriptService.MainScript</em></p>
+
+
+
+      - type: text
+        title: "🟢 Итог урока"
+        text: |          
+          <ul>
+            <li><b>game</b> — вся игра</li>
+            <li><b>Workspace</b> — мир</li>
+            <li><b>Part</b> — объект</li>
+            <li>точки <b>.</b> — показывают путь</li>
+            <li><b>local</b> — делает короткое имя</li>
+          </ul>  
+ 
+ # ============================================================
+  # УРОК 10 — script.Parent — кто я и где я живу
+  # ============================================================
+  - id: 10
+    title: "📘 Урок 10: script.Parent — кто я и где я живу"
+    shortDescription: "🟢 «Как код понимает, где он сам?»"
+
+    content:
+      - type: text
+        title: "Цель урока"
+        text:
+          - "Понять, что такое script.Parent"
+          - "Научиться находить объект, внутри которого лежит скрипт"
+          - "Понять, как использовать script.Parent в коде"
+
+      - type: text
+        title: "🧠 Самое простое объяснение"
+        text: |
+          <span style="font-family: monospace;">script.Parent</span> — это объект, ВНУТРИ которого лежит скрипт
+          <p>Если скрипт лежит в кубике (Part), то <b>script.Parent</b> — это тот самый кубик.</p>
+          <p>Если скрипт лежит в кнопке (Button), то <b>script.Parent</b> — это та самая кнопка.</p>
+          <p>Если скрипт лежит в доме (Model), то <b>script.Parent</b> — это тот самый дом.</p><br>
+          <h4>Скрипт как будто говорит: «Я живу вот тут ⬆️ и хочу работать с этим объектом»</h4>
+
+          
+      - type: code
+        title: "Пример использования script.Parent"
+        code: |
+          local block = script.Parent
+
+          part.Transparency = 0.5
+        afterText: |
+          <h4>🧠 Что здесь происходит</h4>
+          <ul>
+            <li>скрипт смотрит вверх</li>
+            <li>видит: «Я лежу в Part»</li>
+            <li>получает этот Part</li>
+            <li>меняет его прозрачность</li>
+          </ul><br>
+          <h4>🗣 Как объяснить одной фразой</h4>
+          <p>«<span style="font-family: monospace;">script.Parent</span> — это предмет, в котором живёт скрипт»</p>
+
+      
+
+      - type: text
+        title: " 🧩 Почему это очень удобно"
+        text: |
+          <h4>❌ Плохо (жёстко привязано)</h4>
+          <code>local block = game.Workspace.MyBlock</code>
+          <p>Если ты переименуешь MyBlock или переместишь его — код сломается.</p><br>
+          <h4>✅ Хорошо (гибкое)</h4>
+          <code>local block = script.Parent</code>
+          <p>Код всегда будет работать, потому что скрипт всегда знает, где он живёт, работает с любым объектом, можно копировать скрипт в другие Parts</p>
+
+      - type: text
+        title: "🔄 Если скрипт переложить в другой объект"
+        text: |
+          <p>Если ты скопируешь скрипт в другой объект (например, в другой кубик),</p>
+          <p>то <b>script.Parent</b> автоматически станет новым объектом.</p>
+          <p>Это очень удобно для создания универсальных скриптов!</p>
+          <p>Код менять не нужно 🎉</p>
+      - type: text
+        title: "🧠 Аналогия из жизни"
+        text: |
+          <p><em>Скрипт</em> — это: житель дома 🏠</p>
+          <p><em>Parent</em> — это: дом, в котором он живёт</p>
+          <p>Если житель переезжает в другой дом,</p>
+          <p>то его дом автоматически меняется на новый.</p>  
+          <p>Если житель переехал — он всё равно говорит: «Вот мой дом»</p>
+
+      - type: text
+        title: "⚠️ Важный момент"
+        text: |
+          <p><span style="font-family: monospace;">script.Parent</span> — это НЕ всегда Part</p>
+          <p>Это может быть любой объект: Model, Folder, Tool и т.д.</p>
+          <p>Важно понимать, в каком объекте лежит скрипт, чтобы правильно с ним работать.</p>
+          <p>👉 Всё зависит от того, где лежит скрипт</p>
+      - type: text
+        title: "🎒 Мини-задание"
+        text: |
+          <ol>
+            <li>Создай 2 Part</li>
+            <li>Вставь один и тот же Script в оба</li>
+            <li>В коде напиши:
+              <pre>print(script.Parent.Name)</pre>
+            </li>
+            <li>Запусти игру и посмотри, что выведется в консоль</li>
+            <li>Объясни, почему скрипт выводит разные имена</li>  
+          </ol>
 
 
   # ============================================================
-  # УРОК 7_1 — Переменные. Управляем объектами через код
+  # УРОК 11 — Переменные. Управляем объектами через код
   # ============================================================
-  - id: 7_1
-    title: "📘 Урок 7_1: Переменные. Управляем объектами через код"
-    shortDescription: "Учимся создавать переменные и менять свойства объектов с помощью Lua."
+  - id: 11
+    title: "📘 Урок 11: Переменные. Управляем объектами через код"
+    shortDescription: "🟢 «Как код запоминает объект?»"
 
     content:
       - type: text
@@ -618,11 +875,11 @@ lessons:
         correct: 0
 
   # ============================================================
-  # Урок 8: Свойства объекта через код: цвет, размер
+  # Урок 12: Свойства объекта через код: цвет, размер
   # ============================================================
 
-  - id: 8
-    title: "📘 Урок 8: Свойства объекта через код: цвет, размер"
+  - id: 12
+    title: "📘 Урок 12: Свойства объекта через код: цвет, размер"
     shortDescription: "Научимся менять объекты в Workspace с помощью Lua."
 
     content:
@@ -671,157 +928,14 @@ lessons:
           - "block.Transparency = 0.5"
           - "print(block)"
         correct: 0
-
+ 
+ 
   # ============================================================
-  # УРОК 7_2 — Как обратиться к объекту в Roblox
+  # УРОК 13 — Событие Touched
   # ============================================================
-  - id: 7_2
-    title: "📘 Урок 7_2: Как обратиться к объекту в Roblox"
-    shortDescription: "game, Workspace и Part — как они связаны. Как Roblox находит кубик через код. "
-
-    content:
-      - type: text
-        title: "Цель урока"
-        text:
-          - "Как сказать игре, с каким объектом работать"
-          - "Как игра находит объекты: game.Workspace.Part"
-          - "Научиться понимать:"
-          - " <ul>
-                <li>что такое <b>game</b></li>
-                <li>что такое <b>Workspace</b></li>               
-                <li>почему пишут <b>game.Workspace.Part</b></li>                
-                <li>как <b>самому находить путь к объекту</b></li>
-              </ul>"
-
-      - type: text
-        title: "🧩 Часть 1. Где живут объекты в Roblox?"
-        text:
-          - "🏠 <b>Вся игра — это</b> game"
-          - "В Roblox <b>всё находится внутри game.</b>"
-          - "Это как <b>большой дом</b>, в котором есть комнаты."
-
-      - type: text
-        title: "🌍 Комната с миром — Workspace"
-        text: |
-          Workspace — это <b>главная комната игры</b>, где:
-          <ul>
-            <li>бегают игроки</li>
-            <li>стоят кубики</li>
-            <li>находятся дома и платформы</li>
-          </ul>
-      - type: text
-        title: "🟦 Кубик — Part"
-        text:
-          - "Part — это обычный <bкубик></bкубик>, который стоит в мире."
-
-      - type: "gallery"
-        title: "👀 Как это выглядит в Roblox Studio"
-        images:
-          - src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module2/lesson7_1/module2_lesson7_struktura.png?raw=true"
-            caption: ""
-          - src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module2/lesson7_1/module2_lesson7_1.png?raw=true"
-            caption: ""
-          - src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module2/lesson7_1/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202025-12-27%20%D0%B2%2006.36.14.png?raw=true"
-            caption: "👉 Это и есть путь к кубику."
-          
-
-      - type: text
-        title: "🧠 Часть 2. Почему пишут game.Workspace.Part"
-        text: |
-          Roblox <b>не угадывает</b>, что ты имеешь в виду.
-          <p>Ему нужен <b>точный адрес</b>.</p>
-          <p>📬 Как адрес дома: <b>Страна → Город → Улица → Дом</b></p>
-          <p>🎮 В Roblox: <b>game → Workspace → Part</b></p>
-          <p>Это значит: «Возьми Part, который находится в Workspace, который находится в game». </p>
-
-      - type: text
-        title: "✋ Почему нельзя просто написать Part?"
-        text: |
-          Потому что:
-          <ul>
-            <li>кубиков может быть <b>много</b></li>
-            <li>Roblox спросит: 🤔 «Какой именно Part?»</li>
-          </ul>
-          А путь говорит точно.
-
-      - type: text
-        title: "🧩 Часть 3. Зачем писать local cube = game.Workspace.Part"
-        text: |
-          <p>Полный путь — длинный.</p>
-          <p>Поэтому мы делаем короткое имя. <em>local cube = game.Workspace.Part</em></p>
-          <p>Это значит: «Я буду называть game.Workspace.Part словом cube»</p>
-          <p>Теперь можно писать просто: <em>cube.Transparency = 1</em></p>
-          <p>👍 Удобно и понятно.</p>
-
-      - type: text
-        title: "📦 Часть 4. Другие примеры путей"
-        text: |
-          <p><b>🟦 Кубик с другим именем</b></p>
-          <p>Если ты переименовал <b>Part</b> в <b>MagicCube:</b> <em>game.Workspace.MagicCube</em></p>
-
-      - type: "oneImage"
-        title: "🧱 Кубик внутри дома (модели)"
-        textTop: |
-          <p><b>🟦 Кубик с другим именем</b></p>
-          <p>В Explorer:</p>
-        img:
-          src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module2/lesson7_1/module2_lesson7_2.png?raw=true"
-          width: 200
-          maxWidth: "100%"
-          align: center
-        textBottom: |          
-          <p>Код: <em>game.Workspace.House.Door</em></p>
-          👉 Дверь <b>внутри дома.</b>
-
-      - type: "oneImage"
-        title: "🎒 Предмет в рюкзаке игрока"        
-        textTop: |
-          <p><b>🟦 Кубик с другим именем</b></p>
-          <p>В Explorer:</p>
-        img:
-          src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module2/lesson7_1/module2_lesson7_3.png?raw=true"
-          width: 330
-          maxWidth: "100%"
-          align: center        
-        textBottom: |          
-          <p>Код: <em>game.Players.Player1.Backpack.Sword</em></p>
-      
-      - type: "oneImage"
-        title: "📜 Скрипт"   
-        img:
-          src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module2/lesson7_1/module2_lesson7_4.png?raw=true"
-          width: 300
-          maxWidth: "100%"
-          align: center        
-        textBottom: |          
-          <p>Код: <em>game.ServerScriptService.MainScript</em></p>
-
-
-
-      - type: text
-        title: "🟢 Итог урока"
-        text: |          
-          <ul>
-            <li><b>game</b> — вся игра</li>
-            <li><b>Workspace</b> — мир</li>
-            <li><b>Part</b> — объект</li>
-            <li>точки <b>.</b> — показывают путь</li>
-            <li><b>local</b> — делает короткое имя</li>
-          </ul>
-
-      
-
-      
-
-      
-
-
-  # ============================================================
-  # УРОК 9 — Событие Touched
-  # ============================================================
-  - id: 9
-    title: "⭐ Урок 9: Событие Touched: объект реагирует на прикосновение"
-    shortDescription: "Учимся создавать события: когда игрок касается объекта — выполняется код."
+  - id: 13
+    title: "⭐ Урок 13: Событие Touched: объект реагирует на прикосновение"
+    shortDescription: "🟢 «Как объект может что-то почувствовать?»"
 
     content:
       - type: text
@@ -830,8 +944,16 @@ lessons:
           - "Научиться делать объекты интерактивными — реагирующими на прикосновение игрока."
 
       - type: text
-        title: "Что такое Touched?"
-        text: "Событие Touched срабатывает, когда что-то касается объекта. Например — игрок."
+        title: "🧠 Что такое Touched?"
+        text: |
+          <p>✋ Touched — <b>это сигнал:</b></p>
+          <p><b>- «Меня кто-то коснулся!»</b></p>
+          <p>Этот сигнал появляется, когда:</p>
+          <ul>
+            <li>игрок касается объекта;</li>
+            <li>другой объект сталкивается с ним.</li>
+          </ul>
+          Событие Touched срабатывает, когда что-то касается объекта. Например — игрок.
 
       - type: text
         title: "Событие Touched — когда объект чувствует прикосновение"
@@ -844,26 +966,44 @@ lessons:
             <li>подбросить игрока вверх 🚀</li>
             <li>включить звук 🔊</li>
             <li>или даже телепортировать куда-нибудь!</li>
-           </ul>
+          </ul>
           Чтобы сделать такие «реакции» в Roblox, существует специальное событие: <b>Touched</b>.
-      - type: text
-        title: "🤝 Что такое событие?"
-        text:
-          - "Событие — это как сигнал:"
-
-      - type: quote
-        text: "«Что-то произошло! Пора выполнить код!»"
 
       - type: text
+        title: "🧱 Где работает Touched"
+        text: |
+          <p>Событие <b>Touched</b> работает с любым объектом типа <b>Part</b> (куб, сфера, плоскость и т. д.), <b>MeshPart</b></p>
+          <p>Когда кто-то касается этого объекта — срабатывает событие Touched.</p>
+          <p>📦 Чаще всего скрипт лежит прямо в объекте: <b>Part -> Script</b></p>
+
+          
+
+      - type: code
+        title: "🎯 Идея кода с Touched. 🧪 Самый простой пример"
+        code: |
+          local part = script.Parent
+
+          part.Touched:Connect(function(hit)
+              print("Ко мне прикоснулись!")
+          end)
+        afterText: |
+          <h4>🧠 Разбираем по шагам</h4>
+          <p>1. <span style="font-family: monospace;">script.Parent</span></b></p>
+          <p>Мы говорим: «<b>part</b> — это объект, внутри которого лежит скрипт», 👉 это объект, в котором лежит скрипт (наш кубик)</p><br>
+          <p>2. <span style="font-family: monospace;">part.Touched:Connect(function(hit)</span></b></p>
+          <p>Мы говорим: «Когда кто-то коснётся <b>part</b>, выполни код внутри функции»</p><br>
+          <p>3. <span style="font-family: monospace;">function(hit)</span></b></p>
+          <p>Это начало функции — блока кода, который выполнится при касании. <b>hit</b> — это объект, который коснулся нашего кубика (обычно часть игрока: игрок, нога, другой кубик).</p><br>
+          <p>4. <span style="font-family: monospace;">print("Ко мне прикоснулись!")</span></b></p>
+          <p>Это код, который выполнится, когда кто-то коснётся кубика. В нашем случае — просто выведет сообщение в консоль.</p>
+
+      - type: text
+        title: "🗣 Как это происходит на самом деле"
         text:
-          - "Например:"
-          - "<ul>
-            <li>дверь открывается, когда игрок к ней подходит;</li>
-            <li>монетка исчезает при сборе;</li>
-            <li>кнопка нажимается.</li>
-            </ul>"
-          - "<b>Touched</b> — это событие, которое срабатывает, когда любой объект касается другого."
-          - "Чаще всего — когда игрок касается детали (<b>Part</b>)."
+          - "1. Игрок подходит и касается кубика."
+          - "2. Кубик «говорит» скрипту: «Эй, меня коснулись!»"
+          - "3. Скрипт «слушает» кубик и выполняет код внутри функции."
+          - "4. В консоли появляется сообщение: «Ко мне прикоснулись!»"
 
       - type: text
         title: "👆 Как работает Touched?"
@@ -898,9 +1038,28 @@ lessons:
       - type: gallery
         title: "Примеры объектов с событием Touched: кнопка, портал, лава."
         images:
-          - "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module2/lesson9/touczed1.jpg?raw=true"
-          - "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module2/lesson9/tuoczed2.jpeg?raw=true"
-          - "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module2/lesson9/touczed3.jpeg?raw=true"
+          - src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module2/lesson9/touczed1.jpg?raw=true"
+          - src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module2/lesson9/tuoczed2.jpeg?raw=true"
+          - src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module2/lesson9/touczed3.jpeg?raw=true"
+
+      - type: text
+        title: "⚠️ Очень важный момент (для понимания)"
+        text: |
+          <p>Когда объект касается другого объекта, событие <b>Touched</b> срабатывает у <b>обоих объектов</b>.</p>
+          <p>Например, если игрок коснётся кубика:</p>
+          <ul>
+            <li>у кубика сработает событие <b>Touched</b>;</li>
+            <li>у части игрока (например, ноги) тоже сработает событие <b>Touched</b>.</li>
+          </ul>
+          <p>Но чаще всего мы пишем код только для объекта, который должен реагировать на прикосновение (например, кубика).</p> 
+          <p>👉 Поэтому в нашем примере код находится внутри скрипта, который лежит в кубике.</p >  <br>
+          <h4>Touched может срабатывать:</h4>
+          <ul>
+            <li>много раз;</li>
+            <li>очень быстро</li>
+            <li>даже когда игрок просто стоит на кубике</li>
+          </ul>
+          
 
       - type: text
         title: "🧪 Простой пример: куб исчезает при касании"
@@ -975,7 +1134,7 @@ lessons:
           - "Игрок коснулся — и его подкинуло вверх 🎉"
 
       - type: steps
-        title: "Шаг 1. Готовим объект"
+        title: "Попробуй сам!"
         items:
           - "Создай блок TouchBlock."
           - "Поставь на платформу."
@@ -990,34 +1149,26 @@ lessons:
           block.Touched:Connect(function(hit)
               print("Кто-то коснулся куба!")
           end)
+        afterText: |
+          <h4>Проверяем работу</h4>
+          <ul>
+            <li>Запусти игру</li>
+            <li>Коснись блоком игрока</li>
+            <li>Посмотри в Output</li>
+          </ul><br>
+          <h4>Узнаём, кто коснулся блока</h4>
+          <ul>
+            <li>`print(hit.Name)`</li>
+            <li>Посмотри в Output</li>
+          </ul>   
 
-      - type: steps
-        title: "Шаг 2. Подключаем событие"
-        items:
-          - "`local block = script.Parent`"
-          - ""
-          - "`block.Touched:Connect(function(hit)`"
-          - '    print("Кто-то прикоснулся к блоку!")'
-          - "end)`"
-
-      - type: steps
-        title: "Шаг 3. Проверяем работу"
-        items:
-          - "Нажми Play."
-          - "Коснись блоком игрока."
-          - "В Output появится сообщение."
-
-      - type: steps
-        title: "Шаг 4. Узнаём, кто коснулся блока"
-        items:
-          - "`print(hit.Name)`"
-          - "В Output выводится имя части персонажа."
+      
 
       - type: text
         title: "Что важно запомнить"
         text:
-          - "Touched — одно из самых важных событий."
-          - "Даёт возможность делать ловушки, порталы, кнопки и интерактивные объекты."
+          - "<b>Touched</b> — одно из самых важных событий."
+          - "Даёт возможность делать <em>ловушки, порталы, кнопки и интерактивные объекты.</em>"
 
     quiz:
       - question: "Что делает Touched?"
@@ -1034,12 +1185,23 @@ lessons:
           - "Название мира"
         correct: 1
 
+    end:
+      - type: "text"
+        title: "🟢 Итог урока"
+        text: |
+          <ul>
+            <li>событие <b>Touched</b> позволяет объектам реагировать на прикосновения;</li>
+            <li>код внутри функции выполняется при касании;</li>
+            <li>переменная <b>hit</b> содержит объект, который коснулся;</li>
+            <li>объект <b>не думает</b>, он сообщает</li>
+            <li>скрипт <b>реагирует</b></li>
+          </ul> 
   # ============================================================
-  # УРОК 10 — Условия if
+  # УРОК 14 — Условия if
   # ============================================================
-  - id: 10
+  - id: 14
     title: "⭐ Урок 10: Условия if: разные реакции на прикосновения"
-    shortDescription: "Учимся выполнять код только при определённых условиях."
+    shortDescription: "🟢 «Как код выбирает, что делать?»"
 
     content:
       - type: text
@@ -1249,11 +1411,11 @@ lessons:
         correct: 1
 
   # ============================================================
-  # УРОК 11 — ELSE — что делать, если НЕ сработало?
+  # УРОК 15 — ELSE — что делать, если НЕ сработало?
   # ============================================================
 
-  - id: 11
-    title: "📘 Урок 11: ELSE — что делать, если иначе?"
+  - id: 15
+    title: "📘 Урок 15: ELSE — что делать, если иначе?"
     shortDescription: " Учимся реагировать на разные ситуации."
     content:
       - type: text
@@ -1419,10 +1581,10 @@ lessons:
           </ul>
 
   # ============================================================
-  # УРОК 12 — Функции
+  # УРОК 16 — Функции
   # ============================================================
-  - id: 12
-    title: "📘 Урок 12: Функции: создаём команды, которые можно вызывать"
+  - id: 16
+    title: "📘 Урок 16: Функции: создаём команды, которые можно вызывать"
     shortDescription: "Учимся создавать свои функции и понимать, зачем они нужны."
 
     content:
@@ -1670,11 +1832,11 @@ lessons:
         correct: 0
 
   # ============================================================
-  # УРОК 13 — Мини-проект "Волшебный куб"
+  # УРОК 17 — Мини-проект "Волшебный куб"
   # ============================================================
-  - id: 13
-    title: "🎉 Урок 13: Мини-проект: Волшебный куб"
-    shortDescription: "Создаём интерактивный куб, который реагирует на игрока: меняет цвет, размер и телепортируется."
+  - id: 17
+    title: "🎉 Урок 17: Мини-проект: Волшебный куб"
+    shortDescription: "🟢 «Как всё это собрать в игру?». Создаём интерактивный куб, который реагирует на игрока: меняет цвет, размер и телепортируется."
 
     content:
       - type: text

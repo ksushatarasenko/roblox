@@ -12,7 +12,8 @@
 
 <b></b>
 <em></em>
-    <span></span>
+<span style="font-family: monospace;">script.Parent</span>
+<span></span>
     <b style="color: blue;"></b>
     <b style=\"color: rgba(9, 167, 4, 1);\">score</b>
     <b style=\"color: rgb(255, 0, 64);\"></b>
