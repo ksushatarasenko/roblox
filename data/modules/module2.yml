@@ -1229,6 +1229,7 @@ lessons:
         text: |
           if — это как проверка.
           Представь, что мама говорит:
+
       - type: quote
         text: "«Если ты сделал уроки — можешь играть.»"
       - type: text
@@ -1238,13 +1239,19 @@ lessons:
             <li>условие: сделал уроки</li>
             <li>действие: играешь</li>
           </ul>
+
       - type: code
         language: lua
         code: |
           if условие then
               действие
           end
-        text: "В программировании if делает то же самое:"
+        text: |
+          <ul>
+            <li><b>if</b> = если</li>
+            <li><b>then</b> = означает «тогда»</li>
+            <li><b>end</b> = конец правила</li>
+          </ul>
 
       - type: text
         title: "Зачем нужен IF?"

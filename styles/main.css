@@ -44,6 +44,10 @@ h5{
   color: rgb(3, 30, 152);
   font-size: 20px;
 }
+h6{
+  color: rgb(3, 30, 152);
+  font-size: 18px;
+}
 
 /* ====== ШАПКА ====== */
 
@@ -141,6 +145,15 @@ body {
   border-radius: 12px;
   border-left: 6px solid #4a90e2;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin-top: 2% 
+}
+.startCard {
+  width: 94%;
+  border-left: 6px solid #4a90e2;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin: 2% auto;
+  border-radius: 12px;
+  padding: 2%;
 }
 
 .start-card h2 {

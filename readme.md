@@ -54,30 +54,26 @@
 <p class = "warzno"></p>
 
  - type: hint
-        title: "Подсказака 👇 - 📌 Скрипт для Checkpoint2"
-        code: |
-          local checkpoint = script.Parent
-          local respawnPoint = workspace.Spawn2  -- точка второго чекпоинта
+  title: "Подсказка 👇"
+  text:
+    - "Если условие всегда true (истина), цикл будет бесконечным."
+    - "Код будет выполняться снова и снова."
+    - "<b>Он будет работать вечно!</b>"
 
-          checkpoint.Touched:Connect(function(hit)
-              local character = hit.Parent
-              local humanoid = character:FindFirstChild("Humanoid")
+- type: hint
+  title: "Подсказка с кодом"
+  code: |
+    while true do
+      print("Hello")
+    end
 
-              if humanoid then
-                  local player = game.Players:GetPlayerFromCharacter(character)
-
-                  if player then
-                      player.RespawnLocation = respawnPoint
-                      print("Чекпоинт 2 активирован!")
-
-                      -- Эффект: меняем цвет на синий
-                      checkpoint.Color = Color3.fromRGB(0, 100, 255)
-                  end
-              end
-          end)
-
-
-
+- type: hint
+  title: "Подсказка с текстом и кодом"
+  text: "Обрати внимание на условие:"
+  code: |
+    while true do
+      print("Loop")
+    end
 - type: "gallery"
   title: "Примеры Obby"
   images:

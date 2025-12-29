@@ -174,9 +174,23 @@
 
       const img = document.createElement("img");
       img.src = block.img.src;
-      img.style.width = block.img.width + "px";
-      img.style.maxWidth = block.img.maxWidth;
+      if (block.img.width) {
+        if (typeof block.img.width === "number") {
+          img.style.width = block.img.width + "px";
+        } else {
+          img.style.width = block.img.width; // "80%"
+        }
+      }
+
+      if (block.img.maxWidth) {
+        img.style.maxWidth = block.img.maxWidth;
+      }
+      // img.style.width = block.img.width + "px";
+      // img.style.maxWidth = block.img.maxWidth;
       img.className = "thumb";
+      img.onclick = () => {
+        openImageFullscreen([block.img], 0);
+      };
 
       gallery.appendChild(img);
       section.appendChild(gallery);
@@ -361,64 +375,76 @@
     // HINT BLOCK — скрытая подсказка (спойлер)
     // ------------------------------------------------------
     if (block.type === "hint") {
+      const hasText = block.text && block.text.length > 0;
+      const hasCode = block.code && block.code.trim() !== "";
+      const hasAfter = block.afterText && block.afterText.length > 0;
+
+      // ❌ если вообще нечего показывать — не рендерим
+      if (!hasText && !hasCode && !hasAfter) return;
+
       const section = document.createElement("section");
       section.className = "lesson-block hint-block";
 
-      // кнопка-заголовок
+      // КНОПКА
       const btn = document.createElement("button");
       btn.className = "hint-toggle";
       btn.textContent = block.title || "Подсказка";
       section.appendChild(btn);
 
-      // --- Пояснение ПЕРЕД кодом (поддерживает массив) ---
-      if (block.text) {
-        const texts = Array.isArray(block.text) ? block.text : [block.text];
-
-        texts.forEach((t) => {
-          const p = document.createElement("p");
-          p.className = "hint-description";
-          p.innerHTML = t;
-          section.appendChild(p);
-        });
-      }
-
-      // скрытый контейнер для кода
+      // СКРЫТЫЙ КОНТЕНТ
       const hidden = document.createElement("div");
       hidden.className = "hint-content hidden";
 
-      const pre = document.createElement("pre");
-      const code = document.createElement("code");
-      code.className = `language-lua`;
-      code.textContent = block.code || "";
-      pre.appendChild(code);
-      hidden.appendChild(pre);
+      // -------- ТЕКСТ --------
+      if (hasText) {
+        const texts = Array.isArray(block.text) ? block.text : [block.text];
 
-      section.appendChild(hidden);
+        texts.forEach((line) => {
+          const p = document.createElement("p");
+          p.className = "hint-description";
+          p.innerHTML = line;
+          hidden.appendChild(p);
+        });
+      }
 
-      // --- Пояснение ПОСЛЕ кода (supports array) ---
-      if (block.afterText) {
-        const after = document.createElement("div");
-        after.className = "code-after-text";
+      // -------- КОД --------
+      let codeEl = null;
 
-        const list = Array.isArray(block.afterText)
+      if (hasCode) {
+        const pre = document.createElement("pre");
+        const code = document.createElement("code");
+        code.className = "language-lua";
+        code.textContent = block.code;
+
+        pre.appendChild(code);
+        hidden.appendChild(pre);
+        codeEl = code;
+      }
+
+      // -------- ТЕКСТ ПОСЛЕ --------
+      if (hasAfter) {
+        const afterList = Array.isArray(block.afterText)
           ? block.afterText
           : [block.afterText];
 
-        list.forEach((line) => {
+        afterList.forEach((line) => {
           const p = document.createElement("p");
+          p.className = "hint-after-text";
           p.innerHTML = line;
-          after.appendChild(p);
+          hidden.appendChild(p);
         });
-
-        section.appendChild(after);
       }
 
+      section.appendChild(hidden);
       contentEl.appendChild(section);
 
-      // событие раскрытия
+      // -------- КЛИК --------
       btn.onclick = () => {
         hidden.classList.toggle("hidden");
-        hljs.highlightElement(code);
+
+        if (codeEl) {
+          hljs.highlightElement(codeEl);
+        }
       };
     }
 
