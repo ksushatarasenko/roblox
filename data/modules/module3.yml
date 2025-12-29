@@ -1119,6 +1119,56 @@ lessons:
           - "• менять свойства двери (прозрачность, столкновение)."
           - "Сейчас всё будет очень просто и понятно!"
 
+      - type: "codeBlock"
+        title: "🧩 Общая логика двери"
+        code: |
+          [Нажал кнопку]
+                ↓
+          [Проверка: дверь закрыта?]
+                ↓ да
+          [Открыть дверь]
+                ↓
+              wait
+        afterText: |
+          <p>💬 Проговорить вслух:</p>
+          <p><em>Сначала событие, потом проверка, потом действие, потом ожидание. </em></p>
+        
+      - type: "text"
+        title: "🔑 Важные моменты"
+        text:
+          - "1. Кнопка — это просто Part с Script внутри."
+          - "2. Дверь — это тоже Part, который мы будем двигать."
+          - "3. Скрипт в кнопке будет реагировать на прикосновение игрока и открывать дверь."
+          - "4. Мы будем использовать событие <b>Touched</b> для кнопки."
+          - "5. Для движения двери мы будем менять её позицию."
+          - "Код должен начать работать, когда нажали кнопку"
+
+      - type: "text"
+        title: "🟢 СТОП И ВОПРОС?"
+        text: |
+            <ul>
+              <li>Будет ли дверь открываться сама по себе?</li>
+              <li>Что запускает код?</li>
+              <li>Как скрипт в кнопке «видит» дверь?</li>
+              <li>Как понять, что игрок коснулся кнопки?</li>
+              <li>Как открыть и закрыть дверь?</li>
+            </ul>
+      
+      - type: "hint"
+        title: "Подсказка 👇"
+        text: |
+          <ul>
+            <li>Нет. Дверь сама ничего не делает. Пока никто не нажал кнопку, код спит. Код не работает постоянно он ждёт события.</li>
+            <li>Код запускается, когда игрок касается кнопки (событие Touched). «Кнопка говорит коду: “Эй, проснись!”»</li>
+            <li>Скрипт находит дверь через game.Workspace. Мы показываем скрипту, где дверь. Скрипт не угадывает. Мы сами говорим ему: “Вот эта деталь — дверь.”</li>
+            <li>Кнопка сообщает об этом через событие касания. Когда кто-то дотронулся до кнопки, она это замечает.</li>
+            <li>Мы просто меняем позицию двери вверх, чтобы она «ушла» из прохода. Потом возвращаем её обратно.</li>
+          </ul>
+      - type: "text"
+        title: "🚪 Готовы создать дверь?"
+        text:
+          - "Пошагово создадим кнопку и дверь, а потом напишем скрипт, который будет открывать дверь при нажатии на кнопку."
+          - "Поехали!"
       
 
       # -------------------------
@@ -1137,9 +1187,9 @@ lessons:
       - type: "gallery"
         title: "Пример кнопки"
         images:
-          - "https://static.tildacdn.com/tild6335-3064-4165-b833-333533343436/image.png"
-          - "https://i.ytimg.com/vi/cVshcFgv5CY/maxresdefault.jpg"
-          - "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx2NBfXAapae-4umkgXHZevDZdqmKuyVww6w&s"
+          - src: "https://static.tildacdn.com/tild6335-3064-4165-b833-333533343436/image.png"
+          - src: "https://i.ytimg.com/vi/cVshcFgv5CY/maxresdefault.jpg"
+          - src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx2NBfXAapae-4umkgXHZevDZdqmKuyVww6w&s"
 
       # -------------------------
       # STEP 2 — DOOR
@@ -1157,9 +1207,9 @@ lessons:
       - type: "gallery"
         title: "Пример двери"
         images:
-          - "https://i.ytimg.com/vi/OMal8wM1ygQ/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDSjhAICe5r6JXqjsRK0wCHC55zXA"
-          - "https://i.ytimg.com/vi/MCcdOO2q7G8/sddefault.jpg"
-          - "https://static.tildacdn.com/tild3061-3133-4632-a535-613638643364/300123___2.png"
+          - src: "https://i.ytimg.com/vi/OMal8wM1ygQ/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDSjhAICe5r6JXqjsRK0wCHC55zXA"
+          - src: "https://i.ytimg.com/vi/MCcdOO2q7G8/sddefault.jpg"
+          - src: "https://static.tildacdn.com/tild3061-3133-4632-a535-613638643364/300123___2.png"
 
       # -------------------------
       # STEP 3 — SCRIPT
@@ -1296,10 +1346,10 @@ lessons:
         text: "Ты уже делаешь вещи, которые используют в настоящих играх Roblox! 🔥😎"
 
 # ===============================
-# ✅ Урок 18 — Плавное движение объектов (TweenService)
+# ✅ Урок 23 — Плавное движение объектов (TweenService)
 # ===============================
-  - id: 18
-    title: "✅ Урок 18: Плавное движение объектов — TweenService"
+  - id: 23
+    title: "✅ Урок 23: Плавное движение объектов — TweenService"
     shortDescription: "Учимся делать красивые анимации двери, платформ и любых объектов."
     # video: "https://www.youtube.com/embed/TWEEN018"
 
@@ -1329,9 +1379,12 @@ lessons:
       - type: "gallery"
         title: "Где используется TweenService"
         images:
-          - "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module3/lesson18/tweenService1.jpg?raw=true"
-          - "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module3/lesson18/tweenService2.jpg?raw=true"
-          - "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module3/lesson18/maxresdefault3.jpg?raw=true"
+          - src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module3/lesson23/module3_23_1.png?raw=true"
+            caption: "Пример 1: Плавное движение объектаю 📦 Платформа медленно едет в сторону"
+          - src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module3/lesson23/module3_23_2.png?raw=true"
+            caption: "Пример 2: Плавное появление / исчезновение. 👻 Объект медленно становится видимым"
+          - src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module3/lesson23/module3_23_3.png?raw=true"
+            caption: "Пример 3: Анимация UI (кнопки, меню). 🎮 Кнопка плавно увеличивается при наведении"
 
       # -----------------------
       # STEP 1 — Что такое Tween
@@ -1557,10 +1610,10 @@ lessons:
 
 
 # ===============================
-# Урок 19: Движущаяся платформа (лифт)
+# Урок 24: Движущаяся платформа (лифт)
 # ===============================
-  - id: 19
-    title: "🎉 Урок 19: Движущаяся платформа (лифт)"
+  - id: 24
+    title: "🎉 Урок 24: Движущаяся платформа (лифт)"
     shortDescription: "Учимся делать платформу, которая двигается вверх и вниз."
     # video: "https://www.youtube.com/embed/LIFT019"
 
@@ -1892,10 +1945,10 @@ lessons:
 
   
 # ===============================
-# ✅ Урок 20 — Телепортация игрока (создаём портал)
+# ✅ Урок 25 — Телепортация игрока (создаём портал)
 # ===============================
-  - id: 20
-    title: "✅ Урок 20: Телепортация игрока (создаём портал)"
+  - id: 25
+    title: "✅ Урок 25: Телепортация игрока (создаём портал)"
     shortDescription: "Учимся создавать портал, который переносит игрока в другую точку карты."
     # video: "https://www.youtube.com/embed/PORTAL020"
 
@@ -2222,10 +2275,10 @@ lessons:
 
 
 # ===============================
-# 👉 Урок 21 — Чекпоинты и точки возрождения
+# 👉 Урок 26 — Чекпоинты и точки возрождения
 # ===============================
-  - id: 21
-    title: "👉 Урок 21: Чекпоинты и точки возрождения"
+  - id: 26
+    title: "👉 Урок 26: Чекпоинты и точки возрождения"
     shortDescription: "Учимся создавать чекпоинты — точки, где игрок сохраняет прогресс."
     # video: "https://www.youtube.com/embed/CHECKPOINT021"
 
@@ -2482,10 +2535,10 @@ lessons:
         text: "Ты огромный молодец — ты уже создаёшь настоящие игровые механики Roblox! 🚀🔥"
 
 # ===============================
-# 🔥 Урок 22 — Лава, шипы и урон игроку
+# 🔥 Урок 27 — Лава, шипы и урон игроку
 # ===============================
-  - id: 22
-    title: "🔥 Урок 22: Лава и безопасные платформы"
+  - id: 27
+    title: "🔥 Урок 27: Лава и безопасные платформы"
     shortDescription: "Учимся создавать опасные зоны, которые наносят урон или убивают игрока."
     # video: "https://www.youtube.com/embed/LAVATRAP022"
 
@@ -2849,12 +2902,12 @@ lessons:
 
 
 # ===============================
-# 🔥 Урок 23 — Мини-проект: Obby с чекпоинтами и ловушками?
+# 🔥 Урок 28 — Мини-проект: Obby с чекпоинтами и ловушками?
 # ===============================
 
-  - id: 23
+  - id: 28
 
-    title: "🔥 Урок 23: Мини-проект: создаём Obby с ловушками и безопасными зонами"
+    title: "🔥 Урок 28: Мини-проект: создаём Obby с ловушками и безопасными зонами"
     shortDescription: "Собираем полосу препятствий: старт, платформы, лава, ловушки и финиш."
     # video: "https://www.youtube.com/embed/OBBYLEVEL023"
 
