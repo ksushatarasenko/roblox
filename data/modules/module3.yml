@@ -1631,9 +1631,63 @@ lessons:
       - type: "gallery"
         title: "Как выглядит движущаяся платформа"
         images:
-          - "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module3/lesson19/lift1.jpg?raw=true"
-          - "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module3/lesson19/lift2.jpg?raw=true"
-          - "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module3/lesson19/lift3.jpg?raw=true"
+          - src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module3/lesson24/module3_24_1.png?raw=true"
+            caption: |
+              - "Пример 1: Платформа едет вперёд один раз. Используется для простых движущихся платформ"
+          - src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module3/lesson24/module3_24_2.png?raw=true"
+            caption: "Пример 2: Платформа ездит туда и обратно. Подходит для лифтов и маятников"
+          - src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module3/lesson24/module3_24_3.png?raw=true"
+            caption: "Начало Obby"
+      - type: text
+        title: "🧩 Большая идея урока"
+        text: |
+          <p><b>Лифт — это платформа, которая всё время повторяет движение: вверх → пауза → вниз → пауза</b></p>          
+          <ul>
+            <li>📌 Здесь нет кнопки (пока)</li>
+            <li>📌 Лифт живёт сам по себе</li>
+          </ul>
+      - type: codeBlock
+        title: "🧠 Логическая схема (очень важно)"
+        code: |
+          [Начало]
+                ↓
+          [Лифт едет вверх]
+                ↓
+          [Пауза (wait)]
+                ↓
+          [Лифт едет вниз]
+                ↓
+          [Пауза (wait)]
+                ↓
+          [Повторить]
+        afterText: |
+          <p>💬 Проговорить вслух:</p>
+          <p><em>Лифт едет вверх, потом ждёт, потом едет вниз, потом ждёт, и повторяет это снова и снова.</em></p>
+          ~<p>Он делает одно и то же снова и снова.</p>
+    # Шаг 1. Платформа — что это?
+      - type: "text"
+        title: "🟦 Шаг 1. Платформа — что это?"
+        text:
+          - "Платформа — это просто <b>Part</b> (деталь) в Roblox."
+          - "на нём стоит игрок и он едет вместе с платформой."
+          - "Мы будем двигать эту деталь вверх и вниз."
+          - "Важно: у платформы должно быть свойство <b>Anchored = true</b>, чтобы она не падала."
+    # Шаг 2. Плавное движение (Tween)
+      - type: "text"
+        title: "🟨 Шаг 2. Плавное движение (Tween)"
+        text:
+          - "Чтобы платформа двигалась плавно, мы будем использовать <b>TweenService</b>."
+          - "Это специальный сервис, который умеет делать красивые анимации."
+          - "Мы уже изучали его в прошлом уроке."
+          - "Лифт:"
+          - "• едет вверх (имеет верхнюю точку);"
+          - "• ждёт;"
+          - "• едет вниз (имеет нижнюю точку);"
+          - "• ждёт;"
+          - "• повторяет это снова и снова."
+          - "Tween:"
+          - "• в tells, куда ехат;"
+          - "• и за сколько секунд;"
 
       # -----------------------
       # PART 1 — SIMPLE LIFT
@@ -1644,10 +1698,10 @@ lessons:
           - "Эта версия работает очень просто: каждые несколько секунд платформа меняет позицию."
           - "Подходит для движущихся блоков, ловушек и простых Obby."
 
-      - type: "steps"
+      - type: "text"
         title: "🧱 Шаг 1. Создаём платформу"
-        items:
-          - "Вставь <b>Part → Block</b>"
+        text: 
+          - "<p>Вставь <b>Part → Block</b></p>"
           - "Назови его <b>Lift</b>"
           - "Сделай размер, например: <b>8×1×8</b>"
           - "Поставь на пол, где должен быть лифт"
