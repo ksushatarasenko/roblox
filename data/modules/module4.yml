@@ -7,8 +7,8 @@ lessons:
 # ============================================================
 # УРОК 24 — Player, Character, HumanoidRootPart
 # ============================================================
-  - id: 24
-    title: "⭐ Урок 24. Player, Character, Humanoid — кто есть кто"
+  - id: 29
+    title: "⭐ Урок 29. Player, Character, Humanoid — кто есть кто"
     shortDescription: "Понимаем, как устроён игрок: его модель, здоровье, скорость и прыжки."
     # video: "https://www.youtube.com/embed/PLAYERINFO24"
 
@@ -323,12 +323,968 @@ lessons:
           </ul>
           <h4>Это мощнейшая база для будущих проектов!</h4>
 
+# ===============================
+# ✅ Урок 25 — Телепортация игрока (создаём портал)
+# ===============================
+  - id: 25
+    title: "✅ Урок 25: Телепортация игрока (создаём портал)"
+    shortDescription: "Учимся создавать портал, который переносит игрока в другую точку карты."
+    # video: "https://www.youtube.com/embed/PORTAL020"
+
+    content:
+
+      - type: "text"
+        title: "Что мы узнаем?"
+        text: |
+          Сегодня мы сделаем портал, который:
+          <ul>
+            <li>телепортирует игрока в другое место 🧍➡️🌀➡️🧍</li>
+            <li>может переносить на другой остров, этаж, комнату</li>
+            <li>чувствует прикосновение игрока</li>
+          </ul>
+          Это уже прям магия ✨
+
+      - type: "text"
+        title: "🧩 Что такое телепортация в Roblox?"
+        text: |
+          Телепортация — это когда персонаж игрока мгновенно переезжает в другую точку карты.
+          <p>В коде мы просто говорим:</p>
+          <em>«Поставь игрока вот сюда!»</em>
+          <p>Для этого нам нужно:</p>
+          
+          <ol>
+            <li>Найти персонажа игрока🧍</li>
+            <li>Найти его главную часть (HumanoidRootPart)</li>
+            <li>Переместить её в новое место</li>
+          </ol>
+
+      - type: "gallery"
+        title: "Как выглядят порталы"
+        images:
+          - "https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/optimized/5X/6/5/c/6/65c6cfd38866908db10780891a9e16e45e99b46c_2_690x354.jpeg"
+          - "https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/c/f/b/cfbdc7e858bf66b4e00da8f977d7143119d3663d.jpeg"
+          - "https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/d/8/e/d8e9c835fcb878df221f9194c8a46d1264d6d93c.jpeg"
+
+      # -----------------------------------------
+      # СОЗДАЁМ ПОРТАЛ
+      # -----------------------------------------
+      - type: "text"
+        title: "🟦 Шаг 1. Делаем портал и точку выхода"
+        text: |
+          Создай <b>Part</b> → назови его portal
+            <ul>
+              <li>Можно сделать красивым: синим, фиолетовым, прозрачным ✨</li>
+            </ul>
+          Создай ещё один <b>Part</b> → назови его Exit
+            <ul>
+              <li>Это место, куда будет попадать игрок</li>
+            </ul>
+          Поставь <b>Exit</b> там, где должна быть новая точка (другой остров, комната и т.п.)
+          <p>Внутрь <b>Portal</b> добавь Script</p>
+
+      - type: "code"
+        title: "🟩 Шаг 2. Готовим переменные"
+        text: "Открываем Script в Portal и пишем:"
+        code: |
+          local portal = script.Parent
+          local exitPart = game.Workspace.Exit
+        afterText: |
+          Теперь скрипт знает:
+          <ul>
+            <li><b>portal</b> — это наш портал</li>
+            <li><b>exitPart</b> — место, куда телепортируем игрока</li>
+          </ul>
+      - type: "code"
+        title: "🚀 Шаг 3. Телепортируем игрока при прикосновении"
+        text: "Мы будем ждать, пока кто-то коснётся портала, и проверять — это игрок или нет."
+        code: |
+          portal.Touched:Connect(function(hit)
+              local character = hit.Parent
+              local humanoid = character:FindFirstChild("Humanoid")
+
+              if humanoid then
+                  -- нашли игрока
+              end
+          end)
+
+      - type: "code"
+        title: "✨ Шаг 4. Переносим игрока в новую точку"
+        text: "Самый простой способ — использовать MoveTo:"
+        code: |
+          portal.Touched:Connect(function(hit)
+              local character = hit.Parent
+              local humanoid = character:FindFirstChild("Humanoid")
+
+              if humanoid then
+                  character:MoveTo(exitPart.Position + Vector3.new(0, 3, 0))
+              end
+          end)
+        afterText: |
+          <p>🔹 <b>exitPart.Position</b> — позиция точки выхода</p>
+          <p>🔹 <b>+ Vector3.new(0, 3, 0)</b> — чуть выше, чтобы игрок не застрял внутри блока</p>
+          <p>Игрок: коснулся портала → <em>фьюить!</em> → появился у выхода 😄</p>
+      - type: "code"
+        title: "🧠 Другой способ: через HumanoidRootPart"
+        text: "Чуть «правильнее», но можно объяснить простым языком:"
+        code: |
+          portal.Touched:Connect(function(hit)
+              local character = hit.Parent
+              local humanoid = character:FindFirstChild("Humanoid")
+              local root = character:FindFirstChild("HumanoidRootPart")
+
+              if humanoid and root then
+                  root.CFrame = exitPart.CFrame + Vector3.new(0, 3, 0)
+              end
+          end)
+
+        afterText: |
+          <p>🔹 <b>CFrame</b> — это позиция + поворот.</p>
+          <p>🔹 Тут мы переносим игрока туда же, куда смотрит .<b>Exit</b> </p>
+      - type: "code"
+        title: "🧪 Полный пример кода"
+        code: |
+          local portal = script.Parent
+          local exitPart = game.Workspace.Exit
+
+          portal.Touched:Connect(function(hit)
+              local character = hit.Parent
+              local humanoid = character:FindFirstChild("Humanoid")
+
+              if humanoid then
+                  character:MoveTo(exitPart.Position + Vector3.new(0, 3, 0))
+                  print("Телепортирован!")
+              end
+          end)
+
+      
+
+      # -----------------------------------------
+      # УЛУЧШАЕМ ПОРТАЛ
+      # -----------------------------------------
+      - type: "text"
+        title: "🌟 Идеи, как сделать портал круче"
+        text:
+          - "Можно добавить:"
+
+      - type: "code"
+        title: "🔊 1. Звук портала"
+        text: "Внутрь Portal добавь Sound, а в код:"
+        code: |
+          portal.Sound:Play()
+      - type: "text"
+        title: "🌈 2. Частицы (ParticleEmitter)"
+        text: "Красивые эффекты: искры, дым, магия."
+
+      - type: "code"
+        title: "💡 3. Цвет портала меняется при телепорте"
+        code: |
+          portal.Color = Color3.fromRGB(0, 255, 255) -- бирюзовый
+          wait(0.2)
+          portal.Color = Color3.fromRGB(170, 0, 255) -- фиолетовый
+      - type: "code"
+        title: "🔒 4. Портал работает только один раз"
+        text: "Можно добавить флаг:"
+        code: |
+          local used = false
+
+          portal.Touched:Connect(function(hit)
+              if used then return end
+
+              local character = hit.Parent
+              local humanoid = character:FindFirstChild("Humanoid")
+
+              if humanoid then
+                  used = true
+                  character:MoveTo(exitPart.Position + Vector3.new(0, 3, 0))
+              end
+          end)
+
+
+      # -----------------------------------------
+      # ПРАКТИКА
+      # -----------------------------------------
+      - type: "steps"
+        title: "🧩 «Попробуй сам!» — мини-квест"
+        items:
+          - "Сделай два портала: вход A и вход B, чтобы игрок прыгал туда-сюда"
+          - "Сделай портал, который переносит на высокую гору."
+          - "Сделай портал-секрет, который появляется только после нажатия кнопки."
+          - "Добавь надпись «ПОРТАЛ» с помощью BillboardGui над блоком"
+          - "Сделай «опасный портал», который телепортирует игрока в «ловушку» 😈 (но добрую)"
+      - type: "text"
+        title: "1️⃣ ДВА ПОРТАЛА: A ↔ B"
+        text: |
+          <h4>📦 Настройка в Studio</h4>
+          <ul>Сделай два блока:
+            <li>PortalA</li>
+            <li>PortalB</li>
+          </ul>В каждый добавь по Script.
+      
+      - type: "code"
+        title: "🔁 Скрипт для PortalA (телепорт в B)"
+        code: |
+          local portal = script.Parent               -- этот портал (A)
+          local target = workspace.PortalB           -- куда телепортируем (B)
+
+          portal.Touched:Connect(function(hit)
+              local character = hit.Parent
+              local humanoid = character:FindFirstChild("Humanoid")
+
+              if humanoid then
+                  -- телепортируем чуть выше портала B
+                  character:MoveTo(target.Position + Vector3.new(0, 3, 0))
+                  print("Телепорт из A в B")
+              end
+          end)
+
+      - type: "code"
+        title: "🔁 Скрипт для PortalB (телепорт в A)"
+        code: |
+          local portal = script.Parent               -- этот портал (B)
+          local target = workspace.PortalA           -- куда телепортируем (A)
+
+          portal.Touched:Connect(function(hit)
+              local character = hit.Parent
+              local humanoid = character:FindFirstChild("Humanoid")
+
+              if humanoid then
+                  character:MoveTo(target.Position + Vector3.new(0, 3, 0))
+                  print("Телепорт из B в A")
+              end
+          end)
+        afterText: "Подсказка: если игрок начинает «мигать» туда-сюда слишком быстро —можно после телепорта делать wait(0.5) и на это время портал отключать (portal.CanTouch = false → потом обратно true)."
+
+      - type: "code"
+        title: "2️⃣ Надпись «ПОРТАЛ» через BillboardGui"
+        text: 
+          - "Это уже чуть продвинутый уровень, но очень красиво 🤩"
+          - "<b>Вариант: сразу создать через код</b>"
+          - "Скрипт можно положить внутрь портала (например, PortalA):"
+        code: |
+          local portal = script.Parent
+
+          -- создаём BillboardGui
+          local billboard = Instance.new("BillboardGui")
+          billboard.Parent = portal
+          billboard.Adornee = portal
+          billboard.Size = UDim2.new(0, 100, 0, 50)
+          billboard.StudsOffset = Vector3.new(0, 3, 0)  -- над блоком
+
+          -- создаём текст
+          local label = Instance.new("TextLabel")
+          label.Parent = billboard
+          label.Size = UDim2.new(1, 0, 1, 0)
+          label.BackgroundTransparency = 1
+          label.Text = "ПОРТАЛ"
+          label.TextColor3 = Color3.fromRGB(255, 255, 0)
+          label.TextScaled = true
+          label.Font = Enum.Font.FredokaOne
+        afterText: "«Этот код просто создаёт надпись, которая висит над порталом, как 3D-табличка»."
+
+      - type: "text"
+        title: "3️⃣ «Опасный» (но добрый) портал в ловушку 😈"
+        text: 
+          - "Идея:"
+          - "Портал телепортирует игрока в комнату-ловушку:"
+          - "маленькая комнатка, из которой можно выбраться по паркуру, лестнице или секретному выходу."
+      
+      - type: "text"
+        title: "🧱 В Studio"
+        text: |
+          <ul>
+            <li>Сделай блок DangerPortal</li>
+            <li>Сделай где-то на карте комнату-ловушку</li>
+            <li>Поставь там блок TrapPoint — куда будет попадать игрок</li>
+          </ul>
+        
+
+      - type: "hint"
+        title: "Подсказка - 🧨 Скрипт в DangerPortal"
+        code: |
+          local portal = script.Parent
+          local trapPoint = workspace.TrapPoint
+
+          portal.Touched:Connect(function(hit)
+              local character = hit.Parent
+              local humanoid = character:FindFirstChild("Humanoid")
+
+              if humanoid then
+                  -- телепортируем в ловушку
+                  character:MoveTo(trapPoint.Position + Vector3.new(0, 3, 0))
+                  print("Попался в ловушку! 😈")
+
+                  -- можно чуть напугать, но по-доброму:
+                  -- уменьшаем яркость экрана, включаем звук, пишем подсказку
+              end
+          end)
+      - type: "text"
+        title: "🎯 Идеи, как сделать ловушку «доброй»:"
+        text: |
+          <ul>
+            <li>вместо смерти — просто неудобное место: яма, лабиринт, паркур</li>
+            <li>сверху надпись: НАЙДИ ВЫХОД!</li>
+            <li>можно поставить портал назад, но спрятать его</li>
+          </ul>
+
+
+
+
+
+    quiz:
+        - question: "Какой объект отвечает за перемещение игрока?"
+          answers:
+            - "Torso"
+            - "HumanoidRootPart"
+            - "LeftLeg"
+          correct: 1
+
+        - question: "Куда вставляется Script для портала?"
+          answers:
+            - "Внутрь Portal"
+            - "В StarterGui"
+            - "В ServerScriptService"
+          correct: 0
+
+        - question: "Что делает портальная зона?"
+          answers:
+            - "Меняет цвет игрока"
+            - "Телепортирует игрока"
+            - "Добавляет монеты"
+          correct: 1
+
+
+# ===============================
+# 👉 Урок 26 — Чекпоинты и точки возрождения
+# ===============================
+  - id: 26
+    title: "👉 Урок 26: Чекпоинты и точки возрождения"
+    shortDescription: "Учимся создавать чекпоинты — точки, где игрок сохраняет прогресс."
+    # video: "https://www.youtube.com/embed/CHECKPOINT021"
+
+    content:
+
+      - type: "text"
+        title: "🧠 Что такое чекпоинт?"
+        text:
+          - "<b>Чекпоинт</b> — это специальная платформа, которая запоминает, что игрок до неё дошёл."
+          - "Если игрок падает в лаву или проигрывает — он появляется на последнем чекпоинте."
+          - "Когда игрок умирает → он возрождается возле чекпоинта, а не сначала."
+          - "Сегодня мы сделаем простую систему чекпоинтов, как в настоящем Obby."
+      - type: "text"
+        title: "🟦 Что такое точка возрождения?"
+        text: 
+          - "Это объект <b>SpawnLocation</b> — место, где игрок появляется после смерти."
+          - "Roblox сначала спавнит игрока на стандартном SpawnLocation."
+          - "Но мы можем дать игроку <b>свой персональный спавн</b>, когда он активирует чекпоинт."
+
+      - type: "gallery"
+        title: "Как выглядят чекпоинты"
+        images:
+          - "https://i.ytimg.com/vi/EYgZZxwIvro/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBfANeAL5icEqkrDu4rfXJ7JkipJQ"
+          - "https://i.ytimg.com/vi/hU_de1gf7mA/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBt_NEEYaDTeHBAvIFXVZmyyg1Ygg"
+          - "https://i.redd.it/can-anyone-tell-me-how-to-make-an-obby-checkpoint-system-v0-pt58qv5x5vid1.jpg?width=1792&format=pjpg&auto=webp&s=88afea8eb8c597c7bda581e42f21ac0b351886a4"
+
+      # ================================
+      # СОЗДАЁМ ЧЕКПОИНТ
+      # ================================
+      - type: "steps"
+        title: "🔷 Шаг 1. Создаём чекпоинт"
+        items:
+          - "Создай Part → назови его <b>Checkpoint1</b>."
+          - "Размер: 3×1×3"
+          - "Сделай его плоским и яркого цвета."
+          - "Поставь по центру пути."
+          - "Установи <b>Anchored = true</b>."
+          - "Вставь внутрь <b>Script</b>."
+
+      - type: "steps"
+        title: "🟩 Шаг 2. Создаём точку возрождения"
+        items:
+          - "Вставь в игру объект <b>SpawnLocation</b>."
+          - "Переименуй его в <b>CheckpointSpawn1</b>."
+          - "Отключи <b>AllowTeamChangeOnTouch</b>."
+          - "Спрячь его галочкой <b>Enabled = false</b> (но оставь в игре)."
+          - "Поставь так, чтобы игрок появлялся над полом"
+
+      - type: "text"
+        title: "Как это работает?"
+        text:
+          - "Когда игрок касается чекпоинта, мы запоминаем его номер."
+          - "Потом, если он погибает, точка возрождения меняется на нужную."
+      - type: "code"
+        title: "🧠 Шаг 3. Делаем переменную чекпоинта"
+        text: "В Script напиши:"
+        code: |
+          local checkpoint = script.Parent
+          local respawnPoint = game.Workspace.CheckpointSpawn
+
+      - type: "code"
+        title: "⭐ Шаг 4. Когда игрок касается чекпоинта — сохраняем его спавн"
+        code: |
+          checkpoint.Touched:Connect(function(hit)
+              local character = hit.Parent
+              local humanoid = character:FindFirstChild("Humanoid")
+
+              if humanoid then
+                  local player = game.Players:GetPlayerFromCharacter(character)
+
+                  if player then
+                      player.RespawnLocation = respawnPoint
+                      print("Чекпоинт активирован!")
+                  end
+              end
+          end)
+        afterText: 
+          - "Теперь — если игрок умрёт,"
+          - "Roblox появит его именно на respawnPoint 🎉"
+
+      - type: "code"
+        title: "✨ Шаг 5. Добавляем эффект при активации"
+        text: "Например, чекпоинт станет зелёным:"
+        code: |
+          checkpoint.Color = Color3.fromRGB(0, 255, 0)
+      - type: "code"
+        text: "Или увеличится:"
+        code: |
+          checkpoint.Size = Vector3.new(4, 1, 4)
+          wait(0.3)
+          checkpoint.Size = Vector3.new(3, 1, 3)
+      - type: "code"
+        text: "Или заиграет звук:"
+        code: |
+          checkpoint.Sound:Play()
+
+      - type: "code"
+        title: "🎯 Полный рабочий код чекпоинта"
+        code: |
+          local checkpoint = script.Parent
+          local respawnPoint = game.Workspace.CheckpointSpawn
+
+          checkpoint.Touched:Connect(function(hit)
+              local character = hit.Parent
+              local humanoid = character:FindFirstChild("Humanoid")
+
+              if humanoid then
+                  local player = game.Players:GetPlayerFromCharacter(character)
+
+                  if player then
+                      player.RespawnLocation = respawnPoint
+                      print("Чекпоинт активирован!")
+                      
+                      -- эффект
+                      checkpoint.Color = Color3.fromRGB(0, 255, 0)
+                  end
+              end
+          end)       
+      
+
+      # ================================
+      # ПРАКТИКА ДЛЯ РЕБЁНКА
+      # ================================
+      - type: "steps"
+        title: "🧪 Мини-квест (самостоятельно)"
+        items:
+          - "цепочку из 3 чекпоинтов"
+          - "kаждый должен загораться своим цветом."
+          - "cделай бонусный чекпоинт, который телепортирует на секретный уровень."
+          - "чекпоинты показывают «уровень» игрока в Output"
+          - "Поменяй форму чекпоинта на круглый Cylinder."
+      - type: hint
+        title: "Подсказака 👇 - 📌 Скрипт для Checkpoint1"
+        code: |
+          -- Получаем сам чекпоинт
+          local checkpoint = script.Parent
+
+          -- Точка возрождения, куда появится игрок после смерти
+          local respawnPoint = workspace.Spawn1  
+
+          -- Срабатывает, когда что-то касается чекпоинта
+          checkpoint.Touched:Connect(function(hit)
+
+              -- Проверяем: это игрок?
+              local character = hit.Parent
+              local humanoid = character:FindFirstChild("Humanoid")
+
+              if humanoid then
+                  -- Получаем Player из персонажа
+                  local player = game.Players:GetPlayerFromCharacter(character)
+
+                  if player then
+                      -- Устанавливаем точку возрождения
+                      player.RespawnLocation = respawnPoint
+                      print("Чекпоинт 1 активирован!")
+
+                      -- Эффект: меняем цвет чекпоинта
+                      checkpoint.Color = Color3.fromRGB(0, 255, 0)
+                  end
+              end
+          end)
+
+      - type: hint
+        title: "Подсказака 👇 - 📌 Скрипт для Checkpoint2"
+        code: |
+          local checkpoint = script.Parent
+          local respawnPoint = workspace.Spawn2  -- точка второго чекпоинта
+
+          checkpoint.Touched:Connect(function(hit)
+              local character = hit.Parent
+              local humanoid = character:FindFirstChild("Humanoid")
+
+              if humanoid then
+                  local player = game.Players:GetPlayerFromCharacter(character)
+
+                  if player then
+                      player.RespawnLocation = respawnPoint
+                      print("Чекпоинт 2 активирован!")
+
+                      -- Эффект: меняем цвет на синий
+                      checkpoint.Color = Color3.fromRGB(0, 100, 255)
+                  end
+              end
+          end)
+
+      - type: hint
+        title: "Подсказака 👇 - 📌 Скрипт для Checkpoint3 (даёт суперскорость ⚡)"
+        code: |
+          local checkpoint = script.Parent
+          local respawnPoint = workspace.Spawn3  -- третья точка
+
+          checkpoint.Touched:Connect(function(hit)
+              local character = hit.Parent
+              local humanoid = character:FindFirstChild("Humanoid")
+
+              if humanoid then
+                  local player = game.Players:GetPlayerFromCharacter(character)
+
+                  if player then
+                      -- Ставим точку появления
+                      player.RespawnLocation = respawnPoint
+                      print("Чекпоинт 3 активирован! Суперскорость включена!")
+
+                      -- Даём игроку суперскорость
+                      humanoid.WalkSpeed = 40   -- обычная скорость = 16
+                      humanoid.JumpPower = 70   -- прыжок выше
+
+                      -- Эффект: красим чекпоинт в золотой
+                      checkpoint.Color = Color3.fromRGB(255, 200, 0)
+                  end
+              end
+          end)
+      - type: "code"
+        title: "🎁 Как настроить перед запуском?"
+        text: "Должно быть в Workspace:"
+        code: |
+          Checkpoint1
+          Checkpoint2
+          Checkpoint3
+          Spawn1
+          Spawn2
+          Spawn3
+        afterText: |
+          Каждый респаун (Spawn1, Spawn2, Spawn3) должен быть SpawnLocation, у которых:
+          <ul>
+            <li>Enabled = false (чтобы игра не спавнила там сама)</li>
+            <li>Поставлены на правильные позиции</li>
+          </ul>
+
+    quiz:
+      - question: "Где обычно хранят скрипт возрождения?"
+        answers:
+          - "Внутри портала"
+          - "В ServerScriptService"
+          - "В StarterPlayerScripts"
+        correct: 1
+
+      - question: "Что делает чекпоинт?"
+        answers:
+          - "Меняет цвет игрока"
+          - "Сохраняет место появления игрока"
+          - "Увеличивает скорость"
+        correct: 1
+
+      - question: "Какой объект использует игрок для появления?"
+        answers:
+          - "Part"
+          - "SpawnLocation"
+          - "ParticleEmitter"
+        correct: 1
+
+    end:
+      - type: "text" 
+        text: "Ты огромный молодец — ты уже создаёшь настоящие игровые механики Roblox! 🚀🔥"
+
+# ===============================
+# 🔥 Урок 27 — Лава, шипы и урон игроку
+# ===============================
+  - id: 27
+    title: "🔥 Урок 27: Лава и безопасные платформы"
+    shortDescription: "Учимся создавать опасные зоны, которые наносят урон или убивают игрока."
+    # video: "https://www.youtube.com/embed/LAVATRAP022"
+
+    content:
+
+      - type: "text"
+        title: "В игре часто встречаются опасные зоны:"
+        text:
+          - "Это объект (обычно красная платформа), который наносит урон игроку."
+          - "Если здоровье становится 0 — игрок возрождается на чекпоинте."
+          - "<ul>
+            <li>🟥 лава</li>
+            <li>⚔️ шипы</li>
+            <li>☠️ токсичный газ</li>
+            <li>⚡ электрические платформы</li></ul>"
+
+
+      - type: "gallery"
+        title: "Примеры ловушек"
+        images:
+          - "https://i.ytimg.com/vi/KZT0i_UHWDk/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCyZY0xN_4WPbiNIY90PFHquaTOhA"
+          - "https://egamersworld.com/cdn-cgi/image/width=690,quality=75,format=webp/uploads/content/1/17/1755705427704_resized.png"
+          - "https://tr.rbxcdn.com/180DAY-c6b6eaf4129c73c41a4d71bc9a309365/768/432/Image/Webp/noFilter"
+      # ================================
+      # СОЗДАЁМ блок-ловушку
+      # ================================
+      - type: "text"
+        title: "🧱 Шаг 1. Создаём блок-ловушку"
+        text:
+          - "Вставь Part"
+          - "Назови его: Lava (лава) или Spikes (шипы)"
+          - "Покрась в <span style='color: red;'>красный</span> или оранжевый или чёрный."
+          - "Измени Material: Lava → Neon или Cracked Spikes → Metal"
+          - "Сделай <b>Anchored = true</b>."
+          - "Добавь внутрь блока Script"
+      - type: "code"
+        title: "❤️ Что такое Humanoid.Health ?"
+        text:
+          - "У каждого игрока есть здоровье (Health)."
+          - "Максимум — 100."
+          - "Если Health падает до 0 → игрок умирает и возрождается."
+          - "Мы можем уменьшать здоровье через код:"
+        code: |
+          humanoid.Health -= 20 -- отнять 20 HP
+
+      # ================================
+      # СОЗДАЁМ ЛАВУ
+      # ================================
+      - type: "code"
+        title: "🔥 Шаг 2. Лава, которая мгновенно убивает игрока"
+        text: "Внутри объекта Lava:"
+        code: |
+          local lava = script.Parent
+
+          lava.Touched:Connect(function(hit)
+              local char = hit.Parent
+              local humanoid = char:FindFirstChild("Humanoid")
+
+              if humanoid then
+                  humanoid.Health = 0  -- моментальная смерть
+                  print("Игрок упал в лаву!")
+              end
+          end)
+        afterText: "💥 Любой, кто коснётся лавы → сразу погибает."
+
+
+      # ================================
+      # Шипы, которые наносят урон (не сразу убивают)
+      # ================================
+      - type: "code"
+        title: "🩸 Шаг 3. Шипы, которые наносят урон (не сразу убивают)"
+        text: "Скрипт внутри Spikes:"
+        code: |
+          local spikes = script.Parent
+
+          spikes.Touched:Connect(function(hit)
+              local char = hit.Parent
+              local humanoid = char:FindFirstChild("Humanoid")
+
+              if humanoid then
+                  humanoid.Health -= 25  -- минус 25 HP
+                  print("Игрок получил урон от шипов!")
+              end
+          end)
+        afterText: "Игрок может пережить шипы, но будет ранен."
+
+      - type: "note"
+        text: "Humanoid отвечает за здоровье. Если Health падает до 0 — персонаж умирает."
+
+      # ================================
+      # Шаг 4. Опасная зона, наносящая урон ПОСТЕПЕННО
+      # ================================
+      - type: "code"
+        title: "♨️ Шаг 4. Опасная зона, наносящая урон ПОСТЕПЕННО"
+        text: "Например, игрок стоит на кислоте — здоровье уменьшается каждую секунду."
+        code: |
+          local acid = script.Parent
+          local touching = false
+
+          acid.Touched:Connect(function(hit)
+              local humanoid = hit.Parent:FindFirstChild("Humanoid")
+
+              if humanoid then
+                  touching = true
+
+                  while touching do
+                      humanoid.Health -= 5
+                      wait(0.5)
+                  end
+              end
+          end)
+
+          acid.TouchEnded:Connect(function(hit)
+              touching = false
+          end)
+
+        afterText: 
+          - "Пока игрок касается зоны → здоровье тает 💔"
+          - "Ушёл — урон остановился."
+
+      # ================================
+      # Лава с эффектом «поджога» (красиво!)
+      # ================================
+      - type: "code"
+        title: "🔥 Шаг 5. Лава с эффектом «поджога» (красиво!)"
+        code: |
+          local lava = script.Parent
+
+          lava.Touched:Connect(function(hit)
+              local char = hit.Parent
+              local humanoid = char:FindFirstChild("Humanoid")
+              local root = char:FindFirstChild("HumanoidRootPart")
+
+              if humanoid and root then
+                  humanoid.Health -= 40
+                  root.BrickColor = BrickColor.new("Bright orange") -- игрок "горит"
+                  wait(0.3)
+                  root.BrickColor = BrickColor.new("White")
+              end
+          end)
+        afterText: "Простой эффект огня 🔥"
+
+      - type: "CanCollide"
+        title: "Код мгновенного уничтожения"
+        code: |
+          local lava = script.Parent
+
+          lava.Touched:Connect(function(hit)
+              local human = hit.Parent:FindFirstChild("Humanoid")
+              if human then
+                  human.Health = 0   -- мгновенная смерть
+              end
+          end)
+
+      # ================================
+      # ПОСТЕПЕННЫЙ УРОН (каждую секунду)
+      # ================================
+     
+
+      - type: "code"
+        language: "lua"
+        title: "Пошаговое уменьшение здоровья"
+        code: |
+          local lava = script.Parent
+          local damaging = {}  -- список игроки, стоящие на лаве
+
+          lava.Touched:Connect(function(hit)
+              local character = hit.Parent
+              local human = character:FindFirstChild("Humanoid")
+
+              if human and not damaging[character] then
+                  damaging[character] = true
+
+                  while damaging[character] and human.Health > 0 do
+                      human.Health -= 5
+                      wait(0.5)
+                  end
+              end
+          end)
+
+          lava.TouchEnded:Connect(function(hit)
+              damaging[hit.Parent] = nil
+          end)
+
+      - type: "warning"
+        text: "Не делайте слишком быстрый урон — игрок может умереть раньше, чем поймёт, что произошло."
+
+      # ================================
+      # БЕЗОПАСНАЯ ПЛАТФОРМА
+      # ================================
+      - type: "steps"
+        title: "Создаём безопасную платформу"
+        items:
+          - "Создай Part → SafePlatform."
+          - "Покрась в зелёный."
+          - "Anchored = true."
+          - "На неё можно ставить чекпоинты или отдыхать."
+
+      - type: "text"
+        title: "Почему нужны безопасные зоны?"
+        text:
+          - "Чтобы игрок мог отдохнуть."
+          - "Чтобы Obby было интереснее, а не слишком сложным."
+          - "Чтобы логично разделить уровни."
+      # ================================
+      # ПРАКТИКА ДЛЯ РЕБЁНКА
+      # ================================
+      - type: "steps"
+        title: "💡 Что можно добавить?"
+        items:
+          - "🌈 1. Частицы пламени (Добавь ParticleEmitter в лаву — выглядит круто!)"
+          - "🔊 2. Звук шипения (Sound:Play() при касании.)"
+          - "⚠️ 3. Безопасная зона (Сделай блок, который восстанавливает здоровье:(humanoid.Health += 5))"
+          - "😈 4. Ловушка, открывающаяся через секунду (Время на реакцию!)"
+
+
+
+      # ================================
+      # ПРАКТИКА ДЛЯ РЕБЁНКА
+      # ================================
+      - type: "steps"
+        title: "🧪 Мини-квест (попробуй сам!)"
+        items:
+          - "🧱 Блок «треснувший пол», который падает через 1 секунду после наступания (Игрок становится → 1 сек → пол падает вниз)"
+          - "Лаву, которая поднимается вверх каждые 5 секунд (🔥 Лава медленно поднимается → ждёт → опускается → повторяет)"
+          - "Добавь красные частицы — эффект жара."
+          - "Шипы, которые прячутся и выезжают (через TweenService) (⚔️ Шипы поднимаются → ждут → опускаются → повторяют)"
+      - type: hint
+        title: "Подсказака 👇 - 🧱 Игрок становится → 1 сек → пол падает вниз"
+        code: |
+          -- Получаем наш блок пола
+          local floor = script.Parent
+
+          -- Флаг, чтобы пол не падал дважды
+          local used = false
+
+          -- Срабатывает, когда что-то касается блока
+          floor.Touched:Connect(function(hit)
+
+              -- Проверяем: это игрок?
+              local char = hit.Parent
+              local humanoid = char:FindFirstChild("Humanoid")
+
+              if humanoid and not used then
+                  used = true  -- блок уже был активирован
+                  print("По полу наступили! Он трескается!")
+
+                  -- Ждём 1 секунду перед падением
+                  wait(1)
+
+                  -- Пол «падает» вниз
+                  floor.Position = floor.Position - Vector3.new(0, 20, 0)
+
+                  -- Можно сделать его невидимым:
+                  floor.Transparency = 1
+                  floor.CanCollide = false
+              end
+          end)
+
+      - type: hint
+        title: "Подсказака 👇 - 🔥 Лава медленно поднимается → ждёт → опускается → повторяет"
+        code: |
+          -- TweenService для плавного движения
+          local TweenService = game:GetService("TweenService")
+
+          -- Наша лава (Part)
+          local lava = script.Parent
+
+          -- Запоминаем начальную позицию
+          local startPos = lava.Position
+
+          -- Конечная позиция — поднимаем лаву на 15 студий вверх
+          local endPos = lava.Position + Vector3.new(0, 15, 0)
+
+          -- Настройки плавности
+          local info = TweenInfo.new(
+              3,  -- длительность (3 сек)
+              Enum.EasingStyle.Quad,
+              Enum.EasingDirection.Out
+          )
+
+          -- Два твина: вверх и вниз
+          local rise = TweenService:Create(lava, info, {Position = endPos})
+          local fall = TweenService:Create(lava, info, {Position = startPos})
+
+          -- Движение лавы по циклу
+          while true do
+              print("Лава поднимается!")
+              rise:Play()
+              wait(5)
+
+              print("Лава опускается!")
+              fall:Play()
+              wait(5)
+          end
+
+      - type: hint
+        title: "Подсказака 👇 - ⚔️ Шипы поднимаются → ждут → опускаются → повторяют"
+        code: |
+          -- TweenService — для плавных анимаций
+          local TweenService = game:GetService("TweenService")
+
+          local spikes = script.Parent
+
+          -- Запоминаем нижнюю (спрятанную) позицию
+          local hiddenPos = spikes.Position
+
+          -- Позиция, куда шипы выезжают (поднимаются на 5 студий)
+          local upPos = spikes.Position + Vector3.new(0, 5, 0)
+
+          -- Настройки плавного движения
+          local info = TweenInfo.new(
+              0.8,  -- скорость появления
+              Enum.EasingStyle.Bounce, -- стиль (отскок)
+              Enum.EasingDirection.Out
+          )
+
+          -- Создаём два твина: вверх и вниз
+          local showTween = TweenService:Create(spikes, info, {Position = upPos})
+          local hideTween = TweenService:Create(spikes, info, {Position = hiddenPos})
+
+          while true do
+              print("Шипы выезжают!")
+              showTween:Play()
+              wait(2)               -- шипы торчат 2 секунды
+
+              print("Шипы прячутся.")
+              hideTween:Play()
+              wait(3)               -- ждём перед следующей атакой
+          end
+
+
+
+
+
+
+
+
+
+    quiz:
+      - question: "Что уменьшает здоровье игрока?"
+        answers:
+          - "Part"
+          - "Humanoid"
+          - "Texture"
+        correct: 1
+
+      - question: "Как сделать мгновенную смерть?"
+        answers:
+          - "human.JumpPower = 0"
+          - "human.Health = 0"
+          - "human.WalkSpeed = 0"
+        correct: 1
+
+      - question: "Зачем нужны безопасные платформы?"
+        answers:
+          - "Чтобы игроки прыгали выше"
+          - "Чтобы игрок мог передохнуть и не умереть"
+          - "Чтобы сделать игру медленнее"
+        correct: 1
+
 
 # ============================================================
-# УРОК 25 — Расширенные телепорты
+# УРОК 30 — Расширенные телепорты
 # ============================================================
-  - id: 25
-    title: "⭐ Урок 25. Телепорты: портал, телепорт-гейт, переходы между комнатами"
+  - id: 30
+    title: "⭐ Урок 30. Телепорты: портал, телепорт-гейт, переходы между комнатами"
     shortDescription: "Учимся создавать порталы, двусторонние телепорты и телепорты в дом."
     # video: "https://www.youtube.com/embed/TELEPORT25"
 
@@ -664,10 +1620,10 @@ lessons:
 
 
 # ============================================================
-# УРОК 26 — Чекпоинты
+# УРОК 31 — Чекпоинты
 # ============================================================
-  - id: 26
-    title: "⭐ Урок 26. Чекпоинты и респаун игрока"
+  - id: 31
+    title: "⭐ Урок 31. Чекпоинты и респаун игрока"
     shortDescription: "Учимся делать точки сохранения: игрок умирает — появляется там же. (сохранять прогресс и правильно возрождать игрока)"
     video: "https://www.youtube.com/embed/HQQdsMtRg7k?si=OA1rgOVylS-PKlTT"
 
@@ -914,10 +1870,10 @@ lessons:
 
 
 # ============================================================
-# УРОК 27 — Зоны урона и безопасные зоны
+# УРОК 32 — Зоны урона и безопасные зоны
 # ============================================================
-  - id: 27
-    title: "🌟 Урок 27. Зоны урона и безопасные зоны"
+  - id: 32
+    title: "🌟 Урок 32. Зоны урона и безопасные зоны"
     shortDescription: "Создаём лаву, шипы, яд, зоны замедления и безопасные платформы."
     # video: "https://www.youtube.com/embed/DAMAGE27"
 
@@ -1253,10 +2209,10 @@ lessons:
 
 
 # ============================================================
-# УРОК 28 — Ловушки-усложнения
+# УРОК 33 — Ловушки-усложнения
 # ============================================================
-  - id: 28
-    title: "🌟Урок 28. Ловушки: падающие платформы, яд и подбрасывание"
+  - id: 33
+    title: "🌟Урок 33. Ловушки: падающие платформы, яд и подбрасывание"
     shortDescription: "Учимся создавать продвинутые ловушки."
     # video: "https://www.youtube.com/embed/TRAPS28"
 
@@ -1867,10 +2823,10 @@ lessons:
 
 
 # ============================================================
-# УРОК 29 — Мини-проект Obby
+# УРОК 34 — Мини-проект Obby
 # ============================================================
-  - id: 29
-    title: "🌟 Урок 29. Мини-проект: Obby с чекпоинтами"
+  - id: 34
+    title: "🌟 Урок 34. Мини-проект: Obby с чекпоинтами"
     shortDescription: "Создаём полноценный уровень Obby."
 
     content:
