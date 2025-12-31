@@ -5,7 +5,7 @@ description: "В этом модуле мы научимся управлять 
 lessons:
 
 # ============================================================
-# УРОК 24 — Player, Character, HumanoidRootPart
+# УРОК 29 — Player, Character, Humanoid — кто есть кто
 # ============================================================
   - id: 29
     title: "⭐ Урок 29. Player, Character, Humanoid — кто есть кто"
@@ -15,40 +15,129 @@ lessons:
     content:
 
       - type: "text"
-        title: "Зачем нужен этот урок?"
+        title: "🎯 Цель урока"
         text:
-          - "Чтобы управлять игроком, нужно понимать, **из чего он состоит**. В Roblox игрок — это не один объект, а целая система."
-          - "<b>Player</b> — это информация о человеке, который играет."
-          - "<b>Character</b> — это 3D-модель игрока в мире."
-          - "<b>Humanoid</b> — сердце игрока: здоровье, прыжки, скорость."
-          - "<b>HumanoidRootPart</b> — главный блок, через который можно двигать игрока."
+          - "Понять, кто такой игрок в Roblox, из каких частей он состоит и чем именно мы будем управлять в коде."
+
+      - type: "codeBlock"
+        title: "🧠 Большая идея урока"
+        code: |
+          Игрок — это не один объект.
+          Он состоит из нескольких частей.
+          Игрок в Roblox = Player + Character + Humanoid + HumanoidRootPart
+
       - type: "text"
-        title: "🧒 1. Кто такой Player?"
-        text:
-          - "Представь, что Roblox — это школа."
-          - "<b>Player</b> — это ученик, у каждого своё имя и тетрадка."
-          - "<b>📌 Player</b> — это человек за компьютером."
+        title: "🧩 Из чего состоит игрок"
+        text: |
+          <p>Когда игрок заходит в игру, Roblox создаёт несколько объектов.</p>
+          <p>Давай разберёмся, кто есть кто.</p>
+      - type: "oneImage"
+        title: "Из чего состоит игрок"
+        img:
+            src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module4/lesson29/%D0%98%D0%B7%20%D1%87%D0%B5%D0%B3%D0%BE%20%D1%81%D0%BE%D1%81%D1%82%D0%BE%D0%B8%D1%82%20%D0%B8%D0%B3%D1%80%D0%BE%D0%BA.png?raw=true"
+            width: 100%
+            maxWidth: "100%"
+            align: center
+
+      - type: "codeBlock"
+        title: "📌 Схема игрока"
+        code: |
+          Player
+            ↓
+          Character (модель игрока)
+            ↓
+          Humanoid (жизнь и движение)
+      - type: "text"
+        text: |
+          <ul>
+            <li><b>Player</b> — это профиль игрока (имя, настройки).</li>
+            <li><b>Character</b> — это тело игрока в мире.</li>
+            <li><b>Humanoid</b> — это жизнь: здоровье, ходьба, прыжки.</li>
+          </ul>
+
       - type: "code"
         text: "Он появляется в папке:"
         code: |
           game.Players
+
       - type: "text"
+        title: "❤️ 1. Что такое Player?"
         text:
-          - "Примеры того, что относится к Player:"
-          - "<ul><li>имя игрока</li>
-            <li>его GUI (интерфейс, кнопки, меню)</li>
-            <li>его настройки</li>
-            <li>его лидерборды (очки, монеты)</li></ul>"
-          - "<b>НО Player — это НЕ тело игрока!</b>"
-          - "Это просто «досье» или «папка» о нём."
+          - "<b>Player</b> — это аккаунт игрока в Roblox."
+          - "Он хранит информацию:"
+          - "<ul>
+              <li>имя</li>
+              <li>идентификатор (UserId)</li>
+              <li>статистика (очки, деньги)</li>
+              <li>настройки (звук, графика)</li>
+            </ul>"
+      
+      
+      
+      - type: "note"
+        text: |
+          ❗ Частая ошибка:
+          Игрок — это НЕ модель.
+          Модель — это Character.
+
+      - type: "text"
+        title: "🟢 Подумай"
+        text: |
+          <ul>
+            <li>Можно ли увидеть Player в Workspace?</li>
+            <li>Что исчезает, когда игрок умирает — Player или Character?</li>
+          </ul>
+
+      - type: hint
+        title: "Подсказка 🔑 "
+        text:
+          - ""
+          
 
 
-      - type: "gallery"
-        title: "Структура игрока"
-        images:
-          - "https://static.tildacdn.com/tild3738-3165-4566-b263-313437303264/u8963996675_make_npc.png"
-          - "https://habrastorage.org/getpro/habr/upload_files/c1f/dd3/522/c1fdd352242789449edd2371424d4f97.png"
-          - "https://preview.redd.it/hi-i-just-made-another-ugc-this-time-in-roblox-studio-orb-v0-fmzqotm9f5cb1.png?width=1080&crop=smart&auto=webp&s=04247640bebabac23a7abcc213e12b6115a71393"
+      - type: "oneImage"
+        title: "🧍‍♂️ Структура папок"
+        img:
+            src: "https://habrastorage.org/getpro/habr/upload_files/c1f/dd3/522/c1fdd352242789449edd2371424d4f97.png"
+            width: 360
+            maxWidth: "100%"
+            align: center
+
+     
+
+# 🛠 ПРАКТИКА 1. НАХОДИМ HUMANOID
+      - type: "text"
+        title: "🛠 ПРАКТИКА 1. НАХОДИМ HUMANOID"
+        text: |
+          <h4>🎯 Что делаем</h4>
+          <p>Научимся находить Humanoid игрока и работать с ним.</p>
+     
+      - type: "step"
+        title: "🧠 Подготовка"
+        items: 
+          - "Открой Workspace."
+          - "Найди модель своего персонажа."
+          - "Найди объект Humanoid внутри неё."
+          - "Добавь Script в модель персонажа."
+
+      - type: "code"
+        title: "📌 Код: находим Humanoid"
+        code: |
+          local character = script.Parent
+          local humanoid = character:FindFirstChild("Humanoid")
+
+          print(humanoid)
+
+      - type: "text"
+        title: "🧠 Разбор"
+        text: |
+          <ul>
+            <li>script.Parent — это Character</li>
+            <li>Humanoid живёт внутри Character</li>
+            <li>print показывает, что мы его нашли</li>
+          </ul>
+
+      
 
       - type: "text"
         title: "🧍‍♂️ 2. Кто такой Character?"
@@ -65,6 +154,7 @@ lessons:
               <li>HumanoidRootPart (главная деталь)</li>
               <li>Humanoid (жизнь игрока)</li>
             </ul>"
+            
       - type: "code"
         text: "Character появляется в:"
         code: |
