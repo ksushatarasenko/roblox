@@ -219,6 +219,219 @@ lessons:
             <p>Player остаётся всегда.</p>
             <p>Тело может исчезать и появляться снова.</p>
 
+# ============================================================
+# УРОК 30 — Player: профиль игрока
+# ============================================================
+  - id: 30
+    title: "⭐ Урок 30. Player — профиль игрока"
+    shortDescription: "Разбираемся, что такое Player, какую информацию он хранит и зачем он нужен."
+
+    content:
+
+      - type: "text"
+        title: "🎯 Цель урока"
+        text:
+          - "Понять, что такое Player в Roblox."
+          - "Узнать, какую информацию он хранит."
+          - "Научиться отличать Player от тела игрока."
+
+      - type: "codeBlock"
+        title: "🧠 Большая идея урока"
+        code: |
+          Player — это НЕ тело игрока.
+          Player — это профиль игрока.
+          Player живёт в папке Players.
+          Player остаётся, даже если тело исчезло.
+
+      
+      - type: "text"
+        title: "🧩 Что такое Player"
+        text: |
+          <p><b>Player</b> — это профиль игрока в Roblox.</p>
+          <p>Он создаётся автоматически, когда игрок заходит в игру.</p>
+
+      - type: "text"
+        title: "📦 Что хранит Player"
+        text: |
+          <ul>
+            <li>имя игрока</li>
+            <li>UserId (уникальный номер)</li>
+            <li>статистику (очки, деньги)</li>
+            <li>настройки игрока</li>
+          </ul>
+
+      - type: "oneImage"
+        img:
+            src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module4/lesson30/%D0%A7%D1%82%D0%BE%20%D1%85%D1%80%D0%B0%D0%BD%D0%B8%D1%82%20%D0%BF%D1%80%D0%BE%D1%84%D0%B8%D0%BB%D1%8C%20%D0%B8%D0%B3%D1%80%D0%BE%D0%BA%D0%B0.png?raw=true"
+            width: 100%
+            maxWidth: "100%"
+            align: center
+
+# 📁 Где находится Player
+      - type: "text"
+        title: "📁 Где находится Player"
+        text: |
+          <p>Все игроки находятся в специальной папке:</p>
+
+
+      - type: "code"
+        text: "Папка игроков:"
+        code: |
+          game.Players
+
+      
+      - type: "note"
+        text: |
+          В папке Players ты видишь игроков,
+          даже если их тело ещё не появилось в мире.
+      
+      - type: "oneImage"
+        img:
+            src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module4/lesson30/%D0%98%D0%B3%D1%80%D0%BE%D0%BA.png?raw=true"
+            width: 100%
+            maxWidth: "100%"
+            align: center
+      
+      - type: "text"
+        title: "Коротко и строго по делу, по этой картинке 👇"
+        text: |
+          <h4>🔵 СЛЕВА — Explorer (структура игры)</h4>
+          <h5>📂 Players</h5>
+          <p>Здесь живут Player’ы (профили игроков).</p>
+          <p><b>👤 kiruha_202202</b> Это Player, не тело.</p>
+          <p>Внутри Player:</p>
+          <ul>
+            <li><b>🎒 Backpack</b> — инструменты игрока</li>
+            <li><b>📜 PlayerScripts</b> — скрипты игрока (камера, управление и т.д.)</li>
+          </ul>
+          <p>❗ Здесь нет тела — только данные игрока.</p><br>
+          <h4>🟣 СПРАВА — Properties (свойства Player)</h4>
+          <p>Ты смотришь свойства Player kiruha_202202.</p>
+          <p>Самое важное:</p>
+          <ul>
+            <li>Name → kiruha_202202 👉 имя Player</li>
+            <li>UserId → 4492213667 👉 уникальный номер игрока (не меняется)</li>
+            <li>Parent → Players 👉 подтверждение, что это Player</li>
+            <li>Character 👉 ссылка на тело игрока в Workspace</li>
+            <li>DisplayName → Venik 👉 отображаемое имя в игре</li>
+          </ul>
+      
+
+# 🔁 Player и Character — не одно и то же
+      - type: "text"
+        title: "🔑 КЛЮЧЕВАЯ МЫСЛЬ"
+        text: |
+          <p>Слева в Players — Player (профиль).</p>
+          <p>В центре в Workspace — Character (тело).</p>
+          <p>Справа в Properties — данные Player.</p>
+
+
+      - type: "text"
+        title: "🔁 Player и Character — в чём разница?"
+        text: |
+          <ul>
+            <li><b>Player</b> — это профиль игрока.</li>
+            <li><b>Character</b> — это тело игрока.</li>
+          </ul>
+
+      - type: "note"
+        text: |
+          Player остаётся всегда.
+          Character может исчезать и появляться снова.
+# 🛠 Сделай так
+
+      - type: "steps"
+        title: "🛠 Сделай так"
+        items:
+          - "Запусти игру (Play)."
+          - "Открой Explorer."
+          - "Найди папку Players."
+          - "Найди своего Player."
+          - "Обрати внимание: это НЕ модель тела."
+
+
+      - type: "text"
+        title: "🟢 Подумай"
+        text: |
+          <ul>
+            <li>Почему Player не находится в Workspace?</li>
+            <li>Почему Player остаётся после смерти персонажа?</li>
+            <li>Зачем хранить данные игрока отдельно от тела?</li>
+          </ul>
+
+     
+
+      - type: hint
+        title: "Подсказка 🔑"
+        text: |
+          
+          <ul>
+            <li>Player — это информация об игроке.</li>
+            <li>Его нельзя увидеть в мире.</li>
+            <li>Тело можно потерять, а Player — нет.</li>
+          </ul>
+      
+
+      - type: "note"
+        text: |
+          ❗ Ошибка: <br>
+          Пытаться управлять игроком через его модель в Workspace.
+
+          ✔ Правильно:
+          Player — профиль.
+          Character — тело.
+
+
+    
+    quiz:
+    - question: "Что такое Player?"
+      answers:
+        - "Тело игрока в мире"
+        - "Профиль игрока"
+        - "Часть карты"
+      correct: 1
+
+    - question: "Где находится Player?"
+      answers:
+        - "В Workspace"
+        - "В папке Players"
+        - "В ServerStorage"
+      correct: 1
+
+    - question: "Что происходит с Player, когда игрок умирает?"
+      answers:
+        - "Он исчезает"
+        - "Он удаляется"
+        - "Он остаётся"
+      correct: 2
+
+    - question: "Что хранит Player?"
+      answers:
+        - "Только модель тела"
+        - "Имя, UserId, данные игрока"
+        - "Только Humanoid"
+      correct: 1
+    
+    end:
+        - type: "text"
+          title: "🧠 Что мы поняли"
+          text: |
+             <ul>
+                <li>Player — это профиль игрока</li>
+                <li>Он живёт в папке Players</li>
+                <li>Он создаётся автоматически</li>
+                <li>Он не является телом игрока</li>
+              </ul>
+              <p>Если игрок умрёт:</p>
+              <ul>
+                <li>❌ тело в Workspace исчезнет</li>
+                <li>✅ Player в Players останется</li>
+              </ul>
+              <p><b>Player — это информация об игроке.</b></p>
+              <p><b>Character — это его тело в мире.</b></p>
+
+
+
         
           
 
