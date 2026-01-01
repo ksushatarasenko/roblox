@@ -5,10 +5,10 @@ description: "В этом модуле мы научимся управлять 
 lessons:
 
 # ============================================================
-# УРОК 29 — Player, Character, Humanoid — кто есть кто
+# УРОК 29 — Кто такой игрок и где он живёт
 # ============================================================
   - id: 29
-    title: "⭐ Урок 29. Player, Character, Humanoid — кто есть кто"
+    title: "⭐ Урок 29. Кто такой игрок и где он живёт"
     shortDescription: "Понимаем, как устроён игрок: его модель, здоровье, скорость и прыжки."
     # video: "https://www.youtube.com/embed/PLAYERINFO24"
 
@@ -17,20 +17,26 @@ lessons:
       - type: "text"
         title: "🎯 Цель урока"
         text:
-          - "Понять, кто такой игрок в Roblox, из каких частей он состоит и чем именно мы будем управлять в коде."
-
-      - type: "codeBlock"
-        title: "🧠 Большая идея урока"
-        code: |
-          Игрок — это не один объект.
-          Он состоит из нескольких частей.
-          Игрок в Roblox = Player + Character + Humanoid + HumanoidRootPart
+          - "Понять, что такое игрок в Roblox и почему он состоит из нескольких частей. Мы не создаём игрока — мы учимся его находить."
 
       - type: "text"
-        title: "🧩 Из чего состоит игрок"
+        title: "🧠 Большая идея урока"
         text: |
-          <p>Когда игрок заходит в игру, Roblox создаёт несколько объектов.</p>
-          <p>Давай разберёмся, кто есть кто.</p>
+          Игрок — это не одна деталь. 
+          <br><br>
+          <p>Игрок в Roblox состоит из нескольких объектов:</p>
+          <ul>
+            <li>Player — профиль</li>
+            <li>Character — тело</li>
+            <li>Humanoid — жизнь</li>
+            <li>HumanoidRootPart — центр тела</li>
+          </ul><br>
+
+          <p>Игрок появляется сам</p>
+          <p>Roblox создаёт его автоматически.</p>
+          <p>Мы его не создаём — мы его находим.</p>
+
+      
       - type: "oneImage"
         title: "Из чего состоит игрок"
         img:
@@ -39,21 +45,58 @@ lessons:
             maxWidth: "100%"
             align: center
 
-      - type: "codeBlock"
-        title: "📌 Схема игрока"
-        code: |
-          Player
-            ↓
-          Character (модель игрока)
-            ↓
-          Humanoid (жизнь и движение)
+      - type: "text"
+        title: "🧩 Что происходит при входе в игру"
+        text: |
+          <p>Когда игрок нажимает «Play», Roblox автоматически:</p>
+          <ul>
+            <li>создаёт игрока (Player)</li>
+            <li>создаёт ему тело (Character)</li>
+            <li>добавляет жизнь (Humanoid)</li>
+            <li>помещает тело в мир (Workspace)</li>
+          </ul>
+          <p>Мы не пишем код для этого — Roblox делает это сам.</p>
+          <p>Нам не нужен ни один скрипт, чтобы игрок появился.</p>
+
+      - type: "text"
+        title: "🧩 Из чего состоит игрок"
+        text: |
+          <p>Когда игрок заходит в игру, Roblox создаёт НЕ ОДИН объект, а несколько..</p>
+          <p>Давай разберёмся, кто есть кто.</p>
+
       - type: "text"
         text: |
           <ul>
-            <li><b>Player</b> — это профиль игрока (имя, настройки).</li>
-            <li><b>Character</b> — это тело игрока в мире.</li>
-            <li><b>Humanoid</b> — это жизнь: здоровье, ходьба, прыжки.</li>
+            <li><b>🟦 Player</b> — это сам игрок.<p>Это его профиль: имя, настройки, статистика.</p></li>
+            <li><b>🟩 Character</b> — это тело игрока, которое мы видим в мире.</li>
+            <li><b>❤️ Humanoid</b> — это «жизнь» внутри тела: <p>здоровье, ходьба, прыжки.</p></li>
           </ul>
+      
+      - type: "text"
+        title: "⚠️ Важно для понимания:"
+        text: |
+          <p>Игрок ≠ тело.</p>
+          <p>Player — это НЕ модель в мире.</p>
+          <p>Character — это только тело игрока.</p>
+
+      - type: "text"
+        title: "📁 Где живёт игрок в Roblox Studio"
+        text: |
+          <p>В Roblox есть два важных места:</p><br>
+          <ul>
+            <li><b>📂 Players</b> — здесь живёт Player (профиль игрока)</li>
+            <li><b>🌍 Workspace</b> — здесь появляется тело игрока (Character)</li>
+          </ul><br>
+          <p>Player живёт в Players.</p>
+          <p>Тело игрока появляется в Workspace.</p>
+      - type: "oneImage"
+        title: ""
+        img:
+            src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module4/lesson29/Struktura%20gracza%20w%20Roblox%20Studio.png?raw=true"
+            width: 100%
+            maxWidth: "100%"
+            align: center
+
 
       - type: "code"
         text: "Он появляется в папке:"
@@ -72,346 +115,112 @@ lessons:
               <li>настройки (звук, графика)</li>
             </ul>"
       
-      
-      
       - type: "note"
         text: |
-          ❗ Частая ошибка:
-          Игрок — это НЕ модель.
-          Модель — это Character.
+          🔍 Если ты видишь игрока в мире —
+          значит ты смотришь на его тело, а не на самого Player.
+
+      
+      - type: "steps"
+        title: "🛠 Сделай так"
+        items:
+          - "Запусти игру (Play)."
+          - "Открой Explorer."
+          - "Найди папку Players."
+          - "Найди своего игрока."
+          - "Найди модель персонажа в Workspace."
 
       - type: "text"
         title: "🟢 Подумай"
         text: |
           <ul>
-            <li>Можно ли увидеть Player в Workspace?</li>
-            <li>Что исчезает, когда игрок умирает — Player или Character?</li>
-          </ul>
+            <li>Почему игрок появляется без скриптов?</li>
+            <li>Почему в Players и в Workspace — разные объекты?</li>
+            <li>Что исчезнет, если игрок упадёт и умрёт?</li>
+          </ul> 
+
+     
 
       - type: hint
-        title: "Подсказка 🔑 "
-        text:
-          - ""
-          
-
-
-      - type: "oneImage"
-        title: "🧍‍♂️ Структура папок"
-        img:
-            src: "https://habrastorage.org/getpro/habr/upload_files/c1f/dd3/522/c1fdd352242789449edd2371424d4f97.png"
-            width: 360
-            maxWidth: "100%"
-            align: center
-
-     
-
-# 🛠 ПРАКТИКА 1. НАХОДИМ HUMANOID
-      - type: "text"
-        title: "🛠 ПРАКТИКА 1. НАХОДИМ HUMANOID"
         text: |
-          <h4>🎯 Что делаем</h4>
-          <p>Научимся находить Humanoid игрока и работать с ним.</p>
-     
-      - type: "step"
-        title: "🧠 Подготовка"
-        items: 
-          - "Открой Workspace."
-          - "Найди модель своего персонажа."
-          - "Найди объект Humanoid внутри неё."
-          - "Добавь Script в модель персонажа."
-
-      - type: "code"
-        title: "📌 Код: находим Humanoid"
-        code: |
-          local character = script.Parent
-          local humanoid = character:FindFirstChild("Humanoid")
-
-          print(humanoid)
-
-      - type: "text"
-        title: "🧠 Разбор"
-        text: |
+          Подсказка 🔑
           <ul>
-            <li>script.Parent — это Character</li>
-            <li>Humanoid живёт внутри Character</li>
-            <li>print показывает, что мы его нашли</li>
+            <li>Игрок появляется без скриптов, потому что Roblox создаёт его автоматически.</li>
+            <li>В Players хранится сам игрок (профиль), а в Workspace — только его тело.</li>
+            <li>Когда игрок умирает, исчезает тело, но Player остаётся.</li>
           </ul>
-
       
 
-      - type: "text"
-        title: "🧍‍♂️ 2. Кто такой Character?"
-        text:
-          - "Когда игрок появляется в мире Roblox, ему создают тело —  <b>Character.</b>"
-          - "<b>💡 Character = тело игрока в 3D-мире.</b>"
-          - "Как будто в игре заводится коробка с деталями:"
-          - "<ul>
-              <li>голова</li>
-              <li>руки</li>
-              <li>ноги</li>
-              <li>торс</li>
-              <li>одежда</li>
-              <li>HumanoidRootPart (главная деталь)</li>
-              <li>Humanoid (жизнь игрока)</li>
-            </ul>"
-            
-      - type: "code"
-        text: "Character появляется в:"
-        code: |
-          Workspace
-
-      - type: "text"
-        title: "🎨 Ассоциация"
+      - type: "note"
         text: |
-          <ul>
-            <li><b>Player</b> — это аккаунт (как его имя в школе).</li>
-            <li><b>Character</b> — это кукла LEGO, которой он управляет.</li>
-          </ul>
-          Игрок может выйти из игры — Player исчезнет.
-          <p>Кукла упадёт в лаву — Character исчезнет.</p>
-          Но Player всё равно жив и переспавнится 😊
-
-      - type: "text"
-        title: "❤️ 3. Что такое Humanoid?"
-        text: |
-          Внутри Character есть объект Humanoid — это как «жизнь» персонажа.
-          <p>Humanoid отвечает за:</p>
-          <ul>
-            <li>здоровье</li>
-            <li>прыжки</li>
-            <li>скорость</li>
-            <li>смерть</li>
-            <li>анимации</li>
-            <li>движение</li>
-          </ul>
-      - type: "code"
-        text: "Когда здоровье падает → Humanoid умирает → Character исчезает → Player возрождается снова."
-        code: |
-          local humanoid = character:FindFirstChild("Humanoid")
-          humanoid.Health = 50 -- отнимаем здоровье
-      - type: "text"
-        title: "⭐ 4. Самое главное — HumanoidRootPart"
-        text: "Ох, это супер-важная деталь."
-      - type: "tip" 
-        title: "Можно сказать:"
-        text: 
-          - "<b>HumanoidRootPart — это сердце персонажа. Главная точка, откуда Roblox понимает, где находится игрок.</b>"
-      - type: "text"
-        text: |
-          Когда ты телепортируешь игрока — Roblox двигает именно HumanoidRootPart.
-
-          <p>Ассоциация:</p>
-          🎯 «Центр гравитации» игрока или «магнит», который притягивает всё тело.
-
-          <p>Без него персонаж просто развалился бы.</p>
-      - type: "code" 
-        text: "Он находится в:"
-        code: |
-          character.HumanoidRootPart
-      - type: "text"
-        title: "Разберём подробнее"
-        text:
-          - "<b>Player</b> живёт в папке Players."
-          - "<b>Character</b> появляется в Workspace, когда игрок появляется на карте."
-          - "<b>Humanoid</b> хранит: Health, WalkSpeed, JumpPower."
-          - "<b>HumanoidRootPart</b> отвечает за положение персонажа."
-
-      - type: "code" 
-        title: "🌀 Примеры кода, которые помогают понять"
-        text: "<h4>✔️ Как получить ссылку на Character:"
-        code: |
-          local player = game.Players.PlayerAdded:Wait()
-          local character = player.Character or player.CharacterAdded:Wait()
-      - type: "code" 
-        text: "<h4>✔️ Как получить Humanoid:"
-        code: |
-          local humanoid = character:FindFirstChild("Humanoid")
-      - type: "code" 
-        text: "<h4>✔️ Как получить HumanoidRootPart:"
-        code: |
-          local root = character:FindFirstChild("HumanoidRootPart")
-
-
-      - type: "code"
-        language: "lua"
-        title: "Как получить доступ к игроку"
-        code: |
-          local player = game.Players.LocalPlayer
-          print("Твой ник:", player.Name)
-
-      - type: "code"
-        language: "lua"
-        title: "Как получить Character"
-        code: |
-          local player = game.Players.LocalPlayer
-          local char = player.Character or player.CharacterAdded:Wait()
-          print("У игрока есть модель Character!")
-
-      - type: "code"
-        language: "lua"
-        title: "Как изменить прыжок игрока"
-        code: |
-          local player = game.Players.LocalPlayer
-          local char = player.Character or player.CharacterAdded:Wait()
-          local humanoid = char:WaitForChild("Humanoid")
-
-          humanoid.JumpPower = 80
-          print("Теперь ты прыгаешь выше!")
+          ❗ Ошибка:<br>
+          Игрок — это НЕ модель в Workspace.<br>
+          Модель — это только тело.
 
       - type: "note"
-        text: "<b>Важно:</b> всё, что связано с интерфейсом или игроком — работает в <b>LocalScript</b>."
-      - type: "code"
-        title: "🧪 Пример: делаем игрока быстрее"
-        code: |
-          local humanoid = character:FindFirstChild("Humanoid")
-          humanoid.WalkSpeed = 32 -- быстрее!
-      - type: "code"
-        title: "🧨 Пример: наносим урон игроку"
-        code: |
-          lhumanoid.Health -= 20
-        afterText: "Это работает только через Humanoid."
-      - type: table
-        title: "💡 Ассоциации, чтобы было легко запомнить"
-        headers: ["Объект", "Что это?", "Ассоциация"]
-        rows:
-          - ["<b>Player</b>", "Игрок за компьютером", "Ученик"]
-          - ["<b>Character</b>", "Его тело в игре", "Кукла LEGO"]
-          - ["<b>Humanoid</b>", "Жизнь, здоровье", "Сердце/жизненная полоска"]
-          - ["<b>HumanoidRootPart</b>", "Главная деталь, центр тела", "Магнит/ядро персонажа"]
-        
-      - type: "text"
-        title: "🔥 Мини-квест (интересный!)"
         text: |
-          Пусть ребёнок попробует:
-            <ol>
-              <li>Сделать платформу, которая телепортирует игрока вверх на 20 студий</li>
-              <li>Сделать платформу-ускоритель (WalkSpeed = 40)</li>
-              <li>Сделать «тормозную платформу» (WalkSpeed = 10)</li>
-              <li>Сделать блок, который поворачивает игрока на 180°</li>
-            </ol>
-          Хочешь, я дам готовые подсказки и код? 😊
+          ✔ Игрок создаётся автоматически <br>
+          ✔ Player живёт в Players<br>
+          ✔ Тело игрока появляется в Workspace
+
       - type: "text"
-        title: "🌈 Советы, чтобы было интереснее"
+        title: "Что дальше?"
         text: |
-            <ol>
-              <li>Покрась TeleportPad в голубой или фиолетовый</li>
-              <li>SpeedPad сделай ярко-зелёным</li>
-              <li>SlowPad — жёлтый или оранжевый</li>
-              <li>RotatePad — красный</li>
-            </ol>
-            Так легче запомнить, что делает каждый блок.
-            <p>Можно даже добавить надписи поверх с помощью BillboardGui.</p>
-
-
-      - type: "hint" 
-        title: "Подсказка №1 🥰"
-        code: |
-          - "Создай 4 блока (Part) в Workspace:"
-          - "- TeleportPad -> Телепорт вверх"
-          - "- SpeedPad -> Ускорение"
-          - "- SlowPad -> Замедление"
-          - "- RotatePad -> Поворот на 180°"
-          - "В каждый блок вставь Один и тот же Script, который будет проверять имя блока и выполнять действие."
-          - "Да-да! Один скрипт работает для всех — это крутая практика 😎"
-      - type: "hint" 
-        title: "Подсказка №2 (код) 🥰"
-        code: |
-          -- Получаем платформу, на которой стоит этот скрипт
-          local pad = script.Parent
-
-          -- Функция срабатывает, когда кто-то касается платформы
-          pad.Touched:Connect(function(hit)
-
-              -- hit.Parent — это модель персонажа
-              local character = hit.Parent
-
-              -- Находим Humanoid, чтобы понять: это игрок?
-              local humanoid = character:FindFirstChild("Humanoid")
-
-              if humanoid then
-                  -- Находим HumanoidRootPart — центр игрока
-                  local root = character:FindFirstChild("HumanoidRootPart")
-
-                  -- Если platform TeleportPad → телепорт вверх
-                  if pad.Name == "TeleportPad" then
-                      
-                      -- Перемещаем игрока вверх на 20 студий
-                      root.CFrame = root.CFrame + Vector3.new(0, 20, 0)
-
-                      print("Телепортируем игрока вверх!")
-
-                  end
-
-
-                  -- Если platform SpeedPad → ускорение
-                  if pad.Name == "SpeedPad" then
-                      
-                      humanoid.WalkSpeed = 40  -- обычная скорость 16
-                      
-                      print("Ускорение включено!")
-
-                  end
-
-
-                  -- Если platform SlowPad → замедление
-                  if pad.Name == "SlowPad" then
-                      
-                      humanoid.WalkSpeed = 10  -- медленная скорость
-                      
-                      print("Игрок замедлен!")
-
-                  end
-
-
-                  -- Если platform RotatePad → поворот на 180°
-                  if pad.Name == "RotatePad" and root then
-
-                      -- Поворачиваем игрока на 180 градусов
-                      -- Мы сохраняем позицию, но меняем направление взгляда
-                      local pos = root.Position
-                      local rotation180 = root.CFrame * CFrame.Angles(0, math.rad(180), 0)
-                      
-                      root.CFrame = CFrame.new(pos) * CFrame.Angles(0, math.rad(180), 0)
-
-                      print("Игрок развёрнут на 180 градусов!")
-
-                  end
-              end
-          end)
-
-    quiz:
-      - question: "Что такое Humanoid?"
-        answers:
-          - "Украшение модели"
-          - "Объект, который управляет здоровьем и движением игрока"
-          - "Звуковой эффект"
-        correct: 1
-
-      - question: "Где находится Player?"
-        answers:
-          - "Workspace"
-          - "ServerStorage"
-          - "Players"
-        correct: 2
-
-      - question: "Через какой объект можно перемещать игрока?"
-        answers:
-          - "Head"
-          - "HumanoidRootPart"
-          - "LeftFoot"
-        correct: 1
-    end:
-      - type: "text"
-        title: "🎉 Итог: Теперь ты умеешь:"
-        text: |
+          Мы разобрались:
           <ul>
-            <li>управлять движением игрока</li>
-            <li>телепортировать</li>
-            <li>менять скорость</li>
-            <li>разворачивать игрока в пространстве</li>
-            <li>использовать Humanoid и HumanoidRootPart</li>
+            <li>где появляется игрок</li>
+            <li>где находится его тело</li>
           </ul>
-          <h4>Это мощнейшая база для будущих проектов!</h4>
+          <p>В следующем уроке мы подробно разберём <b>Player</b> — профиль игрока.</p>
+
+    
+    quiz:
+        - question: "Что такое Player в Roblox?"
+          answers:
+            - "Тело игрока в мире"
+            - "Профиль игрока (имя, настройки)"
+            - "Часть карты"
+          correct: 1
+
+        - question: "Где находится Player в Roblox Studio?"
+          answers:
+            - "В Workspace"
+            - "В ServerStorage"
+            - "В папке Players"
+          correct: 2
+
+        - question: "Что такое Character?"
+          answers:
+            - "Аккаунт игрока"
+            - "Тело игрока в мире"
+            - "Скрипт управления"
+          correct: 1
+
+        - question: "Что исчезает, когда игрок умирает?"
+          answers:
+            - "Player"
+            - "Character"
+            - "Папка Players"
+          correct: 1
+
+        - question: "Кто создаёт игрока при нажатии Play?"
+          answers:
+            - "Мы в коде"
+            - "Скрипт в Workspace"
+            - "Roblox автоматически"
+          correct: 2
+
+    
+    end:
+        - type: "text"
+          title: "🎯 Главная мысль урока"
+          text: |
+            <h4>Запомни:</h4>
+            <p>Player остаётся всегда.</p>
+            <p>Тело может исчезать и появляться снова.</p>
+
+        
+          
 
 # ===============================
 # ✅ Урок 25 — Телепортация игрока (создаём портал)

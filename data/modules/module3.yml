@@ -2644,6 +2644,7 @@ lessons:
           - "tween.Play()"
           - "tween:Play()"
         correct: 2
+    
     end:
       - type: "text"
         text: "Ты сделал огромный шаг к уровню «разработчик Roblox PRO»!"
