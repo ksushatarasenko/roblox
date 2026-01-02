@@ -6,7 +6,7 @@
 •	✨ <i class="ri-sparkling-2-line"></i>
 •	🧠 <i class="ri-brain-line"></i>
 •	🎮 <i class="ri-gamepad-line"></i>
-🎯 👉 ➡️. 👁️  📍. ✔️
+🎯 👉 ➡️. 👁️  📍. ✔️ ✅
 ➡
 
 
@@ -51,6 +51,7 @@
           - ["🧨 Падает вниз", "Как collapsing floor"]
           - ["🌫 С дымом", "Выглядит очень эффектно"]
           - ["♻️ Возвращается", "И готова снова ловить"]
+
 <p class = "warzno"></p>
 
  - type: hint

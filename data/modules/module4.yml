@@ -430,6 +430,242 @@ lessons:
               <p><b>Player — это информация об игроке.</b></p>
               <p><b>Character — это его тело в мире.</b></p>
 
+# ============================================================
+# ⭐ Урок 31. Character — тело игрока
+# ============================================================
+  - id: 31
+    title: "⭐ Урок 31. Character — тело игрока"
+    shortDescription: "Разбираемся, что такое Character, где он находится и чем он отличается от Player."
+
+    content:
+
+      - type: "text"
+        title: "🎯 Цель урока"
+        text:
+          - "Понять, что такое <b>Character</b>, где он находится и чем он отличается от Player."
+
+      - type: "codeBlock"
+        title: "🧠 Большая идея урока"
+        code: |
+          Player — это профиль игрока
+          Character — это его тело в мире
+        afterText: | 
+          <p><b>👉 Player управляет данными</b></p>
+          <p><b>👉 Character — это то, что мы видим и двигаем</b></p>
+      
+      - type: "text"
+        title: "🧩 Что такое Character?"
+        text: |
+          <p><b>Character — это модель тела игрока, которая появляется в мире.</b></p>
+
+      - type: "text"
+        title: "У Character есть:"
+        text: |
+          <ul>
+            <li>голова</li>
+            <li>руки</li>
+            <li>ноги</li>
+            <li>тело</li>
+            <li>Humanoid (жизнь)</li>
+            <li>HumanoidRootPart (центр тела)</li>
+          </ul>
+
+      - type: "oneImage"
+        img:
+            src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module4/lesson30/%D1%82%D0%B5%D0%BB%D0%BE%D0%98%D0%B3%D1%80%D0%BE%D0%BA%D0%B0.png?raw=true"
+            width: 100%
+            maxWidth: "100%"
+            align: center
+
+# 📁 Где находится Player
+      - type: "text"
+        title: "📍 Где находится Character?"
+        text: |
+          <h4>✔ Character живёт в: <b style=\"color: rgb(255, 0, 64);\">Workspace</b></h4>
+      
+
+
+      - type: "code"
+        text: "Папка игроков:"
+        code: |
+          Workspace
+            └─ kiruha_202202   ← Character (тело)
+        afterText: "⚠️ Имя Character часто такое же, как имя Player — это нормально."
+
+      
+      - type: "text"
+        title: "🧩 Что происходит при входе в игру"
+        text: |
+          Когда игрок нажимает Play, Roblox автоматически:
+          <ul>
+            <li>создаёт Player</li>
+            <li>создаёт Character</li>
+            <li>помещает Character в Workspace</li>
+          </ul>
+          <p>👉 Мы <b>не создаём Character вручную.</b></p>
+      
+      
+      
+      - type: "codeBlock"
+        title: "🔍 Из чего состоит Character"
+        text: |
+          <h4>Пример структуры:</h4>
+        code: |
+          Character
+            ├─ Head
+            ├─ Torso / UpperTorso / LowerTorso
+            ├─ LeftHand
+            ├─ RightHand
+            ├─ LeftFoot
+            ├─ RightFoot
+            ├─ Humanoid
+            └─ HumanoidRootPart
+      
+
+
+      - type: "text"
+        title: "❤️ Самое важное внутри Character"
+        text: |
+          <h4> 🟢 Humanoid</h4>
+          <p>Отвечает за:</p>
+          <ul>
+            <li>здоровье</li>
+            <li>ходьбу</li>
+            <li>прыжки</li>
+            <li>смерть</li>
+          </ul><br>
+           <h4> 🔵 HumanoidRootPart</h4>
+          <p>Это:</p>
+          <ul>
+            <li>центр тела</li>
+            <li>точка телепортации</li>
+            <li>точка поворота</li>
+          </ul>
+          <h5>👉 Если мы хотим переместить игрока — мы двигаем HumanoidRootPart</h5>
+
+          
+      - type: table
+        title: "🧠 Важное отличие (очень важно)"
+        headers: ["Player", "Character"]
+        rows:
+          - ["профиль", "тело"]
+          - ["живёт в Players", "живёт в Workspace"]
+          - ["не виден", "виден"]
+          - ["не умирает", "может умереть"]
+
+
+
+      - type: "text"
+        title: "❌ Частая ошибка"
+        text:
+          - "❌ Character — это Player"
+          - "❌ Player — это тело"
+          - "<br>"
+          - "<h4>✔ Правильно:</h4>"
+          - "✅ Player — это аккаунт"
+          - "✅ Character — это модель"
+
+
+      - type: "text"
+        title: "🟢 Подумай"
+        text: |
+          <ul>
+            <li>Почему Character можно уничтожить, а Player — нет?</li>
+            <li>Почему Character каждый раз создаётся заново?</li>
+            <li>Почему у Character есть Humanoid?</li>
+          </ul>
+
+     
+
+      - type: hint
+        title: "Подсказка 🔑"
+        text: |
+          
+          <ul>
+            <li>Player живёт <b>всегда</b></li>
+            <li>Character живёт <b>пока игрок жив</b></li>
+            <li>После смерти Character создаётся <b>новый</b></li>
+          </ul>
+      
+
+      - type: "text"
+        title: "🛠 Сделай так (практика)"
+        text: |
+          <ol>
+            <li>Нажми <b>Play</b></li>
+            <li>Открой <b>Explorer</b></li>
+            <li>Найди <b>Players → своего Player</b></li>
+            <li>Найди <b>Workspace → модель с таким же именем</b></li>
+            <li>Раскрой Character и найди:
+              <ul>
+                <li>Humanoid</li>
+                <li>HumanoidRootPart</li>
+              </ul>
+            </li>
+          </ol>
+
+      - type: "text"
+        title: "Очень простая формула"
+        text: |
+          <p>Хочешь изменить как выглядит игрок → работай с Character</p>
+          <p>Хочешь изменить данные игрока → работай с Player</p>
+      - type: "text"
+        title: "Пример"
+        text: |
+          <ul>
+            <li>сменить размер → Character</li>
+            <li>надеть шапку → Character</li>
+            <li>изменить здоровье → Humanoid (внутри Character)</li>
+          </ul>
+
+
+    
+    quiz:
+    - question: "Что такое Character?"
+      answers:
+        - "Профиль игрока"
+        - "Тело игрока в мире"
+        - "Скрипт управления"
+      correct: 1
+
+    - question: "Где находится Character?"
+      answers:
+        - "В Players"
+        - "В ReplicatedStorage"
+        - "В Workspace"
+      correct: 2
+
+    - question: "Что произойдёт с Character, если игрок умрёт?"
+      answers:
+        - "Ничего не изменится"
+        - "Character исчезнет"
+        - "Исчезнет Player"
+      correct: 1
+
+    - question: "Что находится внутри Character?"
+      answers:
+        - "Humanoid и части тела"
+        - "Только скрипты"
+        - "Только имя игрока"
+      correct: 0
+
+    - question: "Что отвечает за перемещение Character?"
+      answers:
+        - "Player"
+        - "HumanoidRootPart"
+        - "Backpack"
+      correct: 1
+    
+    end:
+        - type: "text"
+          title: "✔ Итог урока"
+          text: |
+             <ul>
+                <li>✔ Character — это тело игрока</li>
+                <li>✔ Character живёт в Workspace</li>
+                <li>✔ Character можно двигать, ломать, телепортировать</li>
+                <li>✔ Player остаётся, даже если Character исчез</li>
+              </ul>
 
 
         
