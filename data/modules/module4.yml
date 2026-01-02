@@ -1246,11 +1246,11 @@ lessons:
 
 
 # ===============================
-# ✅ Урок 34 — Портал: телепортация по касанию
+# ✅ Урок 35 — Продвинутые порталы и игровые идеи
 # ===============================
-  - id: 34
-    title: "✅ Урок 34: Портал: телепортация по касанию"
-    shortDescription: "Делаем первый портал, который переносит игрока при касании."
+  - id: 35
+    title: "✅ Урок 35: Продвинутые порталы и игровые идеи"
+    shortDescription: "Телепортация — это основа игровых механик, и научиться усиливать её эффектами, логикой и идеями."
     # video: "https://www.youtube.com/embed/PORTAL020"
 
     content:
@@ -1258,163 +1258,326 @@ lessons:
       - type: "text"
         title: "🎯 Цель урока"
         text: |
-          <p>Научиться делать <b>рабочий портал</b>, который телепортирует игрока, когда он к нему прикасается.</p>
-          <p>Это первое реальное применение телепортации в игре.</p>
+          <p>Понять, что <b>телепортация — это основа игровых механик</b>, и научиться <b>усиливать её эффектами, логикой и идеями</b>.</p>
 
-      - type: "codeBlock"
+      - type: "text"
         title: "🧠 Большая идея урока"
-        code: |
-          Портал — это обычный Part.
-          Он ничего не делает сам.
-          Вся магия — в скрипте.
-          
-          Игрок касается портала →
-          мы находим его тело →
-          и переносим в нужную точку.
-
+        text: |
+          <p>Телепортация — это не просто MoveTo().</p>
+          Это:
+          <ul>
+            <li>вход в уровень</li>
+            <li>ловушка</li>
+            <li>награда</li>
+            <li>переход между мирами</li>
+            <li>часть квеста</li>
+          </ul>
+          <p>👉 Всё зависит <b>не от кода</b>, а от <b>того, КАК ты его используешь</b>.</p>
 
           
       - type: "text"
-        title: "🟦 Шаг 1. Создаём Portal и Exit"
+        title: "🧩 Из чего состоит “умный портал”"
         text: |
-          <p>Сначала нам нужно сделать <b>два блока</b>.</p>
-
+          <p>Любой продвинутый портал =</p>
           <ul>
-            <li>
-              <b>Portal</b> — это вход.<br/>
-              Игрок будет <b>касаться этого блока</b>.
-            </li>
-            <li>
-              <b>Exit</b> — это выход.<br/>
-              Это место, <b>где игрок появится после телепортации</b>.
-            </li>
+            <li><b>📦 Part</b> (физический вход) </li>
+            <li><b>👣 Touched</b> (момент касания)</li>
+            <li><b>🚀 Перемещение</b> (MoveTo / HumanoidRootPart)</li>
+            <li><b>✨ Эффекты</b> (звук, цвет, частицы)</li>
+            <li><b>🧠 Логика </b>(один раз, туда-обратно, проверка условий)</li>
           </ul>
-
-          <p>
-            🔹 Portal можно сделать красивым: цветным, прозрачным, светящимся.<br/>
-            🔹 Exit — это обычный блок, его можно спрятать.
-          </p>
-
-          <p>
-            <b>Важно:</b><br/>
-            Portal и Exit — это просто блоки.<br/>
       - type: "oneImage"
         title: "Процесс телепортации в Roblox"
         img:
-            src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module4/lesson33-35/Tworzenie%20Portalu%20i%20Punktu%20Wyjs%CC%81cia.png?raw=true"
+            src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module4/lesson33-35/Zaawansowany%20system%20portalu%20w%20Roblox.png?raw=true"
             width: 100%
             maxWidth: "100%"
             align: center
       
-      - type: "codeBlock"
-        title: "🟩 Шаг 2. Создаём переменные"
+      - type: "text"
+        title: "🌟 Улучшения портала (ВАУ-эффекты)"
+        text: ""   
+
+
+      - type: "code"
+        title: "🔊 1. Звук"
         text: |
-          <p>Мы сохраняем объекты в переменные, чтобы удобно к ним обращаться.</p>
+          <ul>
+            <li>звук при входе</li>
+            <li>звук телепортации</li>
+            <li>звук выхода</li>
+          </ul>          
         code: |
           local portal = script.Parent
-          local exit = workspace.Exit      
+          local sound = portal.Sound
 
+          portal.Touched:Connect(function(hit)
+              sound:Play()
+          end)
+        afterText: |
+          <h5>🧠 Пояснение:</h5>
+          <ul>
+            <li>мы создаём переменную <span style="font-family: monospace;">portal</span> — это наш портал</li>
+            <li>берём <span style="font-family: monospace;">Sound</span>, который лежит внутри портала</li>
+            <li>когда кто-то касается портала → звук проигрывается</li>
+          </ul>
+          <p><b>👉 игрок слышит, что что-то произошло</b></p>
 
       - type: "code"
-        title: "🚀 Шаг 3. Отслеживаем касание (Touched)"
+        title: "🎨 2. Цвет и прозрачность"
         text: |
-          <p>Событие <b>Touched</b> срабатывает, когда что-то касается портала.</p>
-          <p>Но нас интересует <b>только игрок</b>, а не случайный предмет.</p>
+          <ul>
+            <li>портал <b>светится</b></li>
+            <li>меняет цвет при касании</li>
+            <li>становится ярче / темнее</li>
+          </ul>
         code: |
+          local portal = script.Parent
+
           portal.Touched:Connect(function(hit)
-              -- код будет здесь
+              portal.Color = Color3.fromRGB(0, 255, 255)
+              portal.Transparency = 0.3
           end)
+        afterText: |
+          <h5>🧠 Пояснение:</h5>
+          <ul>
+            <li><span style="font-family: monospace;">Color</span> меняет цвет портала</li>
+            <li><span style="font-family: monospace;">Transparency</span> делает его полупрозрачным</li>
+            <li>изменения происходят <b>в момент касания</b></li>
+          </ul>
+          <p><b>👉 Игрок видит: портал активировался</b></p>
 
       - type: "code"
-        title: "✨ Шаг 4. Находим игрока и телепортируем"
+        title: "✨ 3. Эффекты"
         text: |
-          <p>Мы проверяем: кто коснулся портала?</p>
-          <p>Если это часть тела игрока — переносим его.</p>
+          <ul>
+            <li>частицы</li>
+            <li>искры</li>
+            <li>вспышка</li>
+          </ul>
+          <p>👉 телепортация ощущается как магия</p>
+          <h5>Идея:</h5>
+          <p>Портал <b>испускает магические частицы</b>.</p>
+          <p>В портал заранее добавь <span style="font-family: monospace;">ParticleEmitter</span></p>
         code: |
+          local portal = script.Parent
+          local particles = portal.ParticleEmitter
+
           portal.Touched:Connect(function(hit)
-              local character = hit.Parent
-              if character and character:FindFirstChild("Humanoid") then
-                  character:MoveTo(exit.Position)
-              end
+              particles.Enabled = true
           end)
+        afterText: |
+          <h5>🧠 Пояснение:</h5>
+          <ul>
+            <li><span style="font-family: monospace;">ParticleEmitter</span> — это генератор частиц</li>
+            <li>по умолчанию он выключен</li>
+            <li>при касании мы его включаем</li>
+          </ul>
+          <p><b>👉 Телепортация ощущается как магия ✨</b></p>
+
       - type: "note"
         text: |
-          ✔ Работает  
-          ❗ Но телепортация идёт через всё тело сразу  
-          👉 Есть вариант чуть правильнее
+          Эффекты не делают механику.
+          <p>Эффекты ПОКАЗЫВАЮТ механику.</p><br>
 
-      - type: "code"
-        title: "🧠 Чуть правильнее: через HumanoidRootPart"
-        text: |
-          <p>Мы телепортируем <b>центр тела</b>, а не всю модель целиком.</p>
-        code: |
-          portal.Touched:Connect(function(hit)
-              local character = hit.Parent
-              local humanoidRootPart = character and character:FindFirstChild("HumanoidRootPart")
-
-              if humanoidRootPart then
-                  humanoidRootPart.CFrame = CFrame.new(exit.Position)
-              end
-          end)
+          Сначала логика → потом красота.
 
       # -----------------------------------------
       #  ПОРТАЛ
       # -----------------------------------------
 
       - type: "text"
-        title: "🛠 Практика"
+        title: "🔒 Виды порталов"
+        text: ""
+
+      - type: "text"
+        title: "1️⃣ Портал «один раз»"
         text: |
           <ul>
-            <li>Сделай портал другого цвета</li>
-            <li>Перемести Exit выше или ниже</li>
-            <li>Попробуй сделать два портала</li>
+            <li>работает только один раз</li>
+            <li>после использования:
+              <ul>
+                <li>отключается</li>
+                <li>исчезает</li>
+                <li>меняет цвет</li>
+              </ul>
+            </li>
+            <li>👉 отлично для:
+              <ul>
+                <li>секретов</li>
+                <li>наград</li>
+                <li>ловушек</li>
+              </ul>
+            </li>
           </ul>
-     
-      - type: "hint"
+
+      - type: "text"
+        title: "🔁 2️⃣ Portal A ↔ Portal B"
         text: |
-          💡 Подсказка:
-          Если портал срабатывает много раз —
-          добавь задержку или проверку,
-          чтобы игрок телепортировался один раз.
+          <ul>
+            <li>вход → выход</li>
+            <li>выход → вход</li> 
+          </ul>
+          👉 подходит для:
+          <ul>
+            <li>быстрых перемещений</li>
+            <li>лабиринтов</li>
+            <li>больших карт</li>
+          </ul>
+      
+      - type: "text"
+        title: "🧨 3️⃣ Портал-ловушка"
+        text: |
+          телепортирует:
+          <ul>
+            <li>в яму</li>
+            <li>к врагам</li>
+            <li>в опасную зону</li>
+          </ul>
+          <p>👉 игрок учится быть осторожным</p>
+
+      - type: "text"
+        title: "🧩 4️⃣ Портал как часть квеста"
+        text: |
+          работает только если:
+          <ul>
+            <li>собран предмет</li>
+            <li>выполнено задание</li>
+            <li>пройден уровень</li>
+          </ul>
+          <p>👉 портал = награда</p>
+
+      - type: "text"
+        title: "🖼 BillboardGui — подсказки игроку"
+        text: |
+          Портал может:
+          <ul>
+            <li>показывать текст</li>
+            <li>объяснять, куда он ведёт</li>
+            <li>пугать 😈</li>
+            <li>заманивать 😇</li>
+          </ul>
+          <p>Примеры:</p>
+           <ul>
+            <li>«Вход в подземелье»</li>
+            <li>«Опасно!»</li>
+            <li>«Секретный уровень»</li>
+          </ul>
+  # PRIMER
+      - type: "code"
+        title: "✨ Один портал со ВСЕМИ эффектами"
+        text: |
+          <h4>📦 Что должно быть в Studio</h4>
+          В Workspace:
+          <ul>            
+            <li><b>Portal (Part)</b>
+              <ul>
+                <li>Sound</li>
+                <li>ParticleEmitter</li>
+                <li>Script</li>
+              </ul>
+            </li>
+            <li>Exit (Part) — точка выхода</li>
+          </ul>
+        code: |
+          # 🔹 1. Находим портал и выход
+          local portal = script.Parent   -- portal — это блок, к которому мы прикасаемся
+          local exit = workspace.Exit.   -- exit — это место, куда телепортируем игрока
+                --- 🧠 «Где вход, и куда ведёт»
+
+
+          # 🔹 2. Находим эффекты
+          local sound = portal.Sound   -- берём звук внутри портала
+          local particles = portal.ParticleEmitter   -- берём частицы внутри портала
+                --- 🧠 «Чем портал будет удивлять игрока»
+
+          # 🔹 3. Отслеживаем касание 
+          portal.Touched:Connect(function(hit)   -- код запускается, когда кто-то касается портала, hit — это часть, которая коснулась
+              local character = hit.Parent   -- character — тело игрока
+              local root = character and character:FindFirstChild("HumanoidRootPart")  -- HumanoidRootPart — центр тела
+                --- 🧠 «Это точно человек, а не случайный блок»
+
+              if root then   -- Только если это игрок:
+                  -- 🔊 звук
+                  sound:Play()
+
+                  -- 🎨 цвет и прозрачность
+                  portal.Color = Color3.fromRGB(0, 255, 255)
+                  portal.Transparency = 0.3
+
+                  -- ✨ частицы
+                  particles.Enabled = true
+
+                  -- 🚀 телепортация
+                  root.CFrame = CFrame.new(exit.Position)   -- Игрок перемещается целиком, аккуратно и правильно.
+              end
+          end)
+
+
+
+  # end Primer
+
+      - type: "text"
+        title: "🛠 Практика: придумай свой портал"
+        text: |
+          <h5>🔹 Задание</h5>
+          Создай один уникальный портал, который:
+          <ul>
+            <li>телепортирует игрока</li>
+            <li>поменяй цвет</li>
+            <li>замени звук</li>
+            <li>сделай Exit выше / ниже</li>
+            <li>попробуй отключить портал после первого использования</li>
+            <li>использует логику:</li>
+          </ul>
+           <ul>
+            <li>один раз</li>
+            <li>туда-обратно</li>
+            <li>ловушка</li>
+          </ul>
+      
     quiz:
-        - question: "Что делает портал?"
-          answers:
-            - "Сам телепортирует игрока"
-            - "Запускает скрипт при касании"
-            - "Меняет здоровье игрока"
-          correct: 1
+      - question: "Зачем добавляют звук в портал?"
+        answers:
+          - "Чтобы игрок услышал действие"
+          - "Чтобы код работал быстрее"
+          - "Чтобы портал был видимым"
+        correct: 0
 
-        - question: "Что мы телепортируем на самом деле?"
-          answers:
-            - "Player"
-            - "Character"
-            - "HumanoidRootPart"
-          correct: 2
+      - question: "Чем портал-ловушка отличается от обычного?"
+        answers:
+          - "Цветом"
+          - "Логикой использования"
+          - "Размером"
+        correct: 1
 
-        - question: "Какое событие мы используем?"
-          answers:
-            - "Clicked"
-            - "Touched"
-            - "Changed"
-          correct: 1
-    
+      - question: "Что делает портал игровым, а не техническим?"
+        answers:
+          - "MoveTo"
+          - "Эффекты"
+          - "Идея и применение"
+        correct: 2
+
     end:
       - type: "text"
         title: "🎉 Итог: Теперь ты умеешь:"
         text: |
           <ul>
-            <li>ты сделал первый портал</li>
-            <li>использовал касание</li>
-            <li>понял, как работает телепортация в игре</li>
+            <li>создавать настоящие игровые порталы</li>
+            <li>телепортировать игрока по касанию</li>
+            <li>использовать HumanoidRootPart правильно</li>
+            <li>добавлять звук, цвет и эффекты</li>
+            <li>превращать код в игровую механику</li>
           </ul>
-          <p>В следующем уроке мы сделаем <b>чекпоинты и респаун</b>.</p>
+          <h4>Теперь ты не просто пишешь код — ты создаёшь игру 🎮</h4>
+          <p>В следующем уроке мы сделаем <b>чекпоинты и респаун</b> — основу уровней и прогресса.</p>
 
 
 # ===============================
-# 👉 Урок 26 — Чекпоинты и точки возрождения
+# 👉 Урок 36 — Чекпоинты и точки возрождения
 # ===============================
-  - id: 26
-    title: "👉 Урок 26: Чекпоинты и точки возрождения"
+  - id: 36
+    title: "👉 Урок 36: Чекпоинты и точки возрождения"
     shortDescription: "Учимся создавать чекпоинты — точки, где игрок сохраняет прогресс."
     # video: "https://www.youtube.com/embed/CHECKPOINT021"
 
