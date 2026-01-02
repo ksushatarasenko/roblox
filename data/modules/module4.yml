@@ -667,6 +667,206 @@ lessons:
                 <li>✔ Player остаётся, даже если Character исчез</li>
               </ul>
 
+# ============================================================
+# ⭐ Урок 32. Humanoid — жизнь и движение
+# ============================================================
+  - id: 32
+    title: "⭐ Урок 32. Humanoid — жизнь и движение"
+    shortDescription: "Разбираемся, что такое Humanoid."
+
+    content:
+
+      - type: "text"
+        title: "🎯 Цель урока"
+        text:
+          - "Понять, что такое <b>Humanoid</b>, за что он отвечает и почему без него игрок не может жить и двигаться."
+
+      - type: "codeBlock"
+        title: "🧠 Большая идея урока"
+        code: |
+          Humanoid — это «жизнь» внутри тела игрока.
+          Без Humanoid персонаж не может ходить, прыгать и умирать.
+        
+      
+      - type: "text"
+        title: "🧩 Что такое Humanoid?"
+        text: |
+          <p><b>Humanoid</b> — это объект внутри <b>Character</b>,</p>
+          <p>который отвечает за:</p>
+          <ul>
+            <li>❤️ здоровье</li>
+            <li>🚶 ходьбу</li>
+            <li>🦘 прыжки</li>
+            <li>☠️ смерть игрока</li>
+          </ul>
+          <p><b>👉 Если убрать Humanoid — персонаж перестанет быть живым.</b></p>
+      
+
+      - type: "oneImage"
+        img:
+            src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module4/lesson30/%D1%82%D0%B5%D0%BB%D0%BE%D0%98%D0%B3%D1%80%D0%BE%D0%BA%D0%B0.png?raw=true"
+            width: 100%
+            maxWidth: "100%"
+            align: center
+
+
+      - type: "code"
+        text: "📍 Где находится Humanoid?"
+        code: |
+          Workspace
+            └─ Character
+                  └─ Humanoid
+        afterText: "⚠️ Humanoid всегда находится внутри Character."
+
+      
+      - type: "text"
+        title: "🧩 Что делает Humanoid"
+        text: |
+          Humanoid умеет:
+          <ul>
+            <li>хранить здоровье</li>
+            <li>разрешать ходьбу</li>
+            <li>разрешать прыжки</li>
+            <li>определять, жив игрок или нет</li>
+          </ul>
+      
+      
+      
+      - type: "text"
+        title: "❤️ Здоровье игрока"
+        text: |
+          <p>У Humanoid есть здоровье:</p>
+          <ul>
+            <li><b>Health</b> — текущее здоровье</li>
+            <li><b>MaxHealth</b> — максимальное здоровье</li>
+          </ul>
+          <p>👉 Когда Health = 0 → игрок умирает</p>
+          <p>👉 Character исчезает</p>
+          <p>👉 Потом появляется новый Character</p>
+      
+
+
+      - type: "text"
+        title: "🚶 Движение игрока"
+        text: |
+          <p>Humanoid отвечает за движение:</p>
+          <ul>
+            <li><b>WalkSpeed</b> — скорость ходьбы</li>
+            <li><b>JumpPower</b> — сила прыжка</li>
+          </ul>
+          <p>Если:</p>
+          <ul>
+            <li>WalkSpeed = 0 → игрок не может ходить</li>
+            <li>JumpPower = 0 → игрок не может прыгать</li>
+          </ul>
+
+          
+      - type: text
+        title: "❗ Очень важный момент"
+        headers: ["Player", "Character"]
+        text:
+          - "Мы не двигаем игрока напрямую."
+          - "Мы управляем Humanoid — и он двигает тело."
+
+
+
+      - type: "text"
+        title: "❌ Частая ошибка"
+        text:
+          - "❌ Пытаться управлять движением через Player"
+          - "❌ Искать здоровье у Player"
+          - "<br>"
+          - "<h4>✔ Правильно:</h4>"
+          - "✅ движение → Humanoid"
+          - "✅ здоровье → Humanoid"
+
+
+      - type: "text"
+        title: "🟢 Подумай"
+        text: |
+          <ul>
+            <li>Почему здоровье хранится не в Player?</li>
+            <li>Что произойдёт, если Health станет 0?</li>
+            <li>Почему Humanoid находится внутри Character?</li>
+          </ul>
+
+     
+
+      - type: hint
+        title: "Подсказка 🔑"
+        text: |
+          
+          <ul>
+            <li>Humanoid — это «двигатель жизни».</li>
+            <li>Он управляет телом игрока.</li>
+          </ul>
+      
+
+      - type: "text"
+        title: "🛠 Сделай так (практика)"
+        text: |
+          <ol>
+            <li>Нажми <b>Play</b></li>
+            <li>Открой Workspace</li>
+            <li>Найди Character</li>
+            <li>Найди Humanoid</li>
+            <li>Посмотри на:
+              <ul>
+                <li>Health</li>
+                <li>WalkSpeed</li>
+                <li>JumpPower</li>
+              </ul>
+            </li>
+          </ol>
+
+
+    
+    quiz:
+      - question: "Что такое Humanoid?"
+        answers:
+          - "Профиль игрока"
+          - "Жизнь и движение персонажа"
+          - "Часть карты"
+        correct: 1
+
+      - question: "Где находится Humanoid?"
+        answers:
+          - "В Players"
+          - "В Workspace внутри Character"
+          - "В ServerStorage"
+        correct: 1
+
+      - question: "Что произойдёт, если Health станет 0?"
+        answers:
+          - "Ничего"
+          - "Игрок станет быстрее"
+          - "Персонаж умрёт"
+        correct: 2
+
+      - question: "Что отвечает за скорость ходьбы?"
+        answers:
+          - "WalkSpeed"
+          - "JumpPower"
+          - "PlayerSpeed"
+        correct: 0
+
+      - question: "Можно ли управлять здоровьем через Player?"
+        answers:
+          - "Да"
+          - "Нет"
+          - "Только иногда"
+        correct: 1
+    
+    end:
+        - type: "text"
+          title: "✔ Итог урока"
+          text: |
+             <ul>
+                <li>✔ Humanoid отвечает за жизнь игрока</li>
+                <li>✔ Он хранит здоровье и движение</li>
+                <li>✔ Он находится внутри Character</li>
+                <li>✔ Без Humanoid персонаж не живёт</li>
+              </ul>
 
         
           
