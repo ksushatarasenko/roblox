@@ -1004,7 +1004,7 @@ lessons:
         text: "Теперь, когда у нас есть root, мы можем двигать игрока куда угодно."
     
 
-      - type: "codeBlock"
+      - type: "code"
         title: "🛠 Самый простой пример телепортации"  
         code: |
           root.Position = root.Position + Vector3.new(0, 10, 0)
@@ -1110,189 +1110,304 @@ lessons:
 
           
       - type: "text"
-        title: "🧩 Что такое телепортация?"    
+        title: "🟦 Шаг 1. Создаём Portal и Exit"
         text: |
-          <p><b>Телепортация</b> — это когда игрок:</p>
+          <p>Сначала нам нужно сделать <b>два блока</b>.</p>
+
           <ul>
-            <li>мгновенно появляется в другом месте</li>
-            <li>без ходьбы и анимаций</li>
-          </ul>
-          <p>👉 В Roblox телепортация — это <b>изменение позиции тела.</b></p>
-      
-      - type: "code"
-        title: "📍 Что именно мы перемещаем?"    
-        text: |
-          <p>Очень важно:</p>
-        code: |
-          ❌ Player
-          ❌ Humanoid
-          ✅ HumanoidRootPart
-        afterText: |
-          <p><b>HumanoidRootPart — это:</b></p>
-          <ul>
-            <li>центр тела</li>
-            <li>точка, за которую держится весь Character</li>
+            <li>
+              <b>Portal</b> — это вход.<br/>
+              Игрок будет <b>касаться этого блока</b>.
+            </li>
+            <li>
+              <b>Exit</b> — это выход.<br/>
+              Это место, <b>где игрок появится после телепортации</b>.
+            </li>
           </ul>
 
-      - type: "code"
-        title: "🧩 Как выглядит логика телепортации"   
-        code: |
-          [Найти игрока]
-                ↓
-          [Найти его тело]
-                ↓
-          [Найти HumanoidRootPart]
-                ↓
-          [Задать новую позицию]
+          <p>
+            🔹 Portal можно сделать красивым: цветным, прозрачным, светящимся.<br/>
+            🔹 Exit — это обычный блок, его можно спрятать.
+          </p>
 
+          <p>
+            <b>Важно:</b><br/>
+            Portal и Exit — это просто блоки.<br/>
       - type: "oneImage"
         title: "Процесс телепортации в Roblox"
         img:
-            src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module4/lesson33-35/%D0%9F%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81%20%D1%82%D0%B5%D0%BB%D0%B5%D0%BF%D0%BE%D1%80%D1%82%D0%B0%D1%86%D0%B8%D0%B8%20%D0%B2%20Roblox.png?raw=true"
+            src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module4/lesson33-35/Tworzenie%20Portalu%20i%20Punktu%20Wyjs%CC%81cia.png?raw=true"
             width: 100%
             maxWidth: "100%"
             align: center
+      
+      - type: "codeBlock"
+        title: "🟩 Шаг 2. Создаём переменные"
+        text: |
+          <p>Мы сохраняем объекты в переменные, чтобы удобно к ним обращаться.</p>
+        code: |
+          local portal = script.Parent
+          local exit = workspace.Exit      
+
+
+      - type: "code"
+        title: "🚀 Шаг 3. Отслеживаем касание (Touched)"
+        text: |
+          <p>Событие <b>Touched</b> срабатывает, когда что-то касается портала.</p>
+          <p>Но нас интересует <b>только игрок</b>, а не случайный предмет.</p>
+        code: |
+          portal.Touched:Connect(function(hit)
+              -- код будет здесь
+          end)
+
+      - type: "code"
+        title: "✨ Шаг 4. Находим игрока и телепортируем"
+        text: |
+          <p>Мы проверяем: кто коснулся портала?</p>
+          <p>Если это часть тела игрока — переносим его.</p>
+        code: |
+          portal.Touched:Connect(function(hit)
+              local character = hit.Parent
+              if character and character:FindFirstChild("Humanoid") then
+                  character:MoveTo(exit.Position)
+              end
+          end)
+      - type: "note"
+        text: |
+          ✔ Работает  
+          ❗ Но телепортация идёт через всё тело сразу  
+          👉 Есть вариант чуть правильнее
+
+      - type: "code"
+        title: "🧠 Чуть правильнее: через HumanoidRootPart"
+        text: |
+          <p>Мы телепортируем <b>центр тела</b>, а не всю модель целиком.</p>
+        code: |
+          portal.Touched:Connect(function(hit)
+              local character = hit.Parent
+              local humanoidRootPart = character and character:FindFirstChild("HumanoidRootPart")
+
+              if humanoidRootPart then
+                  humanoidRootPart.CFrame = CFrame.new(exit.Position)
+              end
+          end)
 
       # -----------------------------------------
       #  ПОРТАЛ
       # -----------------------------------------
 
       - type: "text"
-        title: "🟦 🧩 С чего начинается любой код телепортации" 
-        text: ""       
-
-      - type: "code"
-        title: "Шаг 1. Найти игрока"
-        code: |
-          local player = game.Players.LocalPlayer
-        afterText: |
-          Что здесь происходит (простыми словами):
-          <ul>
-            <li>мы <b>создаём переменную</b> <span style="font-family: monospace;">player</span></li>
-            <li>в неё кладём <b>самого игрока</b></li>
-            <li><span style="font-family: monospace;">LocalPlayer</span> — это тот <em>игрок, который сейчас играет</em></li>
-          </ul>
-          <p>🧠 «Запомни: это Я в игре»</p>
-
-      - type: "code"
-        title: "🟩 Шаг 2. Найти его тело"
-        code: |
-          local character = player.Character
-        afterText: |
-          Что здесь происходит (простыми словами):
-          <ul>
-            <li>создаём переменную <span style="font-family: monospace;">character</span></li>
-            <li>берём у игрока <b>его тело</b></li>
-            <li>тело — это модель с руками, ногами и головой</li>
-          </ul>
-          <p>🧠 «У игрока есть тело, и мы его нашли»</p>
-
-      - type: "code"
-        title: "🟩 Шаг 3. Найти центр тела"
-        code: |
-          local root = character:WaitForChild("HumanoidRootPart")
-        afterText: |
-          Что здесь происходит (простыми словами):
-          <ul>
-            <li>создаём переменную <span style="font-family: monospace;">root</span></li>
-            <li>ищем <b>главную часть тела</b></li>
-            <li><span style="font-family: monospace;">HumanoidRootPart</span> — это центр игрока <p>(если двигается он — двигается весь игрок)</p></li>
-          </ul>
-          <span style="font-family: monospace;">WaitForChild</span> значит:
-          <p>«Подожди, пока эта часть точно появится»</p>
-          <p>🧠 «Мы нашли точку, за которую можно перемещать игрока»</p>
-
-      - type: "note"
-        text: "🧠 Это три шага будут ВСЕГДА, в любом портале, ловушке и чекпоинте."
-
-
-      - type: "text"
-        title: "🧩 Очень важная мысль"
+        title: "🛠 Практика"
         text: |
-          <h5>Player → это игрок</h5>
-          <h5>Character → это тело</h5>
-          <h5>HumanoidRootPart → это центр тела</h5>
-          <p>👉 Телепортация всегда происходит через HumanoidRootPart.</p>
-
-      - type: "note"
-        text: "Теперь, когда у нас есть root, мы можем двигать игрока куда угодно."
-    
-
-      - type: "codeBlock"
-        title: "🛠 Самый простой пример телепортации"  
-        code: |
-          root.Position = root.Position + Vector3.new(0, 10, 0)
-        afterText: | 
-          <p>👉 Игрок телепортируется вверх.</p>
-          <p>Без кнопок.</p>
-          <p>Без порталов.</p>
-          <p>Без условий.</p>
-
-      - type: "text"
-        title: "🧩 Какие бывают телепортации (ОБЗОР)"
-        text: |
-          <p>⚠️ Мы пока НЕ делаем их, только знакомимся.</p>
           <ul>
-            <li>🚪 портал (коснулся → перенёсся)</li>
-            <li>🔘 кнопка (нажал → перенёсся)</li>
-            <li>☠️ смерть (умер → появился в другом месте)</li>
-            <li>📍 чекпоинт (вернулся к точке)</li>
-            <li>🧨 ловушка (провалился → телепорт)</li>
+            <li>Сделай портал другого цвета</li>
+            <li>Перемести Exit выше или ниже</li>
+            <li>Попробуй сделать два портала</li>
           </ul>
-          <p><b>👉 Все они работают одинаково внутри.</b></p>
-          <p>Меняется только «когда» телепортируем.</p>
      
-      - type: "text"
-        title: "🟢 Подумай"
+      - type: "hint"
         text: |
-          <ul>
-            <li>Почему нельзя телепортировать Player?</li>
-            <li>Что будет, если телепортировать только руку?</li>
-            <li>Почему все телепортации работают одинаково?</li>
-          </ul>
-
-      - type: hint
-        title: "Подсказка 🔑 "
-        text:
-          - "Потому что Player — это профиль, а не объект в мире. У него нет позиции."
-          - "Рука уедет отдельно, а тело останется. Игрок «сломается»."
-          - "Потому что все они двигают одно и то же — HumanoidRootPart."
-     
-
+          💡 Подсказка:
+          Если портал срабатывает много раз —
+          добавь задержку или проверку,
+          чтобы игрок телепортировался один раз.
     quiz:
-        - question: "Что мы телепортируем?"
+        - question: "Что делает портал?"
+          answers:
+            - "Сам телепортирует игрока"
+            - "Запускает скрипт при касании"
+            - "Меняет здоровье игрока"
+          correct: 1
+
+        - question: "Что мы телепортируем на самом деле?"
           answers:
             - "Player"
-            - "Humanoid"
+            - "Character"
             - "HumanoidRootPart"
           correct: 2
 
-        - question: "С чего начинается любой код телепортации?"
+        - question: "Какое событие мы используем?"
           answers:
-            - "С портала"
-            - "С поиска игрока"
-            - "С эффектов"
+            - "Clicked"
+            - "Touched"
+            - "Changed"
           correct: 1
-
-        - question: "Телепортация — это..."
-          answers:
-            - "Анимация"
-            - "Смена позиции"
-            - "Прыжок"
-          correct: 1
-
+    
     end:
       - type: "text"
         title: "🎉 Итог: Теперь ты умеешь:"
         text: |
           <ul>
-            <li>понимать, что именно перемещается в игре</li>
-            <li>находить тело игрока (Character)</li>
-            <li>работать с HumanoidRootPart</li>
-            <li>телепортировать игрока в нужную точку</li>
-            <li>управлять положением и направлением игрока</li>
+            <li>ты сделал первый портал</li>
+            <li>использовал касание</li>
+            <li>понял, как работает телепортация в игре</li>
           </ul>
-          <h4>Это основа для порталов, чекпоинтов и механик движения 🚀</h4>
+          <p>В следующем уроке мы сделаем <b>чекпоинты и респаун</b>.</p>
+
+
+# ===============================
+# ✅ Урок 34 — Портал: телепортация по касанию
+# ===============================
+  - id: 34
+    title: "✅ Урок 34: Портал: телепортация по касанию"
+    shortDescription: "Делаем первый портал, который переносит игрока при касании."
+    # video: "https://www.youtube.com/embed/PORTAL020"
+
+    content:
+
+      - type: "text"
+        title: "🎯 Цель урока"
+        text: |
+          <p>Научиться делать <b>рабочий портал</b>, который телепортирует игрока, когда он к нему прикасается.</p>
+          <p>Это первое реальное применение телепортации в игре.</p>
+
+      - type: "codeBlock"
+        title: "🧠 Большая идея урока"
+        code: |
+          Портал — это обычный Part.
+          Он ничего не делает сам.
+          Вся магия — в скрипте.
+          
+          Игрок касается портала →
+          мы находим его тело →
+          и переносим в нужную точку.
+
+
+          
+      - type: "text"
+        title: "🟦 Шаг 1. Создаём Portal и Exit"
+        text: |
+          <p>Сначала нам нужно сделать <b>два блока</b>.</p>
+
+          <ul>
+            <li>
+              <b>Portal</b> — это вход.<br/>
+              Игрок будет <b>касаться этого блока</b>.
+            </li>
+            <li>
+              <b>Exit</b> — это выход.<br/>
+              Это место, <b>где игрок появится после телепортации</b>.
+            </li>
+          </ul>
+
+          <p>
+            🔹 Portal можно сделать красивым: цветным, прозрачным, светящимся.<br/>
+            🔹 Exit — это обычный блок, его можно спрятать.
+          </p>
+
+          <p>
+            <b>Важно:</b><br/>
+            Portal и Exit — это просто блоки.<br/>
+      - type: "oneImage"
+        title: "Процесс телепортации в Roblox"
+        img:
+            src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module4/lesson33-35/Tworzenie%20Portalu%20i%20Punktu%20Wyjs%CC%81cia.png?raw=true"
+            width: 100%
+            maxWidth: "100%"
+            align: center
+      
+      - type: "codeBlock"
+        title: "🟩 Шаг 2. Создаём переменные"
+        text: |
+          <p>Мы сохраняем объекты в переменные, чтобы удобно к ним обращаться.</p>
+        code: |
+          local portal = script.Parent
+          local exit = workspace.Exit      
+
+
+      - type: "code"
+        title: "🚀 Шаг 3. Отслеживаем касание (Touched)"
+        text: |
+          <p>Событие <b>Touched</b> срабатывает, когда что-то касается портала.</p>
+          <p>Но нас интересует <b>только игрок</b>, а не случайный предмет.</p>
+        code: |
+          portal.Touched:Connect(function(hit)
+              -- код будет здесь
+          end)
+
+      - type: "code"
+        title: "✨ Шаг 4. Находим игрока и телепортируем"
+        text: |
+          <p>Мы проверяем: кто коснулся портала?</p>
+          <p>Если это часть тела игрока — переносим его.</p>
+        code: |
+          portal.Touched:Connect(function(hit)
+              local character = hit.Parent
+              if character and character:FindFirstChild("Humanoid") then
+                  character:MoveTo(exit.Position)
+              end
+          end)
+      - type: "note"
+        text: |
+          ✔ Работает  
+          ❗ Но телепортация идёт через всё тело сразу  
+          👉 Есть вариант чуть правильнее
+
+      - type: "code"
+        title: "🧠 Чуть правильнее: через HumanoidRootPart"
+        text: |
+          <p>Мы телепортируем <b>центр тела</b>, а не всю модель целиком.</p>
+        code: |
+          portal.Touched:Connect(function(hit)
+              local character = hit.Parent
+              local humanoidRootPart = character and character:FindFirstChild("HumanoidRootPart")
+
+              if humanoidRootPart then
+                  humanoidRootPart.CFrame = CFrame.new(exit.Position)
+              end
+          end)
+
+      # -----------------------------------------
+      #  ПОРТАЛ
+      # -----------------------------------------
+
+      - type: "text"
+        title: "🛠 Практика"
+        text: |
+          <ul>
+            <li>Сделай портал другого цвета</li>
+            <li>Перемести Exit выше или ниже</li>
+            <li>Попробуй сделать два портала</li>
+          </ul>
+     
+      - type: "hint"
+        text: |
+          💡 Подсказка:
+          Если портал срабатывает много раз —
+          добавь задержку или проверку,
+          чтобы игрок телепортировался один раз.
+    quiz:
+        - question: "Что делает портал?"
+          answers:
+            - "Сам телепортирует игрока"
+            - "Запускает скрипт при касании"
+            - "Меняет здоровье игрока"
+          correct: 1
+
+        - question: "Что мы телепортируем на самом деле?"
+          answers:
+            - "Player"
+            - "Character"
+            - "HumanoidRootPart"
+          correct: 2
+
+        - question: "Какое событие мы используем?"
+          answers:
+            - "Clicked"
+            - "Touched"
+            - "Changed"
+          correct: 1
+    
+    end:
+      - type: "text"
+        title: "🎉 Итог: Теперь ты умеешь:"
+        text: |
+          <ul>
+            <li>ты сделал первый портал</li>
+            <li>использовал касание</li>
+            <li>понял, как работает телепортация в игре</li>
+          </ul>
+          <p>В следующем уроке мы сделаем <b>чекпоинты и респаун</b>.</p>
 
 
 # ===============================
