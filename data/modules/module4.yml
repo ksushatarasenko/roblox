@@ -2651,6 +2651,334 @@ lessons:
           </ul>
           <h4>🔥 Ты только что сделал свою первую игровую угрозу. Это первый шаг к настоящим уровням и Obby!</h4>
 
+# ===============================
+# ⭐ УРОК 40. Опасные зоны — базовая идея
+# ===============================
+  - id: 40
+    title: "⭐ УРОК 40. Разные виды урона"
+    shortDescription: "Мы учимся управлять здоровьем игрока по-разному."
+    # video: "https://www.youtube.com/embed/LAVATRAP022"
+
+    content:
+
+      - type: "text"
+        title: "🎯 Цель урока"
+        text: |
+          <p>В игре урон бывает разным.</p>
+          <p>Иногда игрок умирает сразу, а иногда — теряет здоровье постепенно.</p>
+          
+      
+      - type: "text"
+        title: "🧠 Большая идея урока"
+        text: |
+          <p><span style="font-family: monospace;">Humanoid.Health — это число</span>.</p>
+          <ul>
+            <li>Если сделать 0 → смерть</li>
+            <li>Если уменьшать понемногу → постепенный урон</li>
+          </ul>
+      
+      - type: "code"
+        title: "🔥 Виды урона в игре"
+        text: |
+          <h5>1️⃣ Мгновенная смерть (лава)</h5>
+          <ul>
+            <li>игрок коснулся</li>
+            <li>здоровье сразу = 0</li>
+            <li>игрок умер</li>
+          </ul>
+        code: |  
+          humanoid.Health = 0
+        afterText: |
+          <p>📌 Используется для:</p>
+          <ul>
+            <li>лавы</li>
+            <li>пропасти</li>
+            <li>смертельных ловушек</li>
+          </ul>
+
+
+      - type: "text"
+        title: "2️⃣ Постепенный урон (кислота)"
+        text: |                
+          <ul>
+            <li>игрок стоит в зоне</li>
+            <li>здоровье уменьшается по чуть-чуть</li>
+            <li>если уйдёт — урон прекратится</li>
+          </ul>
+          <p>🧠 Тут важно:</p>
+          <ul>
+            <li><span style="font-family: monospace;">Touched</span></li>
+            <li><span style="font-family: monospace;">TouchEnded</span></li>
+            <li><span style="font-family: monospace;">while</span></li>
+            <li><span style="font-family: monospace;">wait()</span></li>
+          </ul>
+
+
+      - type: "oneImage"
+        title: "Pułapki śmierci na wyspie"
+        img:
+            src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module4/lesson40-43/Pu%C5%82apki%20s%CC%81mierci%20na%20wyspie.png?raw=true"
+            width: 100%
+            maxWidth: "100%"
+            align: center
+      
+      - type: "code"
+        title: "🧪 Пример: кислота (постепенный урон)"
+        code: |
+          -- Скрипт внутри кислотного блока
+
+          local acid = script.Parent  
+          local damaging = {}
+
+          acid.Touched:Connect(function(hit)
+              local character = hit.Parent
+              local humanoid = character:FindFirstChild("Humanoid")
+
+              if humanoid and not damaging[humanoid] then
+                  damaging[humanoid] = true
+
+                  -- Пока игрок в кислоте
+                  while damaging[humanoid] do
+                      humanoid.Health -= 5
+                      wait(1)
+                  end
+              end
+          end)
+
+          acid.TouchEnded:Connect(function(hit)
+              local character = hit.Parent
+              local humanoid = character:FindFirstChild("Humanoid")
+
+              if humanoid then
+                  damaging[humanoid] = nil
+              end
+          end)
+        afterText: |
+          <h5>🧠 Объяснение простыми словами</h5>
+          <ul>
+            <li><span style="font-family: monospace;">damaging</span> — таблица, которая запоминает, кто сейчас получает урон</li>
+            <li><span style="font-family: monospace;">while</span> — повторяет урон, пока игрок в зоне</li>
+            <li><span style="font-family: monospace;">TouchEnded </span>— говорит игре: «игрок ушёл»</li>
+          </ul>
+          <p>👉 Игрок сам контролирует урон:</p>
+          <p>стоит — больно, ушёл — безопасно.</p>
+
+
+      
+      - type: "code"
+        title: "🌵 3️⃣ Шипы (не сразу убивают)"
+        text: |
+          <ul>
+            <li>игрок наступил</li>
+            <li>получил немного урона</li>
+            <li>может успеть убежать</li>
+          </ul>
+        code: |
+          humanoid.Health -= 20
+        afterText: |          
+          <p>📌 Используется для:</p>
+          <ul>
+            <li>шипов</li>
+            <li>ловушек</li>
+            <li>наказания за ошибку</li>
+          </ul>
+
+
+      - type: "text"
+        title: "🛠 Практическое задание"
+        text: |
+          <p>Создай 3 опасных блока:</p>
+          <ul>
+            <li>🔥 Лава — мгновенная смерть</li>
+            <li>🟢 Кислота — постепенный урон</li>
+            <li>🌵 Шипы — урон, но не смерть</li>
+          </ul>
+          <h5>✅ Условия</h5>
+          <ul>
+            <li>код менять МОЖНО</li>
+            <li>эффекты НЕ использовать</li>
+            <li>главное — логика</li>
+          </ul>
+          <h5>💡 Подсказка</h5>
+          <ul>
+            <li>Если урон повторяется → нужен while</li>
+            <li>Если урон один раз → достаточно Touched</li>
+          </ul>
+
+
+      - type: "hint"
+        title: "Подсказка 🔥 1. Лава — мгновенная смерть🔑"
+        text: |
+          <p>📍 Скрипт внутри блока Lava (Part)</p>
+        code: |
+          -- ЛАВА: убивает сразу
+
+          local lava = script.Parent
+          -- script.Parent — это сам блок лавы
+
+          lava.Touched:Connect(function(hit)
+              -- Срабатывает, когда кто-то касается лавы
+
+              local character = hit.Parent
+              -- Получаем тело игрока
+
+              local humanoid = character:FindFirstChild("Humanoid")
+              -- Проверяем: есть ли Humanoid (значит это игрок)
+
+              if humanoid then
+                  humanoid.Health = 0
+                  -- Сразу убираем все здоровье
+                  -- Игрок мгновенно умирает
+              end
+          end)
+        afterText: | 
+          <p>🧠 Идея: Лава не даёт шансов — коснулся → умер.</p>
+
+      - type: "oneImage"
+        title: "Лава"
+        textTop: ""
+        img:
+            src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module4/lesson40-43/1.%20%D0%9B%D0%B0%D0%B2%D0%B0%20%E2%80%94%20%D0%BC%D0%B3%D0%BD%D0%BE%D0%B2%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F%20%D1%81%D0%BC%D0%B5%D1%80%D1%82%D1%8C.png?raw=true"
+            width: 100%
+            maxWidth: "100%"
+            align: center
+      
+      - type: "hint"
+        title: "Подсказка 🟢 2. Кислота — постепенный урон 🔑"
+        text: |
+          <p>📍 Скрипт внутри блока Acid (Part)</p>
+        code: |
+          -- КИСЛОТА: наносит урон со временем
+
+          local acid = script.Parent
+          local damagePerSecond = 10
+          -- Сколько здоровья отнимается за один раз
+
+          acid.Touched:Connect(function(hit)
+              local character = hit.Parent
+              local humanoid = character:FindFirstChild("Humanoid")
+
+              if humanoid then
+                  -- Пока игрок жив и стоит в кислоте
+                  while humanoid.Health > 0 do
+                      humanoid.Health = humanoid.Health - damagePerSecond
+                      -- Отнимаем часть здоровья
+
+                      wait(1)
+                      -- Ждём 1 секунду
+                  end
+              end
+          end)
+        afterText: | 
+          <p>🧠 Идея: Кислота опасна, но даёт время убежать.</p>
+          <h5>⚠️ Важно</h5>
+          <p><span style="font-family: monospace;">while + wait = урон со временем</span></p>
+
+      - type: "oneImage"
+        title: "Кислота"
+        textTop: ""
+        img:
+            src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module4/lesson40-43/2.%20%D0%9A%D0%B8%D1%81%D0%BB%D0%BE%D1%82%D0%B0%20%E2%80%94%20%D0%BF%D0%BE%D1%81%D1%82%D0%B5%D0%BF%D0%B5%D0%BD%D0%BD%D1%8B%D0%B8%CC%86%20%D1%83%D1%80%D0%BE%D0%BD.png?raw=true"
+            width: 100%
+            maxWidth: "100%"
+            align: center
+
+      - type: "hint"
+        title: "Подсказка 🌵 3. Шипы — урон, но не смерть 🔑"
+        text: |
+          <p>📍 Скрипт внутри блока Spikes (Part)</p>
+        code: |
+          -- ШИПЫ: ранят, но не убивают сразу
+
+          local spikes = script.Parent
+          local damage = 25
+          -- Сколько урона за одно касание
+
+          spikes.Touched:Connect(function(hit)
+              local character = hit.Parent
+              local humanoid = character:FindFirstChild("Humanoid")
+
+              if humanoid then
+                  -- Проверяем, чтобы здоровье не стало отрицательным
+                  if humanoid.Health > damage then
+                      humanoid.Health = humanoid.Health - damage
+                      -- Просто уменьшаем здоровье
+                  end
+              end
+          end)
+
+        afterText: | 
+          <p>🧠 Идея: Шипы — это наказание, а не конец игры.</p>
+      - type: "oneImage"
+        title: "Шипы"
+        textTop: ""
+        img:
+            src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module4/lesson40-43/%D0%A8%D0%B8%D0%BF%D1%8B.png?raw=true"
+            width: 100%
+            maxWidth: "100%"
+            align: center
+      
+      - type: "code"
+        title: "🧠 Главное сравнение (очень важно)"
+        code: |
+          Лава    → сразу Health = 0
+          Кислота → Health уменьшается со временем
+          Шипы    → Health уменьшается немного
+
+
+        
+
+    
+
+
+    quiz:
+      - question: "Что делает Humanoid.Health?"
+        answers:
+          - "Отвечает за движение"
+          - "Хранит здоровье игрока"
+          - "Телепортирует персонажа"
+        correct: 1
+
+      - question: "Как сделать мгновенную смерть?"
+        answers:
+          - "humanoid.Health = 0"
+          - "humanoid:Destroy()"
+          - "player:Kill()"
+        correct: 0
+
+      - question: "Что нужно для постепенного урона?"
+        answers:
+          - "Touched"
+          - "while и wait()"
+          - "Color"
+        correct: 1
+
+      - question: "Зачем нужен TouchEnded?"
+        answers:
+          - "Чтобы начать урон"
+          - "Чтобы закончить урон"
+          - "Чтобы телепортировать игрока"
+        correct: 1
+
+      - question: "Почему урон — это механика?"
+        answers:
+          - "Потому что он красивый"
+          - "Потому что влияет на игровой процесс"
+          - "Потому что использует Part"
+        correct: 1
+
+    end:
+      - type: "text"
+        title: "🎉 Итог: Теперь ты умеешь:"
+        text: |
+          <ul>
+            <li>делать разные виды урона</li>
+            <li>управлять здоровьем игрока</li>
+            <li>создавать честные и понятные ловушки</li>
+            <li>использовать Touched и TouchEnded</li>
+          </ul>
+          <h4>💬 Ты уже создаёшь настоящие игровые механики, а не просто блоки.</h4>
+
 # ============================================================
 # УРОК 30 — Расширенные телепорты
 # ============================================================
