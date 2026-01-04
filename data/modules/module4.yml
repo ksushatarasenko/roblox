@@ -1586,235 +1586,176 @@ lessons:
       - type: "text"
         title: "🧠 Что такое чекпоинт?"
         text:
-          - "<b>Чекпоинт</b> — это специальная платформа, которая запоминает, что игрок до неё дошёл."
+          - "<b>Чекпоинт</b> — это специальная платформа, которая запоминает, что игрок до неё дошёл. Чекпоинт = момент сохранения прогресса"
           - "Если игрок падает в лаву или проигрывает — он появляется на последнем чекпоинте."
           - "Когда игрок умирает → он возрождается возле чекпоинта, а не сначала."
-          - "Сегодня мы сделаем простую систему чекпоинтов, как в настоящем Obby."
+          - "Checkpoint — это блок, которого касается игрок. (игрок до него дошёл, игра поняла: «он молодец», прогресс можно сохранить)"
+          - "👉 Checkpoint <b>ничего не возрождает</b>."
+
       - type: "text"
         title: "🟦 Что такое точка возрождения?"
         text: 
-          - "Это объект <b>SpawnLocation</b> — место, где игрок появляется после смерти."
+          - "Это объект <b>SpawnLocation</b> — место, где игрок появляется после смерти, это <b>специальный объект Roblox</b>, он уже умеет возрождать игроков, мы не пишем для этого код"
           - "Roblox сначала спавнит игрока на стандартном SpawnLocation."
           - "Но мы можем дать игроку <b>свой персональный спавн</b>, когда он активирует чекпоинт."
+          - "👉 Roblox <b>сам знает</b>, что делать со SpawnLocation."
 
-      - type: "gallery"
-        title: "Как выглядят чекпоинты"
-        images:
-          - "https://i.ytimg.com/vi/EYgZZxwIvro/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBfANeAL5icEqkrDu4rfXJ7JkipJQ"
-          - "https://i.ytimg.com/vi/hU_de1gf7mA/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBt_NEEYaDTeHBAvIFXVZmyyg1Ygg"
-          - "https://i.redd.it/can-anyone-tell-me-how-to-make-an-obby-checkpoint-system-v0-pt58qv5x5vid1.jpg?width=1792&format=pjpg&auto=webp&s=88afea8eb8c597c7bda581e42f21ac0b351886a4"
+      - type: "text"
+        title: "❗ Очень важно понять"
+        text: |
+          <p>В Roblox чекпоинт состоит из двух частей:</p>
+          <h4>Checkpoint ≠ SpawnLocation</h4>
+          <ul>
+            <li>🟦 <b>Checkpoint</b> — блок, которого касается игрок</li>
+            <li>🟩 <b>SpawnLocation</b> — место, где игрок появится после смерти</li>
+          </ul>
+          <p>❗ Это <b>разные объекты</b>, но они работают вместе.</p>
+
+      
+      - type: "oneImage"
+        img:
+            src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module4/lesson36-38/module4_36_4.png?raw=true"
+            width: 100%
+            maxWidth: "100%"
+            align: center      
+
+      - type: "text"
+        title: "🧱 Почему SpawnLocation особенный"
+        text: |
+          <h4>🧱 Part</h4>
+          <ul>
+            <li>просто блок</li>
+            <li>Roblox не считает его важным</li>
+            <li>он ничего не умеет</li>
+          </ul>
+          <h4>🟩 SpawnLocation</h4>
+          <ul>
+            <li>специальный объект Roblox</li>
+            <li>движок следит за ним</li>
+            <li>Roblox спрашивает: <em>«Здесь можно возрождать игрока?»</em></li>
+          </ul>
+          <p>👉 Это не магия.</p>    
+          <p>👉 Это <b>встроенная функция Roblox.</b></p>          
+     
+      
+      - type: "text"
+        title: "📁 Где что находится в Studio"
+        text: |
+          <p>В Roblox чекпоинт состоит из двух частей:</p>
+          <ul>
+            <li><b>Checkpoint (Part)</b><p>👉 обычный Part в Workspace</p></li>
+            <li><b>SpawnLocation</b>
+              <ul>
+                <li>👉 специальный объект Roblox</li>
+                <li>👉 тоже находится в Workspace</li>
+              </ul>
+
+            </li>
+          </ul>
+          <p>❗ Это <b>разные объекты</b>, но они работают вместе.</p>
+
+      - type: "oneImage"
+        img:
+            src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module4/lesson36-38/module4_36_2.png?raw=true"
+            width: 100%
+            maxWidth: "100%"
+            align: center
 
       # ================================
       # СОЗДАЁМ ЧЕКПОИНТ
       # ================================
-      - type: "steps"
-        title: "🔷 Шаг 1. Создаём чекпоинт"
-        items:
-          - "Создай Part → назови его <b>Checkpoint1</b>."
-          - "Размер: 3×1×3"
-          - "Сделай его плоским и яркого цвета."
-          - "Поставь по центру пути."
-          - "Установи <b>Anchored = true</b>."
-          - "Вставь внутрь <b>Script</b>."
+      - type: "text"
+        title: "🟦 Шаг 1. Создаём чекпоинт"
+        text:
+          - "1. Создай Part → назови его <b>Checkpoint1</b>."
+          - "2. Размер: 3×1×3"
+          - "3. Сделай его плоским и яркого цвета."
+          - "4. Поставь по центру пути."
+          - "5. Установи <b>Anchored = true</b>."
+          - "5. Вставь внутрь <b>Script</b>."
+          - "👉 Это место касания, а не возрождения."
 
-      - type: "steps"
-        title: "🟩 Шаг 2. Создаём точку возрождения"
-        items:
-          - "Вставь в игру объект <b>SpawnLocation</b>."
-          - "Переименуй его в <b>CheckpointSpawn1</b>."
-          - "Отключи <b>AllowTeamChangeOnTouch</b>."
-          - "Спрячь его галочкой <b>Enabled = false</b> (но оставь в игре)."
-          - "Поставь так, чтобы игрок появлялся над полом"
+      - type: "text"
+        title: "🟩 Шаг 2. Создаём точку возрождения. Создаём SpawnLocation"
+        text:
+          - "1. Вставь в игру объект <b>SpawnLocation</b> (Insert Object → SpawnLocation)."
+          - "2. Переименуй его в <b>Spawn1</b>."
+          - "3. Отключи <b>AllowTeamChangeOnTouch</b>."
+          - "4. Спрячь его галочкой <b>Enabled = false</b> (но оставь в игре)."
+          - "5. Поставь так, чтобы игрок появлялся над полом"
+          - "👉 Именно SpawnLocation отвечает за возрождение."
+
+      
 
       - type: "text"
         title: "Как это работает?"
         text:
           - "Когда игрок касается чекпоинта, мы запоминаем его номер."
           - "Потом, если он погибает, точка возрождения меняется на нужную."
-      - type: "code"
-        title: "🧠 Шаг 3. Делаем переменную чекпоинта"
-        text: "В Script напиши:"
-        code: |
-          local checkpoint = script.Parent
-          local respawnPoint = game.Workspace.CheckpointSpawn
-
-      - type: "code"
-        title: "⭐ Шаг 4. Когда игрок касается чекпоинта — сохраняем его спавн"
-        code: |
-          checkpoint.Touched:Connect(function(hit)
-              local character = hit.Parent
-              local humanoid = character:FindFirstChild("Humanoid")
-
-              if humanoid then
-                  local player = game.Players:GetPlayerFromCharacter(character)
-
-                  if player then
-                      player.RespawnLocation = respawnPoint
-                      print("Чекпоинт активирован!")
-                  end
-              end
-          end)
-        afterText: 
-          - "Теперь — если игрок умрёт,"
-          - "Roblox появит его именно на respawnPoint 🎉"
-
-      - type: "code"
-        title: "✨ Шаг 5. Добавляем эффект при активации"
-        text: "Например, чекпоинт станет зелёным:"
-        code: |
-          checkpoint.Color = Color3.fromRGB(0, 255, 0)
-      - type: "code"
-        text: "Или увеличится:"
-        code: |
-          checkpoint.Size = Vector3.new(4, 1, 4)
-          wait(0.3)
-          checkpoint.Size = Vector3.new(3, 1, 3)
-      - type: "code"
-        text: "Или заиграет звук:"
-        code: |
-          checkpoint.Sound:Play()
-
-      - type: "code"
-        title: "🎯 Полный рабочий код чекпоинта"
-        code: |
-          local checkpoint = script.Parent
-          local respawnPoint = game.Workspace.CheckpointSpawn
-
-          checkpoint.Touched:Connect(function(hit)
-              local character = hit.Parent
-              local humanoid = character:FindFirstChild("Humanoid")
-
-              if humanoid then
-                  local player = game.Players:GetPlayerFromCharacter(character)
-
-                  if player then
-                      player.RespawnLocation = respawnPoint
-                      print("Чекпоинт активирован!")
-                      
-                      -- эффект
-                      checkpoint.Color = Color3.fromRGB(0, 255, 0)
-                  end
-              end
-          end)       
+      - type: "oneImage"
+        img:
+            src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module4/lesson36-38/module4_36_1.png?raw=true"
+            width: 100%
+            maxWidth: "100%"
+            align: center
       
 
-      # ================================
-      # ПРАКТИКА ДЛЯ РЕБЁНКА
-      # ================================
-      - type: "steps"
-        title: "🧪 Мини-квест (самостоятельно)"
-        items:
-          - "цепочку из 3 чекпоинтов"
-          - "kаждый должен загораться своим цветом."
-          - "cделай бонусный чекпоинт, который телепортирует на секретный уровень."
-          - "чекпоинты показывают «уровень» игрока в Output"
-          - "Поменяй форму чекпоинта на круглый Cylinder."
-      - type: hint
-        title: "Подсказака 👇 - 📌 Скрипт для Checkpoint1"
-        code: |
-          -- Получаем сам чекпоинт
-          local checkpoint = script.Parent
-
-          -- Точка возрождения, куда появится игрок после смерти
-          local respawnPoint = workspace.Spawn1  
-
-          -- Срабатывает, когда что-то касается чекпоинта
-          checkpoint.Touched:Connect(function(hit)
-
-              -- Проверяем: это игрок?
-              local character = hit.Parent
-              local humanoid = character:FindFirstChild("Humanoid")
-
-              if humanoid then
-                  -- Получаем Player из персонажа
-                  local player = game.Players:GetPlayerFromCharacter(character)
-
-                  if player then
-                      -- Устанавливаем точку возрождения
-                      player.RespawnLocation = respawnPoint
-                      print("Чекпоинт 1 активирован!")
-
-                      -- Эффект: меняем цвет чекпоинта
-                      checkpoint.Color = Color3.fromRGB(0, 255, 0)
-                  end
-              end
-          end)
-
-      - type: hint
-        title: "Подсказака 👇 - 📌 Скрипт для Checkpoint2"
-        code: |
-          local checkpoint = script.Parent
-          local respawnPoint = workspace.Spawn2  -- точка второго чекпоинта
-
-          checkpoint.Touched:Connect(function(hit)
-              local character = hit.Parent
-              local humanoid = character:FindFirstChild("Humanoid")
-
-              if humanoid then
-                  local player = game.Players:GetPlayerFromCharacter(character)
-
-                  if player then
-                      player.RespawnLocation = respawnPoint
-                      print("Чекпоинт 2 активирован!")
-
-                      -- Эффект: меняем цвет на синий
-                      checkpoint.Color = Color3.fromRGB(0, 100, 255)
-                  end
-              end
-          end)
-
-      - type: hint
-        title: "Подсказака 👇 - 📌 Скрипт для Checkpoint3 (даёт суперскорость ⚡)"
-        code: |
-          local checkpoint = script.Parent
-          local respawnPoint = workspace.Spawn3  -- третья точка
-
-          checkpoint.Touched:Connect(function(hit)
-              local character = hit.Parent
-              local humanoid = character:FindFirstChild("Humanoid")
-
-              if humanoid then
-                  local player = game.Players:GetPlayerFromCharacter(character)
-
-                  if player then
-                      -- Ставим точку появления
-                      player.RespawnLocation = respawnPoint
-                      print("Чекпоинт 3 активирован! Суперскорость включена!")
-
-                      -- Даём игроку суперскорость
-                      humanoid.WalkSpeed = 40   -- обычная скорость = 16
-                      humanoid.JumpPower = 70   -- прыжок выше
-
-                      -- Эффект: красим чекпоинт в золотой
-                      checkpoint.Color = Color3.fromRGB(255, 200, 0)
-                  end
-              end
-          end)
+      - type: "text"
+        title: "🧠 Как связать чекпоинт и SpawnLocation"
+        text:
+          - "Когда игрок касается чекпоинта, мы говорим игре:"
+          - "«Если он умрёт — возроди его вот тут»"
+      
       - type: "code"
-        title: "🎁 Как настроить перед запуском?"
-        text: "Должно быть в Workspace:"
+        title: "💻 Код (с пояснениями)"
         code: |
-          Checkpoint1
-          Checkpoint2
-          Checkpoint3
-          Spawn1
-          Spawn2
-          Spawn3
+          local checkpoint = script.Parent
+          local spawn = workspace.Spawn1
+
+          checkpoint.Touched:Connect(function(hit)
+              local character = hit.Parent
+              local player = game.Players:GetPlayerFromCharacter(character)
+
+              if player then
+                  player.RespawnLocation = spawn
+              end
+          end)
         afterText: |
-          Каждый респаун (Spawn1, Spawn2, Spawn3) должен быть SpawnLocation, у которых:
+          <h5>🧩 Пояснение</h5>
           <ul>
-            <li>Enabled = false (чтобы игра не спавнила там сама)</li>
-            <li>Поставлены на правильные позиции</li>
+            <li><span style="font-family: monospace;">checkpoint</span> — наш блок-чекпоинт</li>
+            <li><span style="font-family: monospace;">spawn</span> — точка возрождения</li>
+            <li><span style="font-family: monospace;">Touched</span> — момент касания</li>
+            <li><span style="font-family: monospace;">hit.Parent</span> — тело игрока</li>
+            <li><span style="font-family: monospace;">GetPlayerFromCharacter</span> — находим игрока</li>
+            <li><span style="font-family: monospace;">RespawnLocation</span> — <b>запоминаем, где возрождаться</b></li>
           </ul>
+          <p>👉 Мы <b>не телепортируем</b> игрока сразу.</p>
+          <p>👉 Мы <b>меняем место его будущего появления</b>.</p>
+      - type: "oneImage"
+        img:
+            src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module4/lesson36-38/module4_36_3.png?raw=true"
+            width: 100%
+            maxWidth: "100%"
+            align: center
+
+      - type: "text"
+        title: "🟢 Вопросы для размышления"
+        text:
+          - "1. Почему мы используем SpawnLocation, а не Part?"
+          - "2. Почему чекпоинт и Spawn — разные объекты?"
+          - "3. Что будет, если игрок умрёт без чекпоинта?"
+
+      - type: hint
+        title: "Подсказка 🔑 "
+        text:
+          - "1. Потому что <b>SpawnLocation умеет возрождать игрока автоматически</b>. Обычный Part — нет, он просто блок."
+          - "2. Чекпоинт — это что <b>игрок трогает</b>, <br> Spawn — это где <b>он потом появится</b>. <br> Они делают <b>разные задачи</b>, поэтому разделены."
+          - "3. Он появится на <b>стартовой SpawnLocation</b> (самой первой). <br>Прогресс не сохранится."
+            
 
     quiz:
-      - question: "Где обычно хранят скрипт возрождения?"
-        answers:
-          - "Внутри портала"
-          - "В ServerScriptService"
-          - "В StarterPlayerScripts"
-        correct: 1
-
+      
       - question: "Что делает чекпоинт?"
         answers:
           - "Меняет цвет игрока"
@@ -1828,10 +1769,574 @@ lessons:
           - "SpawnLocation"
           - "ParticleEmitter"
         correct: 1
+      - question: "Почему SpawnLocation особенный?"
+        answers:
+          - "Потому что он красивый"
+          - "Потому что Roblox уже умеет с ним работать"
+          - "Потому что он больше Part"
+        correct: 1
 
     end:
-      - type: "text" 
-        text: "Ты огромный молодец — ты уже создаёшь настоящие игровые механики Roblox! 🚀🔥"
+      - type: "text"
+        title: "🎉 Итог: Теперь ты понимаешь:"
+        text: |
+          <ul>
+            <li>что такое чекпоинт</li>
+            <li>зачем нужен SpawnLocation</li>
+            <li>как работает возрождение игрока</li>
+            <li>как сохраняется прогресс в игре</li>
+          </ul>
+          <h4>Это основа всех Obby и уровней 🧱</h4>
+          <p>В следующем уроке мы сделаем <b>несколько чекпоинтов</b>.</p>
+
+# ===============================
+# 👉 Урок 37 — Чекпоинты и точки возрождения
+# ===============================
+  - id: 37
+    title: "👉 Урок 37: Несколько чекпоинтов (Obby-система)"
+    shortDescription: "Учимся делать несколько чекпоинтов, чтобы игрок сохранял прогресс по ходу уровня."
+
+    content:
+
+      - type: "text"
+        title: "🧠 Главная идея урока"
+        text:
+          - "- Игрок идёт вперёд →"
+          - "- доходит до нового чекпоинта →"
+          - "- игра запоминает новый прогресс."
+          - "Каждый новый чекпоинт заменяет предыдущий."
+
+      - type: "text"
+        title: "🌍 Аналогия из жизни"
+        text: |
+          <p>Представь длинную полосу препятствий:</p>
+          <ul>
+            <li>ты прошёл половину</li>
+            <li>упал</li>
+            <li>но возвращаешься не в начало, а туда, где был последний флаг 🚩</li>
+          </ul>
+          <p>👉 Каждый флаг — это чекпоинт.</p>
+          
+
+      - type: "text"
+        title: "🧩 Как работает система из нескольких чекпоинтов"
+        text: |
+          <p>В игре есть:</p>
+          <ul>
+            <li><b>🟦 несколько Checkpoint (Part)</b></li>
+            <li><b>🟩 несколько SpawnLocation</b></li>
+          </ul>
+          <p>Каждый чекпоинт:</p>
+          <ul>
+            <li>связан со своим SpawnLocation</li>
+            <li>при касании обновляет точку возрождения</li>
+          </ul>
+        
+      - type: "code"
+        title: "📁 Как выглядит структура в Workspace"
+        code: |
+          Workspace
+            ├─ Checkpoint1
+            ├─ Checkpoint2
+            ├─ Checkpoint3
+            ├─ Spawn1
+            ├─ Spawn2
+            ├─ Spawn3
+        afterText: |
+          👉 Порядок важен только для тебя, Roblox сам не знает, какой чекпоинт «следующий».
+
+      
+
+      - type: "code"
+        title: "🟦 Шаг 1. Создаём несколько чекпоинтов"
+        code: |
+          1. Скопируй Checkpoint
+          2. Назови: Checkpoint1, Checkpoint2, Checkpoint3
+          3. Размести их по уровню
+        afterText: "💡 Сделай их разного цвета — так игрок видит прогресс."
+      
+      - type: "oneImage"
+        img:
+            src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module4/lesson36-38/module4_37_1.png?raw=true"
+            width: 100%
+            maxWidth: "100%"
+            align: center  
+
+      - type: "code"
+        title: "🟩 Шаг 2. Создаём несколько SpawnLocation"
+        code: |
+          1. Скопируй SpawnLocation
+          2. Назови: Spawn1, Spawn2, Spawn3
+          3. Размести рядом с чекпоинтам
+        afterText: "👉 Каждый Spawn — точка возрождения после этого места."
+     
+      - type: "oneImage"
+        img:
+            src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module4/lesson36-38/module4_37_2.png?raw=true"
+            width: 100%
+            maxWidth: "100%"
+            align: center  
+
+      - type: "code"
+        title: "🔗 Шаг 3. Связываем чекпоинт и Spawn"
+        text: "<h5>💻 Пример кода</h5>"
+        code: |
+          local checkpoint = script.Parent
+          local spawn = workspace.Spawn2
+
+          checkpoint.Touched:Connect(function(hit)
+              local character = hit.Parent
+              local player = game.Players:GetPlayerFromCharacter(character)
+
+              if player then
+                  player.RespawnLocation = spawn
+              end
+          end)
+        afterText: |
+          <ul>
+            <li>игрок дошёл до Checkpoint2</li>
+            <li>мы нашли игрока</li>
+            <li>сказали игре: <em>«Теперь возрождай его на Spawn2»</em></li>
+          </ul>
+          <p>❗ Старый чекпоинт <b>больше не важен.</b></p>
+
+      - type: "oneImage"
+        img:
+            src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module4/lesson36-38/module4_37_3.png?raw=true"
+            width: 100%
+            maxWidth: "100%"
+            align: center  
+
+      
+      - type: "code"
+        title: "🟢 Важное правило Obby-системы"
+        text: |
+          <h5>Всегда работает только ПОСЛЕДНИЙ чекпоинт.</h5>
+           <ul>
+            <li>игрок дошёл до Checkpoint3</li>
+            <li>умер</li>
+            <li>появится на Spawn3</li>
+          </ul>
+          <p>Даже если раньше был Checkpoint1.</p>
+          <p><b>Под каждый чекпоинт — свой скрипт</b></p>
+        code: |
+          Checkpoint1 → Spawn1
+          Checkpoint2 → Spawn2
+          Checkpoint3 → Spawn3
+        afterText: |
+          <p>📌 Минус: много одинаковых скриптов (НО это нормально на этом этапе)</p>
+          <p>чуть умнее, позже</p>
+          <p>Один скрипт: читает номер чекпоинта, сам находит нужный Spawn</p>
+
+
+
+      - type: "oneImage"
+        img:
+            src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module4/lesson36-38/module4_37_4.png?raw=true"
+            width: 100%
+            maxWidth: "100%"
+            align: center  
+
+      
+     
+      - type: "text"
+        title: "🟢 Вопросы для размышления"
+        text:
+          - "1. Что будет, если игрок вернётся назад?"
+          - "2. Что произойдёт, если чекпоинты стоят слишком близко?"
+          - "3. Почему SpawnLocation нельзя использовать один на всех?"
+
+      - type: hint
+        title: "Подсказка 🔑 "
+        text:
+          - "1. Ничего страшного. Будет работать последний активированный чекпоинт."
+          - "2. Игрок может случайно активировать сразу несколько чекпоинтов, и игра запомнит последний из них."
+          - "3. Потому что каждый чекпоинт должен знать, где именно возрождать игрока. Если Spawn один — прогресс теряется."
+            
+
+    quiz:
+      - question: "Что происходит, когда игрок касается нового чекпоинта?"
+        answers:
+          - "Он телепортируется"
+          - "Обновляется точка возрождения"
+          - "Он умирает"
+        correct: 1
+
+      - question: "Сколько чекпоинтов может быть активным?"
+        answers:
+          - "Все сразу"
+          - "Только первый"
+          - "Только последний"
+        correct: 2
+
+      - question: "Где хранится информация о возрождении?"
+    
+        answers:
+          - "В Checkpoint"
+          - "В Player"
+          - "В Workspace"
+        correct: 1
+
+    end:
+      - type: "text"
+        title: "🎉 Итог: Теперь ты умеешь:"
+        text: |
+          <ul>
+            <li>делать Obby с прогрессом</li>
+            <li>использовать несколько чекпоинтов</li>
+            <li>управлять точкой возрождения игрока</li>
+            <li>строить уровни шаг за шагом</li>
+          </ul>
+          <h4>Теперь твоя игра умеет запоминать путь игрока 🚩</h4>
+          <p>В следующем уроке мы превратим чекпоинты в <b>игровые механики</b>.</p>
+
+# ===============================
+# 👉 Урок 38 — Чекпоинты и точки возрождения
+# ===============================
+  - id: 38
+    title: "👉 Урок 38: Чекпоинты как игровые механики (ТВОРЧЕСТВО)"
+    shortDescription: "Чекпоинт — это не просто сохранение. Это инструмент игры, который может менять правила, давать награды и удивлять игрока."
+
+    content:
+
+      - type: "text"
+        title: "🧠 Большая идея урока"
+        text: |
+          <h5>Checkpoint = касание + логика + эффект</h5>
+          <p>Один и тот же чекпоинт может:</p>
+          <ul>
+            <li>сохранить прогресс</li>
+            <li>дать бонус</li>
+            <li>открыть секрет</li>
+            <li>изменить способности игрока</li>
+            <li>запустить событие</li>
+          </ul>
+
+
+      - type: "text"
+        title: "🟡 1. Чекпоинт с бонусом 🎁"
+        text: |
+          <h4>Идея</h4>
+          <p>Игрок касается чекпоинта и получает награду.</p>
+          <h5>Примеры:</h5>
+          <ul>
+            <li>+10 монет</li>
+            <li>+1 жизнь</li>
+            <li>+ключ</li>
+            <li>+очки</li>
+          </ul>
+          <p><em>«Ты дошёл сюда — молодец! Вот тебе подарок 💛»</em></p>
+          <h5>Мини-пример логики</h5>
+          <ul>
+            <li>игрок коснулся чекпоинта</li>
+            <li>игра сохранила прогресс</li>
+            <li>игра добавила бонус</li>
+          </ul>
+
+      - type: "oneImage"
+        img:
+            src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module4/lesson36-38/%D0%A7%D0%B5%D0%BA%D0%BF%D0%BE%D0%B8%D0%BD%D1%82%20%D1%81%20%D0%B1%D0%BE%D0%BD%D1%83%D1%81%D0%BE%D0%BC%20.png?raw=true"
+            width: 100%
+            maxWidth: "100%"
+            align: center     
+
+      
+
+      - type: "text"
+        title: "🔵 2. Чекпоинт с суперскоростью ⚡"
+        text: |
+          <h4>Идея</h4>
+          <p>Чекпоинт меняет способности игрока.</p>
+          <h5>После касания:</h5>
+          <ul>
+            <li>игрок бегает быстрее</li>
+            <li>выше прыгает</li>
+            <li>становится «супергероем»</li>
+          </ul>
+          <p><em>«Ты наступил на буст — и стал быстрее, чем раньше»</em></p>
+          <h5>Что здесь важно понять</h5>
+          <ul>
+            <li>чекпоинт ≠ навсегда</li>
+            <li>эффект можно:
+              <ul>
+                <li>ограничить по времени</li>
+                <li>отключить следующим чекпоинтом</li>
+              </ul>
+            </li>
+          </ul>
+
+      - type: "oneImage"
+        img:
+            src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module4/lesson36-38/%D0%A7%D0%B5%D0%BA%D0%BF%D0%BE%D0%B8%D0%BD%D1%82%20%D1%81%20%D1%81%D1%83%D0%BF%D0%B5%D1%80%D1%81%D0%BA%D0%BE%D1%80%D0%BE%D1%81%D1%82%D1%8C%D1%8E%20%E2%9A%A1.png?raw=true"
+            width: 100%
+            maxWidth: "100%"
+            align: center  
+
+      - type: "text"
+        title: "🟣 3. Секретный чекпоинт 🚪✨"
+        text: |
+          <h4>Идея</h4>
+          <p>Не все чекпоинты видны сразу.</p>
+          <h5>Игрок:</h5>
+          <ul>
+            <li>нашёл тайное место</li>
+            <li>активировал скрытый чекпоинт</li>
+            <li>попал в секретную зону</li>
+          </ul>
+          <h5>Примеры:</h5>
+          <ul>
+            <li>скрытая платформа</li>
+            <li>невидимый флаг</li>
+            <li>портал, который появляется только один раз</li>
+          </ul>
+          <p>🔍 Это учит исследовать, а не просто бежать вперёд</p>
+      
+      - type: "oneImage"
+        img:
+            src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module4/lesson36-38/%D0%A1%D0%B5%D0%BA%D1%80%D0%B5%D1%82%D0%BD%D1%8B%D0%B8%CC%86%20%D1%87%D0%B5%D0%BA%D0%BF%D0%BE%D0%B8%D0%BD%D1%82%20%F0%9F%9A%AA%E2%9C%A8.png?raw=true"
+            width: 100%
+            maxWidth: "100%"
+            align: center  
+
+      - type: "text"
+        title: "🟠 4. Нестандартные формы чекпоинтов 🎨"
+        text: |
+          <h4>Идея</h4>
+          <p>Чекпоинт — это не обязательно флаг.</p>
+          <h5>Он может быть:</h5>
+          <ul>
+            <li>кольцом</li>
+            <li>кнопкой</li>
+            <li>плиткой</li>
+            <li>шаром</li>
+            <li>кристаллом</li>
+            <li>светящейся зоной</li>
+          </ul>
+          <h5>Важная мысль</h5>
+          <ul>
+            <li>Форма — любая.</li>
+            <li>Логика — внутри.</li>
+          </ul>
+       
+      - type: "oneImage"
+        img:
+            src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module4/lesson36-38/%D0%9D%D0%B5%D1%81%D1%82%D0%B0%D0%BD%D0%B4%D0%B0%D1%80%D1%82%D0%BD%D1%8B%D0%B5%20%D1%84%D0%BE%D1%80%D0%BC%D1%8B%20%D1%87%D0%B5%D0%BA%D0%BF%D0%BE%D0%B8%D0%BD%D1%82%D0%BE%D0%B2.png?raw=true"
+            width: 100%
+            maxWidth: "100%"
+            align: center  
+      
+      - type: "text"
+        title: "🔴 5. Чекпоинт как мини-квест 🧩"
+        text: |
+          <h4>Идея</h4>
+          <p>Чекпоинт активируется не сразу.</p>
+          <h5>Игрок должен:</h5>
+          <ul>
+            <li>нажать кнопку</li>
+            <li>собрать предмет</li>
+            <li>пройти испытание</li>
+            <li>выбрать правильный путь</li>
+          </ul>
+          <h5>Пример</h5>
+          <p><em>«Если ты дошёл сюда и выполнил задание — игра тебя запомнит»</em></p>
+
+      - type: "oneImage"
+        img:
+            src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module4/lesson36-38/%D0%A7%D0%B5%D0%BA%D0%BF%D0%BE%D0%B8%D0%BD%D1%82%20%D0%BA%D0%B0%D0%BA%20%D0%BC%D0%B8%D0%BD%D0%B8-%D0%BA%D0%B2%D0%B5%D1%81%D1%82.png?raw=true"
+            width: 100%
+            maxWidth: "100%"
+            align: center    
+      
+      
+      - type: "text"
+        title: "🛠 Практика: Система игровых чекпоинтов"
+        text: |
+          <h4>🎯 Задача</h4>
+          <p>Собрать систему чекпоинтов, где каждый чекпоинт — это игровая механика, а не просто сохранение.</p>
+          <h4>✅ Что нужно сделать</h4>
+          <h5>1️⃣ Подготовь сцену</h5>
+          <ul>
+            <li>Создай мини-уровень (Obby)</li>
+            <li>Добавь:
+              <ul>
+                <li>стартовую платформу</li>
+                <li>2–3 препятствия</li>
+                <li>финишную платформу</li>
+              </ul>
+            </li>            
+          </ul>
+          <h5>2️⃣ Создай чекпоинты</h5>
+          <p>Для каждого чекпоинта:</p>
+          <ul>
+            <li>Part (любой формы)</li>
+            <li>Назови: Checkpoint1, Checkpoint2, Checkpoint3</li>
+          </ul>
+          <h53️⃣ Создай точки возрождения</h5>
+          <ul>
+            <li>Добавь SpawnLocation для каждого чекпоинта</li>
+            <li>Назови: Spawn1, Spawn2, Spawn3</li>
+            <li>Отключи Neutral, если нужно</li>
+          </ul>
+          <h54️⃣ Свяжи чекпоинт и Spawn</h5>
+          <p>Для каждого чекпоинта:</p>
+          <ul>
+            <li>При касании:
+               <ul>
+                  <li>сохрани прогресс (player.RespawnLocation)</li>
+                  <li>активируй игровую механику</li>
+                </ul>
+            </li>            
+          </ul>
+          <h5>5️⃣ Добавь игровые эффекты (выбери минимум 2)</h5>
+          <p>Каждый чекпоинт должен что-то делать:</p>
+          <ul>
+            <li>🎁 Чекпоинт с бонусом
+               <p>(+очки / +монеты)</p>
+            </li>   
+            <li>⚡ Чекпоинт с суперскоростью
+               <p>(увеличь WalkSpeed)</p>
+            </li> 
+            <li>🚪 Секретный чекпоинт
+               <p>(телепорт в скрытое место)</p>
+            </li> 
+            <li>🎨 Визуальный эффект
+               <p>(цвет, прозрачность, частицы)</p>
+            </li>    
+            <li>🔊 Звук активации</li>       
+          </ul>
+       
+      - type: "text"
+        title: "🧪 Самопроверка"
+        text: |
+          <p>Ты всё сделал правильно, если:</p>
+          <ul>
+            <li>✅ игрок возрождается на последнем чекпоинте</li>
+            <li>✅ каждый чекпоинт делает что-то особенное</li>
+            <li>✅ прогресс не теряется</li>
+            <li>✅ уровень ощущается как ИГРА</li>
+          </ul>
+     
+      - type: hint
+        title: "Подсказка с кодом 🔑"
+        text: |
+          <p>Этот чекпоинт:</p>
+          <ul>
+            <li>сохраняет точку возрождения</li>
+            <li>даёт бонус (монеты)</li>
+            <li>даёт суперскорость</li>
+            <li>проигрывает звук</li>
+            <li>меняет цвет</li>
+            <li>работает один раз</li>
+          </ul>
+        code: |
+          -- Скрипт лежит ВНУТРИ чекпоинта (Part)
+          -- === НАСТРОЙКИ ЧЕКПОИНТА ===
+
+          local checkpoint = script.Parent          -- сам чекпоинт (Part)
+          local spawnPoint = workspace.Spawn1       -- точка возрождения
+
+          local bonusCoins = 10                     -- сколько монет дать
+          local speedBonus = 32                     -- скорость после чекпоинта
+          local normalSpeed = 16                    -- обычная скорость
+          local speedTime = 5                       -- сколько секунд действует ускорение
+
+          local used = false                        -- чтобы чекпоинт сработал один раз
+
+          -- === ЗВУК ===
+          local sound = Instance.new("Sound")
+          sound.SoundId = "rbxassetid://9118828565"  -- пример звука
+          sound.Volume = 1
+          sound.Parent = checkpoint
+
+
+          -- === ОСНОВНАЯ ЛОГИКА ===
+
+          checkpoint.Touched:Connect(function(hit)
+
+            -- 1. Проверяем: чекпоинт уже использовали?
+            if used then return end
+
+            -- 2. Находим тело игрока
+            local character = hit.Parent
+            local humanoid = character:FindFirstChild("Humanoid")
+            if not humanoid then return end
+
+            -- 3. Находим игрока (Player)
+            local player = game.Players:GetPlayerFromCharacter(character)
+            if not player then return end
+
+            used = true -- помечаем чекпоинт как использованный
+
+            -- === СОХРАНЕНИЕ ПРОГРЕССА ===
+            player.RespawnLocation = spawnPoint
+
+            -- === БОНУС (МОНЕТЫ) ===
+            local leaderstats = player:FindFirstChild("leaderstats")
+            if leaderstats then
+              local coins = leaderstats:FindFirstChild("Coins")
+              if coins then
+                coins.Value += bonusCoins
+              end
+            end
+
+            -- === СУПЕРСКОРОСТЬ ===
+            humanoid.WalkSpeed = speedBonus
+
+            task.delay(speedTime, function()
+              if humanoid then
+                humanoid.WalkSpeed = normalSpeed
+              end
+            end)
+
+            -- === ЭФФЕКТЫ ===
+            sound:Play()                             -- звук
+            checkpoint.Color = Color3.fromRGB(0, 255, 0) -- меняем цвет
+            checkpoint.Transparency = 0.3           -- делаем полупрозрачным
+
+          end)
+
+        afterText: |
+          <h5>🧠 Пояснение</h5>
+          
+            
+
+    quiz:
+      - question: "Что происходит, когда игрок касается нового чекпоинта?"
+        answers:
+          - "Он телепортируется"
+          - "Обновляется точка возрождения"
+          - "Он умирает"
+        correct: 1
+
+      - question: "Сколько чекпоинтов может быть активным?"
+        answers:
+          - "Все сразу"
+          - "Только первый"
+          - "Только последний"
+        correct: 2
+
+      - question: "Где хранится информация о возрождении?"
+    
+        answers:
+          - "В Checkpoint"
+          - "В Player"
+          - "В Workspace"
+        correct: 1
+
+    end:
+      - type: "text"
+        title: "🎉 Итог: Теперь ты умеешь:"
+        text: |
+          <ul>
+            <li>делать Obby с прогрессом</li>
+            <li>использовать несколько чекпоинтов</li>
+            <li>управлять точкой возрождения игрока</li>
+            <li>строить уровни шаг за шагом</li>
+          </ul>
+          <h4>Теперь твоя игра умеет запоминать путь игрока 🚩</h4>
+          <p>В следующем уроке мы превратим чекпоинты в <b>игровые механики</b>.</p>
+
+
 
 # ===============================
 # 🔥 Урок 27 — Лава, шипы и урон игроку

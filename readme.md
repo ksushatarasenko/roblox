@@ -12,7 +12,7 @@
 
 <b></b>
 <em></em>
-<span style="font-family: monospace;">script.Parent</span>
+<span style="font-family: monospace;"></span>
 <span></span>
     <b style="color: blue;"></b>
     <b style=\"color: rgba(9, 167, 4, 1);\">score</b>
@@ -75,6 +75,7 @@
     while true do
       print("Loop")
     end
+
 - type: "gallery"
   title: "Примеры Obby"
   images:
