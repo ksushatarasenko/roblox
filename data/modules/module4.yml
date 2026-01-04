@@ -2297,6 +2297,82 @@ lessons:
 
         afterText: |
           <h5>🧠 Пояснение</h5>
+          <h5>🔹 1. Настройки</h5>
+          <ul>
+            <li><span style="font-family: monospace;">local bonusCoins = 10</span></li>
+            <li><span style="font-family: monospace;">local speedBonus = 32</span></li>
+          </ul>
+          <p>👉 здесь мы настраиваем поведение чекпоинта, не трогая логику (это удобно и понятно)</p>
+          <h5>🔹 2. used = false</h5>
+          <ul>
+            <li><span style="font-family: monospace;">local used = false</span></li>
+          </ul>
+          <p>👉 говорит: «Этот чекпоинт можно активировать только один раз»</p>
+          <h5>🔹 3. Touched</h5>
+          <ul>
+            <li><span style="font-family: monospace;">checkpoint.Touched:Connect(function(hit)</span></li>
+          </ul>
+          <p>👉 срабатывает, когда игрок дотронулся</p>
+          <h5>🔹 4. Проверка игрока</h5>
+          <ul>
+            <li><span style="font-family: monospace;">local humanoid = character:FindFirstChild("Humanoid")</span></li>
+          </ul>
+          <p>👉 защита от: других объектов, случайных касаний</p>
+          <h5>🔹 5. Сохранение прогресса</h5>
+          <ul>
+            <li><span style="font-family: monospace;">player.RespawnLocation = spawnPoint</span></li>
+          </ul>
+          <p>👉 <b>самое главное в чекпоинте</b> Roblox запоминает, где игрок появится после смерти</p>
+          <h5>🔹 6. Бонус</h5>
+          <ul>
+            <li><span style="font-family: monospace;">coins.Value += bonusCoins</span></li>
+          </ul>
+          <p>👉 награда 🎁 чекпоинт становится <b>приятным</b></p>
+          <h5>🔹 7. Суперскорость</h5>
+          <ul>
+            <li><span style="font-family: monospace;">humanoid.WalkSpeed = speedBonus</span></li>
+          </ul>
+          <p>👉 чекпоинт меняет способности игрока</p>
+          <p>А потом:</p>
+          <ul>
+            <li><span style="font-family: monospace;">task.delay(speedTime, function()</span></li>
+          </ul>
+          <p>👉 эффект <b>не навсегда</b></p>
+          <h5>🔹 8. Эффекты</h5>
+          <ul>
+            <li><span style="font-family: monospace;">sound:Play()</span></li>
+            <li><span style="font-family: monospace;">checkpoint.Color = Color3.fromRGB(0, 255, 0)</span></li>
+          </ul>
+          <p>👉 игрок:</p>
+          <ul>
+            <li>слышит</li>
+            <li>видит</li>
+            <li>понимает: <em>что-то произошло</em></li>
+          </ul>
+      - type: "text"
+        title: "🧠 Главное"
+        text: |
+          <h5>Чекпоинт — это не один блок.</h5>
+          <p>Это система:</p>
+          <ul>
+            <li>касание</li>
+            <li>логика</li>
+            <li>эффект</li>
+            <li>идея</li>
+          </ul>
+      - type: "text"
+        title: "🎯 Что можно менять"
+        text: |
+          <h5>Чекпоинт — это не один блок.</h5>
+          <p>Это система:</p>
+          <ul>
+            <li>количество монет</li>
+            <li>время ускорения</li>
+            <li>цвет чекпоинта</li>
+            <li>звук</li>
+            <li>сделать телепорт</li>
+            <li>добавить условие (ключ, кнопка)</li>
+          </ul>
           
             
 
@@ -2325,16 +2401,9 @@ lessons:
 
     end:
       - type: "text"
-        title: "🎉 Итог: Теперь ты умеешь:"
+        title: "💛 Очень сильный момент для урока"
         text: |
-          <ul>
-            <li>делать Obby с прогрессом</li>
-            <li>использовать несколько чекпоинтов</li>
-            <li>управлять точкой возрождения игрока</li>
-            <li>строить уровни шаг за шагом</li>
-          </ul>
-          <h4>Теперь твоя игра умеет запоминать путь игрока 🚩</h4>
-          <p>В следующем уроке мы превратим чекпоинты в <b>игровые механики</b>.</p>
+          <p>«Если ты понял этот скрипт — ты уже не просто кодер, ты создатель механик.»</p>
 
 
 
