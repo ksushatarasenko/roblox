@@ -2979,6 +2979,795 @@ lessons:
           </ul>
           <h4>💬 Ты уже создаёшь настоящие игровые механики, а не просто блоки.</h4>
 
+
+# ===============================
+# ⭐ УРОК 41. Красота и поведение ловушек
+# ===============================
+  - id: 41
+    title: "⭐ УРОК 41. Красота и поведение ловушек"
+    shortDescription: "Мы учимся управлять поведением ловушек (ВАУ-ЭФФЕКТЫ + ВРЕМЯ)."
+    # video: "https://www.youtube.com/embed/LAVATRAP022"
+
+    content:
+
+      - type: "text"
+        title: "🎯 Главная идея урока"
+        text: |
+          <p>Ловушки могут не просто вредить, а двигаться, пугать, предупреждать и выглядеть живыми.</p>
+          <p>👉 Игрок видит, слышит и понимает, что сейчас будет опасно.</p>
+          
+      
+      - type: "text"
+        title: "🧠 Большая мысль урока"
+        text: |
+          <p><span style="font-family: monospace;">Опасность = логика + внешний вид + время</span>.</p>
+          <p>В прошлых уроках:</p>
+          <ul>
+            <li>мы делали что наносит урон</li>
+          </ul>
+          <p>В этом уроке:</p>
+          <ul>
+            <li>мы делаем КАК это выглядит и ведёт себя</li>
+          </ul>
+      
+      
+      - type: "oneImage"
+        title: "🔥 1. Цвет и поджог (BrickColor / Color)"
+        img:
+            src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module4/lesson40-43/1.%20%D0%A6%D0%B2%D0%B5%D1%82%20%D0%B8%20%D0%BF%D0%BE%D0%B4%D0%B6%D0%BE%D0%B3%20(BrickColor%20:%20Color).png?raw=true"
+            width: 100%
+            maxWidth: "100%"
+            align: center
+      - type: "code"
+        title: "🔥 1. Цвет и поджог (BrickColor / Color)"
+        text: |
+          <h5>Идея</h5>
+          <p>Пол сначала меняет цвет → игрок понимает:<em>«Осторожно!»</em> потом ловушка становится опасной.</p>
+          <p><b>Примеры</b></p>
+          <ul>
+            <li>пол становится красным → сейчас будет урон</li>
+            <li>лава светится ярче → активна</li>
+            <li>шипы темнеют → готовы ударить</li>
+          </ul>
+          <h5>Простая мысль</h5>
+          <p><em>«💡 Цвет — это предупреждение»</em></p>
+          <p>💚 Зелёный: «можно»</p>
+          <p>🧡 Оранжевый: «осторожно»</p>
+          <p>❤️ Красный: «опасно!»</p>
+          <h5>📌 Что нужно в Studio</h5>
+           <ol>
+            <li>Part — назови его Trap</li>
+            <li>Внутрь Trap добавь Script</li>
+            <li>Вставь код ниже</li>
+          </ol>
+        code: |
+          -- Это наш блок-ловушка
+          local trap = script.Parent
+
+          -- Цвета ловушки
+          local safeColor = Color3.fromRGB(0, 255, 0)   -- зелёный = безопасно
+          local warningColor = Color3.fromRGB(255, 170, 0) -- оранжевый = осторожно
+          local dangerColor = Color3.fromRGB(255, 0, 0) -- красный = опасно
+
+          -- Сколько времени ждать (в секундах)
+          local warningTime = 2
+
+          -- Когда игра начинается, ловушка безопасна
+          trap.Color = safeColor
+
+          -- Функция, которая делает ловушку опасной
+          local function activateTrap()
+            -- Меняем цвет на предупреждающий
+            trap.Color = warningColor
+
+            -- Ждём несколько секунд
+            wait(warningTime)
+
+            -- Теперь ловушка опасна
+            trap.Color = dangerColor
+          end
+
+          -- Запускаем ловушку
+          activateTrap()
+        afterText: |
+          <h4>👶 Объяснение «на пальцах»</h4>
+          <ul>
+            <li>
+              <span style="font-family: monospace;">local trap = script.Parent</span>
+              <p>👉 мы говорим: «Этот скрипт управляет этим блоком»</p>
+            </li>
+            <li>
+              <span style="font-family: monospace;">safeColor / warningColor / dangerColor</span>
+              <p>👉 цвета = язык игры</p>
+              <p>игрок понимает, что происходит, без слов</p>
+            </li>
+            <li>
+              <span style="font-family: monospace;">wait(2)</span>
+              <p>👉 даём игроку время среагировать</p>
+            </li>
+            <li>
+              <span style="font-family: monospace;">activateTrap()</span>
+              <p>👉 запускаем поведение ловушки</p>
+            </li>
+          </ul>
+
+      - type: "text"
+        title: "🧪 Идеи для экспериментов (без нового кода)"
+        text: |
+         <ul>
+            <li>поменяй цвета</li>
+            <li>сделай warningTime = 5</li>
+            <li>попробуй разные размеры Part</li>
+          </ul>
+
+# 2 
+
+      - type: "oneImage"
+        title: "✨ 2. Частицы (Particles)"
+        img:
+            src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module4/lesson40-43/%E2%9C%A8%202.%20%D0%A7%D0%B0%D1%81%D1%82%D0%B8%D1%86%D1%8B%20(Particles).png?raw=true"
+            width: 100%
+            maxWidth: "100%"
+            align: center
+
+      - type: "code"
+        title: "✨ 2. Частицы (Particles)"
+        text: |    
+          <h5>Идея</h5>
+          <p>Частицы НЕ наносят урон, они говорят игроку: <em>«Эй! Тут опасно, будь осторожен!»</em></p>
+          <p><b>Примеры</b></p>            
+          <ul>
+            <li>дым над лавой</li>
+            <li>искры у шипов</li>
+            <li>ядовитый туман у кислоты</li>
+          </ul>
+          <p>👉 Даже без урона игрок чувствует угрозу</p>
+          <h5>📦 Что нужно в Roblox Studio</h5>                     
+          <ol>
+            <li>Part — назови его Trap</li>
+            <li>
+              Внутрь Trap добавь:
+              <ul>
+                <li><b>ParticleEmitter</b></li>
+                <li><b>Script</b></li>
+              </ul>
+            </li>
+          </ol>
+          <p>👉 Частицы можно добавить через Explorer → + → ParticleEmitter</p>
+          <h5>🧠 Настройка ParticleEmitter (без кода)</h5> 
+          <p>В ParticleEmitter поставь, например:</p>                    
+          <ul>
+            <li>Rate = 20</li>
+            <li>Lifetime = 1 – 2</li>
+            <li>Speed = 1 – 3</li>
+            <li>Color = зелёный / красный / оранжевый</li>
+            <li>Texture = дым / искры (любой)</li>
+          </ul>
+          <p>⚠️ Пока Enabled = false</p>
+        code: |
+          -- Берём блок-ловушку
+          local trap = script.Parent
+
+          -- Находим частицы внутри блока
+          local particles = trap:WaitForChild("ParticleEmitter")
+
+          -- Сначала частицы выключены
+          particles.Enabled = false
+
+          -- Функция включения частиц
+          local function activateParticles()
+            particles.Enabled = true
+          end
+
+          -- Функция выключения частиц
+          local function deactivateParticles()
+            particles.Enabled = false
+          end
+
+          -- Включаем частицы
+          activateParticles()
+
+          -- Ждём 5 секунд
+          wait(5)
+
+          -- Выключаем частицы
+          deactivateParticles()
+        afterText: |
+          <h4>👶 Объяснение «на пальцах»</h4>
+          <ul>
+            <li>
+              <span style="font-family: monospace;">script.Parent</span>
+              <p>👉 «Этот скрипт управляет этим блоком»</p>
+            </li>
+            <li>
+              <span style="font-family: monospace;">ParticleEmitter</span>
+              <p>👉 «Машина, которая создаёт дым / искры / туман»</p>
+            </li>
+            <li>
+              <span style="font-family: monospace;">Enabled = true</span>
+              <p>👉 «Частицы включились»</p>
+            </li>
+            <li>
+              <span style="font-family: monospace;">wait(5)</span>
+              <p>👉 «Подождали 5 секунд»</p>
+            </li>
+          </ul>
+
+      - type: "text"
+        title: "🧪 Идеи для экспериментов (без нового кода)"
+        text: |
+         <ul>
+            <li>сделать частицы очень густыми</li>
+            <li>поменять цвет на: зелёный → яд, красный → огонь</li>
+            <li>поставить частицы выше блока</li>
+            <li>включать / выключать по очереди</li>
+          </ul>
+          <h4>✅ Главное, что нужно запомнить</h4>
+          <ul>
+            <li>частицы не обязаны наносить урон</li>
+            <li>частицы не обязаны наносить урон</li>
+            <li>они создают атмосферу</li>
+            <li>игрок чувствует опасность заранее</li>
+          </ul>
+
+
+      
+# 3 
+      - type: "oneImage"
+        title: "🔊 3. Звук"
+        img:
+            src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module4/lesson40-43/%F0%9F%94%8A%203.%20%D0%97%D0%B2%D1%83%D0%BA.png?raw=true"
+            width: 100%
+            maxWidth: "100%"
+            align: center
+      
+      - type: "code"
+        title: "🔊 3. Звук"
+        text: |    
+          <h5>Идея</h5>
+          <p>Когда игрок подходит или наступает на ловушку — он <b>сначала слышит звук</b>, а уже потом получает урон.</p>
+          <p><b>Примеры</b></p>            
+          <ul>
+            <li>шипы щелкают перед ударом</li>
+            <li>лава бурлит</li>
+            <li>платформа скрипит перед падением</li>
+          </ul>
+          <p>👉 Игрок учится реагировать на звук</p>  
+        code: |
+          DangerPart (Part)
+            ├── Sound (Sound)
+            └── Script
+        afterText: |
+          <ul>
+            <li><b>DangerPart</b> — сама ловушка</li>
+            <li><b>Sound</b> — звук (например, бурление лавы или щелчок шипов)</li>
+            <li><b>Script</b> — логика поведения</li>
+          </ul>
+
+      - type: "code"
+        title: "🧠 Скрипт"
+        code: |
+          -- получаем саму ловушку (Part)
+          local trap = script.Parent
+
+          -- находим звук внутри ловушки
+          local sound = trap:WaitForChild("Sound")
+
+          -- функция срабатывает, когда кто-то касается ловушки
+          trap.Touched:Connect(function(hit)
+
+              -- ищем Humanoid у того, кто коснулся
+              local humanoid = hit.Parent:FindFirstChild("Humanoid")
+
+              -- если это действительно игрок
+              if humanoid then
+
+                  -- ▶️ проигрываем звук предупреждения
+                  sound:Play()
+
+                  -- ⏳ даём игроку долю секунды понять опасность
+                  wait(0.3)
+
+                  -- ❤️ наносим урон (можно менять число)
+                  humanoid.Health -= 20
+              end
+          end)
+        afterText: |
+          <h4>🧒 Объяснение «по-детски»</h4>
+          <ul>
+            <li><b>🧱 trap</b> — это наша ловушка</li>
+            <li><b>🔊 sound</b> — звук, который предупреждает</li>
+            <li><b>👣 Touched</b> — момент, когда игрок наступил</li>
+            <li><b>❤️ Humanoid</b> — здоровье игрока</li>
+            <li><b>⏳ wait(0.3)</b> — маленькая пауза: <em>«Сначала звук → потом боль»</em></li>
+          </ul>
+          <h4>💡 Почему это круто</h4>
+          <ul>
+            <li>Игрок учится слушать игру</li>
+            <li>Звук = сигнал опасности</li>
+            <li>Даже без урона уже страшно и интересно</li>
+          </ul>
+
+      - type: "text"
+        title: "🧪 Идеи для экспериментов (без нового кода)"
+        text: |
+         <ul>
+            <li>громкость звука (Sound.Volume)</li>
+            <li>задержку (wait(1))</li>
+            <li>урон (Health -= 10)</li>
+          </ul>
+          <h4>🎮 Запомни:</h4>
+          <p>Хорошая ловушка — это не та, что убивает,а та, которая <b>предупреждает и учит игрока думать</b> 💥</p>
+
+# 4
+      - type: "oneImage"
+        title: "⏰ 4. Время и ожидание (wait)"
+        img:
+            src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module4/lesson40-43/4.%20%D0%92%D1%80%D0%B5%D0%BC%D1%8F%20%D0%B8%20%D0%BE%D0%B6%D0%B8%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20(wait).png?raw=true"
+            width: 100%
+            maxWidth: "100%"
+            align: center
+      
+      - type: "code"
+        title: "⏰ 4. Время и ожидание (wait)"
+        text: |    
+          <h5>Идея</h5>
+          <ul>
+            <li>Игрок наступает на пол →</li>
+            <li>пол <b>не сразу</b> опасный →</li>
+            <li>у игрока есть время <b>понять и убежать</b>.</li>
+          </ul>
+          <p><em>«Опасность может быть не мгновенной»</em></p>
+          <p><b>Примеры</b></p>            
+          <ul>
+            <li>пол пропадает через 2 секунды</li>
+            <li>лава медленно поднимается</li>
+            <li>шипы выезжают с задержкой</li>
+          </ul>
+          <h5>📦 Что нужно в Roblox Studio</h5>          
+        code: |
+            FallingFloor (Part)
+              └── Script
+        afterText: |
+          <ul>
+            <li><span style="font-family: monospace;">FallingFloor</span> — обычный блок</li>
+            <li><span style="font-family: monospace;">Script</span> — внутри блока</li>
+          </ul>
+      
+      - type: "code"
+        title: "🧩 Скрипт"        
+        code: |
+          -- Берём блок, который будет ловушкой
+          local floor = script.Parent
+
+          -- Флаг, чтобы ловушка сработала только один раз
+          local activated = false
+
+          -- Когда кто-то наступает на блок
+          floor.Touched:Connect(function(hit)
+
+            -- Если ловушка уже сработала — ничего не делаем
+            if activated then return end
+
+            -- Проверяем: это игрок?
+            local humanoid = hit.Parent:FindFirstChild("Humanoid")
+
+            if humanoid then
+              activated = true
+
+              -- 🟡 Предупреждение: меняем цвет
+              floor.BrickColor = BrickColor.new("Bright red")
+
+              -- ⏰ Ждём 2 секунды
+              wait(2)
+
+              -- ⬇️ Пол пропадает (падает)
+              floor.Anchored = false
+            end
+          end)
+        afterText: |
+          <h4>👶 Объяснение простыми словами</h4>
+          <ul>
+            <li>
+              <span style="font-family: monospace;">script.Parent</span>
+              <p>👉 «Этот скрипт управляет этим полом»</p>
+            </li>
+            <li>
+              <span style="font-family: monospace;">Touched</span>
+              <p>👉 «Игрок наступил»</p>
+            </li>
+            <li>
+              <span style="font-family: monospace;">activated</span>
+              <p>👉 «Чтобы ловушка не срабатывала бесконечно»</p>
+            </li>
+            <li>
+              <span style="font-family: monospace;">wait(2)</span>
+              <p>👉 «Игра даёт игроку время подумать»</p>
+            </li>
+            <li>
+              <span style="font-family: monospace;">Anchored = false</span>
+              <p>👉 «Пол больше не приклеен — он падает»</p>
+            </li>
+          </ul>
+          <h4>🧠 Очень важная мысль</h4>
+          <p><b>⏰ Время = напряжение</b></p>
+          <p>Чем больше ожидание — тем страшнее и интереснее</p>
+          <h4>🧪 Что можно попробовать самому</h4>
+          <p>Без нового кода:</p>
+          <ul>
+            <li>изменить <span style="font-family: monospace;">wait(2)</span> на <span style="font-family: monospace;">wait(5)</span></li>
+            <li>поменять цвет предупреждения</li>
+            <li>сделать пол <b>полупрозрачным</b> перед падением</li>
+            <li>убрать <span style="font-family: monospace;">activated</span> и посмотреть, что будет 😄</li>
+          </ul>
+          <h4>⭐ Запомни</h4>
+          <ul>
+            <li><span style="font-family: monospace;">wait()</span> — это <b>время для игрока</b></li>
+            <li>опасность может быть <b>умной</b>, а не мгновенной</li>
+            <li>такие ловушки делают игру <b>честной и захватывающей<</b>/li>
+          </ul>
+      
+
+   #  5
+
+      - type: "oneImage"
+        title: "5. Движущиеся ловушки"
+        img:
+            src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module4/lesson40-43/5.%20%D0%94%D0%B2%D0%B8%D0%B6%D1%83%D1%89%D0%B8%D0%B5%D1%81%D1%8F%20%D0%BB%D0%BE%D0%B2%D1%83%D1%88%D0%BA%D0%B8.png?raw=true"
+            width: 100%
+            maxWidth: "100%"
+            align: center
+      
+      - type: "text"
+        title: "🚧 5. Движущиеся ловушки"
+        text: |    
+          <h5>Идея</h5>
+          <ul>
+            <li>Шипы <b>прячутся</b>,</li>
+            <li>потом <b>ждут</b>,</li>
+            <li>потом <b>резко выезжают, наносят урон</b>,</li>
+            <li>и <b>снова прячутся</b>.</li>
+          </ul>
+          <h5>🧱 Падающий пол</h5>            
+          <ul>
+            <li>игрок наступил</li>
+            <li>подождали</li>
+            <li>пол исчез</li>
+          </ul>
+          <h5>🌋 Поднимающаяся лава</h5>            
+          <ul>
+            <li>лава медленно растёт</li>
+            <li>времени всё меньше</li>
+            <li>паника 😄</li>
+          </ul>
+          <h5>🌵 Выезжающие шипы (TweenService)</h5>            
+          <ul>
+            <li>шипы прячутся</li>
+            <li>затем резко выезжают</li>
+            <li>снова прячутся</li>
+          </ul>
+          <p>👉 Это не просто урон, а ритм и опасность</p>    
+
+      - type: "code"
+        title: "🌵 Пример: выезжающие шипы (TweenService)"
+        text: |    
+          <h5>📦 Подготовка в Studio</h5>
+          <ol>
+            <li>Создай Part → назови Spikes</li>
+            <li>Поставь его в пол (чтобы он был «спрятан»)</li>
+            <li>Вставь в него Script</li>
+          </ol>
+        code: |
+          -- Получаем сервис анимаций
+          local TweenService = game:GetService("TweenService")
+
+          -- Это наши шипы
+          local spikes = script.Parent
+
+          -- Запоминаем начальное (спрятанное) положение
+          local hiddenPosition = spikes.Position
+
+          -- Позиция, куда шипы выезжают (чуть выше)
+          local upPosition = hiddenPosition + Vector3.new(0, 5, 0)
+
+          -- Настройки анимации (быстро и резко)
+          local tweenInfo = TweenInfo.new(
+            0.3, -- время движения
+            Enum.EasingStyle.Quad,
+            Enum.EasingDirection.Out
+          )
+
+          -- Анимация: выезд шипов
+          local showTween = TweenService:Create(
+            spikes,
+            tweenInfo,
+            {Position = upPosition}
+          )
+
+          -- Анимация: спрятать шипы
+          local hideTween = TweenService:Create(
+            spikes,
+            tweenInfo,
+            {Position = hiddenPosition}
+          )
+
+          -- Бесконечный цикл ловушки
+          while true do
+            -- Ждём перед атакой
+            wait(2)
+
+            -- Шипы выезжают
+            showTween:Play()
+
+            -- Они опасны короткое время
+            wait(1)
+
+            -- Шипы прячутся обратно
+            hideTween:Play()
+          end
+        afterText: |
+          <h4>🧠 Что здесь происходит (по шагам)</h4>
+          <ol>
+            <li>TweenService — делает плавное движение</li>
+            <li>Position + Vector3 — мы двигаем шипы вверх</li>
+            <li>wait() — создаёт ритм и ожидание</li>
+            <li>while true — ловушка работает всегда</li>
+            <li>Play() — запускает движение</li>
+          </ol>
+          <p>«Шипы — как злая игрушка:сидят тихо → ждут → БАЦ! → снова спрятались»</p>
+
+   
+
+# ===============================
+# ⭐ УРОК 42. Красота и поведение ловушек
+# ===============================
+  - id: 42
+    title: "⭐ УРОК 42. Мини-практика, попробуй сам - Ловушки"
+    shortDescription: "Мы учимся управлять поведением ловушек (ВАУ-ЭФФЕКТЫ + ВРЕМЯ)."
+    # video: "https://www.youtube.com/embed/LAVATRAP022"
+
+    content:
+
+     
+
+      - type: "text"
+        title: "Мини-практика, попробуй сам"
+        text: "📦 Тебе нужно создать 3 разные ловушки"
+
+      - type: "text"
+        title: "🎮 Как объединить ловушки в одну полосу испытаний"
+        text: |
+          <h4>🧠 Главная идея (самое важное)</h4>
+          <ul>
+            <li><b>Полоса ловушек — это не один скрипт.</b></li>
+            <li>Это <b>последовательность разных зон</b>, где каждая ловушка проверяет <em>другое умение игрока.</em></li>
+          </ul>
+      
+      - type: "text"
+        title: "🧩 1. Думаем как дизайнер игры (а не программист)"
+        text: |
+          <h4>Полоса = ритм:</h4>
+          <ol>
+            <li>игрок бежит</li>
+            <li>пугается</li>
+            <li>ждёт</li>
+            <li>ускоряется</li>
+            <li>ошибается или побеждает</li>
+          </ol>
+
+
+      - type: "oneImage"
+        title: "5. Движущиеся ловушки"
+        img:
+            src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module4/lesson40-43/%D0%9C%D0%B8%D0%BD%D0%B8-%D0%BF%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0,%20%D0%BF%D0%BE%D0%BF%D1%80%D0%BE%D0%B1%D1%83%D0%B8%CC%86%20%D1%81%D0%B0%D0%BC.png?raw=true"
+            width: 100%
+            maxWidth: "100%"
+            align: center
+      
+      - type: "code"
+        title: "🗺 Пример простой полосы"
+        code: |
+          START
+            ↓
+          🧱 Падающий пол (обман)
+            ↓
+          🎵 Ритмичные шипы (тайминг)
+            ↓
+          🔥 Поднимающаяся лава (паника)
+            ↓
+          🏁 Финиш / чекпоинт
+        afterText: |
+          <p>Каждая ловушка:</p>
+          <ul>
+            <li>отдельный Part</li>
+            <li>отдельный Script</li>
+            <li>простая логика</li>
+          </ul>
+          <p>❗ НЕ нужно один огромный скрипт</p>
+
+      - type: "code"
+        title: "🧱 2. Как это выглядит в Explorer"
+        code: |
+          Workspace
+          ├── Trap_1_FallingFloor
+          │   └── Script
+          ├── Trap_2_Spikes
+          │   └── Script
+          ├── Trap_3_Lava
+          │   └── Script
+          ├── Checkpoint
+
+        afterText: |          
+          <ul>
+            <li>👉 Это нормально</li>
+            <li>👉 Это правильно</li>
+            <li>👉 Так делают настоящие игры</li>
+          </ul>
+
+
+      - type: "text"
+        title: "📦 Тебе нужно создать 3 разные ловушки"
+        text: |
+          <h5>🔥 1. Движущаяся лава</h5>
+          <p>Идея: лава медленно поднимается вверх.</p>
+          <p>Игрок должен:</p>
+          <ul>
+            <li>заметить опасность</li>
+            <li>ускориться</li>
+            <li>убежать вовремя</li>
+          </ul>
+          <p>👉 Подсказка: используй Position + wait() или TweenService</p>
+          <h6>📦 Что нужно</h6>
+          <p>Lava (Part) ── Script</p>
+          <h5>🧱 2. Падающий пол</h5>
+          <p>Идея: пол не исчезает сразу.</p>
+          <p>Последовательность:</p>
+          <ul>
+            <li>игрок наступил</li>
+            <li>прошло немного времени</li>
+            <li>пол пропал или упал</li>
+          </ul>
+          <p>👉 Подсказка: Touched → wait() → Anchored = false</p>
+          <h6>📦 Что нужно</h6>
+          <p>FallingFloor (Part) ── Script</p>
+          <h5>🎵 3. Ловушка с ритмом (как музыка)</h5>
+          <p>Идея: ловушка работает по циклу.</p>
+          <p>Например:</p>
+          <ul>
+            <li>шипы появляются</li>
+            <li>затем исчезают</li>
+            <li>и так снова и снова</li>
+          </ul>
+          <p>👉 Подсказка: while true do → wait() → действие</p>
+          <h6>📦 Что нужно</h6>
+          <p>Spikes (Part) ── Script</p>
+
+      - type: hint
+        title: "🔥 1. Движущаяся лава 🔑"
+        code: |
+          -- Берём лаву
+          local lava = script.Parent
+
+          -- Насколько лава поднимается каждый раз
+          local step = 1
+
+          -- Как часто она поднимается
+          local delayTime = 1
+
+          -- Лава поднимается бесконечно
+          while true do
+            wait(delayTime)
+
+            -- Поднимаем лаву вверх
+            lava.Position = lava.Position + Vector3.new(0, step, 0)
+          end
+
+      
+      - type: hint
+        title: "🧱 2. Падающий пол 🔑"
+        code: |
+          -- Берём пол
+          local floor = script.Parent
+
+          -- Чтобы пол сработал только один раз
+          local activated = false
+
+          floor.Touched:Connect(function(hit)
+            -- Если уже падал — ничего не делаем
+            if activated then return end
+
+            -- Проверяем: это игрок?
+            local humanoid = hit.Parent:FindFirstChild("Humanoid")
+
+            if humanoid then
+              activated = true
+
+              -- Ждём перед падением
+              wait(2)
+
+              -- Пол падает
+              floor.Anchored = false
+            end
+          end)
+
+      
+      - type: hint
+        title: "🎵 3. Ловушка с ритмом 🔑"
+        code: |
+          -- Берём шипы
+          local spikes = script.Parent
+
+          -- Начальное состояние — спрятаны
+          spikes.Transparency = 1
+          spikes.CanCollide = false
+
+          while true do
+            -- Шипы появляются
+            spikes.Transparency = 0
+            spikes.CanCollide = true
+
+            wait(1) -- опасно
+
+            -- Шипы исчезают
+            spikes.Transparency = 1
+            spikes.CanCollide = false
+
+            wait(1) -- безопасно
+          end
+  
+      
+
+
+    quiz:
+      - question: "Что делает Humanoid.Health?"
+        answers:
+          - "Отвечает за движение"
+          - "Хранит здоровье игрока"
+          - "Телепортирует персонажа"
+        correct: 1
+
+      - question: "Как сделать мгновенную смерть?"
+        answers:
+          - "humanoid.Health = 0"
+          - "humanoid:Destroy()"
+          - "player:Kill()"
+        correct: 0
+
+      - question: "Что нужно для постепенного урона?"
+        answers:
+          - "Touched"
+          - "while и wait()"
+          - "Color"
+        correct: 1
+
+      - question: "Зачем нужен TouchEnded?"
+        answers:
+          - "Чтобы начать урон"
+          - "Чтобы закончить урон"
+          - "Чтобы телепортировать игрока"
+        correct: 1
+
+      - question: "Почему урон — это механика?"
+        answers:
+          - "Потому что он красивый"
+          - "Потому что влияет на игровой процесс"
+          - "Потому что использует Part"
+        correct: 1
+
+    end:
+      - type: "text"
+        title: "🎉 Итог: Теперь ты умеешь:"
+        text: |
+          <ul>
+            <li>делать разные виды урона</li>
+            <li>управлять здоровьем игрока</li>
+            <li>создавать честные и понятные ловушки</li>
+            <li>использовать Touched и TouchEnded</li>
+          </ul>
+          <h4>💬 Ты уже создаёшь настоящие игровые механики, а не просто блоки.</h4>
+
+
+
 # ============================================================
 # УРОК 30 — Расширенные телепорты
 # ============================================================
