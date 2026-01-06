@@ -3829,343 +3829,236 @@ lessons:
 
 
 # ============================================================
-# УРОК 43 — Расширенные телепорты
+# 🌀 УРОК 43 — ПЕРЕХОДЫ И НАВИГАЦИЯ
 # ============================================================
   - id: 43
-    title: "⭐ Урок 43. Телепорты: портал, телепорт-гейт, переходы между комнатами"
-    shortDescription: "Учимся создавать порталы, двусторонние телепорты и телепорты в дом."
-    # video: "https://www.youtube.com/embed/TELEPORT25"
+    title: "🌀 УРОК 43 — ПЕРЕХОДЫ И НАВИГАЦИЯ"
+    shortDescription: "Учимся перемещать игрока между зонами уровня: порталы, двери, двусторонние переходы и телепорт-гейты."
+    
 
     content:
       - type: "text"
-        text: "Сегодня мы научимся создавать по-настоящему крутые телепорты, не просто перемещение вверх-вниз, а целые переходы между зонами, комнатами и домами."
+        text: |
+            Представь игру без телепортов.
+            <p>Один длинный путь, всё на одном месте… скучно 😴</p>
+            <br>
+            Телепорты делают игру:<br>
+            🚪 многоуровневой  <br>
+            🗺️ похожей на настоящий мир <br> 
+            🎮 интересной и динамичной  <br><br>
+
+            В этом уроке мы научимся **перемещать игрока между зонами** :<br>
+            комнатами, локациями, секретами и домами.
+      
+      - type: "note"
+        text: |
+          🧠 Любой телепорт в Roblox — это всегда одно и то же:<br><br>
+
+          1️⃣ игрок касается объекта  <br>
+          2️⃣ мы находим HumanoidRootPart  <br>
+          3️⃣ переносим его в другую точку  <br><br>
+
+          Меняется только МЕСТО, куда мы телепортируем.
 
       - type: "text"
-        title: "🎒 Что мы изучим?"
+        title: "🎒 Сегодня ты научишься:"
         text:
-          - "<b>Телепорты</b> — это одна из самых популярных механик: порталы, входы в дом, переход на новую локацию."
-          - "В этом уроке ты узнаешь:"
-          - "<b>1)</b> 🌀 что такое портал"
-          - "<b>2)</b> 🏰 что такое телепорт-гейт"
-          - "<b>3)</b> 🚪 как делать переходы между комнатами"
-          - "<b>4)</b> 🔁 как сделать двусторонний телепорт"
-          - "<b>5)</b> 🏡 как сделать телепорт в дом"
-          - "И самое главное — всё это будет работать через <b>HumanoidRootPart</b>, который мы изучили в Уроке 24."
-
-
-      - type: "gallery"
-        title: "Примеры порталов"
-        images:
-          - "https://i.ytimg.com/vi/Es_FlUi1kY8/sddefault.jpg?v=645ebf24"
-          - "https://i.ytimg.com/vi/KBrTuJVGlcY/mqdefault.jpg"
-          - "https://i.ytimg.com/vi/qWDm784rUjU/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAaZ6MgwKtedzVdO94F2XZAkeBquw"
-
+          - "🌀 делать обычные порталы"
+          - "🔁 создавать двусторонние телепорты"
+          - "🚪 делать переходы между комнатами"
+          - "🏡 телепортировать игрока в дом или секретную зону"
+          - "🏰 создавать телепорт-гейты с условием"
+      
       - type: "tip"
-        title: "🧠 Напоминание: кого мы телепортируем?"
+        title: "🧠 Кого мы перемещаем?"
         text: |
-          - "Игрок = Character → у него есть HumanoidRootPart"
-          - "И именно RootPart нужно перемещать, а не голову, ноги или всё тело по отдельности."
+          Игрок — это Character.
+          У Character есть HumanoidRootPart — центр игрока.
 
+          ❗ Мы всегда перемещаем HumanoidRootPart,
+          а не голову, не ноги и не всю модель целиком.
+# 🌀 Часть 1 — Обычный портал (A → B)
 
+      - type: "steps"
+        title: "🌀 Обычный портал (A → B)"
+        items:
+          - "Создай Part → PortalA"
+          - "Создай Part → ExitPoint"
+          - "Вставь Script внутрь PortalA"
+    
+      - type: "code"
+        title: "✨ Код обычного телепорта"
+        code: |
+          local portal = script.Parent
+          local exitPoint = workspace:WaitForChild("ExitPoint")
 
+          portal.Touched:Connect(function(hit)
+              local root = hit.Parent:FindFirstChild("HumanoidRootPart")
+              if root then
+                  root.CFrame = exitPoint.CFrame + Vector3.new(0, 3, 0)
+              end
+          end)
+    
+      - type: "note"
+        text: "Игрок зашёл → ФШУХ! → появился в другой зоне."
+# 🔁 Часть 2 — Двусторонний телепорт (A ↔ B)
       - type: "text"
-        title: "🌀 Часть 1 — Обычный портал (портал А → точка B)"
-        textH4: "📦 Подготовка:"
-        text:
-          - "1. Создай Part → назови его <b>PortalA</b>"
-          - "2. Создай другой Part → назови <b>ExitPoint</b>"
-          - "3. Вставь <b>Script</b> внутрь PortalA"
-
+        title: "🔁 Двусторонний телепорт"
+        text: |
+            Это как двери:<br>
+            зашёл в одну — вышел в другую.<br>
+            А потом можно вернуться обратно.<br>
+      
       - type: "code"
-        title: "✨ Код обычного телепорта:"
+        title: "PortalA → PortalB"
         code: |
-          local portal = script.Parent
-          local exit = workspace.ExitPoint
+            local portal = script.Parent
+            local target = workspace:WaitForChild("PortalB")
 
-          portal.Touched:Connect(function(hit)
-              local char = hit.Parent
-              local root = char:FindFirstChild("HumanoidRootPart")
-
-              if root then
-                  -- переносим игрока в точку выхода
-                  root.CFrame = exit.CFrame + Vector3.new(0, 3, 0)
-                  print("Телепорт в другую зону!")
-              end
-          end)
-        afterText: "👉 Игрок заходит → <em>ФШУУХ!</em> → появляется на новом месте."
-
-      - type: "text"
-        title: "🔁 Часть 2 — Двусторонний телепорт (A ↔ B)"
-        text:
-          - "Это как двери из мира Portal 🔵🔶"
-          - "Заходишь в портал А → оказываешься в B."
-          - "Заходишь в портал B → оказываешься снова в A."
-          - "<h4> 📦 Подготовка:</h4>"
-          - " <ul><li>PortalA</li>
-            <li>PirtalB</li><li>В обоих одинаковый код (только цель отличается)</li></ul>"
+            portal.Touched:Connect(function(hit)
+                local root = hit.Parent:FindFirstChild("HumanoidRootPart")
+                if root then
+                    root.CFrame = target.CFrame + Vector3.new(0, 3, 0)
+                end
+            end)
+      
       - type: "code"
-        title: "✨ Код PortalA (ведёт в B):"
+        title: "PortalB → PortalA"
         code: |
-          local portal = script.Parent
-          local target = workspace.PortalB
+            local portal = script.Parent
+            local target = workspace:WaitForChild("PortalA")
 
-          portal.Touched:Connect(function(hit)
-              local char = hit.Parent
-              local root = char:FindFirstChild("HumanoidRootPart")
-
-              if root then
-                  root.CFrame = target.CFrame + Vector3.new(0, 3, 0)
-                  print("A → B")
-              end
-          end)
-      - type: "code"
-        title: "✨ Код PortalB (ведёт в A):"
-        code: |
-          local portal = script.Parent
-          local target = workspace.PortalA
-
-          portal.Touched:Connect(function(hit)
-              local char = hit.Parent
-              local root = char:FindFirstChild("HumanoidRootPart")
-
-              if root then
-                  root.CFrame = target.CFrame + Vector3.new(0, 3, 0)
-                  print("B → A")
-              end
-          end)
-        afterText: "👉 Игрок может бегать туда-сюда, как через магические врата."
-
+            portal.Touched:Connect(function(hit)
+                local root = hit.Parent:FindFirstChild("HumanoidRootPart")
+                if root then
+                    root.CFrame = target.CFrame + Vector3.new(0, 3, 0)
+                end
+            end)
+      
       - type: "warning"
-        text: 
-         - "Следи, чтобы порталы не стояли слишком близко, иначе игрок может «застрять»."
+        text: "Не ставь порталы слишком близко — игрок может застрять."
+# 🚪 Часть 3 — Переход между комнатами
 
-      - type: "code"
-        title: "🚪 Часть 3 — Переход между комнатами (например, в другой зал)"    
+      - type: "text"
+        title: "🚪 Переход между комнатами"
         text: |
-          Это похоже на двери в торговом центре:
-          <p>зашёл — и сразу оказался в другом помещении.</p>
-          <h4>📦 Подготовка:</h4>
-            <ul>
-              <li>Сделай комнату <b>Room1</b></li>
-              <li>Сделай комнату <b>Room2</b></li>
-              <li>В Room1 поставь Part → Door1</li>
-              <li>В Room2 поставь Part → Door2</li>
-              <li>Все двери Anchored = true</li>
-            </ul>
+          Как в торговом центре:<br>
+          вошёл в дверь — оказался в другом помещении.
+      
+      - type: "code"
+        title: "Код двери"
         code: |
           local door = script.Parent
-          local targetRoomDoor = workspace.Door2  -- куда переносим
+          local targetDoor = workspace:WaitForChild("Door2")
 
           door.Touched:Connect(function(hit)
-              local character = hit.Parent
-              local root = character:FindFirstChild("HumanoidRootPart")
-
+              local root = hit.Parent:FindFirstChild("HumanoidRootPart")
               if root then
-                  root.CFrame = targetRoomDoor.CFrame + Vector3.new(0, 3, 0)
-                  print("Переход в другую комнату!")
+                  root.CFrame = targetDoor.CFrame + Vector3.new(0, 3, 0)
               end
           end)
-        afterText: "👉 Представь, что игрок резко «входит» в соседнюю комнату."
-      
+# 🏡 Часть 4 — Телепорт в дом или секретную зону
+
+      - type: "text"
+        title: "🏡 Телепорт в дом"
+        text: |
+          Одна из самых любимых механик:<br>
+          игрок заходит в куст, дверь или люк<br>
+          и попадает в дом, бункер или тайник.
 
       - type: "code"
-        title: "🏡 Часть 4 — Телепорт в дом (или в секретную комнату)"    
-        text: |
-          Ох, это любимая механика детей!
-          <p>Игрок может войти в маленькую дверь, землю или куст,</p>
-          <p>и попасть в дом, бункер, секретную базу.</p>
-          <h4>📦 Подготовка:</h4>
-            <ul>
-              <li>Портал: <b>HousePortal</b></li>
-              <li>Точка внутри дома: <b>InsideHouse</b></li>
-            </ul>
+        title: "Телепорт в дом"
         code: |
           local portal = script.Parent
-          local housePoint = workspace.InsideHouse
+          local insideHouse = workspace:WaitForChild("InsideHouse")
 
           portal.Touched:Connect(function(hit)
-              local char = hit.Parent
-              local root = char:FindFirstChild("HumanoidRootPart")
-
+              local root = hit.Parent:FindFirstChild("HumanoidRootPart")
               if root then
-                  root.CFrame = housePoint.CFrame + Vector3.new(0, 3, 0)
-                  print("Добро пожаловать в дом!")
+                  root.CFrame = insideHouse.CFrame + Vector3.new(0, 3, 0)
               end
           end)
+# 🧪 Часть 5 — Телепорт-гейт (с условием)
 
+      - type: "text"
+        title: "🧪 Телепорт-гейт"
+        text: |
+          Этот телепорт работает ТОЛЬКО<br>
+          если игрок выполнил условие:<br>
+          нашёл ключ, нажал кнопку, активировал рычаг.
 
       - type: "code"
-        title: "🧪 Часть 5 — Телепорт-гейт (требует действие)"    
-        text: |
-          Интересная механика: телепорт срабатывает только если игрок что-то сделал, например:
-          <ul>
-              <li>собрал ключ</li>
-              <li>нажал кнопку</li>
-              <li>активировал рычаг</li>
-            </ul>
-          <h4>📦 Подготовка:</h4>
-            <ul>
-              <li>Part → Gate</li>
-              <li>BoolValue → <b>Activated = false</b></li>
-            </ul>
+        title: "Код телепорт-гейта"
         code: |
           local gate = script.Parent
-          local exit = workspace.SecretRoom
-          local activated = gate:FindFirstChild("Activated")
+          local target = workspace:WaitForChild("SecretRoom")
+          local activated = gate:WaitForChild("Activated")
 
           gate.Touched:Connect(function(hit)
-              local char = hit.Parent
-              local root = char:FindFirstChild("HumanoidRootPart")
-
+              local root = hit.Parent:FindFirstChild("HumanoidRootPart")
               if root and activated.Value == true then
-                  root.CFrame = exit.CFrame + Vector3.new(0, 3, 0)
-                  print("Гейт активирован → телепорт!")
-              end
-          end)
-        afterText: "👉 Можно сделать квест «найди ключ», чтобы телепорт заработал."
-
-      - type: "code"
-        title: "🎨 Визуальные эффекты (по желанию)"    
-        text: |
-          Используй:
-            <ul>
-              <li><b>ParticleEmitter</b> — искры, дым, магия</li>
-              <li><b>TweenService</b> — плавное свечение портала</li>
-              <li><b>Sound</b> — звук портала</li>
-              <li><b>BillboardGui</b> — надпись «ПОРТАЛ»</li>
-            </ul>
-          Например:
-        code: |
-          portal.Color = Color3.fromRGB(100, 0, 255)
-
-          //Структура объекта Portal в Workspace должна быть такой:
-          Portal (Part)
-            ├── Script
-            ├── Sound
-            ├── ParticleEmitter
-
-      - type: "hint"
-        title: "🧙‍♂️ Подсказка - Полный код внутри Script 👁️"
-        code: |
-          -- Получаем сам портал
-          local portal = script.Parent
-
-          -- Частицы (искры, магия)
-          local particles = portal:FindFirstChild("ParticleEmitter")
-
-          -- Звук телепорта
-          local sound = portal:FindFirstChild("Sound")
-
-          -- Цель, куда будем переносить игрока
-          local target = workspace:WaitForChild("ExitPoint")
-
-          -- TweenService для плавного свечения
-          local TweenService = game:GetService("TweenService")
-
-
-          ----------------------------------------------------------
-          -- 1. СОЗДАЁМ НАДПИСЬ "ПОРТАЛ" ЧЕРЕЗ BillboardGui
-          ----------------------------------------------------------
-
-          local billboard = Instance.new("BillboardGui")
-          billboard.Parent = portal
-          billboard.Adornee = portal
-          billboard.Size = UDim2.new(0, 100, 0, 50)
-          billboard.StudsOffset = Vector3.new(0, 3, 0) -- над порталом
-
-          local label = Instance.new("TextLabel")
-          label.Parent = billboard
-          label.Size = UDim2.new(1, 0, 1, 0)
-          label.BackgroundTransparency = 1
-          label.Text = "ПОРТАЛ"
-          label.TextScaled = true
-          label.TextColor3 = Color3.fromRGB(255, 255, 0)
-          label.Font = Enum.Font.FredokaOne
-
-
-          ----------------------------------------------------------
-          -- 2. ПЛАВНОЕ СВЕЧЕНИЕ ПОРТАЛА (TweenService)
-          ----------------------------------------------------------
-
-          local glowInfo = TweenInfo.new(
-              1.5,                          -- длительность 1.5 сек
-              Enum.EasingStyle.Sine,       -- плавная волна
-              Enum.EasingDirection.InOut,
-              -1,                          -- повторять бесконечно
-              true                         -- реверс (туда-сюда)
-          )
-
-          -- Меняем цвет на магический
-          local glowTween = TweenService:Create(portal, glowInfo, {
-              Color = Color3.fromRGB(120, 0, 255) -- фиолетовое сияние
-          })
-
-          glowTween:Play()
-
-
-          ----------------------------------------------------------
-          -- 3. ОБРАБОТКА ТЕЛЕПОРТА
-          ----------------------------------------------------------
-
-          portal.Touched:Connect(function(hit)
-              local char = hit.Parent
-              local root = char:FindFirstChild("HumanoidRootPart")
-
-              if root then
-                  
-                  -- Включаем частицы
-                  if particles then
-                      particles.Enabled = true
-                  end
-                  
-                  -- Проигрываем звук телепорта
-                  if sound then
-                      sound:Play()
-                  end
-                  
-                  -- Сам телепорт
                   root.CFrame = target.CFrame + Vector3.new(0, 3, 0)
-                  print("Телепорт — в путь!")
-
-                  -- Через 1 секунду выключаем частицы
-                  task.delay(1, function()
-                      if particles then
-                          particles.Enabled = false
-                      end
-                  end)
               end
           end)
+      
+      - type: "text"
+        title: "🧪 Практика"
+        text: |
+          Попробуй сделать сам:<br><br>
+
+          1️⃣ двусторонний телепорт между двумя платформами  <br>
+          2️⃣ дверь, ведущую в секретную комнату  <br>
+          3️⃣ телепорт-гейт, который работает только после нажатия кнопки  
 
 
     quiz:
-      - question: "Какой объект мы ищем, чтобы телепортировать игрока?"
+      - question: "Что мы перемещаем при телепорте?"
         answers:
           - "Head"
           - "HumanoidRootPart"
-          - "Torso"
+          - "Humanoid"
         correct: 1
 
-      - question: "Что делает Vector3.new(0,3,0) в телепорте?"
+      - question: "Когда срабатывает телепорт?"
         answers:
-          - "Поднимает игрока выше на 3 студии"
-          - "Меняет скорость игрока"
-          - "Добавляет урон"
+          - "Когда игрок нажимает клавишу"
+          - "Когда игрок касается объекта"
+          - "Когда игрок прыгает"
+        correct: 1
+
+      - question: "Что делает телепорт-гейт?"
+        answers:
+          - "Всегда телепортирует"
+          - "Работает только при выполнении условия"
+          - "Наносит урон"
+        correct: 1
+
+      - question: "Чем отличается двусторонний телепорт?"
+        answers:
+          - "Он работает только один раз"
+          - "Можно вернуться обратно"
+          - "Он наносит урон"
+        correct: 1
+
+      - question: "Зачем добавляют Vector3.new(0,3,0)?"
+        answers:
+          - "Чтобы игрок не застрял в полу"
+          - "Чтобы увеличить скорость"
+          - "Чтобы нанести урон"
         correct: 0
 
     end:
       - type: "text"
-        title: "🎉 Итог: Теперь ты умеешь: 🧠"
+        title: "🎉 Итог: теперь ты умеешь"
         text: |
-          <ul>
-            <li>обычные телепорты</li>
-            <li>двусторонние порталы</li>
-            <li>переходы между комнатами</li>
-            <li>телепорты в дом</li>
-            <li>телепорт-гейты с условиями</li>
-            <li>а также знаешь, что должен двигаться HumanoidRootPart</li>
-          </ul>
-          <h4>Это огромный шаг в создании настоящих уровней и приключений! 🎮</h4>
+          ✅ создавать порталы  <br>
+          ✅ делать переходы между зонами  <br>
+          ✅ использовать HumanoidRootPart  <br>
+          ✅ делать двусторонние телепорты  <br>
+          ✅ создавать телепорт-гейты с условиями  <br><br>
 
+          👉 В следующем уроке мы начнём делать зоны,
+          которые влияют на игрока: урон, лечение и замедление.
 
 # ============================================================
 # ⭐ УРОК 44 — Зоны: опасность и безопасность

@@ -28,6 +28,7 @@
   <li></li>
 </ul>
 
+<br>
 - type: codeBlock
   title: "🛠 Пример: меняем цвет куба"
   code: |
