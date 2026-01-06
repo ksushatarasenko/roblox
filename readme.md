@@ -8,6 +8,7 @@
 •	🎮 <i class="ri-gamepad-line"></i>
 🎯 👉 ➡️. 👁️  📍. ✔️ ✅
 ➡
+🐌
 
 
 <b></b>

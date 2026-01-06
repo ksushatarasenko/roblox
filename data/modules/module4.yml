@@ -2406,7 +2406,6 @@ lessons:
           <p>«Если ты понял этот скрипт — ты уже не просто кодер, ты создатель механик.»</p>
 
 
-
 # ===============================
 # ⭐ УРОК 39. Опасные зоны — базовая идея
 # ===============================
@@ -3517,7 +3516,6 @@ lessons:
           <p>«Шипы — как злая игрушка:сидят тихо → ждут → БАЦ! → снова спрятались»</p>
 
    
-
 # ===============================
 # ⭐ УРОК 42. Красота и поведение ловушек
 # ===============================
@@ -3556,14 +3554,6 @@ lessons:
           </ol>
 
 
-      - type: "oneImage"
-        title: "5. Движущиеся ловушки"
-        img:
-            src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module4/lesson40-43/%D0%9C%D0%B8%D0%BD%D0%B8-%D0%BF%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0,%20%D0%BF%D0%BE%D0%BF%D1%80%D0%BE%D0%B1%D1%83%D0%B8%CC%86%20%D1%81%D0%B0%D0%BC.png?raw=true"
-            width: 100%
-            maxWidth: "100%"
-            align: center
-      
       - type: "code"
         title: "🗺 Пример простой полосы"
         code: |
@@ -3596,7 +3586,6 @@ lessons:
           ├── Trap_3_Lava
           │   └── Script
           ├── Checkpoint
-
         afterText: |          
           <ul>
             <li>👉 Это нормально</li>
@@ -3606,8 +3595,117 @@ lessons:
 
 
       - type: "text"
-        title: "📦 Тебе нужно создать 3 разные ловушки"
+        title: "🔥 3. Почему ловушки НЕ мешают друг другу"
         text: |
+          <p>Потому что:</p>
+          <ul>
+            <li>каждая ловушка <b></b></li>
+            <li><span style="font-family: monospace;">Touched</span> срабатываеследит только за собойт <b>локально</b></li>
+            <li><span style="font-family: monospace;">while true do</span> работает <b>только внутри объекта</b></li>
+          </ul>
+          <p>🧠 Игрок = один</p>
+          <p>🧱 Ловушки = много маленьких систем</p>
+
+      - type: "code"
+        title: "⏰ 4. Как сделать ощущение одной «живой» полосы"
+        text: |
+          <h5>✅ Одинаковый ритм</h5>
+        code: |
+          wait(1)  -- у всех ловушек похожие паузы
+        afterText: |    
+          <h5>✅ Нарастающая сложность</h5>      
+          <ul>
+            <li>сначала медленно</li>
+            <li>потом быстрее</li>
+            <li>потом паника 😄</li>
+          </ul>
+          <h5>✅ Логика зон</h5>      
+          <p><b>Каждая ловушка = новый вызов</b></p>
+
+
+      - type: "text"
+        title: "🚫 Типичные ошибки при создании полос ловушек"
+        text: |
+          <h5>❌ Ошибка 1. «Всё убивает сразу»</h5>
+          <p>Как выглядит</p>
+          <ul>
+            <li>лава</li>
+            <li>шипы</li>
+            <li>падающий пол</li>
+          </ul>
+          <p><b>➡️ всё = мгновенная смерть</b></p>
+          <p><b>Почему это плохо: </b>Игрок не понимает, где ошибся не учится быстро злится 😠</p>
+          <p><b>✅ Как правильно</b> - сначала предупреждение (цвет / звук), потом урон, иногда — шанс спастись.</p>
+          <h5>❌ Ошибка 2. Слишком много ловушек подряд</h5>
+          <p>Как выглядит</p>
+          <ul>
+            <li>лава → шипы → лава → шипы → лава</li>
+            <li>без пауз и передышек</li>
+          </ul>
+          <p><b>Почему это плохо: </b>Игрок устает путается перестаёт получать удовольствие</p>
+          <p><b>✅ Как правильно</b> - платформа без урона место отдышаться потом следующий вызов</p>
+          <h5>❌ Ошибка 3. Нет чекпоинтов</h5>
+          <p>Как выглядит</p>
+          <ul>
+            <li>длинная полоса</li>
+            <li>один Spawn в начале</li>
+            <li>упал в конце → начинай сначала 😭</li>
+          </ul>
+          <p><b>Почему это плохо: </b>Игрок теряет мотивацию не хочет продолжать</p>
+          <p><b>✅ Как правильно</b> - Каждые 2–3 ловушки → чекпоинт. <em>«Ты продвинулся. Молодец.»</em></p>
+          <h5>❌ Ошибка 4. Ловушки не видно и не слышно</h5>
+          <p>Как выглядит</p>
+          <ul>
+            <li>шипы без предупреждения</li>
+            <li>пол падает сразу</li>
+            <li>урон «из ниоткуда»</li>
+          </ul>
+          <p><b>Почему это плохо: </b>Это кажется нечестным.</p>
+          <p><b>✅ Как правильно</b> - Используй: цвет, задержку (wait), звук, частицы</p>
+          <h5>❌ Ошибка 5. Один огромный скрипт на всё</h5>
+          <p>Как выглядит</p>
+          <ul>
+            <li>один Script</li>
+            <li>200 строк кода</li>
+            <li>всё внутри</li>
+          </ul>
+          <p><b>Почему это плохо: </b>сложно читать, сложно исправлять, одна ошибка ломает всё</p>
+          <p><b>✅ Как правильно</b> - Одна ловушка = один Script. (просто, понятно, удобно менять) </p>
+          <h5>❌ Ошибка 6. Нет ритма</h5>
+          <p>Как выглядит</p>
+          <ul>
+            <li>всё работает хаотично</li>
+            <li>ловушки не связаны</li>
+            <li>нет ощущения уровня</li>
+          </ul>
+          <p><b>Почему это плохо: </b>Игра не чувствуется как единое целое.</p>
+          <p><b>✅ Как правильно</b> - Ритм = повтор + ожидание. (одинаковые wait(), нарастающая сложность, логика зон) </p>
+      - type: "code"
+        title: "🧠 Золотое правило полосы ловушек"
+        code: |
+          Игрок должен:
+          понять → испугаться → подумать → действовать
+        afterText: |
+          <p>Если это есть — ты сделал хороший уровень.</p>  
+          
+
+
+# Приактика
+
+
+      - type: "oneImage"
+        title: "Практическое задание"
+        img:
+            src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module4/lesson40-43/%D0%9C%D0%B8%D0%BD%D0%B8-%D0%BF%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0,%20%D0%BF%D0%BE%D0%BF%D1%80%D0%BE%D0%B1%D1%83%D0%B8%CC%86%20%D1%81%D0%B0%D0%BC.png?raw=true"
+            width: 100%
+            maxWidth: "100%"
+            align: center
+      
+
+      - type: "text"
+        title: "🎯 Практическое задание"
+        text: |
+          <h4>Сделай три разные ловушки</h4>
           <h5>🔥 1. Движущаяся лава</h5>
           <p>Идея: лава медленно поднимается вверх.</p>
           <p>Игрок должен:</p>
@@ -3716,44 +3814,6 @@ lessons:
           end
   
       
-
-
-    quiz:
-      - question: "Что делает Humanoid.Health?"
-        answers:
-          - "Отвечает за движение"
-          - "Хранит здоровье игрока"
-          - "Телепортирует персонажа"
-        correct: 1
-
-      - question: "Как сделать мгновенную смерть?"
-        answers:
-          - "humanoid.Health = 0"
-          - "humanoid:Destroy()"
-          - "player:Kill()"
-        correct: 0
-
-      - question: "Что нужно для постепенного урона?"
-        answers:
-          - "Touched"
-          - "while и wait()"
-          - "Color"
-        correct: 1
-
-      - question: "Зачем нужен TouchEnded?"
-        answers:
-          - "Чтобы начать урон"
-          - "Чтобы закончить урон"
-          - "Чтобы телепортировать игрока"
-        correct: 1
-
-      - question: "Почему урон — это механика?"
-        answers:
-          - "Потому что он красивый"
-          - "Потому что влияет на игровой процесс"
-          - "Потому что использует Part"
-        correct: 1
-
     end:
       - type: "text"
         title: "🎉 Итог: Теперь ты умеешь:"
@@ -3769,10 +3829,10 @@ lessons:
 
 
 # ============================================================
-# УРОК 30 — Расширенные телепорты
+# УРОК 43 — Расширенные телепорты
 # ============================================================
-  - id: 30
-    title: "⭐ Урок 30. Телепорты: портал, телепорт-гейт, переходы между комнатами"
+  - id: 43
+    title: "⭐ Урок 43. Телепорты: портал, телепорт-гейт, переходы между комнатами"
     shortDescription: "Учимся создавать порталы, двусторонние телепорты и телепорты в дом."
     # video: "https://www.youtube.com/embed/TELEPORT25"
 
@@ -4108,260 +4168,448 @@ lessons:
 
 
 # ============================================================
-# УРОК 31 — Чекпоинты
+# ⭐ УРОК 44 — Зоны: опасность и безопасность
 # ============================================================
-  - id: 31
-    title: "⭐ Урок 31. Чекпоинты и респаун игрока"
-    shortDescription: "Учимся делать точки сохранения: игрок умирает — появляется там же. (сохранять прогресс и правильно возрождать игрока)"
-    video: "https://www.youtube.com/embed/HQQdsMtRg7k?si=OA1rgOVylS-PKlTT"
+  - id: 44
+    title: "⭐ Урок 44. Зоны: опасность и безопасность"
+    shortDescription: "Учимся создавать зоны, которые наносят урон, лечат, замедляют или защищают игрока."
+
 
     content:
-
+    
       - type: "text"
-        title: "🎮 Что такое чекпоинт?"
         text: |
-          Представь, что твой персонаж бежит по длинному опасному пути.
-          <p><em>Лава, прыжки, ловушки</em> — ошибка → смерть → снова сначала… ой 😭</p>
-          Чтобы так не мучиться, игре нужны чекпоинты.
-          <p><b>Чекпоинт</b> — это место, куда игрок вернётся после смерти.</p>
-          - "Игрок коснулся чекпоинта → и он запомнился."
+          <p>Сегодня мы научимся создавать зоны — это обычные Part,
+          которые реагируют на игрока и изменяют его состояние.</p>
 
-      - type: "gallery"
-        title: "Примеры чекпоинтов"
-        images:
-          - src: "https://i.ytimg.com/vi/EYgZZxwIvro/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBfANeAL5icEqkrDu4rfXJ7JkipJQ"
-          - src: "https://i.ytimg.com/vi/H87g7jrVuT4/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAek0Dj95j8Z6yLK8oFCkQtDKG5xQ"
-
-      - type: "code"
-        title: "⭐ Что такое точка респауна (RespawnLocation)?"
+          🔥 лава — убивает  <br>
+          ☠️ опасная зона — наносит урон   <br>
+          🐌 замедляющая зона — замедляет   <br>
+          💚 безопасная зона — лечит   <br><br>
+          <p>👉 Почти ВСЕ Obby строятся именно на зонах.</p>
+      
+      - type: "note"
         text: |
-          Каждый игрок появляется в мире Roblox на SpawnLocation — это стартовая точка.
-          <p>Но!</p>
-          Мы можем сделать так, чтобы каждый игрок имел СВОЮ личную точку респауна.
-          <p>Для этого у игрока есть свойство:</p>          
-        code: |
-          player.RespawnLocation = какой_то_SpawnLocation
+          🧠 Одна формула на весь урок: <br>
+
+          Part + Touched → Humanoid → меняем свойства игрока
+
+
 
       - type: "steps"
-        title: "🧱 Шаг 1. Создаём чекпоинт"
+        title: "1. 🔥 Зона мгновенной смерти (лава)"
         items:
-          - "1. Создай Part → назови <b>Checkpoint</b>"
-          - "2. Покрась в яркий цвет"
-          - "3. Установи <b>Anchored = true</b>"
-          - "4. Добавь <b>Script</b>"
-          - "Можно даже сделать платформу светящейся или с эффектами."
-      - type: "steps"
-        title: "📍 Шаг 2. Создаём точку респауна"
-        items:
-          - "1. Добавь  <b>SpawnLocation</b>"
-          - "2. Назови его <b>Respawn1</b>"
-          - "3. Выключи галочку <b>Enabled </b> (иначе игрок будет сразу спавниться на нём)"
-          - "4. Перемести его туда, где игрок должен оживать"
-          - "Можно даже сделать платформу светящейся или с эффектами."
+          - "Создай Part → назови Lava"
+          - "Anchored = true"
+          - "Material = Neon"
+          - "Цвет: красный или оранжевый"
+          - "Добавь Script"
 
       - type: "code"
-        title: "🧠 Шаг 3. Ловим прикосновение к чекпоинту"
-        text: "⚠ Важно: игроков можно поймать по Humanoid."
+        title: "🔥 Код лавы"
         code: |
-          -- Получаем сам чекпоинт (платформа)
-          local checkpoint = script.Parent
+          local lava = script.Parent
 
-          -- Точка появления, куда будем возрождать игрока
-          local respawnPoint = workspace:WaitForChild("Respawn1")
-
-          -- Когда кто-то касается чекпоинта
-          checkpoint.Touched:Connect(function(hit)
-
-              -- hit.Parent — это модель игрока
-              local character = hit.Parent 
-
-              -- ищем Humanoid, чтобы понять, что это именно игрок
-              local humanoid = character:FindFirstChild("Humanoid")
+          lava.Touched:Connect(function(hit)
+              local humanoid = hit.Parent:FindFirstChild("Humanoid")
               if humanoid then
-                  
-                  -- Достаём Player по модели персонажа
-                  local player = game.Players:GetPlayerFromCharacter(character)
-
-                  if player then
-                      -- Устанавливаем чекпоинт:
-                      -- теперь игрок будет возрождаться на Respawn1
-                      player.RespawnLocation = respawnPoint
-
-                      print("Чекпоинт активирован!")
-
-                      -------------------------------------------------
-                      -- ЭФФЕКТЫ ДЛЯ КРАСОТЫ
-                      -------------------------------------------------
-
-                      -- меняем цвет чекпоинта (радостный эффект)
-                      checkpoint.Color = Color3.fromRGB(0, 255, 0)
-
-                      -- делаем лёгкую анимацию "подскока"
-                      local oldSize = checkpoint.Size
-                      checkpoint.Size = oldSize + Vector3.new(0, 1, 0)
-                      task.wait(0.2)
-                      checkpoint.Size = oldSize
-
-                      -- можно добавить звук, если есть:
-                      -- checkpoint.Sound:Play()
-                  end
+                  humanoid.Health = 0
               end
           end)
 
       - type: "note"
-        text: "Чекпоинты работают через свойство <b>RespawnLocation</b>."
+        text: "Коснулся → умер → респаун на чекпоинте."
+
+    # 2. Опасная зона (урон, но не смерть)
+      - type: "steps"
+        title: "2. ⚔️ Опасная зона (урон)"
+        items:
+          - "Part → DamageZone"
+          - "Anchored = true"
+          - "Добавь Script"
+
+      - type: "code"
+        title: "⚔️ Код зоны урона"
+        code: |
+          local zone = script.Parent
+
+          zone.Touched:Connect(function(hit)
+              local humanoid = hit.Parent:FindFirstChild("Humanoid")
+              if humanoid then
+                  humanoid.Health -= 20
+              end
+          end)
+        
+      - type: "tip"
+        text: "Так делают шипы, электричество, кислоту."
+    # 3. Ядовитая зона (постепенный урон)
+
       - type: "text"
-        title: "🎉 Что теперь умеет игрок?"
+        title: "3. ☠️ Ядовитая зона (урон со временем)"
         text: |
+          Пока игрок стоит в зоне — здоровье уменьшается.
+
+      - type: "code"
+        title: "☠️ Код ядовитой зоны"
+        code: |
+          local poison = script.Parent
+          local touching = false
+
+          poison.Touched:Connect(function(hit)
+              local humanoid = hit.Parent:FindFirstChild("Humanoid")
+              if humanoid then
+                  touching = true
+                  while touching do
+                      humanoid.Health -= 5
+                      task.wait(0.5)
+                  end
+              end
+          end)
+
+          poison.TouchEnded:Connect(function()
+              touching = false
+          end)
+
+  # 4. Зона замедления
+      - type: "steps"
+        title: "🐌 4. Зона замедления"
+        items:
+          - "Part → SlowZone"
+          - "Добавь Script"
+      
+      - type: "code"
+        title: "🐌 Код замедления"
+        code: |
+          local zone = script.Parent
+
+          zone.Touched:Connect(function(hit)
+              local humanoid = hit.Parent:FindFirstChild("Humanoid")
+              if humanoid then
+                  humanoid.WalkSpeed = 8
+              end
+          end)
+
+          zone.TouchEnded:Connect(function(hit)
+              local humanoid = hit.Parent:FindFirstChild("Humanoid")
+              if humanoid then
+                  humanoid.WalkSpeed = 16
+              end
+          end)
+
+      - type: "warning"
+        text: "Всегда возвращай скорость обратно!"
+  
+  # 💚 5. Безопасная зона (лечение)
+
+
+      - type: "steps"
+        title: "💚 Безопасная зона"
+        items:
+          - "Part → SafeZone"
+          - "Цвет: зелёный"
+          - "Anchored = true"
+    
+
+      - type: "code"
+        title: "💚 Код безопасной зоны"
+        code: |
+          local zone = script.Parent
+
+          zone.Touched:Connect(function(hit)
+              local humanoid = hit.Parent:FindFirstChild("Humanoid")
+              if humanoid then
+                  humanoid.Health += 5
+              end
+          end)
+
+# 🧩 Мини-квест
+
+      - type: "text"
+        title: "🧪 Мини-квест"
+        text: |
+          Попробуй сделать:
           <ol>
-            <li>Встаёт на чекпоинт</li>
-            <li>Игра это запоминает</li>
-            <li>Если игрок умирает (падает в лаву/пропасть/шипы),</li>
-            <li>Он возрождается на Respawn1, а не на старте!</li>
+            <li>зону, которая лечит ТОЛЬКО если здоровье < 50</li>
+            <li>зону, которая замедляет на 1 секунду </li>
+            <li>зону, которая сначала зелёная, а потом становится опасной</li>
           </ol>
-      # mini-kwest
+      
+      - type: "oneImage"
+        title: " Мини-квест"
+        img:
+            src: "https://github.com/ksushatarasenko/roblox-course-assets/blob/main/module4/lesson44-47/%20%D0%9C%D0%B8%D0%BD%D0%B8-%D0%BA%D0%B2%D0%B5%D1%81%D1%82_lesson44.png?raw=true"
+            width: 100%
+            maxWidth: "100%"
+            align: center
+
+      - type: hint
+        title: "1️⃣ ЗОНА ЛЕЧЕНИЯ 🔑"          
+        text: 
+          - "💚 Лечит ТОЛЬКО если здоровье < 50"
+          - "Part: HealZone"
+        code: |
+          -- 💚 ЗОНА ЛЕЧЕНИЯ
+          -- Лечит игрока ТОЛЬКО если здоровье меньше 50
+
+          local zone = script.Parent
+
+          zone.Touched:Connect(function(hit)
+              local humanoid = hit.Parent:FindFirstChild("Humanoid")
+
+              -- Проверяем: это игрок?
+              if humanoid then
+
+                  -- Проверяем здоровье
+                  if humanoid.Health < 50 then
+                      humanoid.Health += 10
+                      print("Лечение! Здоровье было меньше 50.")
+                  else
+                      print("Здоровье и так достаточно высокое.")
+                  end
+
+              end
+          end)
+
+
+      - type: hint
+        title: "2️⃣ ЗОНА ЗАМЕДЛЕНИЯ 🔑"
+        text: 
+          - "🐌 Замедляет игрока на 1 секунду"
+          - "Part: SlowZone"
+        code: |
+
+      - type: hint
+        title: "3️⃣ ЗОНА-ЛОВУШКА 🔑"
+        text: 
+          - "🟢 → 🔴 Сначала безопасная, потом опасная"
+          - "Part: SwitchZone"
+        code: |
+          -- 🟢➡️🔴 ЗОНА С ПЕРЕКЛЮЧЕНИЕМ
+          -- Сначала безопасная (зелёная)
+          -- Через время становится опасной (красной)
+
+          local zone = script.Parent
+          local dangerous = false  -- флаг: опасна или нет
+
+          -- ЦИКЛ: меняем состояние зоны
+          task.spawn(function()
+              while true do
+                  -- 🟢 Безопасная
+                  zone.Color = Color3.fromRGB(0, 255, 0)
+                  dangerous = false
+                  print("Зона безопасная")
+                  task.wait(2)
+
+                  -- 🔴 Опасная
+                  zone.Color = Color3.fromRGB(255, 0, 0)
+                  dangerous = true
+                  print("Зона стала опасной!")
+                  task.wait(2)
+              end
+          end)
+
+          -- Реакция на касание
+          zone.Touched:Connect(function(hit)
+              local humanoid = hit.Parent:FindFirstChild("Humanoid")
+
+              if humanoid and dangerous then
+                  humanoid.Health -= 15
+                  print("Урон! Зона была красной.")
+              end
+          end)
+
+      - type: "note"
+        text: "💡 Одна и та же зона может вести себя по-разному — всё зависит от условий и состояния."
+# ✨ Дополнительное задание (по желанию)
+
       - type: "text"
-        title: "🧪 Хочешь мини-квест?"
+        title: "✨ Дополнительное задание: звук и эффекты"
         text: |
-          <p><b>📍 Чекпоинт, который НЕ срабатывает, если у игрока мало здоровья.</b><ul><li>(Использовать humanoid.Health)</li></ul></p>
-          <p><b>📍 Чекпоинт, который играет звук победы.</b><ul><li>(Sound:Play())</li></ul></p>
-          <p><b>📍 Чекпоинт, который светится через TweenService.</b><ul><li>(например, плавное изменение цвета)</li></ul></p>
-          <p><b>📍 Два чекпоинта — первый красный, второй зелёный, и игрок должен активировать их по порядку.</b><ul><li></li></ul></p>
-
-      - type: "hint"
-        title: "⭐ КОД-ПОДСКАЗКА №1 — Чекпоинт, который срабатывает только если здоровье > 50"
+          Хочешь сделать зоны более «живыми» и эффектными? 😎  
+          <p>Добавь **звук и частицы** — как в настоящих играх Roblox.</p><br>
+          ⭐ Это задание НЕ обязательно, но очень круто прокачивает уровень!
+      
+      - type: "text"
+        title: "🔊 Часть 1 — Добавляем звук"
+        text: |
+          <h5>📦 Подготовка</h5>
+          <ol>
+            <li>Выбери Part (HealZone / SlowZone / SwitchZone)</li>
+            <li>Добавь внутрь объект Sound</li>
+            <li>Вставь любой звук (heal / click / danger / magic)</li>
+          </ol>
+      
+      - type: hint
+        title: "💚 Пример: звук при лечении 🔑"
         code: |
-          local checkpoint = script.Parent
-          local respawnPoint = workspace.Respawn1
+          -- 💚 Звук лечения
 
-          checkpoint.Touched:Connect(function(hit)
-              local char = hit.Parent
-              local humanoid = char:FindFirstChild("Humanoid")
+          local zone = script.Parent
+          local sound = zone:FindFirstChild("Sound") -- звук внутри зоны
 
-              if humanoid and humanoid.Health > 50 then
-                  local player = game.Players:GetPlayerFromCharacter(char)
-                  if player then
-                      player.RespawnLocation = respawnPoint
-                      print("Чекпоинт активирован! Здоровье достаточно высокое.")
+          zone.Touched:Connect(function(hit)
+              local humanoid = hit.Parent:FindFirstChild("Humanoid")
+
+              if humanoid and humanoid.Health < 50 then
+                  humanoid.Health += 10
+
+                  if sound then
+                      sound:Play()
                   end
-              end
-          end)
-        afterText: "✔️ можно делать условия с Health."
 
-      - type: "hint"
-        title: "⭐ КОД-ПОДСКАЗКА №2 — Чекпоинт, который проигрывает звук"
-        code: |
-          local checkpoint = script.Parent
-          local respawnPoint = workspace.Respawn1
-          local sound = checkpoint:FindFirstChild("Sound")  -- звук должен быть внутри чекпоинта
-
-          checkpoint.Touched:Connect(function(hit)
-              local char = hit.Parent
-              local humanoid = char:FindFirstChild("Humanoid")
-
-              if humanoid then
-                  local player = game.Players:GetPlayerFromCharacter(char)
-                  if player then
-                      player.RespawnLocation = respawnPoint
-                      if sound then sound:Play() end
-                      print("Чекпоинт активирован со звуком!")
-                  end
+                  print("Лечение со звуком!")
               end
           end)
 
-        afterText: "✔️ ✔ Дети любят звук — код мотивирует их добавлять эффекты."
-
-      - type: "hint"
-        title: "⭐ КОД-ПОДСКАЗКА №3 — Чекпоинт, который загорается через TweenService"
+      - type: "text"
+        title: "✨ Часть 2 — Добавляем частицы"
+        text: |
+          <h5>📦 Подготовка</h5>
+          <ol>
+            <li>Внутрь Part добавь ParticleEmitter</li>
+            <li>Настрой: Color, Rate (например 10–20), Lifetime (0.5–1)</li>
+          </ol>
+      
+      - type: hint
+        title: "💚 Пример: частицы при лечении 🔑"
         code: |
-          local checkpoint = script.Parent
-          local respawnPoint = workspace.Respawn1
-          local TweenService = game:GetService("TweenService")
+          -- ✨ Частицы при лечении
 
-          checkpoint.Touched:Connect(function(hit)
-              local char = hit.Parent
-              local humanoid = char:FindFirstChild("Humanoid")
+          local zone = script.Parent
+          local particles = zone:FindFirstChild("ParticleEmitter")
 
-              if humanoid then
-                  local player = game.Players:GetPlayerFromCharacter(char)
-                  if player then
-                      player.RespawnLocation = respawnPoint
+          zone.Touched:Connect(function(hit)
+              local humanoid = hit.Parent:FindFirstChild("Humanoid")
 
-                      -- Плавное свечение
-                      local tweenInfo = TweenInfo.new(0.5)
-                      local tween = TweenService:Create(checkpoint, tweenInfo, {
-                          Color = Color3.fromRGB(0, 255, 0)
-                      })
-                      tween:Play()
+              if humanoid and humanoid.Health < 50 then
+                  humanoid.Health += 10
 
-                      print("Чекпоинт красиво активирован!")
+                  if particles then
+                      particles.Enabled = true
+                      task.delay(1, function()
+                          particles.Enabled = false
+                      end)
                   end
+
+                  print("Лечение с эффектами!")
               end
           end)
-        afterText: 
-          - "✔️ Тут вспоминается Урок 18 — TweenService."
-          - "✔️ Короткий и красивый пример."
 
-      - type: "hint"
-        title: "⭐ КОД-ПОДСКАЗКА №4 — Два чекпоинта: активировать можно только по порядку"
-        text: "РЕБЁНОК видит, что можно хранить состояние."
+      - type: "text"
+        title: "🟢🔴 Часть 3 — Эффекты для опасной зоны"
+        text: |
+          <h5>💥 Эффект + звук ТОЛЬКО когда зона опасна</h5>
+
+      - type: hint
+        title: "🔴 Эффекты для опасной зоны 🔑"
         code: |
-          -- Первым должен быть активирован Checkpoint1
-          local checkpoint = script.Parent
-          local respawnPoint = workspace.Respawn2
-          local playerStage = workspace:FindFirstChild("PlayerStage")  -- NumberValue
+          -- 🔴 Эффекты для опасной зоны
 
-          checkpoint.Touched:Connect(function(hit)
-              local char = hit.Parent
-              local humanoid = char:FindFirstChild("Humanoid")
+          local zone = script.Parent
+          local dangerous = false
 
-              if humanoid then
-                  local player = game.Players:GetPlayerFromCharacter(char)
-                  if player then
-                      
-                      -- Проверяем: активирован ли первый чекпоинт?
-                      if playerStage.Value == 1 then
-                          player.RespawnLocation = respawnPoint
-                          playerStage.Value = 2  -- поднимаем уровень прогресса
-                          print("Активация чекпоинта 2!")
-                      else
-                          print("Сначала активируй чекпоинт 1!")
-                      end
-                  end
+          local sound = zone:FindFirstChild("Sound")
+          local particles = zone:FindFirstChild("ParticleEmitter")
+
+          -- Переключение состояния
+          task.spawn(function()
+              while true do
+                  -- 🟢 безопасно
+                  zone.Color = Color3.fromRGB(0,255,0)
+                  dangerous = false
+                  if particles then particles.Enabled = false end
+                  task.wait(2)
+
+                  -- 🔴 опасно
+                  zone.Color = Color3.fromRGB(255,0,0)
+                  dangerous = true
+                  if particles then particles.Enabled = true end
+                  task.wait(2)
               end
           end)
-        afterText: 
-          - "✔️ Это отличный мостик к системам прогресса и уровней."
-          - "✔️ Ребёнок увидит, как можно проверять порядок действий."
+
+          zone.Touched:Connect(function(hit)
+              local humanoid = hit.Parent:FindFirstChild("Humanoid")
+
+              if humanoid and dangerous then
+                  humanoid.Health -= 15
+
+                  if sound then
+                      sound:Play()
+                  end
+
+                  print("Урон + звук + частицы!")
+              end
+          end)
+
+
+      - type: "text"
+        title: "🧠 Челлендж"
+        text: |
+          Попробуй сам:
+          <ol>
+            <li>сделать разный звук для безопасной и опасной зоны</li>
+            <li>включать частицы ТОЛЬКО при касании  </li>
+            <li>сделать зону, которая сначала светится, а потом взрывается ✨💥</li>
+          </ol>
 
 
 
     quiz:
-      - question: "Что делает RespawnLocation?"
+      - question: "Что такое зона в Roblox?"
         answers:
-          - "Меняет скорость игрока"
-          - "Указывает, где игрок появится после смерти"
-          - "Убивает игрока"
+          - "Любой Part, который меняет правила игры при касании"
+          - "Только лава"
+          - "Место, где игрок сохраняется"
+        correct: 0
+
+      - question: "Какой объект мы используем, чтобы изменить здоровье игрока?"
+        answers:
+          - "Player"
+          - "Humanoid"
+          - "HumanoidRootPart"
         correct: 1
+
+      - question: "Что делает код humanoid.Health -= 20?"
+        answers:
+          - "Увеличивает здоровье игрока"
+          - "Уменьшает здоровье игрока"
+          - "Телепортирует игрока"
+        correct: 1
+
+      - question: "Почему в зоне замедления важно использовать TouchEnded?"
+        answers:
+          - "Чтобы игрок умер"
+          - "Чтобы вернуть скорость обратно"
+          - "Чтобы телепортировать игрока"
+        correct: 1
+
+      - question: "Какая зона считается безопасной?"
+        answers:
+          - "Та, которая наносит урон"
+          - "Та, которая лечит или защищает игрока"
+          - "Та, которая убивает игрока"
+        correct: 1
+
     end:
       - type: "text"
-        title: "🎉 Итог: Теперь ты умеешь: 🧠"
+        title: "🎉 Итог урока"
         text: |
-          <ul>
-            <li>что такое чекпоинт</li>
-            <li>что такое респаун</li>
-            <li>как сделать сохранение прогресса</li>
-            <li>как настроить RespawnLocation</li>
-            <li>как красиво оформить чекпоинт</li>
-          </ul>
-          <h4>Это фундамент для любых Obby, адвенчур, уровней и мини-игр! 🎮</h4>
+          Теперь ты умеешь:
 
+          ✅ создавать опасные зоны  
+          ✅ наносить мгновенный и постепенный урон  
+          ✅ замедлять и лечить игрока  
+          ✅ управлять Humanoid  
+
+          👉 В следующем уроке мы начнём объединять зоны
+          и превращать их в НАСТОЯЩИЕ ЛОВУШКИ.
 
 # ============================================================
-# УРОК 32 — Зоны урона и безопасные зоны
+# УРОК 45 — Зоны урона и безопасные зоны
 # ============================================================
-  - id: 32
-    title: "🌟 Урок 32. Зоны урона и безопасные зоны"
+  - id: 45
+    title: "🌟 Урок 45. Зоны урона и безопасные зоны"
     shortDescription: "Создаём лаву, шипы, яд, зоны замедления и безопасные платформы."
     # video: "https://www.youtube.com/embed/DAMAGE27"
 
@@ -4697,10 +4945,10 @@ lessons:
 
 
 # ============================================================
-# УРОК 33 — Ловушки-усложнения
+# УРОК 46 — Ловушки-усложнения
 # ============================================================
-  - id: 33
-    title: "🌟Урок 33. Ловушки: падающие платформы, яд и подбрасывание"
+  - id: 46
+    title: "🌟Урок 46. Ловушки: падающие платформы, яд и подбрасывание"
     shortDescription: "Учимся создавать продвинутые ловушки."
     # video: "https://www.youtube.com/embed/TRAPS28"
 
@@ -5311,10 +5559,10 @@ lessons:
 
 
 # ============================================================
-# УРОК 34 — Мини-проект Obby
+# УРОК 47 — Мини-проект Obby
 # ============================================================
-  - id: 34
-    title: "🌟 Урок 34. Мини-проект: Obby с чекпоинтами"
+  - id: 47
+    title: "🌟 Урок 47. Мини-проект: Obby с чекпоинтами"
     shortDescription: "Создаём полноценный уровень Obby."
 
     content:
