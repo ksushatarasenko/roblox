@@ -4,339 +4,1202 @@ description: "Учимся создавать NPC, движение, обнар�
 
 lessons:
 
-  # ==============================================================
-  # УРОК 40 — СОЗДАНИЕ NPC
-  # ==============================================================
-  - id: 40
-    title: "Создание NPC с Humanoid"
-    shortDescription: "Учимся создавать персонажа-NPC, который стоит в мире и реагирует на игрока."
-    video: "https://www.youtube.com/embed/47sErtArdrI?si=ciGfdmdp4Yh5tvXO"
+  # ============================================================
+# УРОК 60 — Кто такой NPC и зачем он нужен
+# ============================================================
+- id: 60
+  title: "⭐ Урок 60. Кто такой NPC и зачем он нужен"
+  shortDescription: "Знакомимся с NPC — персонажами, которые делают игру живой."
+  # video: "https://www.youtube.com/embed/NPC60"
 
-    content:
-      - type: text
-        title: "Кто такой NPC?"
-        text:
-          - "NPC — это персонаж, которым управляет *игра*, а не игрок."
-          - "Как и у игрока, у него есть Character и Humanoid."
-          - "Humanoid отвечает за здоровье, анимации, движение и реакцию."
+  content:
+    - type: "text"
+      text: |
+        До этого момента в игре был только игрок.<br><br>
+        Мир реагировал, но <b>не жил</b>.<br><br>
+        Теперь появляется кое-кто новый 👀<br><br>
+        <b>NPC</b> — персонажи, которые живут в игре,<br>
+        говорят, охраняют, помогают и дают задания.<br><br>
+        С этого урока твоя игра начинает напоминать<br>
+        <b>настоящее приключение</b> 🎮✨
 
-      - type: gallery
-        title: "Примеры NPC"
-        images:
-          - "assets/images/npc-1.png"
-          - "assets/images/npc-2.png"
-          - "assets/images/npc-3.png"
+    - type: "text"
+      title: "🧠 Что такое NPC?"
+      text: |
+        <b>NPC</b> — это <b>Non-Player Character</b>.<br>
+        Это персонаж, которым <b>не управляет игрок</b>.<br><br>
+        NPC живёт в игровом мире и делает то,<br>
+        что ты для него запрограммировал.
 
-      - type: steps
-        title: "Шаг 1. Добавляем NPC"
-        items:
-          - "Открой Toolbox → Models."
-          - "Выбери персонажа R6 или R15."
-          - "Поставь его в Workspace."
-          - "Проверь: у NPC должен быть объект Humanoid!"
+    - type: "text"
+      title: "👾 Чем NPC отличается от игрока?"
+      text: |
+        Игрок:<br>
+        • управляется с клавиатуры<br>
+        • имеет камеру<br>
+        • проходит уровень<br><br>
+        NPC:<br>
+        • управляется кодом<br>
+        • стоит, ходит или реагирует<br>
+        • помогает или мешает игроку
 
-      - type: steps
-        title: "Шаг 2. Делаем NPC неподвижным"
-        items:
-          - "Открой Humanoid."
-          - "Установи WalkSpeed = 0."
-          - "Установи JumpPower = 0."
+    - type: "text"
+      title: "🎭 Роли NPC в играх"
+      text: |
+        NPC может быть кем угодно:<br><br>
+        🧙 помощник — подсказывает, что делать<br>
+        🛡️ страж — не пускает без условия<br>
+        🛒 торговец — обменивает монеты<br>
+        🗝️ квестодатель — даёт задание<br>
+        😈 враг — мешает пройти дальше<br><br>
+        Один NPC = <b>часть истории игры</b>.
 
-      - type: steps
-        title: "Шаг 3. Скрипт реакции NPC"
-        items:
-          - "Добавь Script внутрь модели NPC."
-          - "Этот код покажет сообщение, когда игрок дотронется до NPC."
+    - type: "text"
+      title: "🗺️ Где ты уже видел NPC?"
+      text: |
+        NPC есть почти в каждой игре:<br><br>
+        • жители деревень<br>
+        • продавцы в магазинах<br>
+        • охранники у дверей<br>
+        • персонажи с диалогами<br><br>
+        Без NPC мир кажется пустым.
 
-      - type: code
-        language: lua
-        title: "NPC реагирует на касание"
-        code: |
-          local npc = script.Parent
-          local root = npc:FindFirstChild("HumanoidRootPart")
+    - type: "text"
+      title: "🎯 Зачем мы изучаем NPC именно сейчас?"
+      text: |
+        Потому что ты уже умеешь:<br>
+        • работать с игроком<br>
+        • делать монеты и награды<br>
+        • открывать двери по условиям<br>
+        • создавать интерфейс<br><br>
+        NPC поможет <b>связать всё это в квест</b>.
 
-          root.Touched:Connect(function(hit)
-              local human = hit.Parent:FindFirstChild("Humanoid")
-              if human then
-                  print("Игрок подошёл к NPC!")
-              end
-          end)
+    - type: "text"
+      title: "🧪 Мини-мышление (без кода)"
+      text: |
+        Представь NPC в своей игре:<br><br>
+        1️⃣ Где он стоит?<br>
+        2️⃣ Что он делает?<br>
+        3️⃣ Что он говорит игроку?<br>
+        4️⃣ Что игрок должен сделать в ответ?<br><br>
+        👉 Это и есть основа квестов.
 
-      - type: text
-        title: "Что мы сделали?"
-        text:
-          - "Теперь NPC может реагировать на игрока."
-          - "В следующем уроке NPC научится ходить!"
+  quiz:
+    - question: "Что означает NPC?"
+      answers:
+        - "New Player Character"
+        - "Non-Player Character"
+        - "Next Play Control"
+      correct: 1
 
-    quiz:
-      - question: "Кто такой NPC?"
-        answers:
-          - "Просто модель"
-          - "Персонаж, которым управляет игра"
-          - "Объект без Humanoid"
-        correct: 1
+    - question: "Кто управляет NPC?"
+      answers:
+        - "Игрок"
+        - "Клавиатура"
+        - "Код"
+      correct: 2
 
-      - question: "Какой объект должен быть у NPC?"
-        answers:
-          - "Humanoid"
-          - "Script"
-          - "Folder"
-        correct: 0
+    - question: "Зачем NPC нужны в игре?"
+      answers:
+        - "Для украшения карты"
+        - "Чтобы сделать мир живым и интересным"
+        - "Чтобы увеличить размер игры"
+      correct: 1
 
-  # ==============================================================
-  # УРОК 41 — ДВИЖЕНИЕ NPC ПО ТОЧКАМ
-  # ==============================================================
-  - id: 41
-    title: "Движение NPC по точкам"
-    shortDescription: "Учимся делать NPC-патруль: он ходит по маршруту из нескольких точек."
-    video: "https://www.youtube.com/embed/NPCMOVE41"
+    - question: "Кем НЕ может быть NPC?"
+      answers:
+        - "Стражем"
+        - "Торговцем"
+        - "Игроком"
+      correct: 2
 
-    content:
-      - type: text
-        title: "Что такое патруль?"
-        text:
-          - "Патруль — это поведение, когда NPC ходит по заранее заданному маршруту."
-          - "Маршрут состоит из точек (Part), размещённых в мире."
+    - question: "Что чаще всего делает NPC в играх?"
+      answers:
+        - "Даёт задания или информацию"
+        - "Меняет управление камерой"
+        - "Удаляет интерфейс"
+      correct: 0
 
-      - type: steps
-        title: "Шаг 1. Создаём точки пути"
-        items:
-          - "Создай 3 Part в Workspace."
-          - "Назови их Waypoint1, Waypoint2, Waypoint3."
-          - "Сделай прозрачными: Transparency = 1."
+  end:
+    - type: "text"
+      title: "🎉 Итог урока"
+      text: |
+        Теперь ты знаешь:<br>
+        <ul>
+          <li>кто такой NPC</li>
+          <li>чем он отличается от игрока</li>
+          <li>какие роли он может выполнять</li>
+          <li>зачем NPC делают игру живой</li>
+        </ul>
+        <h4>В следующем уроке мы создадим своего первого NPC 👾</h4>
 
-      - type: steps
-        title: "Шаг 2. Скрипт движения NPC"
-        items:
-          - "Вставь Script внутрь NPC."
-          - "Этот код заставит NPC ходить по кругу."
+# ============================================================
+# УРОК 61 — Создание NPC (модель + Humanoid)
+# ============================================================
+- id: 61
+  title: "⭐ Урок 61. Создание NPC: модель и Humanoid"
+  shortDescription: "Создаём своего первого NPC и делаем его «живым»."
+  # video: "https://www.youtube.com/embed/NPC61"
 
-      - type: code
-        language: lua
-        title: "NPC ходит по точкам"
-        code: |
-          local npc = script.Parent
-          local humanoid = npc:FindFirstChild("Humanoid")
+  content:
+    - type: "text"
+      text: |
+        В прошлом уроке мы узнали,<br>
+        <b>кто такой NPC</b> и зачем он нужен.<br><br>
+        Теперь пора сделать его <b>по-настоящему</b> 👾<br><br>
+        Сегодня ты создашь своего первого NPC —<br>
+        персонажа, который стоит в мире и готов<br>
+        взаимодействовать с игроком.
 
-          local points = {
-              workspace.Waypoint1,
-              workspace.Waypoint2,
-              workspace.Waypoint3
-          }
+    - type: "text"
+      title: "🧠 Из чего состоит NPC?"
+      text: |
+        NPC — это не просто кубик.<br><br>
+        Минимально NPC должен состоять из:<br>
+        • <b>Model</b> — чтобы объединить части<br>
+        • <b>Part</b> — тело NPC<br>
+        • <b>Humanoid</b> — чтобы NPC считался персонажем<br><br>
+        Без Humanoid NPC — просто объект.
 
-          while true do
-              for _, point in ipairs(points) do
-                  humanoid:MoveTo(point.Position)
-                  humanoid.MoveToFinished:Wait()
-                  wait(1)
-              end
-          end
+    - type: "steps"
+      title: "🧱 Шаг 1. Создаём тело NPC"
+      items:
+        - "Создай <b>Part</b>"
+        - "Назови его <b>Body</b>"
+        - "Размер — как у персонажа"
+        - "Anchored = true"
+        - "CanCollide = true"
 
-      - type: text
-        title: "Объяснение"
-        text:
-          - "MoveTo() отправляет NPC к точке."
-          - "MoveToFinished ждёт, пока NPC дойдёт."
-          - "Так NPC патрулирует территорию."
+    - type: "steps"
+      title: "📦 Шаг 2. Объединяем в модель"
+      items:
+        - "Выдели <b>Body</b>"
+        - "Нажми <b>Model → Group</b>"
+        - "Назови модель <b>NPC</b>"
 
-    quiz:
-      - question: "Как NPC двигается?"
-        answers:
-          - "Телепортируется"
-          - "Через Humanoid:MoveTo()"
-          - "Его тянет игрок"
-        correct: 1
+    - type: "steps"
+      title: "❤️ Шаг 3. Добавляем Humanoid"
+      items:
+        - "Открой модель <b>NPC</b>"
+        - "Нажми <b>+</b>"
+        - "Добавь <b>Humanoid</b>"
 
-  # ==============================================================
-  # УРОК 42 — NPC ЗАМЕЧАЕТ ИГРОКА
-  # ==============================================================
-  - id: 42
-    title: "NPC замечает игрока"
-    shortDescription: "Делаем NPC, который реагирует, если игрок подошёл слишком близко."
-    video: "https://www.youtube.com/embed/NPCDETECT42"
+    - type: "text"
+      title: "✨ Что изменилось?"
+      text: |
+        Теперь NPC:<br>
+        • считается персонажем<br>
+        • может иметь здоровье<br>
+        • может реагировать как живой объект<br><br>
+        Для Roblox это уже <b>настоящий персонаж</b>.
 
-    content:
-      - type: text
-        title: "Что такое радиус обнаружения?"
-        text:
-          - "Радиус — это расстояние, на котором NPC 'видит' игрока."
-          - "Если игрок ближе установленного расстояния, NPC реагирует."
+    - type: "text"
+      title: "👀 NPC и игрок — теперь похожи"
+      text: |
+        И у игрока, и у NPC есть:<br>
+        • Model<br>
+        • Parts<br>
+        • Humanoid<br><br>
+        Разница в том, что:<br>
+        👉 игрок управляется человеком<br>
+        👉 NPC управляется кодом
 
-      - type: steps
-        title: "Шаг 1. Скрипт обнаружения"
-        items:
-          - "Вставь Script внутрь NPC."
-          - "Этот код проверяет расстояние каждые 0.2 секунды."
+    - type: "text"
+      title: "🧪 Мини-практика"
+      text: |
+        Попробуй изменить NPC:<br><br>
+        1️⃣ Поменяй цвет тела<br>
+        2️⃣ Измени размер NPC (больше / меньше игрока)<br>
+        3️⃣ Добавь NPC имя (Name у модели)<br>
+        4️⃣ Поставь NPC рядом с дверью или путём
 
-      - type: code
-        language: lua
-        title: "NPC видит игрока в радиусе"
-        code: |
-          local npc = script.Parent
-          local root = npc:FindFirstChild("HumanoidRootPart")
+    - type: "text"
+      title: "⚠️ Важно запомнить"
+      text: |
+        • Humanoid нужен, чтобы объект считался персонажем<br>
+        • NPC пока <b>не говорит</b> и <b>не двигается</b><br>
+        • Мы сделали только основу<br><br>
+        В следующих уроках NPC научится<br>
+        <b>реагировать и взаимодействовать</b>.
 
-          local detectionRadius = 12
+  quiz:
+    - question: "Зачем NPC нужен Humanoid?"
+      answers:
+        - "Для красоты"
+        - "Чтобы Roblox считал его персонажем"
+        - "Чтобы он стал прозрачным"
+      correct: 1
 
-          while true do
-              for _, player in ipairs(game.Players:GetPlayers()) do
-                  local char = player.Character
-                  if char and char:FindFirstChild("HumanoidRootPart") then
-                      local dist = (char.HumanoidRootPart.Position - root.Position).Magnitude
-                      if dist < detectionRadius then
-                          print("NPC: Я вижу игрока!")
-                      end
-                  end
-              end
-              wait(0.2)
-          end
+    - question: "В чём должен находиться Humanoid NPC?"
+      answers:
+        - "В Workspace"
+        - "В Part"
+        - "В Model NPC"
+      correct: 2
 
-      - type: text
-        title: "Что можно добавить?"
-        text:
-          - "Разворот NPC к игроку."
-          - "Атаку, эмоцию или звук."
-          - "Начало диалога."
+    - question: "Что объединяет части NPC в одно целое?"
+      answers:
+        - "Script"
+        - "Model"
+        - "Folder"
+      correct: 1
 
-    quiz:
-      - question: "Что делает NPC в этом уроке?"
-        answers:
-          - "Считает монеты"
-          - "Прыгает на месте"
-          - "Замечает игрока, если он рядом"
-        correct: 2
+    - question: "Чем NPC пока отличается от игрока?"
+      answers:
+        - "У NPC нет Humanoid"
+        - "NPC не управляется игроком"
+        - "NPC не может быть в игре"
+      correct: 1
 
-  # ==============================================================
-  # УРОК 43 — ДИАЛОГИ NPC
-  # ==============================================================
-  - id: 43
-    title: "Диалоги NPC: окно, текст и выбор ответа"
-    shortDescription: "Учимся создавать окно диалога, которое появляется при обращении к NPC."
-    video: "https://www.youtube.com/embed/NPCDIALOG43"
+    - question: "Что мы сделали в этом уроке?"
+      answers:
+        - "Создали диалог"
+        - "Создали основу NPC"
+        - "Сделали искусственный интеллект"
+      correct: 1
 
-    content:
-      - type: text
-        title: "Как устроен диалог?"
-        text:
-          - "1. Игрок приближается к NPC."
-          - "2. NPC отправляет сигнал клиенту."
-          - "3. На экране появляется окно."
-          - "4. Игрок выбирает ответ."
+  end:
+    - type: "text"
+      title: "🎉 Итог урока"
+      text: |
+        Теперь ты умеешь:<br>
+        <ul>
+          <li>создавать NPC как модель</li>
+          <li>добавлять Humanoid</li>
+          <li>понимать разницу между NPC и игроком</li>
+        </ul>
+        <h4>В следующем уроке NPC начнёт реагировать на игрока 👀</h4>
+# ============================================================
+# УРОК 62 — NPC реагирует на игрока
+# ============================================================
+- id: 62
+  title: "⭐ Урок 62. NPC реагирует на игрока"
+  shortDescription: "Учимся делать NPC, который замечает игрока и реагирует на его появление."
+  # video: "https://www.youtube.com/embed/NPC62"
 
-      - type: steps
-        title: "Шаг 1. Создаём интерфейс диалога"
-        items:
-          - "StarterGui → ScreenGui → Frame."
-          - "Внутрь Frame добавь TextLabel и две кнопки: Yes и No."
-          - "Frame.Visible = false."
+  content:
+    - type: "text"
+      text: |
+        Теперь у нас есть NPC с телом и Humanoid 👾<br><br>
+        Но пока он просто стоит.<br><br>
+        В этом уроке мы научим NPC <b>замечать игрока</b>:<br>
+        подходить, реагировать и показывать,<br>
+        что он живой.
 
-      - type: steps
-        title: "Шаг 2. Создаём RemoteEvent"
-        items:
-          - "ReplicatedStorage → Insert → RemoteEvent."
-          - "Назови OpenDialog."
+    - type: "text"
+      title: "👀 Как NPC может «заметить» игрока?"
+      text: |
+        Есть несколько способов понять,<br>
+        что игрок рядом:<br><br>
+        • игрок коснулся NPC<br>
+        • игрок подошёл на близкое расстояние<br>
+        • игрок вошёл в зону<br><br>
+        Сегодня мы начнём с <b>самого простого</b> — касания.
 
-      - type: steps
-        title: "Шаг 3. Скрипт в NPC"
-        items:
-          - "Этот скрипт отправляет сигнал клиенту при касании."
+    - type: "steps"
+      title: "🧱 Шаг 1. Где будет код NPC?"
+      items:
+        - "Открой модель <b>NPC</b>"
+        - "Выбери <b>Body</b>"
+        - "Добавь внутрь <b>Script</b>"
 
-      - type: code
-        language: lua
-        title: "NPC вызывает диалог"
-        code: |
-          local event = game.ReplicatedStorage:WaitForChild("OpenDialog")
-          local root = script.Parent:FindFirstChild("HumanoidRootPart")
+    - type: "text"
+      title: "🧠 Что мы будем проверять?"
+      text: |
+        Когда кто-то касается NPC, нам нужно понять:<br><br>
+        • это игрок или нет?<br>
+        • нужно ли реагировать?<br><br>
+        Как и раньше, мы проверяем наличие <b>Humanoid</b>.
 
-          root.Touched:Connect(function(hit)
-              local player = game.Players:GetPlayerFromCharacter(hit.Parent)
-              if player then
-                  event:FireClient(player)
-              end
-          end)
+    - type: "code"
+      title: "✨ Код: NPC реагирует на игрока"
+      code: |
+        local npcBody = script.Parent
 
-      - type: steps
-        title: "Шаг 4. LocalScript в GUI"
-        items:
-          - "Этот скрипт показывает окно диалога."
+        npcBody.Touched:Connect(function(hit)
+            local character = hit.Parent
+            local humanoid = character:FindFirstChild("Humanoid")
 
-      - type: code
-        language: lua
-        title: "Показ диалога на экране"
-        code: |
-          local event = game.ReplicatedStorage:WaitForChild("OpenDialog")
-          local frame = script.Parent
+            if humanoid then
+                print("NPC заметил игрока!")
+            end
+        end)
+      afterText: |
+        👉 Теперь, когда игрок касается NPC,<br>
+        в Output появляется сообщение.<br><br>
+        Это первая форма «реакции».
 
-          event.OnClientEvent:Connect(function()
-              frame.Visible = true
-          end)
+    - type: "text"
+      title: "🎭 Как NPC может реагировать?"
+      text: |
+        Реакция может быть любой:<br><br>
+        • сообщение в консоли<br>
+        • звук<br>
+        • изменение цвета NPC<br>
+        • начало диалога<br>
+        • открытие двери<br><br>
+        Сейчас мы тренируем <b>сам факт реакции</b>.
 
-      - type: text
-        title: "Теперь работает диалог!"
-        text:
-          - "Окно появляется, когда игрок касается NPC."
-          - "Можно добавить выбор ответа и квест."
+    - type: "code"
+      title: "🎨 Пример: NPC меняет цвет при касании"
+      code: |
+        local npcBody = script.Parent
 
-    quiz:
-      - question: "Где должен быть LocalScript для GUI?"
-        answers:
-          - "В Workspace"
-          - "В StarterGui"
-          - "В ServerScriptService"
-        correct: 1
+        npcBody.Touched:Connect(function(hit)
+            local humanoid = hit.Parent:FindFirstChild("Humanoid")
 
-  # ==============================================================
-  # УРОК 44 — МИНИ-ПРОЕКТ: СТРАЖ И СОКРОВИЩЕ
-  # ==============================================================
-  - id: 44
-    title: "Мини-проект: Страж охраняет сокровище"
-    shortDescription: "Создаём полноценного NPC-стража: патруль, детекция игрока, диалог и награда."
-    
+            if humanoid then
+                npcBody.Color = Color3.fromRGB(255, 255, 0)
+                print("NPC реагирует на игрока!")
+            end
+        end)
+      afterText: |
+        👉 Игрок подошёл → NPC «ожил».
 
-    content:
-      - type: text
-        title: "Что создаём?"
-        text:
-          - "NPC-страж ходит по маршруту."
-          - "Если игрок подходит — страж останавливается."
-          - "Запускается диалог."
-          - "Если игрок соглашается выполнить задание → получает доступ к сундуку."
+    - type: "text"
+      title: "⚠️ Важно понимать"
+      text: |
+        • NPC пока <b>не говорит</b><br>
+        • NPC пока <b>не думает</b><br>
+        • NPC просто реагирует на событие<br><br>
+        Это фундамент для диалогов и квестов.
 
-      - type: steps
-        title: "Этапы проекта"
-        items:
-          - "1. Создать NPC."
-          - "2. Настроить патруль (урок 41)."
-          - "3. Добавить обнаружение игрока (урок 42)."
-          - "4. Создать окно диалога."
-          - "5. Сделать выбор ответа: Да/Нет."
-          - "6. Если Да → открыть дверь к сокровищу."
+    - type: "text"
+      title: "🧪 Мини-практика"
+      text: |
+        Попробуй сам:<br><br>
+        1️⃣ Сделай, чтобы NPC менял цвет обратно через 1 секунду<br>
+        2️⃣ Добавь звук реакции<br>
+        3️⃣ Сделай надпись над NPC («Привет!»)<br>
+        4️⃣ Сделай реакцию только один раз
 
-      - type: code
-        language: lua
-        title: "Пример: дверь открывается при согласии"
-        code: |
-          local event = game.ReplicatedStorage:WaitForChild("QuestAnswer")
-          local door = workspace.TreasureDoor
+  quiz:
+    - question: "Как NPC понимает, что рядом игрок?"
+      answers:
+        - "По имени объекта"
+        - "По наличию Humanoid"
+        - "По цвету персонажа"
+      correct: 1
 
-          event.OnServerEvent:Connect(function(player, answer)
-              if answer == "yes" then
-                  door.CanCollide = false
-                  door.Transparency = 0.6
-              end
-          end)
+    - question: "Какое событие мы использовали в этом уроке?"
+      answers:
+        - "Changed"
+        - "Touched"
+        - "Clicked"
+      correct: 1
 
-      - type: text
-        title: "Итог"
-        text:
-          - "У ребёнка получается настоящий мини-квест!"
-          - "Работает NPC, патруль, диалог и награда."
+    - question: "Где находится Script для реакции NPC?"
+      answers:
+        - "В Player"
+        - "В Body NPC"
+        - "В Workspace"
+      correct: 1
 
-    quiz:
-      - question: "Что делает QuestAnswer?"
-        answers:
-          - "Меняет цвет NPC"
-          - "Открывает дверь при правильном ответе"
-          - "Создает монеты"
-        correct: 1
+    - question: "Что NPC делает в этом уроке?"
+      answers:
+        - "Даёт задание"
+        - "Начинает диалог"
+        - "Реагирует на игрока"
+      correct: 2
+
+    - question: "Зачем нужна реакция NPC?"
+      answers:
+        - "Для красоты"
+        - "Чтобы игрок понял: NPC живой"
+        - "Чтобы ускорить игру"
+      correct: 1
+
+  end:
+    - type: "text"
+      title: "🎉 Итог урока"
+      text: |
+        Теперь ты умеешь:<br>
+        <ul>
+          <li>делать NPC, который реагирует на игрока</li>
+          <li>использовать событие Touched</li>
+          <li>отличать игрока от других объектов</li>
+        </ul>
+        <h4>В следующем уроке NPC начнёт разговаривать 💬</h4>
+
+# ============================================================
+# УРОК 63 — Диалоги с NPC (окно и текст)
+# ============================================================
+- id: 63
+  title: "⭐ Урок 63. Диалоги с NPC: окно и текст"
+  shortDescription: "Создаём диалоговое окно и учим NPC разговаривать с игроком."
+  # video: "https://www.youtube.com/embed/NPC63"
+
+  content:
+    - type: "text"
+      text: |
+        NPC уже умеет реагировать на игрока 👀<br><br>
+        Но настоящая магия начинается,<br>
+        когда NPC <b>говорит</b> 💬<br><br>
+        В этом уроке мы создадим<br>
+        <b>диалоговое окно</b>,<br>
+        в котором NPC сможет общаться с игроком.
+
+    - type: "text"
+      title: "💬 Что такое диалог в игре?"
+      text: |
+        Диалог — это разговор между игроком и NPC.<br><br>
+        Обычно диалог:<br>
+        • появляется при подходе к NPC<br>
+        • показывает текст<br>
+        • исчезает после разговора<br><br>
+        Диалоги делают игру<br>
+        <b>понятной и живой</b>.
+
+    - type: "text"
+      title: "🧩 Из чего состоит диалоговое окно?"
+      text: |
+        Наш простой диалог будет состоять из:<br><br>
+        🖼️ ScreenGui — окно диалога<br>
+        🏷️ TextLabel — текст NPC<br>
+        ▶️ TextButton — кнопка «Дальше» или «Закрыть»
+
+    - type: "steps"
+      title: "🧱 Шаг 1. Создаём интерфейс диалога"
+      items:
+        - "Открой <b>StarterGui</b>"
+        - "Добавь <b>ScreenGui</b> → назови <b>DialogGui</b>"
+        - "Добавь <b>TextLabel</b> → текст NPC"
+        - "Добавь <b>TextButton</b> → кнопка «Закрыть»"
+        - "DialogGui.Enabled = false"
+
+    - type: "text"
+      title: "👀 Когда должен появляться диалог?"
+      text: |
+        Диалог появляется,<br>
+        когда игрок <b>взаимодействует с NPC</b>.<br><br>
+        Например:<br>
+        • игрок касается NPC<br>
+        • игрок подходит близко<br><br>
+        Сейчас используем <b>Touched</b>.
+
+    - type: "code"
+      title: "✨ Код: показать диалог при касании NPC"
+      code: |
+        local npcBody = script.Parent
+        local dialogGui = game.Players.LocalPlayer.PlayerGui:WaitForChild("DialogGui")
+
+        npcBody.Touched:Connect(function(hit)
+            local humanoid = hit.Parent:FindFirstChild("Humanoid")
+
+            if humanoid then
+                dialogGui.Enabled = true
+            end
+        end)
+      afterText: |
+        👉 Игрок касается NPC → диалог появляется.
+
+    - type: "text"
+      title: "▶️ Закрываем диалог"
+      text: |
+        Диалог не должен висеть вечно.<br><br>
+        Кнопка «Закрыть»<br>
+        выключает интерфейс.
+
+    - type: "code"
+      title: "✨ Код кнопки «Закрыть»"
+      code: |
+        local button = script.Parent
+        local dialogGui = button.Parent.Parent
+
+        button.MouseButton1Click:Connect(function()
+            dialogGui.Enabled = false
+        end)
+
+    - type: "text"
+      title: "🧠 Важно запомнить"
+      text: |
+        • Диалог — это <b>интерфейс</b><br>
+        • Он включается и выключается<br>
+        • NPC и UI работают вместе<br><br>
+        Это основа для выбора ответов и квестов.
+
+    - type: "text"
+      title: "🧪 Мини-практика"
+      text: |
+        Попробуй улучшить диалог:<br><br>
+        1️⃣ Измени текст NPC («Привет, герой!»)<br>
+        2️⃣ Сделай красивое окно (цвет, размер)<br>
+        3️⃣ Сделай, чтобы диалог появлялся только один раз<br>
+        4️⃣ Добавь имя NPC в TextLabel
+
+  quiz:
+    - question: "Зачем в игре нужны диалоги?"
+      answers:
+        - "Для украшения интерфейса"
+        - "Чтобы NPC мог общаться с игроком"
+        - "Чтобы ускорить игру"
+      correct: 1
+
+    - question: "Какой объект отвечает за окно диалога?"
+      answers:
+        - "TextLabel"
+        - "ScreenGui"
+        - "TextButton"
+      correct: 1
+
+    - question: "Когда в этом уроке появляется диалог?"
+      answers:
+        - "Когда игра запускается"
+        - "Когда игрок касается NPC"
+        - "Когда игрок прыгает"
+      correct: 1
+
+    - question: "Как мы закрываем диалог?"
+      answers:
+        - "Удаляем NPC"
+        - "Выключаем ScreenGui"
+        - "Телепортируем игрока"
+      correct: 1
+
+    - question: "Что связывает NPC и диалог?"
+      answers:
+        - "Интерфейс и событие"
+        - "Цвет персонажа"
+        - "Размер карты"
+      correct: 0
+
+  end:
+    - type: "text"
+      title: "🎉 Итог урока"
+      text: |
+        Теперь ты умеешь:<br>
+        <ul>
+          <li>создавать диалоговое окно</li>
+          <li>показывать текст NPC</li>
+          <li>включать и выключать диалог</li>
+          <li>связывать NPC и интерфейс</li>
+        </ul>
+        <h4>В следующем уроке игрок сможет выбирать ответы 💬➡️</h4>
+
+# ============================================================
+# УРОК 64 — Выбор ответа игрока (кнопки и логика)
+# ============================================================
+- id: 64
+  title: "⭐ Урок 64. Выбор ответа игрока"
+  shortDescription: "Учимся делать диалоги с вариантами ответов и реакцией NPC."
+  # video: "https://www.youtube.com/embed/NPC64"
+
+  content:
+    - type: "text"
+      text: |
+        В прошлом уроке NPC научился говорить 💬<br><br>
+        Но пока игрок только <b>читает</b>.<br><br>
+        Теперь мы сделаем шаг дальше:<br>
+        игрок сможет <b>выбирать ответ</b>.<br><br>
+        Это делает диалог<br>
+        по-настоящему <b>интерактивным</b> 🎮✨
+
+    - type: "text"
+      title: "🎯 Зачем нужен выбор ответа?"
+      text: |
+        Когда игрок выбирает ответ:<br><br>
+        • он чувствует контроль<br>
+        • диалог становится интереснее<br>
+        • игра перестаёт быть линейной<br><br>
+        Даже простой выбор «Да / Нет»<br>
+        уже меняет ощущение от игры.
+
+    - type: "text"
+      title: "🧩 Из чего состоит диалог с выбором?"
+      text: |
+        Теперь в диалоге есть:<br><br>
+        🏷️ TextLabel — текст NPC<br>
+        ▶️ TextButton — вариант ответа 1<br>
+        ▶️ TextButton — вариант ответа 2<br><br>
+        Каждая кнопка — это <b>действие</b>.
+
+    - type: "steps"
+      title: "🧱 Шаг 1. Добавляем кнопки ответов"
+      items:
+        - "Открой <b>DialogGui</b>"
+        - "Добавь <b>TextButton</b> → AnswerYes"
+        - "Добавь <b>TextButton</b> → AnswerNo"
+        - "Задай текст: «Да» и «Нет»"
+        - "Размести кнопки под текстом NPC"
+
+    - type: "text"
+      title: "▶️ Ответ «Да» — соглашаемся"
+      text: |
+        Нажатие кнопки «Да»<br>
+        означает согласие с NPC.<br><br>
+        Например:<br>
+        «Да, я помогу»<br>
+        «Хорошо, я согласен»
+
+    - type: "code"
+      title: "✨ Код кнопки «Да»"
+      code: |
+        local button = script.Parent
+        local dialogGui = button.Parent.Parent
+
+        button.MouseButton1Click:Connect(function()
+            print("Игрок согласился")
+            dialogGui.Enabled = false
+        end)
+
+    - type: "text"
+      title: "❌ Ответ «Нет» — отказываемся"
+      text: |
+        Ответ «Нет» — это тоже выбор.<br><br>
+        Игрок может отказаться<br>
+        или вернуться позже.
+
+    - type: "code"
+      title: "✨ Код кнопки «Нет»"
+      code: |
+        local button = script.Parent
+        local dialogGui = button.Parent.Parent
+
+        button.MouseButton1Click:Connect(function()
+            print("Игрок отказался")
+            dialogGui.Enabled = false
+        end)
+
+    - type: "text"
+      title: "🧠 Что мы сделали на самом деле?"
+      text: |
+        Мы научились:<br><br>
+        • ловить выбор игрока<br>
+        • реагировать на кнопки<br>
+        • менять поведение игры<br><br>
+        В следующих уроках выбор<br>
+        будет влиять на <b>квесты и награды</b>.
+
+    - type: "text"
+      title: "🧪 Мини-практика"
+      text: |
+        Попробуй улучшить диалог:<br><br>
+        1️⃣ Сделай разные тексты после «Да» и «Нет»<br>
+        2️⃣ Пусть одна кнопка закрывает диалог, а другая — нет<br>
+        3️⃣ Сделай третью кнопку «Позже»<br>
+        4️⃣ Измени текст NPC после выбора
+
+  quiz:
+    - question: "Зачем в диалоге нужен выбор ответа?"
+      answers:
+        - "Для красоты"
+        - "Чтобы игрок мог влиять на игру"
+        - "Чтобы ускорить диалог"
+      correct: 1
+
+    - question: "Какой объект используется для вариантов ответа?"
+      answers:
+        - "TextLabel"
+        - "TextButton"
+        - "ScreenGui"
+      correct: 1
+
+    - question: "Что происходит при нажатии кнопки ответа?"
+      answers:
+        - "Игра перезапускается"
+        - "Срабатывает событие нажатия"
+        - "NPC исчезает"
+      correct: 1
+
+    - question: "Может ли ответ «Нет» быть полезным?"
+      answers:
+        - "Нет, он бесполезен"
+        - "Да, это тоже выбор игрока"
+        - "Только если есть таймер"
+      correct: 1
+
+    - question: "Что станет следующим шагом после выбора ответа?"
+      answers:
+        - "Создание карты"
+        - "Квест или награда"
+        - "Удаление NPC"
+      correct: 1
+
+  end:
+    - type: "text"
+      title: "🎉 Итог урока"
+      text: |
+        Теперь ты умеешь:<br>
+        <ul>
+          <li>создавать диалоги с выбором</li>
+          <li>использовать кнопки как ответы</li>
+          <li>реагировать на решение игрока</li>
+        </ul>
+        <h4>В следующем уроке NPC даст игроку настоящее задание 🎯</h4>
 
 
+# ============================================================
+# УРОК 65 — NPC даёт задание (квест)
+# ============================================================
+- id: 65
+  title: "⭐ Урок 65. NPC даёт задание"
+  shortDescription: "Учимся делать простые квесты: NPC ставит цель, игрок её выполняет."
+  # video: "https://www.youtube.com/embed/NPC65"
+
+  content:
+    - type: "text"
+      text: |
+        Теперь NPC умеет говорить 💬<br>
+        и игрок умеет отвечать 👍👎<br><br>
+        Самое время сделать <b>настоящий квест</b> 🎯<br><br>
+        <b>Квест</b> — это когда:<br>
+        NPC говорит, что нужно сделать,<br>
+        игрок выполняет задание,<br>
+        а игра это <b>проверяет</b>.
+
+    - type: "text"
+      title: "🎮 Что такое квест?"
+      text: |
+        Простой квест состоит из трёх частей:<br><br>
+        1️⃣ Задание — что нужно сделать<br>
+        2️⃣ Условие — как понять, что выполнено<br>
+        3️⃣ Результат — что произойдёт дальше<br><br>
+        Например:<br>
+        «Собери 5 монет — и я открою дверь»
+
+    - type: "text"
+      title: "🧩 Как NPC «помнит» задание?"
+      text: |
+        Чтобы игра знала, есть ли задание,<br>
+        мы используем специальные значения:<br><br>
+        🔘 BoolValue — да / нет<br>
+        🔢 IntValue — число<br><br>
+        Они хранят состояние квеста 🧠
+
+    - type: "steps"
+      title: "🧱 Шаг 1. Создаём состояние квеста"
+      items:
+        - "Выбери NPC (Model)"
+        - "Добавь <b>BoolValue</b>"
+        - "Назови его <b>QuestActive</b>"
+        - "Установи <b>false</b>"
+
+    - type: "text"
+      title: "📜 Пример задания от NPC"
+      text: |
+        NPC говорит игроку:<br><br>
+        «Принеси мне 5 монет 🪙»<br><br>
+        Когда игрок нажимает «Да»,<br>
+        задание становится активным.
+
+    - type: "code"
+      title: "✨ Код: NPC выдаёт задание"
+      code: |
+        local npc = script.Parent
+        local questActive = npc:FindFirstChild("QuestActive")
+
+        if questActive then
+            questActive.Value = true
+            print("Квест начался: собери 5 монет")
+        end
+
+    - type: "text"
+      title: "🧠 Что происходит в игре?"
+      text: |
+        • игрок согласился на задание<br>
+        • квест стал активным<br>
+        • теперь игра может проверять прогресс<br><br>
+        Это как флажок:<br>
+        <b>Квест включён ✔️</b>
+
+    - type: "text"
+      title: "🔗 Связь с модулем 6"
+      text: |
+        В модуле 6 ты уже делал:<br><br>
+        🪙 монеты<br>
+        📊 счётчик монет<br><br>
+        Теперь эти монеты —<br>
+        <b>часть задания</b>, а не просто числа.
+
+    - type: "text"
+      title: "🧪 Мини-практика"
+      text: |
+        Попробуй сам:<br><br>
+        1️⃣ Сделай задание «Собери 3 монеты»<br>
+        2️⃣ Добавь второе BoolValue: <b>QuestDone</b><br>
+        3️⃣ После согласия игрока включай QuestActive<br>
+        4️⃣ Подумай: что должно произойти, когда квест выполнен?
+
+  quiz:
+    - question: "Что такое квест?"
+      answers:
+        - "Украшение карты"
+        - "Задание для игрока"
+        - "Случайное событие"
+      correct: 1
+
+    - question: "Из каких частей состоит простой квест?"
+      answers:
+        - "Карта, музыка, свет"
+        - "Задание, условие, результат"
+        - "NPC, игрок, кнопка"
+      correct: 1
+
+    - question: "Как мы храним состояние квеста?"
+      answers:
+        - "В Color объекта"
+        - "С помощью Value (BoolValue / IntValue)"
+        - "В названии NPC"
+      correct: 1
+
+    - question: "Что делает BoolValue?"
+      answers:
+        - "Хранит текст"
+        - "Хранит да / нет"
+        - "Телепортирует игрока"
+      correct: 1
+
+    - question: "Почему квест связан с монетами?"
+      answers:
+        - "Потому что монеты красивые"
+        - "Чтобы задание имело цель"
+        - "Случайно"
+      correct: 1
+
+  end:
+    - type: "text"
+      title: "🎉 Итог урока"
+      text: |
+        Теперь ты умеешь:<br>
+        <ul>
+          <li>понимать, что такое квест</li>
+          <li>делать задание от NPC</li>
+          <li>хранить состояние квеста</li>
+          <li>связывать задания с монетами</li>
+        </ul>
+        <h4>В следующем уроке NPC проверит задание и даст награду 🏆</h4>
+
+# ============================================================
+# УРОК 66 — NPC проверяет задание и даёт награду
+# ============================================================
+- id: 66
+  title: "⭐ Урок 66. NPC проверяет задание и даёт награду"
+  shortDescription: "Учимся проверять выполнение квеста и награждать игрока."
+  # video: "https://www.youtube.com/embed/NPC66"
+
+  content:
+    - type: "text"
+      text: |
+        У нас уже есть всё необходимое 👏<br><br>
+        ✅ NPC дал задание<br>
+        🪙 игрок собирает монеты<br>
+        🧠 игра хранит состояние квеста<br><br>
+        Теперь самое важное:<br>
+        <b>NPC должен понять — выполнено ли задание</b><br>
+        и <b>отреагировать</b> 🎉
+
+    - type: "text"
+      title: "🎯 Когда квест считается выполненным?"
+      text: |
+        Квест выполнен, если:<br><br>
+        • задание было активировано<br>
+        • игрок выполнил условие<br><br>
+        В нашем случае:<br>
+        <b>игрок собрал нужное количество монет</b> 🪙
+
+    - type: "text"
+      title: "🧩 Что проверяет NPC?"
+      text: |
+        NPC проверяет:<br><br>
+        🔘 QuestActive — был ли взят квест<br>
+        🔢 Coins — сколько монет у игрока<br><br>
+        Если всё совпадает —<br>
+        NPC говорит: «Отлично!» 🎉
+
+    - type: "steps"
+      title: "🧱 Шаг 1. Подготовка значений"
+      items:
+        - "У NPC есть <b>QuestActive (BoolValue)</b>"
+        - "У игрока есть <b>Coins (IntValue)</b>"
+        - "Определи нужное количество монет (например, 5)"
+
+    - type: "code"
+      title: "✨ Код: проверка выполнения квеста"
+      code: |
+        local npc = script.Parent
+        local questActive = npc:FindFirstChild("QuestActive")
+
+        local player = game.Players.LocalPlayer
+        local coins = player:FindFirstChild("Coins")
+
+        if questActive and questActive.Value == true then
+            if coins and coins.Value >= 5 then
+                print("Квест выполнен!")
+            else
+                print("Недостаточно монет")
+            end
+        end
+
+    - type: "text"
+      title: "🏆 Что такое награда?"
+      text: |
+        Награда — это то,<br>
+        что игрок получает за старание 💪<br><br>
+        Это может быть:<br>
+        🚪 открытая дверь<br>
+        🌀 телепорт дальше<br>
+        🪙 бонусные монеты<br>
+        💬 сообщение «Молодец!»<br><br>
+        Даже маленькая награда —<br>
+        это <b>радость и мотивация</b> 😊
+
+    - type: "code"
+      title: "✨ Код: выдаём награду"
+      code: |
+        local npc = script.Parent
+        local questActive = npc:FindFirstChild("QuestActive")
+
+        local door = workspace:FindFirstChild("RewardDoor")
+
+        if questActive then
+            questActive.Value = false
+        end
+
+        if door then
+            door.CanCollide = false
+            door.Transparency = 0.5
+            print("Дверь открыта! Награда получена 🎉")
+        end
+
+    - type: "text"
+      title: "🧠 Что мы сделали?"
+      text: |
+        Мы замкнули полный цикл:<br><br>
+        NPC → задание → действия игрока → проверка → награда<br><br>
+        Это основа:<br>
+        • RPG<br>
+        • квестов<br>
+        • приключенческих игр<br>
+        • сюжетных Obby
+
+    - type: "text"
+      title: "🧪 Мини-практика"
+      text: |
+        Попробуй сам:<br><br>
+        1️⃣ Сделай награду — телепорт дальше<br>
+        2️⃣ Добавь сообщение «Спасибо за помощь!»<br>
+        3️⃣ Сделай второй квест у того же NPC<br>
+        4️⃣ Попробуй награду в виде монет
+
+  quiz:
+    - question: "Когда NPC может выдать награду?"
+      answers:
+        - "Всегда"
+        - "Когда квест выполнен"
+        - "Когда игрок рядом"
+      correct: 1
+
+    - question: "Что NPC проверяет для квеста?"
+      answers:
+        - "Цвет игрока"
+        - "Монеты и состояние квеста"
+        - "Размер карты"
+      correct: 1
+
+    - question: "Что может быть наградой?"
+      answers:
+        - "Только монеты"
+        - "Дверь, телепорт, сообщение"
+        - "Только текст"
+      correct: 1
+
+    - question: "Почему награда важна?"
+      answers:
+        - "Для красоты"
+        - "Она мотивирует игрока"
+        - "Без причины"
+      correct: 1
+
+    - question: "Что мы построили в этом уроке?"
+      answers:
+        - "Просто диалог"
+        - "Полный цикл квеста"
+        - "Меню игры"
+      correct: 1
+
+  end:
+    - type: "text"
+      title: "🎉 Итог урока"
+      text: |
+        Теперь ты умеешь:<br>
+        <ul>
+          <li>проверять выполнение задания</li>
+          <li>анализировать действия игрока</li>
+          <li>давать награду</li>
+          <li>строить полноценные квесты</li>
+        </ul>
+        <h4>В следующем уроке мы соберём всё в мини-проект 🏰</h4>
+
+# ============================================================
+# УРОК 67 — Мини-проект: «Страж охраняет сокровище»
+# ============================================================
+- id: 67
+  title: "⭐ Урок 67. Мини-проект: Страж охраняет сокровище"
+  shortDescription: "Создаём полноценный квест с NPC, монетами, диалогами и наградой."
+  # video: "https://www.youtube.com/embed/NPC67"
+
+  content:
+    - type: "text"
+      text: |
+        🎉 Поздравляем!<br><br>
+        Ты дошёл до финального проекта модуля 7.<br><br>
+        Сейчас мы соберём <b>настоящую игровую механику</b>,<br>
+        как в RPG и приключенческих Obby 🎮✨<br><br>
+        Это не отдельные куски кода —<br>
+        это <b>цельная мини-игра</b>.
+
+    - type: "text"
+      title: "🏰 Идея проекта"
+      text: |
+        В игре есть сокровище 💎<br>
+        Но путь к нему охраняет NPC — Страж 🛡️<br><br>
+        Страж говорит:<br>
+        «Я пропущу тебя, если ты принесёшь 5 монет»<br><br>
+        Игрок:<br>
+        • разговаривает со Стражем<br>
+        • принимает задание<br>
+        • собирает монеты<br>
+        • возвращается<br>
+        • получает награду 🎉
+
+    - type: "text"
+      title: "🧩 Что используется в проекте?"
+      text: |
+        В этом проекте используется ВСЁ, чему ты научился:<br><br>
+        👾 NPC с Humanoid<br>
+        💬 Диалоги и кнопки<br>
+        🎯 Квест (QuestActive)<br>
+        🪙 Монеты и счётчик<br>
+        🚪 Дверь / проход<br>
+        🧠 Проверка условий<br><br>
+        Это настоящий игровой цикл 🔄
+
+    - type: "steps"
+      title: "🗺️ Структура проекта"
+      items:
+        - "NPC → <b>Guard</b> (Model + Humanoid)"
+        - "BoolValue → <b>QuestActive</b> (в NPC)"
+        - "IntValue → <b>Coins</b> (у игрока)"
+        - "Дверь → <b>TreasureDoor</b>"
+        - "Сокровище → <b>Treasure</b>"
+        - "DialogGui с кнопками «Да / Нет»"
+
+    - type: "text"
+      title: "💬 Диалог со Стражем"
+      text: |
+        Пример диалога:<br><br>
+        🛡️ Страж:<br>
+        «Стой! Я охраняю сокровище.»<br><br>
+        «Принеси мне 5 монет — и я открою путь.»<br><br>
+        ▶️ Да — взять задание<br>
+        ❌ Нет — уйти
+
+    - type: "code"
+      title: "✨ Код: выдача задания Стражем"
+      code: |
+        local guard = script.Parent
+        local questActive = guard:FindFirstChild("QuestActive")
+
+        if questActive then
+            questActive.Value = true
+            print("Квест начался: принеси 5 монет")
+        end
+
+    - type: "text"
+      title: "🪙 Выполнение задания"
+      text: |
+        Игрок собирает монеты,<br>
+        счётчик Coins увеличивается.<br><br>
+        Когда монет достаточно,<br>
+        игрок возвращается к Стражу.
+
+    - type: "code"
+      title: "✨ Код: проверка и награда"
+      code: |
+        local guard = script.Parent
+        local questActive = guard:FindFirstChild("QuestActive")
+        local door = workspace:FindFirstChild("TreasureDoor")
+
+        local player = game.Players.LocalPlayer
+        local coins = player:FindFirstChild("Coins")
+
+        if questActive and questActive.Value == true then
+            if coins and coins.Value >= 5 then
+                questActive.Value = false
+
+                if door then
+                    door.CanCollide = false
+                    door.Transparency = 0.5
+                end
+
+                print("Страж: Ты заслужил пройти!")
+            end
+        end
+
+    - type: "text"
+      title: "🏆 Награда"
+      text: |
+        После выполнения квеста:<br><br>
+        🚪 дверь открывается<br>
+        💎 игрок получает доступ к сокровищу<br>
+        💬 NPC благодарит игрока<br><br>
+        Это создаёт чувство победы 🎉
+
+    - type: "text"
+      title: "🧪 Идеи для улучшения"
+      text: |
+        Хочешь сделать проект круче?<br><br>
+        1️⃣ Добавь звук открытия двери<br>
+        2️⃣ Сделай анимацию NPC<br>
+        3️⃣ Добавь второй квест<br>
+        4️⃣ Сделай таймер на задание<br>
+        5️⃣ Добавь награду в виде монет
+
+  quiz:
+    - question: "Кто охраняет сокровище в проекте?"
+      answers:
+        - "Игрок"
+        - "NPC-Страж"
+        - "Монета"
+      correct: 1
+
+    - question: "Что нужно сделать, чтобы пройти дальше?"
+      answers:
+        - "Нажать кнопку"
+        - "Собрать нужное количество монет"
+        - "Перезайти в игру"
+      correct: 1
+
+    - question: "Что проверяет Страж?"
+      answers:
+        - "Цвет игрока"
+        - "Количество монет и квест"
+        - "Размер карты"
+      correct: 1
+
+    - question: "Что является наградой?"
+      answers:
+        - "Сообщение"
+        - "Открытый путь к сокровищу"
+        - "Ошибка"
+      correct: 1
+
+    - question: "Почему этот проект важен?"
+      answers:
+        - "Потому что он красивый"
+        - "Он объединяет все изученные механики"
+        - "Случайно"
+      correct: 1
+
+  end:
+    - type: "text"
+      title: "🎉 Итог модуля 7"
+      text: |
+        Ты научился:<br>
+        <ul>
+          <li>создавать NPC</li>
+          <li>делать диалоги и выбор</li>
+          <li>давать и проверять квесты</li>
+          <li>награждать игрока</li>
+        </ul>
+        <h4>Ты сделал настоящий игровой квест. Это уровень разработчика 🎮🔥</h4>

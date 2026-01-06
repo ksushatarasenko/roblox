@@ -1,0 +1,23 @@
+[
+  {
+    "id": "roblox",
+    "title": "Roblox: создание игр",
+    "description": "...",
+    "age": "9–12",
+    "modules": [ ... ]
+  },
+  {
+    "id": "ai",
+    "title": "Искусственный интеллект",
+    "description": "...",
+    "age": "9–12",
+    "modules": [ ... ]
+  },
+  {
+    "id": "design",
+    "title": "Дизайн и визуальное мышление",
+    "description": "...",
+    "age": "8–11",
+    "modules": [ ... ]
+  }
+]

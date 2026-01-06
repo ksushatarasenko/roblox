@@ -944,3 +944,153 @@ lessons:
 
           👉 В следующем уроке мы научимся
           **обновлять HUD по событиям игры**.
+
+# ============================================================
+# ⭐ УРОК 53 — Мини-проект: Интерфейс для игры
+# ============================================================
+  - id: 53
+    title: "⭐ Урок 53. Мини-проект: интерфейс для Obby"
+    shortDescription: "Создаём полноценный интерфейс: стартовое меню + HUD для Obby из модуля 4."
+
+
+    content:
+
+      - type: "text"
+        text: |
+          У тебя уже есть Obby:<br>
+          ✔️ платформы <br> 
+          ✔️ ловушки  <br>
+          ✔️ чекпоинты <br> 
+          ✔️ телепорты  <br>
+
+          Но теперь мы сделаем шаг,
+          который отличает игру от заготовки.<br>
+
+          👉 **Мы добавим интерфейс**:
+          меню и HUD.<br>
+
+          После этого твой Obby
+          будет выглядеть как настоящая игра.
+
+      - type: "note"
+        text: |
+          В этом уроке мы:<br>
+
+          ▶️ создадим стартовое меню  <br>
+          🎯 добавим HUD игрока  <br>
+          🔁 научимся включать и выключать интерфейс  <br>
+          🧩 соединим UI с игрой из модуля 4  
+      
+      - type: "code"
+        title: "🗂️ Структура интерфейса"
+        code: |
+          StarterGui
+          ├── MenuGui
+          │    ├── Title (TextLabel)
+          │    ├── PlayButton (TextButton)
+          │    └── ExitButton (TextButton)
+          │
+          └── HUDGui
+              ├── HealthLabel (TextLabel)
+              ├── CoinsLabel (TextLabel)
+              └── HintLabel (TextLabel)
+      
+      - type: "code"
+        title: "▶️ Часть 1. Стартовое меню"
+        text: |
+          Когда игрок заходит в игру,
+          он сначала видит меню.<br>
+
+          В меню:<br>
+          ▶️ кнопка Play — начать игру <br> 
+          ❌ кнопка Exit — закрыть меню  
+        code: |
+          -- Script внутри кнопки Play
+          local button = script.Parent
+          local menu = button.Parent.Parent
+          local hud = game.Players.LocalPlayer.PlayerGui:WaitForChild("HUDGui")
+
+          button.MouseButton1Click:Connect(function()
+              menu.Enabled = false
+              hud.Enabled = true
+          end)
+      - type: "hint"
+        text: |
+          📌 MenuGui → Enabled = true  <br>
+          📌 HUDGui → Enabled = false  <br>
+
+          После нажатия Play:<br>
+          меню исчезает, HUD появляется.
+      - type: "text"
+        title: "🎯 Часть 2. HUD игрока"
+        text: |
+          HUD всегда на экране,
+          пока игрок проходит Obby.<br>
+
+          Он показывает:<br>
+          ❤️ здоровье  <br>
+          🪙 монеты  <br>
+          🧭 подсказку задания  
+
+      - type: "note"
+        text: |
+          На этом этапе значения можно
+          оставить простыми:<br>
+
+          Health: 100  <br>
+          Coins: 0  <br>
+          Hint: "Доберись до финиша!"
+      - type: "text"
+        title: "🔁 Часть 3. Управление интерфейсом"
+        text: |
+          Вся магия происходит
+          через свойство Enabled.<br>
+
+          MenuGui.Enabled = true / false  <br>
+          HUDGui.Enabled = true / false  <br>
+
+          👉 Так мы управляем тем,
+          что видит игрок.
+      
+      - type: "text"
+        title: "🔗 Как интерфейс связан с Obby"
+        text: |
+          • игрок нажимает Play <br> 
+          • меню исчезает  <br>
+          • начинается прохождение Obby  <br>
+          • HUD показывает прогресс <br> 
+          • чекпоинты и ловушки работают  
+      - type: "note"
+        text: |
+          🧠 Интерфейс не мешает игре.<br>
+
+          Он:<br>
+          ✔️ помогает  <br>
+          ✔️ объясняет  <br>
+          ✔️ делает Obby понятным 
+      - type: "text"
+        title: "🧪 Мини-практика"
+        text: |
+          Попробуй улучшить проект:<br>
+
+          1️⃣ Измени название игры в меню  <br>
+          2️⃣ Сделай кнопки разного цвета  <br>
+          3️⃣ Поменяй текст подсказки в HUD  <br>
+          4️⃣ Спрячь HUD до нажатия Play  
+    
+
+    end:
+      - type: "text"
+        title: "🎉 Итог урока"
+        text: |
+          Ты создал полноценный интерфейс
+          для своей игры:<br><br>
+
+          ✅ стартовое меню  <br>
+          ✅ кнопки Play и Exit  <br>
+          ✅ HUD игрока  <br>
+          ✅ управление интерфейсом <br> 
+          ✅ связь UI с Obby  <br><br>
+
+          🎮 Теперь твой Obby —
+          это уже настоящая игра, а не заготовка.
